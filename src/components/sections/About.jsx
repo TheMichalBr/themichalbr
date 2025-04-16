@@ -6,10 +6,15 @@ export const About = () => {
     "Technology",
     "Programming",
     "Creating content",
-    "Svelte",
+    "Editing",
+    "Memes",
+    "Music",
+    "Films",
+    "Chess",
+    "Exploring",
   ];
 
-  const ProgLan = ["Node.js", "Python", "AWS", "MongoDB", "GraphQL", "React", "Vue", "TypeScript", "TailwindCSS"];
+  const ProgLan = ["C#", "C++", "HTML", "CSS", "Java", "JavaScript", "React", "Python", "SQL", "Godot", "Unity", "Source", "Unreal",];
 
   return (
     <section
@@ -25,13 +30,14 @@ export const About = () => {
 
           <div className="rounded-xl p-8 border-white/10 border hover:-translate-y-1 transition-all">
             <p className="text-gray-300 mb-6">
+              My name is Michal, 23 years old and I've come from the Czech Republic – live in Brno.
               Passionate developer with expertise in building scalable web
               applications and creating innovative solutions.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="rounded-xl p-6 hover:-translate-y-1 transition-all">
-                <h3 className="text-xl font-bold mb-4"> Hobbies</h3>
+                <h3 className="text-xl font-bold mb-4"> My Hobbies</h3>
                 <div className="flex flex-wrap gap-2">
                   {Hobbies.map((tech, key) => (
                     <span
@@ -47,7 +53,7 @@ export const About = () => {
               </div>
 
               <div className="rounded-xl p-6 hover:-translate-y-1 transition-all">
-                <h3 className="text-xl font-bold mb-4"> Programming languages</h3>
+                <h3 className="text-xl font-bold mb-4"> Experience in</h3>
                 <div className="flex flex-wrap gap-2">
                   {ProgLan.map((tech, key) => (
                     <span

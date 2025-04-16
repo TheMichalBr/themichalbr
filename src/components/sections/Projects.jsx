@@ -88,13 +88,13 @@ export const Projects = () => {
               transition-all
             "
             >
-              <h3 className="text-xl font-bold mb-2">E-Commerce Web App</h3>
+              <h3 className="text-xl font-bold mb-2">aim_blueline</h3>
               <p className="text-gray-400 mb-4">
                 Full-stack e-commerce with modern UI, secure payment
                 integration, and customizable product inventory.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["Next.js", "TypeScript", "Stripe", "PostgreSQL"].map(
+                {["CS2 map", "Source 2 Editor"].map(
                   (tech) => (
                     <span
                       key={tech}
@@ -121,21 +121,17 @@ export const Projects = () => {
               </div>
             </div>
 
-            <div
-              className="
+            <div className="
               glass p-6 rounded-xl border border-white/10 
               hover:-translate-y-1 hover:border-blue-500/30
               hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)]
-              transition-all
-            "
-            >
-              <h3 className="text-xl font-bold mb-2">Real-Time Chat App</h3>
+              transition-all">
+              <h3 className="text-xl font-bold mb-2">Tetris</h3>
               <p className="text-gray-400 mb-4">
-                Scalable chat platform supporting real-time messaging, presence,
-                and group chat features.
+              Probably everyone has heard of Tetris.. so this is my version of Tetris with some interesting changes. So definitely give it a try!
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["Socket.IO", "Express", "React", "Redis"].map((tech, key) => (
+                {["Web Game", "Godot", "v1.1 - Various improvements and bug fixes"].map((tech, key) => (
                   <span
                     key={key}
                     className="
@@ -150,13 +146,8 @@ export const Projects = () => {
                   </span>
                 ))}
               </div>
-              <div className="flex justify-between items-center ">
-                <a
-                  href="#"
-                  className="text-blue-400 hover:text-blue-300 transition-colors my-4"
-                >
-                  View Project →
-                </a>
+              <div className="flex justify-between items-center">
+                <a href="https://themichalbr.github.io/mgames/Tetris.html" className="text-blue-400 hover:text-blue-300 transition-colors my-4">Play ONLINE →</a>
               </div>
             </div>
           </div>
