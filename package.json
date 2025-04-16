@@ -1,5 +1,9 @@
 {
   "name": "themichalbr",
+  "homepage": "https://themichalbr.github.io/themichalbr_r",
+  "description": "My personal website.",
+  "author": "MichalBr",
+  "license": "MIT",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -7,7 +11,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",
