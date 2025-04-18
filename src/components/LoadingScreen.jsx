@@ -5,6 +5,12 @@ export const LoadingScreen = ({ onComplete }) => {
   const fullText = "/Loading.../>";
 
   useEffect(() => {
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
     let index = 0;
     const interval = setInterval(() => {
       setText(fullText.substring(0, index));
@@ -14,12 +20,18 @@ export const LoadingScreen = ({ onComplete }) => {
         clearInterval(interval);
 
         setTimeout(() => {
+          document.body.style.overflow = originalBodyOverflow;
+          document.documentElement.style.overflow = originalHtmlOverflow;
           onComplete();
         }, 1000);
       }
     }, 100);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      document.body.style.overflow = originalBodyOverflow;
+      document.documentElement.style.overflow = originalHtmlOverflow;
+    };
   }, [onComplete]);
 
   return (
