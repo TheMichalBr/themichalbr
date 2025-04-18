@@ -2,16 +2,19 @@ import { RevealOnScroll } from "../RevealOnScroll";
 
 export const About = () => {
   const Hobbies = [
+    "Game",
+    "Content creation",
+    "Game development",
     "Games",
-    "Technology",
-    "Programming",
     "Creating content",
     "Editing",
-    "Memes",
+    "Programing",
     "Music",
     "Films",
-    "Chess",
+    "Collecting",
     "Exploring",
+    "Technology",
+    "Memes",
   ];
 
   const ProgLan = ["C#", "C++", "HTML", "CSS", "Java", "JavaScript", "React", "Python", "SQL", "Godot", "Unity", "Source", "Unreal",];
@@ -30,7 +33,17 @@ export const About = () => {
 
           <div className="rounded-xl p-8 border-white/10 border hover:-translate-y-1 transition-all">
             <p className="text-gray-300 mb-6">
-              My name is Michal, 23 years old and I've come from the Czech Republic – live in Brno.
+            My name is Michal, 23 years old and I've come from the Czech Republic – live in Brno.
+
+I can speak well in Czech, English and bit of German and Spanish (and other similar Slavic languages).
+
+I successfully finished studying Information technology in High school and English language school.
+
+Now I studying Information Technologies at the PEF Faculty of Mendel University and trying to survive it.
+
+My hobbies are games, technology, programing, creating content, editing, music, films, collecting, chess, exploring, memes and much more.
+
+I'm not going to write everything here, but if you have any questions, feel free to just message me @MichalBr on Discord or on my e-mail biz.michalbr@gmail.com.
               Passionate developer with expertise in building scalable web
               applications and creating innovative solutions.
             </p>
@@ -75,12 +88,11 @@ export const About = () => {
               <h3 className="text-xl font-bold mb-4"> 🏫 Education </h3>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
                 <li>
-                  <strong> B.S. in Computer Science </strong> - XYZ University
-                  (2016-2020)
+                  <strong>Information Technologies </strong> - Mendel University
+                  (2024-Present)
                 </li>
                 <li>
-                  Relevant Coursework: Data Structures, Web Development, Cloud
-                  Computing...
+                  I successfully finished studying Information technology in High school and English language school.
                 </li>
               </ul>
             </div>
