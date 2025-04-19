@@ -90,8 +90,7 @@ export const Projects = () => {
             >
               <h3 className="text-xl font-bold mb-2">aim_blueline</h3>
               <p className="text-gray-400 mb-4">
-                Full-stack e-commerce with modern UI, secure payment
-                integration, and customizable product inventory.
+              You just want to have a blast with your friends? (too large)
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {["CS2 map", "Source 2 Editor"].map(
@@ -125,13 +124,21 @@ export const Projects = () => {
               glass p-6 rounded-xl border border-white/10 
               hover:-translate-y-1 hover:border-blue-500/30
               hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)]
-              transition-all">
-              <h3 className="text-xl font-bold mb-2">Tetris</h3>
+              transition-all relative overflow-hidden">
+
+            <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
+              style={{
+                backgroundImage: "url('https://raw.githubusercontent.com/TheMichalBr/themichalbr/refs/heads/main/media/games/CBMB_Tetris_.webp')",
+              }}
+            ></div>
+
+            <div className="relative z-10">
+              <h3 className="text-xl font-bold mb-2">Tetris <span className="text-xs font-normal">(v1.1)</span></h3>
               <p className="text-gray-400 mb-4">
               Probably everyone has heard of Tetris.. so this is my version of Tetris with some interesting changes. So definitely give it a try!
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["Web Game", "Godot", "v1.1 - Various improvements and bug fixes"].map((tech, key) => (
+                {["Web Game", "Godot"].map((tech, key) => (
                   <span
                     key={key}
                     className="
@@ -152,7 +159,8 @@ export const Projects = () => {
             </div>
           </div>
         </div>
-      </RevealOnScroll>
-    </section>
+      </div>
+    </RevealOnScroll>
+  </section>
   );
 };
