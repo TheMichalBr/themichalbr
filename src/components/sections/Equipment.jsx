@@ -135,7 +135,7 @@ const equipmentData = [
 
 export const Equipment = () => {
     return (
-    <section id="equipment" className="min-h-screen py-20 pt-30" px-10>
+    <section id="equipment" className="min-h-screen py-20 pt-30" px-10 horizontal-scroll>
         <div className="max-w-6xl mx-auto px-4">
             <RevealOnScroll>
             <h2 className="pb-4 text-3xl font-bold mb-10 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
@@ -155,10 +155,10 @@ export const Equipment = () => {
                     />
                     </div>
                     <div className="p-4 bg-[#1e202470]/90 backdrop-blur-md rounded-b-xl w-full h-full">
-                    <p className="text-sm text-blue-400 uppercase mb-2">
+                    <p className="text-sm text-blue-500 uppercase mb-2">
                         {item.category}
                     </p>
-                    <h3 className="text-base font-semibold text-white leading-tight">
+                    <h3 className="text-base font-semibold text-gray-300 leading-tight">
                         {item.name}
                     </h3>
 
@@ -182,7 +182,7 @@ export const Equipment = () => {
                             />
                             </svg>
                         </button>
-                        <div className="absolute bottom-full mb-4 right-0 w-48 p-2 bg-gray-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-90 transition-opacity duration-300">
+                        <div className="absolute bottom-full mb-4 right-0 w-48 p-2 bg-gray-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-85 transition-opacity duration-300">
                         {/* "absolute right-0 top-full mt-2 w-48 p-2 bg-gray-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"*/}
                         {item.info || "No additional information available."}
                         </div>
