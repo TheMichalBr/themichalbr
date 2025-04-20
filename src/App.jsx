@@ -10,7 +10,6 @@ import { Home } from "./components/sections/Home";
 import { About } from "./components/sections/About";
 import { Equipment } from "./components/sections/Equipment";
 import { Projects } from "./components/sections/Projects";
-import { Contact } from "./components/sections/Contact";
 import Footer from "./components/sections/Footer";
 
 function App() {
@@ -31,7 +30,6 @@ function App() {
         <About />
         <Equipment />
         <Projects />
-        <Contact />
         <Footer />
       </div>
     </>
