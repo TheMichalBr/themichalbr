@@ -1,8 +1,28 @@
 import { RevealOnScroll } from "../RevealOnScroll";
 import { Button } from "@material-tailwind/react";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export const Projects = () => {
+
+  const [downloads, setDownloads] = useState(null);
+
+  useEffect(() => {
+    // Funkce pro získání dat z Modrinth API
+    const fetchModrinthData = async () => {
+      try {
+        const response = await fetch("https://api.modrinth.com/v2/project/G4nmS8ee");
+        const data = await response.json();
+        setDownloads(data.downloads); // Nastavení počtu stažení
+      } catch (error) {
+        console.error("Chyba při načítání dat z Modrinth API:", error);
+      }
+    };
+
+    fetchModrinthData();
+  }, []);
+
   return (
     <section
       id="projects"
@@ -19,14 +39,14 @@ export const Projects = () => {
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
               style={{
-                backgroundImage: "url('https://raw.githubusercontent.com/TheMichalBr/themichalbr/refs/heads/main/media/games/CBMB_Tetris_.webp')",
+                backgroundImage: "url('https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_Tetris.webp')",
               }}
             ></div>
 
               <div className="relative z-10">
               <h3 className="text-xl font-bold mb-2"> Tetris <span className="text-xs font-normal">(v1.1)</span></h3>
               <p className="text-gray-400 mb-4">
-              Probably everyone has heard of Tetris.. so this is my version of Tetris with some interesting changes!
+              Probably everyone has heard of Tetris.. so this is my version of Tetris with some interesting changes! So definitely give it a try!
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {["Web Game", "Godot"].map((tech, key) => (
@@ -42,7 +62,11 @@ export const Projects = () => {
               <div className="flex justify-between items-center">
                 <a href="https://themichalbr.github.io/mgames/Tetris.html" className="text-blue-400 hover:text-blue-300 transition-colors my-4">
                   PLAY ONLINE →
-                </a>
+                </a>{downloads !== null && (
+                  <span className="text-blue-400 text-sm">
+                    100+ played games ︽
+                  </span>
+                )}
               </div>
             </div>
             </div>
@@ -64,10 +88,10 @@ export const Projects = () => {
               <div className="relative z-10">
               <h3 className="text-xl font-bold mb-2"> aim_blueline <span className="text-xs font-normal">(in development)</span></h3>
               <p className="text-gray-400 mb-4">
-                You just want to have a blast with your friends? Or have a thrilling duel up to 5v5 on one aim map and compare who is the bigger shooter? Inspired by the legendary aim_redline map.
+                You just want to have a blast with your friends? Or have a thrilling duel to compare who is the bigger shooter? Inspired by the legendary aim_redline map.
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["CS2 Map", "Source 2 Editor"].map((tech, key) => (
+                {["Game Map", "CS2", "Source 2 Editor"].map((tech, key) => (
                   <span
                     key={key}
                     className="
@@ -85,10 +109,15 @@ export const Projects = () => {
               <div className="flex justify-between items-center">
                 <a
                   href="#"
-                  className="text-blue-400 hover:text-blue-300 transition-colors my-4"
+                  className="text-blue-400 hover:text-blue-300 transition-colors my-4 text-gray-400 cursor-not-allowed"
+      style={{ pointerEvents: "none" }}
                 >
                   PLAY IN CS2 →
-                </a>
+                </a>{downloads !== null && (
+                  <span className="text-blue-400 text-sm">
+                    not available ︽
+                  </span>
+                )}
               </div>
             </div>
             </div>
@@ -111,7 +140,7 @@ export const Projects = () => {
               This mod adds a rocket launcher to the game. You know what to do with it. Be nice to your friends!
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["Minecraft Mod", "Java"].map(
+                {["Game Mod", "Minecraft", "Java"].map(
                   (tech) => (
                     <span
                       key={tech}
@@ -129,12 +158,13 @@ export const Projects = () => {
                 )}
               </div>
               <div className="flex justify-between items-center">
-                <a
-                  href="#"
-                  className="text-blue-400 hover:text-blue-300 transition-colors my-4"
-                >
-                  DOWNLOAD MOD <span className="text-xs font-normal">from Modrinth</span> →
-                </a>
+                <a href="https://modrinth.com/mod/nms-rocket-launcher-mod/" className="text-blue-400 hover:text-blue-300 transition-colors my-4">
+                  DOWNLOAD MOD →
+                </a>{downloads !== null && (
+                  <span className="text-blue-400 text-sm">
+                    {downloads.toLocaleString()} downloads ︽
+                  </span>
+                )}
               </div>
             </div>
             </div>
@@ -154,7 +184,7 @@ export const Projects = () => {
             <div className="relative z-10">
               <h3 className="text-xl font-bold mb-2"> shooter game <span className="text-xs font-normal">(in development)</span></h3>
               <p className="text-gray-400 mb-4">
-                First person shooter game on unknown island. Game will be made in Unreal Engine.
+                First person shooter game on unknown island. Game will be made in Unreal Engine. More info soon!
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {["Game", "Unreal"].map((tech, key) => (
@@ -173,7 +203,12 @@ export const Projects = () => {
                 ))}
               </div>
               <div className="flex justify-between items-center">
-                <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors my-4">VIEW PROJECT →</a>
+                <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors my-4 text-gray-400 cursor-not-allowed"
+      style={{ pointerEvents: "none" }}>VIEW PROJECT PAGE →</a>{downloads !== null && (
+                  <span className="text-blue-400 text-sm">
+                    not available ︽
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -183,14 +218,15 @@ export const Projects = () => {
       <div className="w-full border-t border-gray-800 my-14 px-10"></div>
       
       <div
-        className="mt-16 max-w-4xl mx-auto text-center px-6 lg:px-12 relative bg-cover bg-center rounded-xl p-8 bg-black/100 border-white/10"
+        className="glass mt-16 max-w-4xl mx-auto text-center px-6 lg:px-12 relative bg-cover bg-center rounded-xl p-8 border border-white/10 hover:-translate-y-1 hover:border-blue-500/30
+              hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)] transition-all overflow-hidden"
         style={{
           backgroundImage: "url('https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PME.png')",
         }}>
     <div className="absolute inset-0 bg-black/60 rounded-xl"></div>
       <div className="relative z-10">
         <p className="text-gray-300 text-lg mb-4">
-        If you're interested or have any questions, since I don't have everything written here, feel free to email me or message me at @MichalBr on Discord.
+          If you're interested or have any questions, since I don't have everything written here, feel free to email me or message me at @MichalBr on Discord.
         </p>
         <a href="mailto:biz.michalbr@gmail.com" className="transition bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded relative overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] inline-block">
           Contact me
