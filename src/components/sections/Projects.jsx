@@ -4,6 +4,12 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 
+import pm1 from "/projects/PM_1.webp";
+import pm2 from "/projects/PM_2.webp";
+import pm3 from "/projects/PM_3.webp";
+import pm4 from "/projects/PM_4.webp";
+import pmc from "/projects/PM_C.webp";
+
 export const Projects = () => {
 
   const [downloads, setDownloads] = useState(null);
@@ -39,7 +45,7 @@ export const Projects = () => {
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
               style={{
-                backgroundImage: "url('https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_1.webp')",
+                backgroundImage: pm1,
               }}
             ></div>
 
@@ -80,7 +86,7 @@ export const Projects = () => {
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
               style={{
-                backgroundImage: "url('https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_2.webp')",
+                backgroundImage: pm2,
               }}
             ></div>
 
@@ -131,7 +137,7 @@ export const Projects = () => {
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
               style={{
-                backgroundImage: "url('https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_3.webp')",
+                backgroundImage: pm3,
               }}
             ></div>
               <div className="relative z-10">
@@ -177,7 +183,7 @@ export const Projects = () => {
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
               style={{
-                backgroundImage: "url('https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_4.webp')",
+                backgroundImage: pm4,
               }}
             ></div>
 
@@ -221,7 +227,7 @@ export const Projects = () => {
         className="glass mt-16 max-w-4xl mx-auto text-center px-6 lg:px-12 relative bg-cover bg-center rounded-xl p-8 border border-white/10 hover:-translate-y-1 hover:border-blue-500/30
               hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)] transition-all overflow-hidden"
         style={{
-          backgroundImage: "url('https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_C.webp')",
+          backgroundImage: pmc,
         }}>
     <div className="absolute inset-0 bg-black/60 rounded-xl"></div>
       <div className="relative z-10">
