@@ -45,7 +45,7 @@ export const Projects = () => {
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
               style={{
-                backgroundImage: pm1,
+                backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_1.webp)",
               }}
             ></div>
 
@@ -86,7 +86,7 @@ export const Projects = () => {
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
               style={{
-                backgroundImage: pm2,
+                backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_2.webp)",
               }}
             ></div>
 
@@ -137,7 +137,7 @@ export const Projects = () => {
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
               style={{
-                backgroundImage: pm3,
+                backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_3.webp)",
               }}
             ></div>
               <div className="relative z-10">
@@ -183,7 +183,7 @@ export const Projects = () => {
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
               style={{
-                backgroundImage: pm4,
+                backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_4.webp)",
               }}
             ></div>
 
@@ -227,7 +227,7 @@ export const Projects = () => {
         className="glass mt-16 max-w-4xl mx-auto text-center px-6 lg:px-12 relative bg-cover bg-center rounded-xl p-8 border border-white/10 hover:-translate-y-1 hover:border-blue-500/30
               hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)] transition-all overflow-hidden"
         style={{
-          backgroundImage: pmc,
+          backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_C.webp)",
         }}>
     <div className="absolute inset-0 bg-black/60 rounded-xl"></div>
       <div className="relative z-10">
