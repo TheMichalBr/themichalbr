@@ -14,12 +14,12 @@ export const About = () => {
 
           <div className="rounded-xl p-8 border-white/10 border hover:-translate-y-1 transition-all">
             <p className="text-gray-300 mb-6">
-              My name is Michal, 23 years old and I've come from the Czech Republic – live in Brno. I can speak well in Czech, English and bit of German and Spanish (and other similar Slavic languages).
-              Passionate gamer and developer with expertise in building scalable web applications and creating innovative solutions.
+            My name is Michal, I am 23 years old and I come from the Czech Republic and I currently live in Brno. I can speak Czech, English and slightly German and Spanish. Of course there are some pretty similar languages that I understand, but that's not the point.
+            I am passionate gamer, content creator and also a programmer and developer with some experience in various programming languages and technologies. I have a passion for creating creative and innovative solutions and building modern, slick and cool applications or games. I am always eager to learn and grow, and I am excited to take on new challenges.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="rounded-xl p-6 hover:-translate-y-1 transition-all">
+              <div className="rounded-xl p-6 transition-all">
                 <h3 className="text-xl font-bold mb-4"> Hobbies</h3>
                 <div className="flex flex-wrap gap-2">
                   {Hob.map((tech, key) => (
@@ -35,7 +35,7 @@ export const About = () => {
                 </div>
               </div>
 
-              <div className="rounded-xl p-6 hover:-translate-y-1 transition-all">
+              <div className="rounded-xl p-6 transition-all">
                 <h3 className="text-xl font-bold mb-4"> Experience in</h3>
                 <div className="flex flex-wrap gap-2">
                   {Prog.map((tech, key) => (
@@ -85,23 +85,19 @@ export const About = () => {
               <div className="space-y-4 text-gray-300">
                 <div>
                   <h4 className="font-semibold">
-                    {" "}
-                    Software Engineer at ABC Corp (2020 - Present){" "}
+                    EXAMPLE (EXAMPLE)
                   </h4>
                   <p>
-                    Developed and maintained microservices for cloud-based
-                    applications.
+                    EXAMPLEEXAMPLEEXAMPLEEXAMPLE
                   </p>
                 </div>
 
                 <div>
                   <h4 className="font-semibold">
-                    {" "}
-                    Intern at DEF Startups (2019){" "}
+                    EXAMPLE (EXAMPLE)
                   </h4>
                   <p>
-                    Assisted in building front-end components and integration
-                    REST APIs
+                    EXAMPLEEXAMPLEEXAMPLEEXAMPLE
                   </p>
                 </div>
               </div>
