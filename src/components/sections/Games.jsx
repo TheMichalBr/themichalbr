@@ -102,7 +102,7 @@ export const Games = () => {
     },
     {
       id: "rainbowsixsiegex",
-      name: "Rainbow Six Siege X -- od tud",
+      name: "Rainbow Six Siege X -- OD TUD JÍT NAHORU",
       platform: "Ubisoft (TheMichalBr)",
       rank: "Platinum IV",
       rankIcon: R6,
@@ -203,15 +203,16 @@ export const Games = () => {
   </h2>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
     {games.map((game) => (
-      <div
+      <div 
         key={game.id}
-        className="p-4 bg-gray-800/70 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative"
+        className="p-4 bg-gray-800/70 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative bg-black/50 inset-0 absolute"
         style={{
-          backgroundImage: `url(${game.image})`,
+          backgroundImage: `url(${game.image})`, // tady oddělat vyřešit
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
+        
         <div className="flex items-center gap-4">
           <img
             src={game.image}
