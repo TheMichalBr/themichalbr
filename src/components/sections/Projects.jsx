@@ -40,9 +40,7 @@ export const Projects = () => {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-
             <div className="p-6 rounded-xl border border-white/10 hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition relative overflow-hidden">
-
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
             style={{ backgroundImage: `url(${pm1})` }}
             >
@@ -113,7 +111,7 @@ export const Projects = () => {
                 <a
                   href="#"
                   className="text-blue-400 hover:text-blue-300 transition-colors my-4 text-gray-400 cursor-not-allowed"
-      style={{ pointerEvents: "none" }}
+                  style={{ pointerEvents: "none" }}
                 >
                   PLAY IN CS2 →
                 </a>{downloads !== null && (
