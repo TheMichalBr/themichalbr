@@ -1,30 +1,8 @@
 import { RevealOnScroll } from "../RevealOnScroll";
 
-import video from "/games/V_PZ.mov"
-
 export const Home = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative">
-
-{/* Video na pozadí */}
-<video
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        src={video}
-        type="video/mov"
-        autoPlay
-        loop
-        muted
-        playsInline
-        onLoadedMetadata={(e) => (e.target.playbackRate = 0.75)} // Zpomalení videa
-      ></video>
-
-{/* Tmavý překryv přímo na video */}
-      <div className="absolute inset-0 bg-black/50 z-0"></div>
-
-{/* Gradient na spodní hranu */}
-{/*<div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80 z-5"></div>*/}
-
-
       <RevealOnScroll>
         <div className="text-center z-10 px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent leading-right">
