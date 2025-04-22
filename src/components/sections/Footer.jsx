@@ -26,7 +26,7 @@ export function Footer() {
                 <Typography as="a" href="https://www.youtube.com/@MichalBr" className="opacity-80 transition-opacity hover:opacity-100">
                 <img
                                         src= {Youtube}
-                                        alt="YouTube"
+                                        alt="Youtube"
                                         className="h-6 w-6 filter invert group-hover:invert-0 group-hover:brightness-150 transition-all duration-300 ease-in-out hover:drop-shadow-[0_0_15px_rgba(255,0,0,0.8)]"
                 />
                 </Typography>
@@ -35,7 +35,7 @@ export function Footer() {
                 <Typography as="a" href="https://www.instagram.com/brmichl/" className="opacity-80 transition-opacity hover:opacity-100">
                 <img
                                         src= {Instagram}
-                                        alt="YouTube"
+                                        alt="Instagram"
                                         className="h-6 w-6 filter invert group-hover:invert-0 group-hover:brightness-150 transition-all duration-300 ease-in-out hover:drop-shadow-[0_0_15px_rgba(225,48,108,0.8)]"
                 />
                 </Typography>
@@ -44,7 +44,7 @@ export function Footer() {
                 <Typography as="a" href="https://x.com/TheMichalBr" className="opacity-80 transition-opacity hover:opacity-100">
                 <img
                                         src= {X}
-                                        alt="YouTube"
+                                        alt="X"
                                         className="h-6 w-6 filter invert group-hover:invert-0 group-hover:brightness-150 transition-all duration-300 ease-in-out hover:drop-shadow-[0_0_15px_rgba(29,161,242,0.8)]"
                 />
                 </Typography>
@@ -53,7 +53,7 @@ export function Footer() {
                 <Typography as="a" href="https://steamcommunity.com/id/misakbr2/" className="opacity-80 transition-opacity hover:opacity-100">
                 <img
                                         src= {Steam}
-                                        alt="YouTube"
+                                        alt="Steam"
                                         className="h-6 w-6 filter invert group-hover:invert-0 group-hover:brightness-150 transition-all duration-300 ease-in-out hover:drop-shadow-[0_0_15px_rgba(0,255,255,0.8)]"
                 />
                 </Typography>
@@ -62,7 +62,7 @@ export function Footer() {
                 <Typography as="a" href="https://github.com/TheMichalBr" className="opacity-80 transition-opacity hover:opacity-100">
                 <img
                                         src= {GitHub}
-                                        alt="YouTube"
+                                        alt="GitHub"
                                         className="h-6 w-6 filter invert group-hover:invert-0 group-hover:brightness-150 transition-all duration-300 ease-in-out hover:drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]"
                 />
                 </Typography>
