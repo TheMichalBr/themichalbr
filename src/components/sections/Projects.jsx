@@ -44,10 +44,9 @@ export const Projects = () => {
             <div className="p-6 rounded-xl border border-white/10 hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition relative overflow-hidden">
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
-              style={{
-                backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_1.webp)",
-              }}
-            ></div>
+            style={{ backgroundImage: `url(${pm1})` }}
+            >
+            </div>
 
               <div className="relative z-10">
               <h3 className="text-xl font-bold mb-2"> Tetris <span className="text-xs font-normal">(v1.1)</span></h3>
@@ -85,11 +84,9 @@ export const Projects = () => {
               transition-all relative overflow-hidden">
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
-              style={{
-                backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_2.webp)",
-              }}
-            ></div>
-
+            style={{ backgroundImage: `url(${pm2})` }}
+            >
+            </div>
 
               <div className="relative z-10">
               <h3 className="text-xl font-bold mb-2"> aim_blueline <span className="text-xs font-normal">(in development)</span></h3>
@@ -136,10 +133,9 @@ export const Projects = () => {
               transition-all relative overflow-hidden">
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
-              style={{
-                backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_3.webp)",
-              }}
-            ></div>
+            style={{ backgroundImage: `url(${pm3})` }}
+            >
+            </div>
               <div className="relative z-10">
               <h3 className="text-xl font-bold mb-2"> NmS' Rocket Launcher Mod <span className="text-xs font-normal">(v1.0)</span></h3>
               <p className="text-gray-400 mb-4">
@@ -182,10 +178,9 @@ export const Projects = () => {
               transition-all relative overflow-hidden">
 
             <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
-              style={{
-                backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_4.webp)",
-              }}
-            ></div>
+            style={{ backgroundImage: `url(${pm4})` }}
+            >
+            </div>
 
             <div className="relative z-10">
               <h3 className="text-xl font-bold mb-2"> shooter game <span className="text-xs font-normal">(in development)</span></h3>
@@ -225,10 +220,8 @@ export const Projects = () => {
       
       <div
         className="glass mt-16 max-w-4xl mx-auto text-center px-6 lg:px-12 relative bg-cover bg-center rounded-xl p-8 border border-white/10 hover:-translate-y-1 hover:border-blue-500/30
-              hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)] transition-all overflow-hidden"
-        style={{
-          backgroundImage: "url(https://raw.githubusercontent.com/TheMichalBr/themichalbr_r/refs/heads/main/public/projects/PM_C.webp)",
-        }}>
+              hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)] transition-all overflow-hidden" 
+              style={{ backgroundImage: `url(${pmc})` }}>
     <div className="absolute inset-0 bg-black/60 rounded-xl"></div>
       <div className="relative z-10">
         <p className="text-gray-300 text-lg mb-4">
