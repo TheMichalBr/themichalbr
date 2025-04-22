@@ -1,7 +1,3 @@
-import "./index.css";
-import "./App.css";
-import './assets/fonts/fonts.css';
-
 import { useState } from "react";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { Navbar } from "./components/Navbar";
@@ -12,6 +8,10 @@ import { Equipment } from "./components/sections/Equipment";
 import { Games } from "./components/sections/Games";
 import { Projects } from "./components/sections/Projects";
 import Footer from "./components/sections/Footer";
+
+import "./index.css";
+import "./App.css";
+import './assets/fonts/fonts.css';
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
