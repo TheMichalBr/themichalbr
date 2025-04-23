@@ -1,4 +1,5 @@
 import { RevealOnScroll } from "../RevealOnScroll";
+import { Video } from "./Video.jsx";
 
 export const About = () => {
   const Hob = ["Games", "Programing", "Content creation", "Editing", "Development", "Music", "Films", "Chess", "Collecting", "Exploring", "Technology", "Memes"];
@@ -67,6 +68,13 @@ export const About = () => {
             </div>
           </div>
 
+
+          <div className="rounded-xl p-4 border-white/10 border hover:-translate-y-1 transition-all mt-8 py-8">
+          <div className="max-w-6xl mx-auto px-4">
+          <Video />
+          </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
               <h3 className="text-xl font-bold mb-4"> 🏫 Education </h3>
@@ -91,7 +99,6 @@ export const About = () => {
                     EXAMPLEEXAMPLEEXAMPLEEXAMPLE
                   </p>
                 </div>
-
                 <div>
                   <h4 className="font-semibold">
                     EXAMPLE (EXAMPLE)
