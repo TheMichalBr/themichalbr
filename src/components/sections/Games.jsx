@@ -146,7 +146,7 @@ export const Games = () => {
                   alt="Doom Eternal"
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <h3 className="text-xl font-bold text-white">Doom Eternal</h3>
                   <p className="text-sm text-gray-300">Platform: PC</p>
                   <p className="text-sm text-gray-300">Difficulty: Nightmare (100%)</p>
@@ -172,7 +172,7 @@ export const Games = () => {
                   alt="Cyberpunk 2077"
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   <h3 className="text-xl font-bold text-white">Cyberpunk 2077 + PL</h3>
                   <p className="text-sm text-gray-300">Platform: PC</p>
                   <p className="text-sm text-yellow-400">Rating: ★★★★★ 10/10</p>
@@ -193,10 +193,8 @@ export const Games = () => {
             </div>
           </div>
 
- {/* Mezera mezi sekcemi */}
  <div className="h-8"></div>
 
-          {/* Hry */}
 <div>
   <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
     Games
@@ -207,12 +205,11 @@ export const Games = () => {
         key={game.id}
         className="p-4 bg-gray-800/70 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative bg-black/50 inset-0 absolute"
         style={{
-          backgroundImage: `url(${game.image})`, // tady oddělat vyřešit
+          /*backgroundImage: `url(${game.image})`*/
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        
         <div className="flex items-center gap-4">
           <img
             src={game.image}
@@ -224,7 +221,7 @@ export const Games = () => {
             <p className="text-sm text-gray-300">Platform: {game.platform}</p>
             <div className="flex items-center gap-2">
               <img
-                src={game.rankIcon} // Dynamicky načte ikonu ranku
+                src={game.rankIcon}
                 alt={`${game.rank} Icon`}
                 className="w-6 h-6"
               />
