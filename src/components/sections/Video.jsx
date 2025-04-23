@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Video= () => {
+export const Video = () => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const handlePlayVideo = () => {
@@ -8,19 +8,16 @@ export const Video= () => {
   };
 
   return (
-    <section id="aboutme" className="min-h-screen flex items-center justify-center py-20">
+    <section id="aboutme" className="min-h-screen flex items-center justify-center py-20 bg-gray-900">
       <div className="max-w-6xl mx-auto px-4">
         <div className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-lg border border-white/10">
           {!isVideoPlaying ? (
-            <div
-              className="relative w-full h-0"
-              style={{ paddingTop: "56.25%" }} // Poměr stran 16:9
-            >
+            <div className="relative w-full h-0" style={{ paddingTop: "56.25%" }}>
               {/* Náhled videa */}
               <img
-                src={`https://img.youtube.com/vi/VgQDsqOi2wo/maxresdefault.jpg`}
+                src="https://img.youtube.com/vi/VgQDsqOi2wo/maxresdefault.jpg"
                 alt="Video Thumbnail"
-                className="absolute top-0 left-0 w-full h-full object-cover"
+                className="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
               />
               {/* Tlačítko přehrávání */}
               <button
