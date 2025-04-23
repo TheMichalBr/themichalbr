@@ -1,5 +1,5 @@
 import { RevealOnScroll } from "../RevealOnScroll";
-import { Video } from "./Video.jsx";
+import Video from "./Video.jsx";
 
 export const About = () => {
   const Hob = ["Games", "Programing", "Content creation", "Editing", "Development", "Music", "Films", "Chess", "Collecting", "Exploring", "Technology", "Memes"];
@@ -55,25 +55,10 @@ export const About = () => {
           </div>
 
           <div className="rounded-xl p-4 border-white/10 border hover:-translate-y-1 transition-all mt-8 py-8">
-          <div className="max-w-6xl mx-auto px-4">
-                <div className="relative w-full max-w-4xl mx-auto" style={{ paddingTop: "56.25%" }}>
-                    <iframe
-                        className="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg border border-white/10"
-                        src="https://www.youtube.com/embed/VgQDsqOi2wo"
-                        title="MichalBr - YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
-                </div>
+            <div className="max-w-6xl mx-auto px-4">
+              <Video videoUrl="https://www.youtube.com/watch?v=VgQDsqOi2wo" />
+              </div>
             </div>
-          </div>
-
-
-          <div className="rounded-xl p-4 border-white/10 border hover:-translate-y-1 transition-all mt-8 py-8">
-          <div className="max-w-6xl mx-auto px-4">
-          <Video />
-          </div>
-          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
