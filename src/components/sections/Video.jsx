@@ -12,14 +12,14 @@ const Video = ({ videoUrl }) => {
   };
 
   const videoId = getVideoId(videoUrl);
+  const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
   useEffect(() => {
     if (videoId) {
-      // Načítání dat z YouTube Data API
       const fetchVideoData = async () => {
         try {
           const response = await fetch(
-            `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=AIzaSyBDUuoEtHoIxIirw4zN4oIVOu4Z_zOn78E`
+            `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${API_KEY}`
           );
           const data = await response.json();
           if (data.items && data.items.length > 0) {
