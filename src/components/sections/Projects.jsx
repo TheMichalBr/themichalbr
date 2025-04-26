@@ -216,7 +216,7 @@ export const Projects = () => {
 
       <div className="w-full border-t border-gray-800 my-14 px-10"></div>
       
-      <div
+      <div id="contact"
         className="glass mt-16 max-w-4xl mx-auto text-center px-6 lg:px-12 relative bg-cover bg-center rounded-xl p-8 border border-white/10 hover:-translate-y-1 hover:border-blue-500/30
               hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)] transition-all overflow-hidden" 
               style={{ backgroundImage: `url(${pmc})` }}>
