@@ -34,7 +34,7 @@ const Video = ({ videoUrl }) => {
 
       fetchVideoData();
     }
-  }, [videoId]);
+  }, [API_KEY, videoId]);
 
   if (!videoId) {
     return (
