@@ -12,7 +12,8 @@ import hddI from "/equipment/8_HDD.webp";
 import ssdI from "/equipment/9_SSD.webp";
 import osI from "/equipment/10_OS.webp";
 import mmonitorI from "/equipment/11_MMONITOR.webp";
-import smonitorI from "/equipment/12_SMONITOR.webp";
+import smonitor1I from "/equipment/12_SMONITOR1.webp";
+import smonitor2I from "/equipment/12_SMONITOR2.webp";
 import keyboardI from "/equipment/13_KEYBOARD.webp";
 import mouseI from "/equipment/14_MOUSE.webp";
 import mousepadI from "/equipment/15_MOUSEPAD.webp";
@@ -20,6 +21,7 @@ import headsetI from "/equipment/16_HEADSET.webp";
 import microphoneI from "/equipment/17_MICROPHONE.webp";
 import mobileI from "/equipment/18_MOBILE.webp";
 import consoleotherI from "/equipment/19_CONSOLE.webp";
+import vrI from "/equipment/20_VROTHER.webp";
 
 const equipmentData = [
 {
@@ -53,9 +55,9 @@ const equipmentData = [
 },
 {
     category: "GRAPHICS CARD",
-    name: "NVIDIA MSI GeForce RTX 2070 GAMING Z",
+    name: "NVIDIA MSI GeForce RTX 2070",
     image: gpuI,
-    info: "Memory: 8GB GDDR6",
+    info: "Memory: 8GB GDDR6, Version: GAMING Z",
 },
 {
     category: "COMPUTER MEMORY",
@@ -88,10 +90,16 @@ const equipmentData = [
     info: "Refresh rate: 270Hz, Info: 27 2K IPS G-Sync",
 },
 {
-    category: "SIDE MONITORS",
-    name: "ZOWIE by BenQ XL2720, IIYAMA PLE2209HDS-B1",
-    image: smonitorI,
-    info: "Refresh rate: 144Hz/60Hz, Info: 27/22 1080p TN",
+    category: "SIDE MONITOR",
+    name: "ZOWIE by BenQ XL2720",
+    image: smonitor1I,
+    info: "Refresh rate: 144Hz, Info: 27 1080p TN",
+},
+{
+    category: "SIDE MONITOR",
+    name: "IIYAMA PLE2209HDS-B1",
+    image: smonitor2I,
+    info: "Refresh rate: 60Hz, Info: 22 1080p TN",
 },
 {
     category: "KEYBOARD",
@@ -112,7 +120,7 @@ const equipmentData = [
 },
 {
     category: "HEADSET",
-    name: "Logitech G Pro X 2 LIGHTSPEED Wireless",
+    name: "Logitech G Pro X 2 LIGHTSPEED",
     image: headsetI,
 },
 {
@@ -127,26 +135,30 @@ const equipmentData = [
     info: "Storage: 128GB, RAM: 6GB",
 },
 {
-    category: "CONSOLE AND OTHER",
-    name: "Xbox 360, Mobile VR, Electric Table",
+    category: "CONSOLE",
+    name: "Xbox 360",
     image: consoleotherI,
+},
+{
+    category: "OTHER",
+    name: "Mobile VR, Electric Table",
+    image: vrI,
 },
 ];
 
 export const Equipment = () => {
     return (
-    <section id="equipment" className="min-h-screen py-20 pt-30" px-10 horizontal-scroll>
-        <div className="max-w-6xl mx-auto px-4">
+    <section id="equipment" className="min-h-screen py-20 " px-10 horizontal-scroll>
+        <div className="max-w-5xl mx-auto px-4">
             <RevealOnScroll>
-            <h2 className="pb-4 text-3xl font-bold mb-10 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
+            <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
                 Equipment
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {equipmentData.map((item, index) => (
                 <div
                     key={index}
-                    className="group relative bg-[#1e20243a] border border-white/10 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
-                > {/* bylo tam group rozlejo auto */}
+                    className="group relative bg-[#1e20243a] border border-white/10 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
                     <div className="relative h-40 overflow-hidden flex items-center justify-center">
                     <img
                         src={item.image}
