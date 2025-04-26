@@ -78,18 +78,10 @@ export const About = () => {
               <div className="space-y-4 text-gray-300">
                 <div>
                   <h4 className="font-semibold">
-                    EXAMPLE (EXAMPLE)
+                    TEXT 1 (DATE)
                   </h4>
                   <p>
-                    EXAMPLEEXAMPLEEXAMPLEEXAMPLE
-                  </p>
-                </div>
-                <div>
-                  <h4 className="font-semibold">
-                    EXAMPLE (EXAMPLE)
-                  </h4>
-                  <p>
-                    EXAMPLEEXAMPLEEXAMPLEEXAMPLE
+                    TEXT 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   </p>
                 </div>
               </div>
