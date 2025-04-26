@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 
-import S from "/games/G_S.webp";
+import S from "/games/elements/G_S.webp";
 
 import RR from "/games/reviews/R_R.webp";
 import RC from "/games/reviews/R_C.webp";
@@ -27,8 +27,8 @@ import R7 from "/games/CHESS.webp";
 export const Games = () => {
   const [showSettings, setShowSettings] = useState(null);
 
-  const toggleSettings = (game) => {
-    setShowSettings(showSettings === game ? null : game);
+  const toggleSettings = (gameId) => {
+    setShowSettings((prev) => (prev === gameId ? null : gameId));
   };
 
   const games = [
@@ -102,7 +102,7 @@ export const Games = () => {
     },
     {
       id: "rainbowsixsiegex",
-      name: "Rainbow Six Siege X -- OD TUD JÍT NAHORU",
+      name: "Rainbow Six Siege X",
       platform: "Ubisoft (TheMichalBr)",
       rank: "Platinum IV",
       rankIcon: R6,
@@ -130,12 +130,12 @@ export const Games = () => {
   ];
 
   return (
-    <section id="games" className="min-h-screen text-white py-20 px-6">
-      <div className="max-w-7xl mx-auto space-y-16">
+    <section id="games" className="min-h-screen text-white py-20 px-6 justify-center">
+      <div className="max-w-5xl mx-auto space-y-16">  {/* 7xl bylo*/}
         <RevealOnScroll>
           {/* Recenze */}
           <div>
-            <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
               Latest Reviews
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -193,66 +193,123 @@ export const Games = () => {
             </div>
           </div>
 
- <div className="h-8"></div>
+  <div className="h-16"></div>
 
-<div>
-  <h2 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+  <div>
+  <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
     Games
   </h2>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
     {games.map((game) => (
-      <div 
+      <div
         key={game.id}
-        className="p-4 bg-gray-800/70 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative bg-black/50 inset-0 absolute"
+        className="p-4 bg-gray-800/70 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative border border-gray-700 hover:border-gray-500"
         style={{
-          /*backgroundImage: `url(${game.image})`*/
+          backgroundImage: `url(${game.image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="flex items-center gap-4">
-          <img
-            src={game.image}
-            alt={game.name}
-            className="w-14 h-14 rounded-lg"
-          />
-          <div>
-            <h3 className="text-lg font-bold text-white">{game.name}</h3>
-            <p className="text-sm text-gray-300">Platform: {game.platform}</p>
-            <div className="flex items-center gap-2">
-              <img
-                src={game.rankIcon}
-                alt={`${game.rank} Icon`}
-                className="w-6 h-6"
-              />
-              <p className="text-sm text-yellow-400">{game.rank}</p>
+        {/* Překryv pro ztmavení */}
+        <div className="absolute inset-0 bg-black/60 rounded-lg"></div>
+
+        {/* Zmenšené logo ranku na levé straně */}
+        <div
+          className="absolute left-2 top-2 w-16 h-16 opacity-60"
+          style={{
+            backgroundImage: `url(${game.rankIcon})`,
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "top left",
+            filter: "blur(1px) brightness(0.5)",
+          }}
+        ></div>
+
+        {/* Fade efekt zleva */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent rounded-lg"></div>
+
+        {/* Obsah karty */}
+        <div className="relative z-10">
+          <div className="flex items-center gap-4">
+            <img
+              src={game.image}
+              alt={game.name}
+              className="w-14 h-14 rounded-lg border border-gray-600"
+            />
+            <div>
+              <h3 className="text-lg font-bold text-white">{game.name}</h3>
+              <p className="text-sm text-gray-300">Platform: {game.platform}</p>
+              <div className="flex items-center gap-2">
+                <img
+                  src={game.rankIcon}
+                  alt={`${game.rank} Icon`}
+                  className="w-6 h-6"
+                />
+                <p className="text-sm text-yellow-400">{game.rank}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <button
-          onClick={() => toggleSettings(game.id)}
-          className="absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full shadow-md hover:bg-blue-400 transition-transform duration-300 transform hover:scale-110">
-          <img src={S} alt="Settings" className="w-5 h-5" />
-        </button>
-        <div
-          className={`mt-4 bg-gray-700/80 p-4 rounded-lg transition-all duration-500 transform ${
-            showSettings === game.id
-              ? "max-h-screen opacity-100 translate-y-0"
-              : "max-h-0 opacity-0 -translate-y-4 overflow-hidden"
-          }`}
-        >
-          {Object.entries(game.settings).map(([key, value]) => (
-            <p key={key} className="text-sm text-gray-300">
-              {key.charAt(0).toUpperCase() + key.slice(1)}: {value}
-            </p>
-          ))}
+
+          {/* Tlačítko Settings */}
+<button
+  onClick={() => toggleSettings(game.id)}
+  className={`absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full shadow-md transition-transform duration-300 transform ${
+    showSettings === game.id
+      ? "rotate-45 bg-red-500 hover:bg-red-400"
+      : "hover:bg-blue-400 hover:scale-110"
+  }`}
+  aria-label="Toggle Settings"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth="2"
+    stroke="currentColor"
+    className="w-5 h-5"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 4v16m8-8H4"
+    />
+  </svg>
+</button>
+
+{/* Rank jako obrázek vlevo od tlačítka */}
+<div
+  className="absolute top-4 right-16 w-10 h-10 opacity-40 rounded-full bg-cover bg-center"
+  style={{
+    backgroundImage: `url(${game.rankIcon})`,
+    filter: "blur(2px) brightness(0.8)",
+  }}
+></div>
+
+          {/* Obsah nastavení */}
+          <div
+            className={`overflow-hidden transition-all duration-700 ease-in-out ${
+              showSettings === game.id ? "max-h-60 mt-4" : "max-h-0"
+            }`}
+          >
+            <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg border border-gray-700 hover:border-gray-500">
+              <h4 className="text-sm font-bold mb-4">Settings</h4>
+              <ul className="text-xs space-y-2">
+                {Object.entries(game.settings).map(([key, value]) => (
+                  <li key={key}>
+                    <span className="font-semibold">{key}:</span> {value}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     ))}
   </div>
 </div>
+
         </RevealOnScroll>
-        </div>
+      </div>
     </section>
 );
 };
