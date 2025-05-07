@@ -214,22 +214,50 @@ export const Projects = () => {
         </div>
       </div>
 
-      <div className="w-full border-t border-gray-800 my-14 px-10"></div>
-      
-      <div id="contact"
-        className="glass mt-16 max-w-4xl mx-auto text-center px-6 lg:px-12 relative bg-cover bg-center rounded-xl p-8 border border-white/10 hover:-translate-y-1 hover:border-blue-500/30
-              hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)] transition-all overflow-hidden" 
-              style={{ backgroundImage: `url(${pmc})` }}>
-    <div className="absolute inset-0 bg-black/60 rounded-xl"></div>
-      <div className="relative z-10">
-        <p className="text-gray-300 text-lg mb-4">
-          If you're interested or have any questions, since I don't have everything written here, feel free to email me or message me at @MichalBr on Discord.
-        </p>
-        <a href="mailto:biz.michalbr@gmail.com" className="transition bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded relative overflow-hidden hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] inline-block">
-          Contact me
-        </a>
-      </div>
+    <section id="contact-section" className="relative px-6 lg:px-12 py-12">
+
+  <div className="w-full border-t border-gray-800 my-14 px-10 pb-8"></div>
+
+  <div
+    id="contact"
+    className="glass relative max-w-6xl mx-auto text-center bg-cover bg-center rounded-2xl p-12 border border-white/10 hover:border-blue-500/30 hover:shadow-[0_8px_30px_rgba(59,130,246,0.3)] transition-transform hover:-translate-y-1.5 overflow-hidden"
+    style={{
+      backgroundImage: `url(${pmc})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+  >
+    {/* Překryv pro ztmavení [0_0_15px_rgba(59,130,246,0.4)]  */}
+    <div className="absolute inset-0 bg-black/70 rounded-2xl pointer-events-none"></div>
+
+    {/* Dekorativní animované kruhy */}
+    <div className="absolute -top-16 -left-16 w-48 h-48 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+    <div className="absolute -bottom-16 -right-16 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+
+    {/* Obsah */}
+    <div className="relative z-10">
+      <h3 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-6">
+        Get in Touch
+      </h3>
+      <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+      If you're interested or have any questions, since I don't have everything written here, feel free to email me or message me at <span className="text-blue-400">@MichalBr</span> on Discord.
+      </p>
+      <a
+        href="mailto:biz.michalbr@gmail.com"
+        className="inline-block bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-3 px-12 rounded-full shadow-lg hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] transition-transform hover:-translate-y-0.5"
+      >
+        Contact Me
+      </a>
     </div>
+
+    {/* Plovoucí dekorace */}
+    <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute top-1/3 left-1/4 w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-xl opacity-30 animate-float"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-20 h-20 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur-xl opacity-30 animate-float-reverse"></div>
+    </div>
+  </div>
+</section>
+
     </RevealOnScroll>
   </section>
   );
