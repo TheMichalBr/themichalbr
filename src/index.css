@@ -6,7 +6,7 @@ html, body {
   font-family: "Poppins", sans-serif;
   background: #0a0a0a;
   color: #f3f4f6;
-  overflow-x: auto; /* Prevent horizontal scroll */
+  overflow-x: auto;
 }
 
 @layer utilities {
@@ -49,7 +49,6 @@ html, body {
   transform: translateY(0);
 }
 
-/* Prevent horizontal scroll */
 .horizontal-scroll {
   display: flex;
   overflow-x: auto;
@@ -58,4 +57,36 @@ html, body {
 
 .horizontal-scroll > * {
   scroll-snap-align: start;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes float-reverse {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 6s ease-in-out infinite;
 }
