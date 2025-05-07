@@ -214,10 +214,8 @@ export const Projects = () => {
         </div>
       </div>
 
-    <section id="contact-section" className="relative px-6 lg:px-12 py-12">
-
+  <section id="contact-section" className="relative px-6 lg:px-12 py-12">
   <div className="w-full border-t border-gray-800 my-14 px-10 pb-8"></div>
-
   <div
     id="contact"
     className="glass relative max-w-6xl mx-auto text-center bg-cover bg-center rounded-2xl p-12 border border-white/10 hover:border-blue-500/30 hover:shadow-[0_8px_30px_rgba(59,130,246,0.3)] transition-transform hover:-translate-y-1.5 overflow-hidden"
@@ -256,7 +254,7 @@ export const Projects = () => {
       <div className="absolute bottom-1/4 right-1/3 w-20 h-20 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur-xl opacity-30 animate-float-reverse"></div>
     </div>
   </div>
-</section>
+  </section>
 
     </RevealOnScroll>
   </section>
