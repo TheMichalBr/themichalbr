@@ -73,16 +73,40 @@ export const About = () => {
                 </li>
               </ul>
             </div>
-            <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
-              <h3 className="text-xl font-bold mb-4"> 💼 Work Experience </h3>
+            <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all" id="contact">
+              <h3 className="text-xl font-bold mb-4"> 💼 Contact me </h3>
               <div className="space-y-4 text-gray-300">
                 <div>
                   <h4 className="font-semibold">
-                    TEXT 1 (DATE)
+                    Get in Touch
                   </h4>
                   <p>
-                    TEXT 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    If you're interested or have any questions, since I don't have everything written here, feel free to email me or message me at @MichalBr on Discord.
                   </p>
+
+<div className="flex flex-col md:flex-row gap-3 justify-center items-center px-8 pb-8">
+        <a
+          href="mailto:biz.michalbr@gmail.com"
+          className="flex items-center gap-2 px-5 py-3 rounded-xl border border-blue-500/30 text-blue-400 hover:bg-blue-500/10 font-semibold transition-all duration-150"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16 12l-4-4-4 4m8 0v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6m16 0V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6" />
+          </svg>
+          E-mail
+        </a>
+        <a
+          href="https://discord.com/users/your-discord-id"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-5 py-3 rounded-xl border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 font-semibold transition-all duration-150"
+        >
+          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.317 4.369A19.791 19.791 0 0 0 16.885 3.2a.074.074 0 0 0-.078.037c-.34.607-.719 1.396-.984 2.013a18.524 18.524 0 0 0-5.59 0 12.583 12.583 0 0 0-.997-2.013a.077.077 0 0 0-.078-.037c-1.432.327-2.814.812-4.11 1.569a.07.07 0 0 0-.032.027C.533 9.045-.32 13.579.099 18.057a.08.08 0 0 0 .031.056c1.73 1.27 3.415 2.048 5.077 2.568a.077.077 0 0 0 .084-.027c.391-.535.739-1.1 1.037-1.693a.076.076 0 0 0-.041-.104c-.552-.21-1.077-.465-1.584-.755a.077.077 0 0 1-.008-.127c.106-.08.213-.163.316-.246a.074.074 0 0 1 .077-.01c3.33 1.522 6.94 1.522 10.227 0a.073.073 0 0 1 .078.009c.104.083.21.166.317.246a.077.077 0 0 1-.006.127c-.507.29-1.032.545-1.584.755a.076.076 0 0 0-.04.105c.3.592.647 1.158 1.036 1.692a.076.076 0 0 0 .084.028c1.663-.52 3.348-1.298 5.078-2.568a.077.077 0 0 0 .03-.055c.5-5.177-.838-9.673-3.548-13.661a.061.061 0 0 0-.03-.028zM8.02 15.331c-1.006 0-1.823-.92-1.823-2.051 0-1.13.807-2.05 1.823-2.05 1.025 0 1.832.92 1.823 2.05 0 1.13-.807 2.05-1.823 2.05zm7.974 0c-1.006 0-1.823-.92-1.823-2.051 0-1.13.807-2.05 1.823-2.05 1.025 0 1.832.92 1.823 2.05 0 1.13-.798 2.05-1.823 2.05z"/>
+          </svg>
+          Discord
+        </a>
+      </div>
+
                 </div>
               </div>
             </div>
