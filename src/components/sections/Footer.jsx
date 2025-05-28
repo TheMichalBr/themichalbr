@@ -17,7 +17,7 @@ export function Footer() {
     <footer className="relative w-full pb-9">
         <div className="mx-auto w-full max-w-7xl px-8">
         <RevealOnScroll>
-            <div className="mt-12 flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between">
+            <div className="mt-12 flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between border-white/10">
             <Typography variant="small" className="mb-4 text-center font-normal text-gray-300 md:mb-0">
                 &copy; {currentYear} <Tooltip title="Created in React with ❤️ by MichalBr." slots={{ transition: Zoom }} className="transition-all duration-200">MichalBr</Tooltip>. All Rights Reserved.
             </Typography>
