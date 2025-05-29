@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import pm1 from "/projects/PM_1.webp";
 import pm2 from "/projects/PM_2.webp";
 import pm3 from "/projects/PM_3.webp";
-import pm4 from "/projects/PM_4.webp";
+import pm4 from "/projects/PM_4-1.webp";
 
 export const Projects = () => {
 
@@ -48,7 +48,7 @@ export const Projects = () => {
               <div className="relative z-10">
               <h3 className="text-xl font-bold mb-2"> Tetris <span className="text-xs font-normal">(v1.1)</span></h3>
               <p className="text-gray-400 mb-4">
-              Probably everyone has heard of Tetris.. so this is my version of Tetris with some interesting changes! So definitely give it a try!
+              Probably everyone has heard of Tetris. So this is my version of Tetris with some interesting changes!
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {["Web Game", "Godot"].map((tech, key) => (
@@ -64,11 +64,7 @@ export const Projects = () => {
               <div className="flex justify-between items-center">
                 <a href="https://themichalbr.github.io/mgames/Tetris.html" className="text-blue-400 hover:text-blue-300 transition-colors my-4">
                   PLAY ONLINE →
-                </a>{downloads !== null && (
-                  <span className="text-blue-400 text-sm">
-                    100+ played games ▶
-                  </span>
-                )}
+                </a>
               </div>
             </div>
             </div>
@@ -86,12 +82,12 @@ export const Projects = () => {
             </div>
 
               <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-2"> aim_blueline <span className="text-xs font-normal">(in development)</span></h3>
+              <h3 className="text-xl font-bold mb-2"> Snake <span className="text-xs font-normal">(v1.0.3)</span></h3>
               <p className="text-gray-400 mb-4">
-                You just want to have a blast with your friends? Or have a thrilling duel to compare who is the bigger shooter? Inspired by the legendary aim_redline map.
+              Classic Snake. Eat the food, grow the snake and try not to hit the walls or yourself!
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
-                {["Game Map", "CS2", "Source 2 Editor"].map((tech, key) => (
+                {["Game", "Python"].map((tech, key) => (
                   <span
                     key={key}
                     className="
@@ -107,17 +103,9 @@ export const Projects = () => {
                 ))}
               </div>
               <div className="flex justify-between items-center">
-                <a
-                  href="#"
-                  className="text-blue-400 hover:text-blue-300 transition-colors my-4 text-gray-400 cursor-not-allowed"
-                  style={{ pointerEvents: "none" }}
-                >
-                  PLAY IN CS2 →
-                </a>{downloads !== null && (
-                  <span className="text-blue-400 text-sm">
-                    not available ⇩
-                  </span>
-                )}
+                <a href="https://github.com/TheMichalBr/snake_game" className="text-blue-400 hover:text-blue-300 transition-colors my-4">
+                  DOWNLOAD GAME →
+                </a>
               </div>
             </div>
             </div>
@@ -134,7 +122,7 @@ export const Projects = () => {
             >
             </div>
               <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-2"> NmS' Rocket Launcher Mod <span className="text-xs font-normal">(v1.0)</span></h3>
+              <h3 className="text-xl font-bold mb-2"> NmS' Rocket Launcher Mod <span className="text-xs font-normal">(v1.0.2)</span></h3>
               <p className="text-gray-400 mb-4">
               This mod adds a rocket launcher to the game. You know what to do with it. Be nice to your friends!
               </p>
@@ -182,7 +170,7 @@ export const Projects = () => {
             <div className="relative z-10">
               <h3 className="text-xl font-bold mb-2"> shooter game <span className="text-xs font-normal">(in development)</span></h3>
               <p className="text-gray-400 mb-4">
-                First person shooter game on unknown island. Game will be made in Unreal Engine. More info soon!
+                First person shooter game on unknown island. Game will be made in Unreal Engine. More info soon!  aim_blueline You just want to have a blast with your friends? Or have a thrilling duel to compare who is the bigger shooter? Inspired by the legendary aim_redline map. "Game Map", "CS2", "Source 2 Editor" PLAY IN CS2 →
               </p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {["Game", "Unreal"].map((tech, key) => (
