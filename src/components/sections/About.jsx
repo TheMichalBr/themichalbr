@@ -62,7 +62,7 @@ export const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div className="p-6 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
-              <h3 className="text-xl font-bold mb-4"> 🏫 Education </h3>
+              <h3 className="text-xl font-bold mb-4"> 🏫 Education and Job</h3>
               <ul className="list-disc list-inside text-gray-300 space-y-2">
                 <li>
                   <strong>Information Technologies </strong> - at the PEF Faculty of Mendel University
@@ -70,6 +70,9 @@ export const About = () => {
                 </li>
                 <li>
                   I successfully finished studying Information technology in High school and English language school.
+                </li>
+                <li>
+                  I am currently a full-time student and do not work anywhere.
                 </li>
               </ul>
             </div>
@@ -84,7 +87,7 @@ export const About = () => {
                     If you're interested or have any questions, since I don't have everything written here, feel free to email me or message me at @MichalBr on Discord.
                   </p>
 
-<div className="flex flex-col md:flex-row gap-3 justify-center items-center px-8 pb-8">
+<div className="flex flex-col md:flex-row gap-6 justify-center items-center px-8 pb-8">
         <a
           href="mailto:biz.michalbr@gmail.com"
           className="flex items-center gap-2 px-5 py-3 rounded-xl border border-blue-500/30 text-blue-400 hover:bg-blue-500/10 font-semibold transition-all duration-150"
