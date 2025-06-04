@@ -130,8 +130,8 @@ export const Games = () => {
   ];
 
   return (
-    <section id="games" className="min-h-screen text-white py-20 px-6 justify-center">
-      <div className="max-w-5xl mx-auto space-y-16">  {/* 7xl bylo*/}
+    <section id="games" className="min-h-screen text-white py-20 justify-center flex items-center">
+      <div className="max-w-5xl mx-auto space-y-16 px-4">  {/* 7xl bylo*/}
         <RevealOnScroll>
           {/* Recenze */}
           <div>
@@ -203,7 +203,7 @@ export const Games = () => {
     {games.map((game) => (
       <div
         key={game.id}
-        className="p-4 bg-gray-800/70 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative border border-gray-700 hover:border-gray-500"
+        className="p-4 bg-gray-800/70 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative border border-gray-800 hover:border-gray-500"
         style={{
           backgroundImage: `url(${game.image})`,
           backgroundSize: "cover",
