@@ -22,7 +22,8 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
       document.body.style.overflow = "";
       document.body.style.touchAction = "";
       window.scrollTo(0, scrollPosition.current);
-    } return () => {
+    }
+    return () => {
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.left = "";
@@ -74,10 +75,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
               className={`
                 w-full flex justify-center
                 transition-all duration-500
-                ${menuOpen
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 -translate-y-8"
-                }
+                ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}
               `}
               style={{
                 transitionDelay: menuOpen ? `${i * 80 + 120}ms` : "0ms",
@@ -92,9 +90,12 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
                   bg-gradient-to-r from-cyan-700/10 to-blue-900/10
                   shadow-xl shadow-cyan-900/10
                   transition-all duration-225
-                  hover:bg-cyan-500/20 hover:text-cyan-300 focus:bg-cyan-500/30 focus:text-cyan-200
+                  hover:bg-cyan-500/20 hover:text-cyan-300
+                  focus:bg-cyan-500/30 focus:text-cyan-200
                   border border-cyan-400/10
-                  scale-95 hover:scale-100 active:scale-97 cursor-pointer outline-none ring-0 focus:ring-2 focus:ring-cyan-400
+                  scale-95 hover:scale-100 active:scale-97
+                  cursor-pointer outline-none ring-0
+                  focus:ring-2 focus:ring-cyan-400
                 `}
                 style={{
                   transitionProperty: "background, color, transform, box-shadow",
