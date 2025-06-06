@@ -57,21 +57,11 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
             />
           </div>
 
-          {/* Staré menu pro mobil
-          <div className="w-7 h-5 relative cursor-pointer z-40 md:hidden" onClick={() => setMenuOpen((prev) => !prev)}>
-            &#9776;
-          </div>
-          */}
-
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#aboutme" className={`text-gray-300 hover:text-white transition-colors hover:scale-102 ${
-                activeSection === "aboutme" ? "font-bold" : ""}`}>About me</a>
-            <a href="#equipment" className={`text-gray-300 hover:text-white transition-colors hover:scale-102 ${
-                activeSection === "equipment" ? "font-bold" : ""}`}>Equipment</a>
-            <a href="#games" className={`text-gray-300 hover:text-white transition-colors hover:scale-102 ${
-                activeSection === "games" ? "font-bold" : ""}`}>Games</a>
-            <a href="#projects" className={`text-gray-300 hover:text-white transition-colors hover:scale-102 ${
-                activeSection === "projects" ? "font-bold" : ""}`}>Projects</a>
+            <a href="#aboutme" className={`text-gray-300 hover:text-white transition-colors hover:scale-102 ${activeSection === "aboutme" ? "font-bold" : ""}`}>About me</a>
+            <a href="#equipment" className={`text-gray-300 hover:text-white transition-colors hover:scale-102 ${activeSection === "equipment" ? "font-bold" : ""}`}>Equipment</a>
+            <a href="#games" className={`text-gray-300 hover:text-white transition-colors hover:scale-102 ${activeSection === "games" ? "font-bold" : ""}`}>Games</a>
+            <a href="#projects" className={`text-gray-300 hover:text-white transition-colors hover:scale-102 ${activeSection === "projects" ? "font-bold" : ""}`}>Projects</a>
           </div>
         </div>
       </div>
