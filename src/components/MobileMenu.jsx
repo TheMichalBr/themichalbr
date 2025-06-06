@@ -34,6 +34,17 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
     };
   }, [menuOpen, setMenuOpen]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMenuOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [menuOpen, setMenuOpen]);
+
   const links = [
     { href: "#aboutme", label: "About me" },
     { href: "#equipment", label: "Equipment" },
