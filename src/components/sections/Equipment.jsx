@@ -81,7 +81,6 @@ const equipmentData = [
     category: "OPERATING SYSTEM",
     name: "Windows 11 Pro",
     image: osI,
-    info: "Version: 24H2",
 },
 {
     category: "MAIN MONITOR",
@@ -132,7 +131,6 @@ const equipmentData = [
     category: "MOBILE",
     name: "Samsung S20 FE",
     image: mobileI,
-    info: "Storage: 128GB, RAM: 6GB",
 },
 {
     category: "CONSOLE",
