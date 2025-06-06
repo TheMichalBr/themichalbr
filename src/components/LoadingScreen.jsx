@@ -54,7 +54,7 @@ export const LoadingScreen = ({ onComplete }) => {
         <div className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 via-blue-600 to-cyan-400 animate-loading-bar3 rounded"></div>
       </div>
       <div className="mt-8 text-xs text-gray-400 tracking-widest font-mono opacity-80 select-none">
-        Loading website, please wait...
+        Please wait... Still waiting? <a href="https://www.githubstatus.com/" className="text-blue-400">Check for issues</a>.
       </div>
       <style>
         {`
