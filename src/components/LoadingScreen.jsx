@@ -41,7 +41,7 @@ export const LoadingScreen = ({ onComplete }) => {
     <div
       className={`
         fixed inset-0 z-50 flex flex-col items-center justify-center
-        bg-gradient-to-br from-black via-gray-900 to-gray-950
+        bg-gradient-to-br from-black via-black-900 to-blue-950
         transition-opacity duration-700
         ${fadeOut ? "opacity-0 pointer-events-none" : "opacity-100"}
       `}
