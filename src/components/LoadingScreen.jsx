@@ -25,10 +25,10 @@ export const LoadingScreen = ({ onComplete }) => {
             document.body.style.overflow = originalBodyOverflow;
             document.documentElement.style.overflow = originalHtmlOverflow;
             onComplete();
-          }, 400);
-        }, 1000);
+          }, 50);
+        }, 900);
       }
-    }, 80);
+    }, 65);
 
     return () => {
       clearInterval(interval);
