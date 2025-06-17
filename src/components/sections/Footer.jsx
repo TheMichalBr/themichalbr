@@ -73,7 +73,7 @@ export function Footer() {
                                     <img
                                         src={Email}
                                         alt="Email"
-                                        className="h-6 w-6 filter invert group-hover:invert-0 group-hover:brightness-150 transition-all duration-300 ease-in-out hover:drop-shadow-[0_0_10px_rgba(105,550,10,0.8)]"
+                                        className="h-6 w-6 filter invert group-hover:invert-0 group-hover:brightness-150 transition-all duration-300 ease-in-out hover:drop-shadow-[0_0_10px_rgba(115,30,240,0.8)]"
                                     />
                                 </Typography>
                             </Tooltip>
