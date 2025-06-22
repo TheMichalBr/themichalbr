@@ -26,27 +26,23 @@ import vrI from "/equipment/20_VROTHER.webp";
 const equipmentData = [
 {
     category: "COMPUTER CASE",
-    name: "Fractal Design Define 7",
+    name: "Fractal Design Define 7 Black TG Dark Tint",
     image: caseI,
-    info: "Design: Black TG Dark Tint",
 },
 {
     category: "POWER SUPPLY",
     name: "Corsair HX1000",
     image: psuI,
-    info: "Power: 1000W, Certification: 80+ Platinum",
 },
 {
     category: "MOTHERBOARD",
     name: "MSI MPG X870E CARBON WIFI",
     image: mbI,
-    info: "Format: ATX AM5, BIOS: 7E49v1A3",
 },
 {
     category: "PROCESSOR",
     name: "AMD Ryzen 9 9900X",
     image: cpuI,
-    info: "Cores: 12, Threads: 24",
 },
 {
     category: "PROCESSOR COOLER",
@@ -55,15 +51,13 @@ const equipmentData = [
 },
 {
     category: "GRAPHICS CARD",
-    name: "NVIDIA MSI GeForce RTX 2070",
+    name: "NVIDIA MSI GeForce RTX 2070 GAMING Z 8G GDDR6",
     image: gpuI,
-    info: "Memory: 8GB GDDR6, Version: GAMING Z",
 },
 {
     category: "COMPUTER MEMORY",
-    name: "Kingston Fury Beast DDR5",
+    name: "Kingston Fury Beast DDR5 32GB (2x16GB) 6000MHz CL30",
     image: ramI,
-    info: "Memory: 32GB (2x16GB) 6000MHz CL30",
 },
 {
     category: "DRIVE (HDD)",
