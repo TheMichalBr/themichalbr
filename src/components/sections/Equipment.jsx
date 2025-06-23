@@ -159,7 +159,7 @@ export const Equipment = () => {
                     />
                     </div>
                     <div className="p-4 bg-[#1e202470]/90 backdrop-blur-md rounded-b-xl w-full h-full">
-                    <p className="text-sm text-blue-500 uppercase mb-2">
+                    <p className="text-xs font-semibold text-blue-400 uppercase mb-2 tracking-wide">
                         {item.category}
                     </p>
                     <h3 className="text-base font-semibold text-gray-300 leading-tight">
