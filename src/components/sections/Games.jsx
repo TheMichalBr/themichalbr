@@ -139,8 +139,8 @@ export const Games = () => {
               Latest Reviews
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Jedna recenze */}
-              <div className="relative group overflow-hidden rounded-lg shadow-lg bg-black/20">
+              {/* První recenze */}
+              <div className="relative group overflow-hidden rounded-lg shadow-lg bg-black/20 border-white/10">
                 <img
                   src={RR}
                   alt="Doom Eternal"
@@ -155,7 +155,7 @@ export const Games = () => {
                     href="https://steamcommunity.com/id/misakbr2/recommended/782330/"
                     className="mt-2 text-blue-400 hover:text-blue-300 transition-colors"
                   >
-                    Read Review →
+                    Read review →
                   </a>
                 </div>
                 <p className="absolute bottom-2 left-2 text-sm text-gray-400 bg-black/50 px-2 py-1 rounded">
@@ -165,26 +165,26 @@ export const Games = () => {
                   ★★★★★ 9.2/10
                 </p>
               </div>
-              {/* Další recenze */}
-              <div className="relative group overflow-hidden rounded-lg shadow-lg bg-black/20">
+              {/* Druhá recenze */}
+              <div className="relative group overflow-hidden rounded-lg shadow-lg bg-black/20 border-white/10">
                 <img
                   src={RC}
                   alt="Cyberpunk 2077"
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <h3 className="text-xl font-bold text-white">Cyberpunk 2077 + PL</h3>
+                  <h3 className="text-xl font-bold text-white">Cyberpunk 2077 + Phantom Liberty</h3>
                   <p className="text-sm text-gray-300">Platform: PC</p>
                   <p className="text-sm text-yellow-400">Rating: ★★★★★ 10/10</p>
                   <a
                     href="#"
                     className="mt-2 text-blue-400 hover:text-blue-300 transition-colors"
                   >
-                    Coming soon →
+                    Read review →
                   </a>
                 </div>
                 <p className="absolute bottom-2 left-2 text-sm text-gray-400 bg-black/50 px-2 py-1 rounded">
-                  Cyberpunk 2077 + PL
+                  Cyberpunk 2077 + Phantom Liberty
                 </p>
                 <p className="absolute bottom-2 right-2 text-sm text-yellow-400 bg-black/50 px-2 py-1 rounded">
                   ★★★★★ 10/10
