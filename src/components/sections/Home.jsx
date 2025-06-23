@@ -1,12 +1,14 @@
 import { RevealOnScroll } from "../RevealOnScroll";
+import { MatrixRainBackground } from "./MatrixRainBackground"; // přidejte tento import
 
 export const Home = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <MatrixRainBackground /> {/* přidejte tuto řádku */}
       <RevealOnScroll>
         <div className="text-center z-10 px-4">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent leading-right"> Hi, I'm MichalBr </h1>
-          <p className="tex-gray-400 text-lg mb-8 max-w-lg mx-auto">
+          <p className="text-gray-200 text-lg mb-8 max-w-lg mx-auto">
           I'm a content creator, ultimate god gamer, and developer who loves to win chicken dinners or clicking heads, create interesting to entertaining videos, and code clean and responsive apps, mods or great games.
           </p>
           <div className="flex justify-center space-x-4">
