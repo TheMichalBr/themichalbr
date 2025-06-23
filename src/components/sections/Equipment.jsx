@@ -51,25 +51,23 @@ const equipmentData = [
 },
 {
     category: "GRAPHICS CARD",
-    name: "NVIDIA MSI GeForce RTX 2070 GAMING Z 8G GDDR6",
+    name: "NVIDIA MSI GeForce RTX 2070 GAMING Z 8GB GDDR6",
     image: gpuI,
 },
 {
     category: "COMPUTER MEMORY",
-    name: "Kingston Fury Beast DDR5 32GB (2x16GB) 6000MHz CL30",
+    name: "Kingston Fury Beast DDR5 32GB 6000MHz CL30",
     image: ramI,
 },
 {
-    category: "DRIVE (HDD)",
-    name: "WD Ultrastar DC HC320",
+    category: "HARD DISK DRIVE",
+    name: "WD Ultrastar DC HC320 - 8TB",
     image: hddI,
-    info: "Storage: 8TB, Info: 7200RPM SATA",
 },
 {
-    category: "DRIVE (SSD)",
-    name: "Samsung SSD 990 PRO",
+    category: "SOLID STATE DRIVE",
+    name: "Samsung SSD 990 PRO - 1TB",
     image: ssdI,
-    info: "Storage: 1TB, Info: NVMe SSD M.2 PCIe Gen4",
 },
 {
     category: "OPERATING SYSTEM",
@@ -80,31 +78,28 @@ const equipmentData = [
     category: "MAIN MONITOR",
     name: "Acer Predator XB273UNX",
     image: mmonitorI,
-    info: "Refresh rate: 270Hz, Info: 27 2K IPS G-Sync",
 },
 {
     category: "SIDE MONITOR",
-    name: "ZOWIE by BenQ XL2720",
+    name: "Zowie by BenQ XL2720",
     image: smonitor1I,
-    info: "Refresh rate: 144Hz, Info: 27 1080p TN",
 },
 {
     category: "SIDE MONITOR",
-    name: "IIYAMA PLE2209HDS-B1",
+    name: "Iiyama PLE2209HDS",
     image: smonitor2I,
-    info: "Refresh rate: 60Hz, Info: 22 1080p TN",
 },
 {
     category: "KEYBOARD",
     name: "Logitech G915 LIGHTSPEED TKL",
     image: keyboardI,
-    info: "Switches: GL Linear (Red)",
+    info: "SWITCHES: GL Linear - Red",
 },
 {
     category: "MOUSE",
     name: "Logitech G Pro X Superlight 2",
     image: mouseI,
-    info: "DPI: 400, Hz: 4000",
+    info: "DPI: 400, HZ: 8000",
 },
 {
     category: "MOUSEPAD",
@@ -186,7 +181,7 @@ export const Equipment = () => {
                             />
                             </svg>
                         </button>
-                        <div className="absolute bottom-full mb-4 right-0 w-48 p-2 bg-gray-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-85 transition-opacity duration-300">
+                        <div className="absolute bottom-full mb-4 right-0 w-48 p-2 bg-gray-900 text-gray text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-85 transition-opacity duration-300">
                         {/* "absolute right-0 top-full mt-2 w-48 p-2 bg-gray-800 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"*/}
                         {item.info || "No additional information available."}
                         </div>
