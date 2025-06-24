@@ -35,7 +35,7 @@ const projectsData = [
     id: "rocketmod",
     order: 3,
     title: "NmS' Rocket Launcher Mod",
-    version: "v1.0.2",
+    version: "v1.0.3",
     desc: "This mod adds a rocket launcher to the game. You know what to do with it. Be nice to your friends!",
     tech: ["Game Mod", "Minecraft", "Java"],
     image: pm3,
