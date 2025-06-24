@@ -29,7 +29,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
           <a href="#home" className="font-mono text-4xl text-white hover:scale-106 transition-colors" style={{ fontFamily: 'Bellibish' }}>M</a>
 
           <div
-            className="w-7 h-5 relative cursor-pointer z-40 md:hidden flex flex-col justify-between group"
+            className="w-7 h-5 relative cursor-pointer z-40 md:hidden flex flex-col justify-between group navbar-hamburger"
             onClick={() => setMenuOpen((prev) => !prev)}
             aria-label="Open mobile menu"
           >
@@ -67,9 +67,9 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
       </div>
       <style>
         {`
-        .group:hover span {
-          background: #38bdf8;
-        }
+          .navbar-hamburger.group:hover span {
+            background: #38bdf8;
+          }
         `}
       </style>
     </nav>
