@@ -1,11 +1,11 @@
 {
   "name": "themichalbr",
-  "homepage": "https://themichalbr.github.io/themichalbr_r",
+  "homepage": "https://themichalbr.github.io/themichalbr",
   "description": "My personal website.",
   "author": "MichalBr",
   "license": "MIT",
   "private": true,
-  "version": "4.5.0",
+  "version": "4.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
