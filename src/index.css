@@ -58,3 +58,12 @@ html, body {
 .horizontal-scroll > * {
   scroll-snap-align: start;
 }
+
+.settings-panel ::selection {
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+}
+
+.group:hover span { /* Kvůli problemu s games oznacovanim textu */
+  background: none !important;
+}
