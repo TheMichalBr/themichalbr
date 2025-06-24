@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
@@ -11,10 +12,12 @@ html, body {
 
 @layer utilities {
   @keyframes blink {
+
     0%,
     100% {
       opacity: 1;
     }
+
     50% {
       opacity: 0;
     }
@@ -28,12 +31,13 @@ html, body {
     0% {
       transform: translateX(-100%);
     }
+
     100% {
       transform: translateX(250%);
     }
   }
 
-.animate-loading-bar {
+  .animate-loading-bar {
     animation: loading 0.8s ease infinite;
   }
 }
@@ -55,15 +59,6 @@ html, body {
   scroll-snap-type: x mandatory;
 }
 
-.horizontal-scroll > * {
+.horizontal-scroll>* {
   scroll-snap-align: start;
-}
-
-.settings-panel ::selection {
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-}
-
-.group:hover span { /* Kvůli problemu s games oznacovanim textu */
-  background: none !important;
 }
