@@ -34,12 +34,16 @@ export const Games = () => {
   const games = [
     {
       id: "cs2",
-      name: "Counter-Strike 2",
+      name: "Counter Strike 2",
       platform: "Steam (MichalBr)",
-      rank: "Global Elite (Premier: 21 000+ ELO)",
+      rank: "Level 8 - Global Elite",
       rankIcon: R1,
       image: G1,
       settings: {
+        Stats: "https://csgostats.gg/player/76561199019687093",
+        Premier: "21 000+ ELO",
+        MM: "Global Elite",
+        FACEIT: "Level 8",
         resolution: "1920x1080",
         sensitivity: "1.5",
         crosshair: "Custom",
@@ -195,118 +199,116 @@ export const Games = () => {
 
   <div className="h-16"></div>
 
-  <div>
-  <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
-    Games
-  </h2>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-    {games.map((game) => (
-      <div
-        key={game.id}
-        className="p-4 bg-gray-800/70 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 relative border border-gray-800 hover:border-gray-500"
-        style={{
-          backgroundImage: `url(${game.image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Překryv pro ztmavení */}
-        <div className="absolute inset-0 bg-black/60 rounded-lg"></div>
+    <div>
+      <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
+        Games
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {games.map((game, idx) => (
+          <div
+            key={game.id}
+            tabIndex={0}
+            className={`
+              group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-800
+              transition-all duration-500
+              focus:outline-none focus:ring-4 focus:ring-cyan-500/40
+              hover:scale-[1.025] hover:shadow-3xl
+              select-none
+              ${showSettings === game.id ? "ring-2 ring-blue-400/60" : ""}
+            `}
+            style={{
+              backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.92) 60%, rgba(0,0,0,0.7)), url(${game.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              cursor: "pointer",
+            }}
+          >
+            {/* Fade overlay pro smooth tmavý efekt */}
+            <div className="absolute inset-0 pointer-events-none rounded-2xl bg-gradient-to-br from-black/80 via-black/60 to-transparent transition-all duration-500 group-hover:from-black/90 group-hover:via-black/70"></div>
 
-        {/* Zmenšené logo ranku na levé straně */}
-        <div
-          className="absolute left-2 top-2 w-16 h-16 opacity-60"
-          style={{
-            backgroundImage: `url(${game.rankIcon})`,
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "top left",
-            filter: "blur(1px) brightness(0.5)",
-          }}
-        ></div>
-
-        {/* Fade efekt zleva */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent rounded-lg"></div>
-
-        {/* Obsah karty */}
-        <div className="relative z-10">
-          <div className="flex items-center gap-4">
-            <img
-              src={game.image}
-              alt={game.name}
-              className="w-14 h-14 rounded-lg border border-gray-600"
-            />
-            <div>
-              <h3 className="text-lg font-bold text-white">{game.name}</h3>
-              <p className="text-sm text-gray-300">Platform: {game.platform}</p>
-              <div className="flex items-center gap-2">
+            {/* Obsah karty */}
+            <div className="relative z-10 flex flex-col gap-2">
+              <div className="flex items-center gap-4">
                 <img
-                  src={game.rankIcon}
-                  alt={`${game.rank} Icon`}
-                  className="w-6 h-6"
+                  src={game.image}
+                  alt={game.name}
+                  className="w-16 h-16 rounded-xl border-2 border-gray-700 shadow-md transition-transform duration-500 group-hover:scale-105"
+                  draggable={false}
+                  style={{ userSelect: "none" }}
                 />
-                <p className="text-sm text-yellow-400">{game.rank}</p>
+                <div>
+                  <h3 className="text-xl font-extrabold text-white tracking-tight drop-shadow select-none">
+                    {game.name}
+                  </h3>
+                  <p className="text-sm text-gray-300 select-none">{game.platform}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <img
+                      src={game.rankIcon}
+                      alt={`${game.rank} Icon`}
+                      className="w-6 h-6 drop-shadow"
+                      draggable={false}
+                      style={{ userSelect: "none" }}
+                    />
+                    <p className="text-sm font-bold text-sky-400 drop-shadow select-none">{game.rank}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tlačítko Settings */}
+              <button
+                onClick={() => toggleSettings(game.id)}
+                className={`
+                  absolute top-5 right-5 z-20 bg-blue-500 text-white p-2 rounded-full shadow-lg
+                  transition-all duration-300
+                  focus:outline-none focus:ring-2 focus:ring-cyan-400
+                  ${showSettings === game.id
+                    ? "rotate-45 bg-red-500 hover:bg-red-400 scale-110"
+                    : "hover:bg-blue-400 hover:scale-110 active:scale-95"
+                  }
+                `}
+                aria-label="Toggle Settings"
+                tabIndex={0}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+              </button>
+
+              {/* Obsah nastavení */}
+              <div
+                className={`
+                  overflow-hidden transition-all duration-700 ease-in-out
+                  ${showSettings === game.id ? "max-h-60 mt-4 opacity-100" : "max-h-0 opacity-0"}
+                `}
+              >
+                <div className="bg-gray-950/95 text-white p-6 rounded-xl shadow-lg border border-gray-700 hover:border-cyan-500 transition-colors duration-300">
+                  <h4 className="text-sm font-bold mb-4 tracking-wide text-cyan-400">Settings</h4>
+                  <ul className="text-xs space-y-2">
+                    {Object.entries(game.settings).map(([key, value]) => (
+                      <li key={key} className="flex gap-1">
+                        <span className="font-semibold text-gray-200">{key}:</span>
+                        <span className="text-gray-300 break-all">{value}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-
-          {/* Tlačítko Settings */}
-<button
-  onClick={() => toggleSettings(game.id)}
-  className={`absolute top-4 right-4 bg-blue-500 text-white p-2 rounded-full shadow-md transition-transform duration-300 transform ${
-    showSettings === game.id
-      ? "rotate-45 bg-red-500 hover:bg-red-400"
-      : "hover:bg-blue-400 hover:scale-110"
-  }`}
-  aria-label="Toggle Settings"
->
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth="2"
-    stroke="currentColor"
-    className="w-5 h-5"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M12 4v16m8-8H4"
-    />
-  </svg>
-</button>
-
-{/* Rank jako obrázek vlevo od tlačítka */}
-<div
-  className="absolute top-4 right-16 w-10 h-10 opacity-40 rounded-full bg-cover bg-center"
-  style={{
-    backgroundImage: `url(${game.rankIcon})`,
-    filter: "blur(2px) brightness(0.8)",
-  }}
-></div>
-
-          {/* Obsah nastavení */}
-          <div
-            className={`overflow-hidden transition-all duration-700 ease-in-out ${
-              showSettings === game.id ? "max-h-60 mt-4" : "max-h-0"
-            }`}
-          >
-            <div className="bg-gray-900 text-white p-6 rounded-lg shadow-lg border border-gray-700 hover:border-gray-500">
-              <h4 className="text-sm font-bold mb-4">Settings</h4>
-              <ul className="text-xs space-y-2">
-                {Object.entries(game.settings).map(([key, value]) => (
-                  <li key={key}>
-                    <span className="font-semibold">{key}:</span> {value}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
-    ))}
-  </div>
-</div>
+    </div>
 
         </RevealOnScroll>
       </div>
