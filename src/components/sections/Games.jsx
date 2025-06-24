@@ -137,65 +137,194 @@ export const Games = () => {
     <section id="games" className="min-h-screen text-white py-20 justify-center flex items-center">
       <div className="max-w-5xl mx-auto space-y-16 px-4">  {/* 7xl bylo*/}
         <RevealOnScroll>
-          {/* Recenze */}
-          <div>
-            <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
-              Latest Reviews
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* První recenze */}
-              <div className="relative group overflow-hidden rounded-lg shadow-lg bg-black/20 border-white/10">
-                <img
-                  src={RR}
-                  alt="Doom Eternal"
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <h3 className="text-xl font-bold text-white">Doom Eternal</h3>
-                  <p className="text-sm text-gray-300">Platform: PC</p>
-                  <p className="text-sm text-gray-300">Difficulty: Nightmare (100%)</p>
-                  <p className="text-sm text-yellow-400">Rating: ★★★★★ 9.2/10</p>
-                  <a
-                    href="https://steamcommunity.com/id/misakbr2/recommended/782330/"
-                    className="mt-2 text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    Read review →
-                  </a>
-                </div>
-                <p className="absolute bottom-2 left-2 text-sm text-gray-400 bg-black/50 px-2 py-1 rounded">
-                  Doom Eternal
-                </p>
-                <p className="absolute bottom-2 right-2 text-sm text-yellow-400 bg-black/50 px-2 py-1 rounded">
-                  ★★★★★ 9.2/10
-                </p>
-              </div>
-              {/* Druhá recenze */}
-              <div className="relative group overflow-hidden rounded-lg shadow-lg bg-black/20 border-white/10">
-                <img
-                  src={RC}
-                  alt="Cyberpunk 2077"
-                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <h3 className="text-xl font-bold text-white">Cyberpunk 2077 + Phantom Liberty</h3>
-                  <p className="text-sm text-gray-300">Platform: PC</p>
-                  <p className="text-sm text-yellow-400">Rating: ★★★★★ 10/10</p>
-                  <a
-                    href="#"
-                    className="mt-2 text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    Read review →
-                  </a>
-                </div>
-                <p className="absolute bottom-2 left-2 text-sm text-gray-400 bg-black/50 px-2 py-1 rounded">
-                  Cyberpunk 2077 + Phantom Liberty
-                </p>
-                <p className="absolute bottom-2 right-2 text-sm text-yellow-400 bg-black/50 px-2 py-1 rounded">
-                  ★★★★★ 10/10
-                </p>
-              </div>
+          {/* Latest Reviews - sjednocený glassmorphism design */}
+<div>
+  <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
+    Latest Reviews
+  </h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {/* Doom Eternal Review */}
+    <div
+      className="
+        group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-cyan-700/30
+        transition-all duration-500
+        select-none
+        focus:outline-none focus:ring-4 focus:ring-cyan-500/40
+        overflow-hidden
+      "
+      tabIndex={0}
+      style={{
+        cursor: "pointer",
+      }}
+    >
+      {/* Overlay s obrázkem a přiblížením */}
+      <div
+        className="
+          absolute inset-0 rounded-3xl z-0
+          transition-transform duration-700 ease-[cubic-bezier(.4,2,.3,1)]
+          will-change-transform
+          group-hover:scale-105
+        "
+        style={{
+          backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${RR})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        aria-hidden="true"
+      />
+      {/* Jemný overlay pro čitelnost */}
+      <div className="absolute inset-0 pointer-events-none rounded-3xl bg-black/40 transition-all duration-500 group-hover:bg-black/70 z-10"></div>
+      {/* Obsah karty */}
+      <div className="relative z-20 flex flex-col h-full justify-between">
+        <div>
+          <h3 className="text-2xl font-extrabold text-white tracking-tight drop-shadow select-none mb-2">
+            Doom Eternal
+          </h3>
+          <div className="space-y-1">
+            {/* Info o platformě a obtížnosti - zobrazit pouze při hoveru */}
+            <div
+              className="
+                transition-all duration-500 ease-in-out
+                opacity-0 max-h-0 translate-y-2 pointer-events-none
+                group-hover:opacity-100 group-hover:max-h-20 group-hover:translate-y-0 group-hover:pointer-events-auto
+              "
+            >
+              <p className="text-sm text-gray-200 select-none">Platform: PC</p>
+              <p className="text-sm text-gray-200 select-none">Difficulty: Nightmare (100%)</p>
             </div>
           </div>
+        </div>
+        <div className="flex items-end justify-between mt-6 h-10 relative">
+          {/* Hvězdičky - pouze jeden <span>, animace pozice */}
+          <span
+            className={`
+              text-lg font-bold text-yellow-400 drop-shadow select-none
+              absolute bottom-0 transition-all duration-500
+              right-0 group-hover:left-0 group-hover:right-auto
+              group-hover:translate-x-0
+              group-hover:opacity-100
+              opacity-100
+              z-10
+            `}
+            style={{
+              transition: "all 0.5s cubic-bezier(.4,2,.3,1)",
+            }}
+          >
+            ★★★★★ 9.2/10
+          </span>
+          {/* Read review - fade-in vpravo dole při hoveru */}
+          <a
+            href="https://steamcommunity.com/id/misakbr2/recommended/782330/"
+            className={`
+              text-cyan-300 hover:text-cyan-200 transition-colors text-base font-semibold select-text focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded px-3 py-1 bg-black/30 backdrop-blur-md
+              absolute right-0 bottom-0 opacity-0 pointer-events-none
+              group-hover:opacity-100 group-hover:pointer-events-auto
+              transition-all duration-500
+              z-10
+            `}
+            tabIndex={0}
+            style={{
+              WebkitUserSelect: "text",
+              userSelect: "text",
+              transition: "all 0.5s cubic-bezier(.4,2,.3,1)",
+            }}
+            target="_blank" rel="noopener noreferrer"
+          >
+            Read review →
+          </a>
+        </div>
+      </div>
+    </div>
+    {/* Cyberpunk Review */}
+    <div
+      className="
+        group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-cyan-700/30
+        transition-all duration-500
+        select-none
+        focus:outline-none focus:ring-4 focus:ring-cyan-500/40
+        overflow-hidden
+      "
+      tabIndex={0}
+      style={{
+        cursor: "pointer",
+      }}
+    >
+      {/* Overlay s obrázkem a přiblížením */}
+      <div
+        className="
+          absolute inset-0 rounded-3xl z-0
+          transition-transform duration-700 ease-[cubic-bezier(.4,2,.3,1)]
+          will-change-transform
+          group-hover:scale-105
+        "
+        style={{
+          backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${RC})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 pointer-events-none rounded-3xl bg-black/40 transition-all duration-500 group-hover:bg-black/70 z-10"></div>
+      <div className="relative z-20 flex flex-col h-full justify-between">
+        <div>
+          <h3 className="text-2xl font-extrabold text-white tracking-tight drop-shadow select-none mb-2">
+            Cyberpunk 2077
+          </h3>
+          <div className="space-y-1">
+            {/* Info o platformě - zobrazit pouze při hoveru */}
+            <div
+              className="
+                transition-all duration-500 ease-in-out
+                opacity-0 max-h-0 translate-y-2 pointer-events-none
+                group-hover:opacity-100 group-hover:max-h-20 group-hover:translate-y-0 group-hover:pointer-events-auto
+              "
+            >
+              <p className="text-sm text-gray-200 select-none">Platform: PC</p>
+              <p className="text-sm text-gray-200 select-none">Including datadisk: Phantom Liberty</p>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-end justify-between mt-6 h-10 relative">
+          <span
+            className={`
+              text-lg font-bold text-yellow-400 drop-shadow select-none
+              absolute bottom-0 transition-all duration-500
+              right-0 group-hover:left-0 group-hover:right-auto
+              group-hover:translate-x-0
+              group-hover:opacity-100
+              opacity-100
+              z-10
+            `}
+            style={{
+              transition: "all 0.5s cubic-bezier(.4,2,.3,1)",
+            }}
+          >
+            ★★★★★ 10/10
+          </span>
+          <a
+            href="#"
+            className={`
+              text-cyan-300 hover:text-cyan-200 transition-colors text-base font-semibold select-text focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded px-3 py-1 bg-black/30 backdrop-blur-md
+              absolute right-0 bottom-0 opacity-0 pointer-events-none
+              group-hover:opacity-100 group-hover:pointer-events-auto
+              transition-all duration-500
+              z-10
+            `}
+            tabIndex={0}
+            style={{
+              WebkitUserSelect: "text",
+              userSelect: "text",
+              transition: "all 0.5s cubic-bezier(.4,2,.3,1)",
+            }}
+            target="_blank" rel="noopener noreferrer"
+          >
+            Read review →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
   <div className="h-16"></div>
 
@@ -292,7 +421,7 @@ export const Games = () => {
                   ${showSettings === game.id ? "max-h-60 mt-4 opacity-100" : "max-h-0 opacity-0"}
                 `}
               >
-                <div className="bg-gray-950/95 text-white p-6 rounded-xl shadow-lg border border-gray-700 hover:border-cyan-500 transition-colors duration-300">
+                <div className="bg-gray-950/95 text-white p-6 rounded-xl shadow-lg border border-gray-700 hover:border-cyan-500 transition-colors duration-300 select-text settings-panel">
                   <h4 className="text-sm font-bold mb-4 tracking-wide text-cyan-400">Settings</h4>
                   <ul className="text-xs space-y-2">
                     {Object.entries(game.settings).map(([key, value]) => (
@@ -315,3 +444,64 @@ export const Games = () => {
     </section>
 );
 };
+
+{/*
+          <div>
+            <h2 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
+              Latest Reviews
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <div className="relative group overflow-hidden rounded-lg shadow-lg bg-black/20 border-white/10">
+                <img
+                  src={RR}
+                  alt="Doom Eternal"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <h3 className="text-xl font-bold text-white">Doom Eternal</h3>
+                  <p className="text-sm text-gray-300">Platform: PC</p>
+                  <p className="text-sm text-gray-300">Difficulty: Nightmare (100%)</p>
+                  <p className="text-sm text-yellow-400">Rating: ★★★★★ 9.2/10</p>
+                  <a
+                    href="https://steamcommunity.com/id/misakbr2/recommended/782330/"
+                    className="mt-2 text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    Read review →
+                  </a>
+                </div>
+                <p className="absolute bottom-2 left-2 text-sm text-gray-400 bg-black/50 px-2 py-1 rounded">
+                  Doom Eternal
+                </p>
+                <p className="absolute bottom-2 right-2 text-sm text-yellow-400 bg-black/50 px-2 py-1 rounded">
+                  ★★★★★ 9.2/10
+                </p>
+              </div>
+              
+              <div className="relative group overflow-hidden rounded-lg shadow-lg bg-black/20 border-white/10">
+                <img
+                  src={RC}
+                  alt="Cyberpunk 2077"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <h3 className="text-xl font-bold text-white">Cyberpunk 2077 + Phantom Liberty</h3>
+                  <p className="text-sm text-gray-300">Platform: PC</p>
+                  <p className="text-sm text-yellow-400">Rating: ★★★★★ 10/10</p>
+                  <a
+                    href="#"
+                    className="mt-2 text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    Read review →
+                  </a>
+                </div>
+                <p className="absolute bottom-2 left-2 text-sm text-gray-400 bg-black/50 px-2 py-1 rounded">
+                  Cyberpunk 2077 + Phantom Liberty
+                </p>
+                <p className="absolute bottom-2 right-2 text-sm text-yellow-400 bg-black/50 px-2 py-1 rounded">
+                  ★★★★★ 10/10
+                </p>
+              </div>
+            </div>
+          </div>
+  */}
