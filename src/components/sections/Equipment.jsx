@@ -78,6 +78,7 @@ const equipmentData = [
     category: "MAIN MONITOR",
     name: "Acer Predator XB273UNX",
     image: mmonitorI,
+    info: "REFRESH RATE: 270Hz",
 },
 {
     category: "SIDE MONITOR",
