@@ -2,8 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 
-import S from "/games/elements/G_S.webp";
-
 import RR from "/games/reviews/R_R.webp";
 import RC from "/games/reviews/R_C.webp";
 
@@ -35,18 +33,17 @@ export const Games = () => {
     {
       id: "cs2",
       name: "Counter Strike 2",
-      platform: "Steam (MichalBr)",
-      rank: "Level 8 - Global Elite",
+      platform: "Steam (MichalBr, michalbr-)",
+      rank: "Level 9",
       rankIcon: R1,
       image: G1,
       settings: {
-        Stats: "https://csgostats.gg/player/76561199019687093",
-        Premier: "21 000+ ELO",
-        MM: "Global Elite",
-        FACEIT: "Level 8",
-        resolution: "1920x1080",
-        sensitivity: "1.5",
-        crosshair: "Custom",
+        FACEIT: "Level 9",
+        Premier: "21 000+ ELO (MM p. Global Elite)",
+        Crosshair: "CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D",
+        Viewmodel: "viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2",
+        Sensitivity: "2.52",
+        Resolution: "1280x960, Almost everything on low quality",
       },
     },
     {
@@ -57,9 +54,9 @@ export const Games = () => {
       rankIcon: R2,
       image: G2,
       settings: {
-        resolution: "2560x1440",
-        sensitivity: "4.0",
-        graphics: "Ultra",
+        Crosshair: "2560x1440",
+        Sensitivity: "4.0",
+        Resolution: "2560x1440, LOW quality",
       },
     },
     {
@@ -70,9 +67,9 @@ export const Games = () => {
       rankIcon: R3,
       image: G3,
       settings: {
-            resolution: "1920x1080",
-            sensitivity: "2.0",
-            graphics: "High",
+            Crosshair: "1920x1080",
+            Sensitivity: "2.0",
+            Resolution: "2560x1440, LOW quality",
       },
     },
     {
@@ -83,10 +80,9 @@ export const Games = () => {
         rankIcon: R4,
         image: G4,
         settings: {
-            Stats: "https://fortnite.gg/stats?player=MichalBr / https://fortnitetracker.com/profile/all/MichalBr",
-            resolution: "1920x1080",
-            graphics: "High",
-            sensitivity: "5.0",
+            Statistics: "https://fortnite.gg/stats?player=MichalBr",
+            Sensitivity: "5.0",
+            Resolution: "2560x1440, Almost everything on low quality, View Distance HIGH",
         },
     },
     {
@@ -98,10 +94,10 @@ export const Games = () => {
       image: G5,
       settings: {
         Sensitivity: "0.82 / 1 / 1",
-        Resolution: "2560x1440, 270Hz, Limit: 500 FPS",
         Graphics: "Low and only Bloom, MT, NVRB are ON",
         Crosshair: "Cyan / Static",
         Info: "FPS counter - enabled, Enemy highlight color - red, Map rotate - On (1.16 0.72)",
+        Resolution: "2560x1440, Almost everything on low quality",
       },
     },
     {
@@ -112,10 +108,8 @@ export const Games = () => {
       rankIcon: R6,
       image: G6,
       settings: {
-        Stats: "https://r6.tracker.network/profile/pc/TheMichalBr",
-        resolution: "",
-        sensitivity: "",
-        graphics: "",
+        Sensitivity: "",
+        Resolution: "2560x1440, Almost everything on low quality",
       },
     },
     {
@@ -126,9 +120,8 @@ export const Games = () => {
       rankIcon: R7,
       image: G7,
       settings: {
-        Account: "https://www.chess.com/member/michalbr13",
-        Theme: "Dark Blue",
-        Style: "Space",
+        Chessboard: "Dark Blue",
+        Figurines: "Space",
       },
     },
   ];
@@ -464,7 +457,7 @@ export const Games = () => {
                     >
                       <div className="bg-gray-950/95 text-white p-6 rounded-xl shadow-lg border border-gray-700 hover:border-cyan-500 transition-colors duration-300 select-text">
                         <h4 className="text-sm font-bold mb-4 tracking-wide text-cyan-400">
-                          Settings
+                          Settings and information
                         </h4>
                         <ul className="text-xs space-y-2">
                           {Object.entries(game.settings).map(([key, value]) => (
