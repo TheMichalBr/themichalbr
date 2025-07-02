@@ -136,7 +136,7 @@ const equipmentData = [
 
 export const Equipment = () => {
     return (
-    <section id="equipment" className="min-h-screen py-20 " px-10 horizontal-scroll>
+    <section id="equipment" className="min-h-screen py-20" px-10 horizontal-scroll>
         <div className="max-w-5xl mx-auto px-4">
             <RevealOnScroll>
             <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
