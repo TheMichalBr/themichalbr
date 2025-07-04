@@ -88,14 +88,23 @@ export function HomeBackGround() {
         const angle = p.angle + ts * 0.00018 * p.speed;
         const pulse = 0.7 + 0.3 * Math.sin(ts * 0.001 * p.speed + p.phase);
         const x = center.x + Math.cos(angle) * p.baseRadius;
-        const y = center.y + Math.sin(angle) * p.baseRadius;
+        let y = center.y + Math.sin(angle) * p.baseRadius;
+
+        let particleAlpha = 0.82 * pulse;
+        const fadeMargin = 60;
+
+        if (y > height - fadeMargin) {
+          particleAlpha *= Math.max(0, (height - y) / fadeMargin);
+        } else if (y < fadeMargin) {
+          particleAlpha *= Math.max(0, y / fadeMargin);
+        }
 
         ctx.save();
         ctx.beginPath();
         ctx.arc(x, y, p.size * pulse, 0, 2 * Math.PI);
         ctx.shadowColor = p.shadow;
         ctx.shadowBlur = 18 + 8 * pulse;
-        ctx.globalAlpha = 0.82 * pulse;
+        ctx.globalAlpha = particleAlpha;
         ctx.fillStyle = p.color;
         ctx.fill();
         ctx.restore();
@@ -108,8 +117,7 @@ export function HomeBackGround() {
     window.addEventListener("resize", setup);
     anim = requestAnimationFrame(draw);
 
-    const handleVisibility = () => {
-    };
+    const handleVisibility = () => {};
     document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
