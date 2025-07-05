@@ -15,7 +15,7 @@ const currentYear = new Date().getFullYear();
 
 export function Footer() {
     return (
-        <footer className="relative w-full pb-9">
+        <footer className="relative w-full pb-9" id="footer">
             <div className="mx-auto w-full max-w-7xl px-8">
                 <RevealOnScroll>
                     <div className="flex w-full flex-col items-center justify-center border-t border-blue-gray-50 py-4 md:flex-row md:justify-between border-white/10">
