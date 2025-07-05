@@ -1,22 +1,22 @@
-# Thanks to Pedro Tech for amazing tutorial.
+{/* # Thanks to Pedro Tech for amazing tutorial.
 
 # DEV
 
-- zmenit spodni text
-- upravit mobile menu
-- obcasne mizeni elementu pri resiznuti
-- loading dat do midu
-- upravit texty
-- vyresit jak to udelat mensi(min na gridu?) GAMES
-- reviews asi dat pod sebe
-- games predelat
-- vypada v pohode 
-- pro celou stranku plati aby jsme ji vic ujednotili designem animacema stylem a barvou pouzitou
+    - zmenit spodni text
+      - upravit mobile menu
+        - obcasne mizeni elementu pri resiznuti
+          - loading dat do midu
+            - upravit texty
+  - vyresit jak to udelat mensi(min na gridu ?) GAMES
+    - reviews asi dat pod sebe
+      - games predelat
+        - vypada v pohode
+          - pro celou stranku plati aby jsme ji vic ujednotili designem animacema stylem a barvou pouzitou
 
------------------------------------------------------- CS2 Config (autoexec.cfg) ------------------------------------------------------
+------------------------------------------------------CS2 Config(autoexec.cfg)------------------------------------------------------
 
-Crosshair CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D
-Viewmodel viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2; cl_righthand 1;
+Crosshair CSGO - bimys - eFkyb - icw9q - Sfrmo - XKH8D
+Viewmodel viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z - 2; cl_righthand 1;
 viewmodel_presetpos 0;
 Mouse sens. 1.82
 
@@ -25,10 +25,10 @@ https://csstats.gg/player/76561198115132041
 https://faceit.com/en/players/michalbr-
 
 // CROSSHAIR
-CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D
+CSGO - bimys - eFkyb - icw9q - Sfrmo - XKH8D
 
 // VIEWMODEL AND BOB
-viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2;
+viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z - 2;
 cl_righthand 1; viewmodel_presetpos 0; cl_viewmodel_shift_left_amt 0.5;
 cl_viewmodel_shift_right_amt 0.25; viewmodel_recoil 0;
 cl_bob_lower_amt 5; cl_bobamt_lat 0.1; cl_bobamt_vert 0.1;
@@ -51,7 +51,7 @@ safezonex 0.993978; safezoney 0.993978;
 fps_max 400; fps_max_ui 70; fps_max_tools 60; cl_showfps 0; cq_netgraph 1; cl_cmdrate 128; rate 786432;
 
 // (SLO = -high -threads 8 -refresh 270 -console +exec autoexec.cfg /-language bananagaming // 2560:1440 270Hz High
-125%, 45%/35%, 400DPI 1000Hz 6/11 2.4/1)
+125 %, 45 % /35%, 400DPI 1000Hz 6/11 2.4 / 1)
 
 // PRACTICE COMMANDS AND BINDS (Exec in offline game to load practice)
 sv_cheats 1; mp_warmup_end 1; mp_startmoney 16000; mp_freezetime 0; mp_limitteams 0;
@@ -66,26 +66,6 @@ bot_mimic_yaw_offset 0; mp_buytime 1337;
 clear;
 
 echo #### MichalBr's CS2 config loaded! ####;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 "use client";
 
@@ -373,4 +353,4 @@ const Background = forwardRef<HTMLDivElement, BackgroundProps>(
 
 Background.displayName = "Background";
 
-export { Background };
+export { Background };*/}
