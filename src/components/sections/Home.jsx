@@ -69,7 +69,7 @@ export const Home = () => {
             </a>
             
             <a 
-              href="#contact" 
+              href="#footer" 
               className="group relative border-2 border-blue-500/50 text-blue-300 py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:border-blue-400 hover:text-blue-200 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-blue-500/10 backdrop-blur-sm transform hover:scale-105 active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
               aria-label="Get in touch with me"
             >
