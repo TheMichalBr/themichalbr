@@ -16,16 +16,15 @@ export const Home = () => {
               </span>
               <span className="relative inline-block bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 MichalBr
-                <div className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full opacity-70 animate-pulse"></div>
               </span>
             </h1>
             
             {/* Compact badges */}
             <div className="flex flex-wrap justify-center gap-2 mb-6">
-              <span className="px-3 py-1.5 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-blue-500/30 hover:scale-105">
-                🎮 Ultimate God Gamer
+              <span className="px-3 py-1.5 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-300 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-blue-500/30 hover:scale-105">
+                🎮 Gamer
               </span>
-              <span className="px-3 py-1.5 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-300 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-cyan-500/30 hover:scale-105">
+              <span className="px-3 py-1.5 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-cyan-500/30 hover:scale-105">
                 🎥 Content Creator
               </span>
               <span className="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-300 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/30 hover:scale-105">
@@ -41,7 +40,7 @@ export const Home = () => {
               <span className="text-blue-400 font-medium bg-blue-400/10 px-1 py-0.5 rounded mx-0.5">
                 entertaining content
               </span>
-              , <span className="text-cyan-400 font-medium bg-cyan-400/10 px-1 py-0.5 rounded mx-0.5"> shooting heads and dominating games </span>, and building{" "}
+              , <span className="text-cyan-400 font-medium bg-cyan-400/10 px-1 py-0.5 rounded mx-0.5"> shooting heads and dominating in games </span>, and building{" "}
               <span className="text-purple-300 font-medium bg-purple-400/10 px-1 py-0.5 rounded mx-0.5">
                 clean and responsive apps and great games
               </span>
@@ -73,7 +72,7 @@ export const Home = () => {
               className="group relative border-2 border-blue-500/50 text-blue-300 py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:border-blue-400 hover:text-blue-200 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-blue-500/10 backdrop-blur-sm transform hover:scale-105 active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
               aria-label="Get in touch with me"
             >
-              <span className="relative z-10 flex items-center justify-center gap-2 text-sm">
+              <span className="relative z-10 flex items-center justify-center gap-2 text-sm animate-pulse">
                 Contact me
                 <svg className="w-3 h-3 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
