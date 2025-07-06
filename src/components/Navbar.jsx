@@ -227,3 +227,171 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
 };
 
 */}
+
+
+{/*
+import { useEffect, useState } from "react";
+
+export const Navbar = ({ menuOpen, setMenuOpen }) => {
+  const [activeSection, setActiveSection] = useState("");
+  const [scrolled, setScrolled] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState("up");
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("section");
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop - 100;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      setActiveSection(current);
+      
+      // Detekce scrollování pro dynamické pozadí
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 50);
+      
+      // Detekce směru scrollování
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setScrollDirection("down");
+      } else {
+        setScrollDirection("up");
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [menuOpen, lastScrollY]);
+
+  // Dynamické pozadí podle scroll pozice
+  const getNavbarStyles = () => {
+    if (menuOpen) {
+      return "bg-[rgba(8, 8, 8, 0.98)] backdrop-blur-2xl border-b border-white/25 shadow-2xl";
+    } else if (scrolled) {
+      return "bg-[rgba(12, 12, 12, 0.95)] backdrop-blur-xl border-b border-white/20 shadow-xl";
+    } else {
+      return "bg-[rgba(10, 10, 10, 0.6)] backdrop-blur-md border-b border-white/5 shadow-lg";
+    }
+  };
+
+  return (
+    <nav className={`fixed top-0 w-full z-40 px-3.5 py-0.5 transition-all duration-500 ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] ${getNavbarStyles()}`}>
+      <div className="max-w-5xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          <a 
+            href="#home" 
+            className="font-mono text-4xl text-white hover:scale-110 transition-all duration-500 ease-[cubic-bezier(0.34, 1.56, 0.64, 1)]" 
+            style={{ fontFamily: 'Bellibish' }}
+          >
+            M
+          </a>
+
+          <div
+            className="w-7 h-5 relative cursor-pointer z-40 md:hidden flex flex-col justify-between group navbar-hamburger"
+            onClick={() => setMenuOpen((prev) => !prev)}
+            aria-label="Open mobile menu"
+          >
+            <span
+              className={`block absolute left-0 h-1 w-7 bg-white rounded transition-all duration-500 ease-[cubic-bezier(0.68, -0.55, 0.265, 1.55)] 
+                ${menuOpen ? "top-2.5 rotate-45 shadow-lg" : "top-0 rotate-0"}`}
+              style={{
+                boxShadow: menuOpen
+                  ? "0 4px 20px 0 rgba(6,182,212,0.3)"
+                  : undefined,
+              }}
+            />
+            <span
+              className={`block absolute left-0 h-1 w-7 bg-white rounded transition-all duration-500 ease-[cubic-bezier(0.68, -0.55, 0.265, 1.55)] 
+                ${menuOpen ? "opacity-0 left-3 scale-x-50" : "top-2 scale-x-100"}`}
+            />
+            <span
+              className={`block absolute left-0 h-1 w-7 bg-white rounded transition-all duration-500 ease-[cubic-bezier(0.68, -0.55, 0.265, 1.55)] 
+                ${menuOpen ? "top-2.5 -rotate-45 shadow-lg" : "top-4 rotate-0"}`}
+              style={{
+                boxShadow: menuOpen
+                  ? "0 4px 20px 0 rgba(6,182,212,0.3)"
+                  : undefined,
+              }}
+            />
+          </div>
+
+          <div className="hidden md:flex items-center space-x-8">
+            <a 
+              href="#aboutme" 
+              className={`text-gray-300 hover:text-white transition-all duration-400 ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] hover:scale-105 ${
+                activeSection === "aboutme" ? "font-bold" : ""
+              }`}
+            >
+              About me
+            </a>
+            <a 
+              href="#equipment" 
+              className={`text-gray-300 hover:text-white transition-all duration-400 ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] hover:scale-105 ${
+                activeSection === "equipment" ? "font-bold" : ""
+              }`}
+            >
+              Equipment
+            </a>
+            <a 
+              href="#games" 
+              className={`text-gray-300 hover:text-white transition-all duration-400 ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] hover:scale-105 ${
+                activeSection === "games" ? "font-bold" : ""
+              }`}
+            >
+              Games
+            </a>
+            <a 
+              href="#projects" 
+              className={`text-gray-300 hover:text-white transition-all duration-400 ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] hover:scale-105 ${
+                activeSection === "projects" ? "font-bold" : ""
+              }`}
+            >
+              Projects
+            </a>
+          </div>
+        </div>
+      </div>
+
+      
+      <div className={`absolute inset-0 -z-10 backdrop-blur-3xl transition-all duration-700 ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] ${
+        scrolled ? "backdrop-blur-2xl" : "backdrop-blur-md"
+      }`} />
+      
+      
+      <div className={`absolute inset-0 -z-10 bg-gradient-to-b transition-all duration-700 ease-[cubic-bezier(0.25, 0.46, 0.45, 0.94)] ${
+        scrolled 
+          ? "from-black/40 via-black/30 to-transparent" 
+          : "from-black/20 via-black/10 to-transparent"
+      }`} />
+
+      <style>
+        {`
+          .navbar-hamburger.group:hover span {
+            background: #38bdf8;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          }
+          
+          
+          @supports (backdrop-filter: blur(0)) {
+            nav {
+              backdrop-filter: blur(20px);
+            }
+          }
+          
+          
+          @supports not (backdrop-filter: blur(0)) {
+            nav {
+              background: rgba(10, 10, 10, 0.9) !important;
+            }
+          }
+        `}
+      </style>
+    </nav>
+  );
+};*/}
