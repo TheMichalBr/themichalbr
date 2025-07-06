@@ -9,7 +9,7 @@ import Instagram from "/socials/2_Instagram.svg";
 import X from "/socials/3_X.svg";
 import Steam from "/socials/4_Steam.svg";
 import GitHub from "/socials/5_GitHub.svg";
-import Email from "/socials/6_Email.svg";
+import Email from "/socials/6_Gmail.svg";
 
 const currentYear = new Date().getFullYear();
 
