@@ -117,7 +117,7 @@ export function HomeBackGround() {
     window.addEventListener("resize", setup);
     anim = requestAnimationFrame(draw);
 
-    const handleVisibility = () => {};
+    const handleVisibility = () => { };
     document.addEventListener("visibilitychange", handleVisibility);
 
     return () => {
