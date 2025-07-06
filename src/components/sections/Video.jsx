@@ -5,7 +5,6 @@ const Video = ({ videoUrl }) => {
   const [videoTitle, setVideoTitle] = useState("Loading...");
   const [videoViews, setVideoViews] = useState("Loading...");
 
-  // Extrahujeme ID videa z URL
   const getVideoId = (url) => {
     const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
     return match ? match[1] : null;
@@ -56,15 +55,12 @@ const Video = ({ videoUrl }) => {
       >
         {!isVideoPlaying ? (
           <div className="relative w-full h-0" style={{ paddingTop: "56.25%" }}>
-            {/* Náhled videa */}
             <img
               src={videoThumbnail}
               alt="Video Thumbnail"
               className="absolute top-0 left-0 w-full h-full object-cover rounded-xl"
             />
-            {/* Ztmavení */}
             <div className="absolute top-0 left-0 w-full h-full bg-black/70 rounded-xl"></div>
-            {/* Tlačítko přehrávání */}
             <div className="absolute inset-0 flex items-center justify-center">
               <button
                 onClick={() => setIsVideoPlaying(true)}
@@ -83,7 +79,6 @@ const Video = ({ videoUrl }) => {
           </div>
         ) : (
           <div className="relative w-full max-w-4xl mx-auto" style={{ paddingTop: "56.25%" }}>
-            {/* YouTube iframe */}
             <iframe
               className="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg border border-white/10"
               src={embedUrl}
@@ -91,7 +86,6 @@ const Video = ({ videoUrl }) => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
-            {/* Tlačítko pro návrat */}
             <button
               onClick={() => setIsVideoPlaying(false)}
               className="absolute top-4 right-4 bg-black/70 text-white p-2 rounded-full hover:bg-black/80 transition-colors cursor-pointer"
@@ -101,7 +95,6 @@ const Video = ({ videoUrl }) => {
           </div>
         )}
       </div>
-      {/* Název videa a počet zhlédnutí */}
       <div className="mt-4 flex justify-between w-full max-w-4xl">
         <h3 className="text-lg font-bold text-white">{videoTitle}</h3>
         <p className="text-sm text-gray-400">{videoViews}</p>
