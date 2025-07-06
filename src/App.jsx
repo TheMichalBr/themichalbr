@@ -10,7 +10,7 @@ import { Projects } from "./components/sections/Projects";
 import Footer from "./components/sections/Footer";
 
 import "./index.css";
-import "./App.css";
+import "./App.scss";
 import './assets/fonts/fonts.css';
 
 function App() {
