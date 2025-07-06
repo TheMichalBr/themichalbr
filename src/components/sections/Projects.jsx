@@ -147,11 +147,10 @@ export const Projects = () => {
                   <div className="flex justify-between items-center">
                     <a
                       href={project.link}
-                      className={`text-blue-400 hover:text-blue-300 transition-colors my-4 ${
-                        project.disabled
-                          ? "text-gray-400 cursor-not-allowed pointer-events-none"
-                          : ""
-                      }`}
+                      className={`text-blue-400 hover:text-blue-300 transition-colors my-4 ${project.disabled
+                        ? "text-gray-400 cursor-not-allowed pointer-events-none"
+                        : ""
+                        }`}
                       style={project.disabled ? { pointerEvents: "none" } : {}}
                       tabIndex={project.disabled ? -1 : 0}
                     >
