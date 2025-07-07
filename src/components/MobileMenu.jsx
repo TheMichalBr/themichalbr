@@ -56,7 +56,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
     <>
       <div
         className={`
-          fixed inset-0 z-30 bg-black transition-opacity duration-500
+          fixed inset-0 z-30 bg-black transition-opacity duration-900
           ${menuOpen ? "opacity-80 pointer-events-auto" : "opacity-0 pointer-events-none"}
         `}
         onClick={() => setMenuOpen(false)}
@@ -85,7 +85,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
               key={link.href}
               className={`
                 w-full flex justify-center
-                transition-all duration-500
+                transition-all duration-900
                 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}
               `}
               style={{
@@ -97,13 +97,13 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
                 onClick={() => setMenuOpen(false)}
                 className={`
                   text-3xl md:text-4xl font-extrabold tracking-tight
-                  text-white px-10 py-4 rounded-xl w-full max-w-xs text-center
-                  bg-gradient-to-r from-cyan-700/10 to-blue-900/10
+                  text-gray-200 px-10 py-4 rounded-xl w-full max-w-xs text-center
+                  bg-gradient-to-r from-cyan-800/10 to-blue-900/10
                   shadow-xl shadow-cyan-900/10
-                  transition-all duration-225
-                  hover:bg-cyan-500/20 hover:text-cyan-300
-                  focus:bg-cyan-500/30 focus:text-cyan-200
-                  border border-cyan-400/10
+                  transition-all duration-600
+                  hover:bg-cyan-900/20 hover:text-blue-400
+                  focus:bg-cyan-900/30 focus:text-blue-300
+                  border border-cyan-100/10
                   scale-95 hover:scale-100 active:scale-97
                   cursor-pointer outline-none ring-0
                   focus:ring-2 focus:ring-cyan-400
