@@ -1,17 +1,10 @@
 {/* # Thanks to Pedro Tech for amazing tutorial.
 
 # DEV
-
-    - zmenit spodni text
-      - upravit mobile menu
+        - Upravit texty a obsah (home,about,projects,games,equipment,loading screen)
         - obcasne mizeni elementu pri resiznuti
-          - loading dat do midu
-            - upravit texty
-  - vyresit jak to udelat mensi(min na gridu ?) GAMES
-    - reviews asi dat pod sebe
-      - games predelat
-        - vypada v pohode
-          - pro celou stranku plati aby jsme ji vic ujednotili designem animacema stylem a barvou pouzitou
+        - loading
+        - pro celou stranku plati aby jsme ji vic ujednotili designem animacema stylem a barvou pouzitou
 
 ------------------------------------------------------CS2 Config(autoexec.cfg)------------------------------------------------------
 
