@@ -1,5 +1,6 @@
-import { RevealOnScroll } from "../RevealOnScroll";
 import { useState, useEffect } from "react";
+import { RevealOnScroll } from "../RevealOnScroll";
+
 import pm1 from "/projects/PM_1.webp";
 import pm2 from "/projects/PM_2.webp";
 import pm3 from "/projects/PM_3.webp";
@@ -16,8 +17,10 @@ const projectsData = [
     tech: ["Web Game", "Godot"],
     image: pm1,
     link: "https://themichalbr.github.io/mgames/Tetris.html",
-    linkLabel: "PLAY ONLINE →",
+    linkLabel: "PLAY ONLINE",
     downloads: null,
+    status: "completed",
+    featured: true,
   },
   {
     id: "snake",
@@ -28,8 +31,10 @@ const projectsData = [
     tech: ["Game", "Python"],
     image: pm2,
     link: "https://github.com/TheMichalBr/snake_game",
-    linkLabel: "DOWNLOAD GAME →",
+    linkLabel: "DOWNLOAD GAME",
     downloads: null,
+    status: "completed",
+    featured: false,
   },
   {
     id: "rocketmod",
@@ -40,34 +45,40 @@ const projectsData = [
     tech: ["Game Mod", "Minecraft", "Java"],
     image: pm3,
     link: "https://modrinth.com/mod/nms-rocket-launcher-mod/",
-    linkLabel: "DOWNLOAD MOD →",
-    downloads: "modrinth", // speciální značka pro dynamické stažení
+    linkLabel: "DOWNLOAD MOD",
+    downloads: "modrinth",
+    status: "completed",
+    featured: false,
   },
   {
     id: "shooter",
     order: 4,
     title: "shooter game",
-    version: "in development",
-    desc: "First person shooter game on unknown island. Game will be made in Unreal Engine. More info soon!",
+    version: "v0.1 (alpha)",
+    desc: "First person shooter game on unknown island. Game will be made in Unreal Engine.",
     tech: ["Game", "Unreal"],
     image: pm4,
     link: "#",
-    linkLabel: "VIEW GAME PAGE →",
+    linkLabel: "VIEW GAME PAGE",
     downloads: 100,
     disabled: true,
+    status: "development",
+    featured: false,
   },
   {
     id: "aim_blueline",
-    order: 0, // nebude zobrazeno
+    order: 0,
     title: "aim_blueline",
     version: "in development",
     desc: "You just want to have a blast with your friends? Or have a thrilling duel to compare who is the bigger shooter? Inspired by the legendary aim_redline map.",
     tech: ["Game Map", "CS2", "Source 2 Editor"],
     image: pm4,
     link: "#",
-    linkLabel: "PLAY IN CS2 →",
+    linkLabel: "PLAY IN CS2",
     downloads: null,
     disabled: true,
+    status: "development",
+    featured: false,
   },
   {
     id: "websites",
@@ -81,303 +92,248 @@ const projectsData = [
     linkLabel: "",
     downloads: null,
     disabled: true,
+    status: "completed",
+    featured: false,
   },
 ];
 
+const StatusBadge = ({ status }) => {
+  const statusStyles = {
+    completed: "bg-green-500/20 text-green-400 border-green-500/30",
+    development: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+    planning: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+  };
+
+  const statusLabels = {
+    completed: "Completed",
+    development: "In Development",
+    planning: "Planning",
+  };
+
+  return (
+    <span className={`px-2 py-1 rounded-full text-xs border ${statusStyles[status] || statusStyles.completed}`}>
+      {statusLabels[status] || "Unknown"}
+    </span>
+  );
+};
+
+const ProjectCard = ({ project, downloads }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      className={`group relative p-6 rounded-xl border transition-all duration-300 overflow-hidden ${project.featured
+        ? 'border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-cyan-500/5'
+        : 'border-white/10'
+        } ${!project.disabled
+          ? 'hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-[0_8px_32px_rgba(59,130,246,0.15)]'
+          : 'opacity-70'
+        }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+
+      {project.featured && (
+        <div className="absolute top-4 right-4 z-20">
+          <span className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-2 py-1 rounded-full text-xs font-medium">
+            Featured
+          </span>
+        </div>
+      )}
+
+
+      <div
+        className={`absolute inset-0 bg-cover bg-center transition-all duration-500 ${isHovered ? 'scale-105 opacity-40' : 'scale-100 opacity-25'
+          }`}
+        style={{
+          backgroundImage: `url(${project.image})`,
+          filter: 'blur(0.5px)',
+        }}
+      />
+
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+
+
+      <div className="absolute inset-0">
+        <div className={`absolute top-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl transition-all duration-700 ${isHovered ? 'translate-x-4 translate-y-4' : 'translate-x-0 translate-y-0'
+          }`} />
+        <div className={`absolute bottom-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl transition-all duration-700 ${isHovered ? '-translate-x-4 -translate-y-4' : 'translate-x-0 translate-y-0'
+          }`} />
+      </div>
+
+
+      <div className="relative z-10 h-full flex flex-col">
+
+        <div className="flex justify-between items-start mb-3">
+          <div>
+            <h3 className="text-xl font-bold mb-1 text-white group-hover:text-blue-300 transition-colors"> {/* mb-2 */}
+              {project.title}
+            </h3>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-400">{project.version}</span>
+              <StatusBadge status={project.status} />
+            </div>
+          </div>
+        </div>
+
+
+        <p className="text-gray-300 mb-4 leading-relaxed flex-grow">
+          {project.desc}
+        </p>
+
+        {/* bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all*/}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.tech.map((tech, key) => (
+            <span
+              key={key}
+              className="bg-white/10 backdrop-blur-sm text-white/90 py-1 px-3 rounded-full text-sm border border-white/20 hover:bg-white/20 hover:shadow-[0_2px_8px_rgba(255,255,255,0.1)] transition-all duration-300"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+
+        <div className="flex justify-between items-center pt-2">
+          <a
+            href={project.link}
+            className={`group/link flex items-center gap-1 font-medium transition-all duration-300 ${project.disabled
+              ? "text-gray-500 cursor-not-allowed pointer-events-none"
+              : "text-blue-400 hover:text-blue-300"
+              }`}
+            style={project.disabled ? { pointerEvents: "none" } : {}}
+            tabIndex={project.disabled ? -1 : 0}
+          >
+            {project.linkLabel}
+            {!project.disabled && (
+              <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">
+                →
+              </span>
+            )}
+          </a>
+
+
+          {project.downloads === "modrinth" && downloads !== null && (
+            <div className="flex items-center gap-1 text-cyan-400 text-sm">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+              <span>{downloads.toLocaleString()}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const Projects = () => {
   const [downloads, setDownloads] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Získání počtu stažení pro rocketmod
     const fetchModrinthData = async () => {
       try {
+        setLoading(true);
         const response = await fetch("https://api.modrinth.com/v2/project/G4nmS8ee");
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         setDownloads(data.downloads);
       } catch (error) {
-        console.error("Chyba při načítání dat z Modrinth API:", error);
+        console.error("Error fetching Modrinth data:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchModrinthData();
   }, []);
 
-  // Filtrování a řazení projektů
   const visibleProjects = projectsData
     .filter((p) => p.order > 0)
-    .sort((a, b) => a.order - b.order);
+    .sort((a, b) => {
+      if (a.featured !== b.featured) {
+        return b.featured - a.featured;
+      }
+      return a.order - b.order;
+    });
 
   return (
     <section
       id="projects"
-      className="min-h-screen flex items-center justify-center py-20"
+      className="min-h-screen flex items-center justify-center py-20 relative overflow-hidden"
     >
+
+      <div className="absolute inset-0">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+      </div>
+
       <RevealOnScroll>
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
-            Featured Projects
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-white/10">
-            {visibleProjects.map((project) => (
+        <div className="max-w-6xl mx-auto px-4 relative z-10"> {/* bylo tam 5xl */}
+
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 bg-clip-text text-transparent"> {/* from-blue-500 to-cyan-400 */}
+              Featured Projects
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Explore my collection of games, mods, and applications creations or co-creations built with passion and creativity.
+            </p>
+          </div>
+
+
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+              Failed to load download statistics: {error}
+            </div>
+          )}
+
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {visibleProjects.map((project, index) => (
               <div
                 key={project.id}
-                className="p-6 rounded-xl border border-white/10 hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition relative overflow-hidden glass"
+                className="opacity-0 animate-fade-in"
+                style={{ animationDelay: `${index * 0.2}s`, animationFillMode: 'forwards' }}
               >
-                <div
-                  className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
-                  style={{ backgroundImage: `url(${project.image})` }}
-                ></div>
-                <div className="relative z-10">
-                  <h3 className="text-xl font-bold mb-2">
-                    {project.title}{" "}
-                    <span className="text-xs font-normal">
-                      ({project.version})
-                    </span>
-                  </h3>
-                  <p className="text-gray-400 mb-4">{project.desc}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech, key) => (
-                      <span
-                        key={key}
-                        className="bg-blue-500/10 text-blue-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <a
-                      href={project.link}
-                      className={`text-blue-400 hover:text-blue-300 transition-colors my-4 ${project.disabled
-                        ? "text-gray-400 cursor-not-allowed pointer-events-none"
-                        : ""
-                        }`}
-                      style={project.disabled ? { pointerEvents: "none" } : {}}
-                      tabIndex={project.disabled ? -1 : 0}
-                    >
-                      {project.linkLabel}
-                    </a>
-                    {project.downloads === "modrinth" && downloads !== null && (
-                      <span className="text-blue-400 text-sm">
-                        {downloads.toLocaleString()} downloads ⇩
-                      </span>
-                    )}
-                  </div>
-                </div>
+                <ProjectCard project={project} downloads={downloads} />
               </div>
             ))}
           </div>
+
+
+          {loading && (
+            <div className="text-center mt-6">
+              <div className="inline-flex items-center gap-2 text-blue-400">
+                <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+                <span className="text-sm">Loading project statistics...</span>
+              </div>
+            </div>
+          )}
         </div>
       </RevealOnScroll>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out;
+        }
+      `}</style>
     </section>
   );
 };
-
-{/*
-import { RevealOnScroll } from "../RevealOnScroll";
-import { Button } from "@material-tailwind/react";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-
-import pm1 from "/projects/PM_1.webp";
-import pm2 from "/projects/PM_2.webp";
-import pm3 from "/projects/PM_3.webp";
-import pm4 from "/projects/PM_4-1.webp";
-
-export const Projects = () => {
-
-  const [downloads, setDownloads] = useState(null);
-
-  useEffect(() => {
-    // Funkce pro získání dat z Modrinth API
-    const fetchModrinthData = async () => {
-      try {
-        const response = await fetch("https://api.modrinth.com/v2/project/G4nmS8ee");
-        const data = await response.json();
-        setDownloads(data.downloads); // Nastavení počtu stažení
-      } catch (error) {
-        console.error("Chyba při načítání dat z Modrinth API:", error);
-      }
-    };
-
-    fetchModrinthData();
-  }, []);
-
-  return (
-    <section
-      id="projects"
-      className="min-h-screen flex items-center justify-center py-20">
-      <RevealOnScroll>
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
-            Featured Projects
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            <div className="p-6 rounded-xl border border-white/10 hover:-translate-y-1 hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)] transition relative overflow-hidden">
-            <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
-            style={{ backgroundImage: `url(${pm1})` }}
-            >
-            </div>
-
-              <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-2"> Tetris <span className="text-xs font-normal">(v1.1)</span></h3>
-              <p className="text-gray-400 mb-4">
-              Probably everyone has heard of Tetris. So this is my version of Tetris with some interesting changes!
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {["Web Game", "Godot"].map((tech, key) => (
-                  <span
-                    key={key}
-                    className="bg-blue-500/10 text-blue-500 py-1 px-3 rounded-full text-sm hover:bg-blue-500/20 
-                                    hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex justify-between items-center">
-                <a href="https://themichalbr.github.io/mgames/Tetris.html" className="text-blue-400 hover:text-blue-300 transition-colors my-4">
-                  PLAY ONLINE →
-                </a>
-              </div>
-            </div>
-            </div>
-
-            <div
-              className="
-              glass p-6 rounded-xl border border-white/10 
-              hover:-translate-y-1 hover:border-blue-500/30
-              hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)]
-              transition-all relative overflow-hidden">
-
-            <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
-            style={{ backgroundImage: `url(${pm2})` }}
-            >
-            </div>
-
-              <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-2"> Snake <span className="text-xs font-normal">(v1.0.3)</span></h3>
-              <p className="text-gray-400 mb-4">
-              Classic Snake. Eat the food, grow the snake and try not to hit the walls or yourself!
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {["Game", "Python"].map((tech, key) => (
-                  <span
-                    key={key}
-                    className="
-                      bg-blue-500/10 text-blue-500 py-1 px-3 
-                      rounded-full text-sm
-                      transition
-                      hover:bg-blue-500/20 hover:-translate-y-0.5
-                      hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]
-                    "
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="flex justify-between items-center">
-                <a href="https://github.com/TheMichalBr/snake_game" className="text-blue-400 hover:text-blue-300 transition-colors my-4">
-                  DOWNLOAD GAME →
-                </a>
-              </div>
-            </div>
-            </div>
-
-            <div
-              className="
-              glass p-6 rounded-xl border border-white/10 
-              hover:-translate-y-1 hover:border-blue-500/30
-              hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)]
-              transition-all relative overflow-hidden">
-
-            <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
-            style={{ backgroundImage: `url(${pm3})` }}
-            >
-            </div>
-              <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-2"> NmS' Rocket Launcher Mod <span className="text-xs font-normal">(v1.0.2)</span></h3>
-              <p className="text-gray-400 mb-4">
-              This mod adds a rocket launcher to the game. You know what to do with it. Be nice to your friends!
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {["Game Mod", "Minecraft", "Java"].map(
-                  (tech) => (
-                    <span
-                      key={tech}
-                      className="
-                      bg-blue-500/10 text-blue-500 py-1 px-3 
-                      rounded-full text-sm
-                      transition
-                      hover:bg-blue-500/20 hover:-translate-y-0.5
-                      hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]
-                    "
-                    >
-                      {tech}
-                    </span>
-                  )
-                )}
-              </div>
-              <div className="flex justify-between items-center">
-                <a href="https://modrinth.com/mod/nms-rocket-launcher-mod/" className="text-blue-400 hover:text-blue-300 transition-colors my-4">
-                  DOWNLOAD MOD →
-                </a>{downloads !== null && (
-                  <span className="text-blue-400 text-sm">
-                    {downloads.toLocaleString()} downloads ⇩
-                  </span>
-                )}
-              </div>
-            </div>
-            </div>
-
-            <div className="
-              glass p-6 rounded-xl border border-white/10 
-              hover:-translate-y-1 hover:border-blue-500/30
-              hover:shadow-[0_4px_20px_rgba(59,130,246,0.1)]
-              transition-all relative overflow-hidden">
-
-            <div className="absolute inset-0 bg-cover bg-center bg-black/80 hover:bg-black/30 transition-all duration-300 opacity-25 hover:opacity-40"
-            style={{ backgroundImage: `url(${pm4})` }}
-            >
-            </div>
-
-            <div className="relative z-10">
-              <h3 className="text-xl font-bold mb-2"> shooter game <span className="text-xs font-normal">(in development)</span></h3>
-              <p className="text-gray-400 mb-4">
-                First person shooter game on unknown island. Game will be made in Unreal Engine. More info soon!  aim_blueline You just want to have a blast with your friends? Or have a thrilling duel to compare who is the bigger shooter? Inspired by the legendary aim_redline map. "Game Map", "CS2", "Source 2 Editor" PLAY IN CS2 →
-              </p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {["Game", "Unreal"].map((tech, key) => (
-                  <span
-                    key={key}
-                    className="
-                      bg-blue-500/10 text-blue-500 py-1 px-3 
-                      rounded-full text-sm
-                      transition
-                      hover:bg-blue-500/20 hover:-translate-y-0.5
-                      hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]
-                    "
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="flex justify-between items-center">
-                <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors my-4 text-gray-400 cursor-not-allowed"
-      style={{ pointerEvents: "none" }}>VIEW PROJECT PAGE →</a>{downloads !== null && (
-                  <span className="text-blue-400 text-sm">
-                    not available ⇩
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </RevealOnScroll>
-  </section>
-  );
-};
-*/}
