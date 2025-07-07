@@ -56,7 +56,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
     <>
       <div
         className={`
-          fixed inset-0 z-30 bg-black transition-opacity duration-900
+          fixed inset-0 z-30 bg-black transition-opacity duration-600
           ${menuOpen ? "opacity-80 pointer-events-auto" : "opacity-0 pointer-events-none"}
         `}
         onClick={() => setMenuOpen(false)}
@@ -85,7 +85,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
               key={link.href}
               className={`
                 w-full flex justify-center
-                transition-all duration-900
+                transition-all duration-600
                 ${menuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8"}
               `}
               style={{
