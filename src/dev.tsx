@@ -1,7 +1,7 @@
 {/* # Thanks to Pedro Tech for amazing tutorial.
 
 # DEV
-        - Upravit texty a obsah (home,about,projects,games,equipment,loading screen)
+        - Upravit texty a obsah (home,about,projects,games,equipment,loading screen) - games pro firefox?, new games?, new equipment? loading? home? about?
         - obcasne mizeni elementu pri resiznuti
         - loading
         - pro celou stranku plati aby jsme ji vic ujednotili designem animacema stylem a barvou pouzitou
