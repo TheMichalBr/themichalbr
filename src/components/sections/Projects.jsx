@@ -5,6 +5,7 @@ import pm1 from "/projects/PM_1.webp";
 import pm2 from "/projects/PM_2.webp";
 import pm3 from "/projects/PM_3.webp";
 import pm4 from "/projects/PM_4.webp";
+import pm5 from "/projects/PM_5.webp";
 import pm6 from "/projects/PM_6.webp";
 
 const projectsData = [
@@ -34,7 +35,7 @@ const projectsData = [
     linkLabel: "DOWNLOAD GAME",
     downloads: null,
     status: "completed",
-    featured: false,
+    featured: true,
   },
   {
     id: "rocketmod",
@@ -48,7 +49,7 @@ const projectsData = [
     linkLabel: "DOWNLOAD MOD",
     downloads: "modrinth",
     status: "completed",
-    featured: false,
+    featured: true,
   },
   {
     id: "shooter",
@@ -72,7 +73,7 @@ const projectsData = [
     version: "in development",
     desc: "You just want to have a blast with your friends? Or have a thrilling duel to compare who is the bigger shooter? Inspired by the legendary aim_redline map.",
     tech: ["Game Map", "CS2", "Source 2 Editor"],
-    image: pm4,
+    image: pm5,
     link: "#",
     linkLabel: "PLAY IN CS2",
     downloads: null,
@@ -105,7 +106,7 @@ const StatusBadge = ({ status }) => {
   };
 
   const statusLabels = {
-    completed: "Completed",
+    completed: "Released",
     development: "In Development",
     planning: "Planning",
   };
@@ -135,7 +136,7 @@ const ProjectCard = ({ project, downloads }) => {
 
       {project.featured && (
         <div className="absolute top-4 right-4 z-20">
-          <span className="bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-2 py-1 rounded-full text-xs font-medium">
+          <span className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-2 py-1 rounded-full text-xs font-medium">
             Featured
           </span>
         </div>
@@ -182,7 +183,7 @@ const ProjectCard = ({ project, downloads }) => {
           {project.desc}
         </p>
 
-        {/* bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all*/}
+        {/* bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all */}
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tech.map((tech, key) => (
             <span
@@ -264,25 +265,18 @@ export const Projects = () => {
     });
 
   return (
-    <section
-      id="projects"
-      className="min-h-screen flex items-center justify-center py-20 relative overflow-hidden"
-    >
-
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-      </div>
+    <section id="projects" className="min-h-screen flex items-center justify-center py-20 relative overflow-hidden">
 
       <RevealOnScroll>
-        <div className="max-w-6xl mx-auto px-4 relative z-10"> {/* bylo tam 5xl */}
+
+        <div className="max-w-6xl mx-auto px-4 relative z-10"> {/* max-w-5xl ?*/}
 
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 bg-clip-text text-transparent"> {/* from-blue-500 to-cyan-400 */}
+            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
               Featured Projects
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Explore my collection of games, mods, and applications creations or co-creations built with passion and creativity.
+              Explore my collection of applications, games, and mods that I have created or contributed to with enthusiasm and creativity.
             </p>
           </div>
 
