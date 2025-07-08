@@ -17,9 +17,8 @@ export const LoadingScreen = ({ onComplete }) => {
     "Entering page.."
   ];
 
-  // Generate starfield
   useEffect(() => {
-    const newStars = Array.from({ length:120 }, (_, i) => ({
+    const newStars = Array.from({ length: 120 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -39,36 +38,31 @@ export const LoadingScreen = ({ onComplete }) => {
     document.documentElement.style.overflow = "hidden";
 
     const startTime = Date.now();
-    const totalDuration = 1500; // Shortened to 1.5 seconds for faster loading
-    
-    // Timer for elapsed time
+    const totalDuration = 1500;
+
     const timeInterval = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000;
       setElapsedTime(elapsed);
     }, 20);
 
-    // Progress and task updates with dynamic estimation
     const progressInterval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const newProgress = Math.min((elapsed / totalDuration) * 100, 100);
       setProgress(newProgress);
 
-      // Update progress history for estimation
       const currentTime = elapsed / 1000;
       setProgressHistory(prev => {
         const newHistory = [...prev, { progress: newProgress, time: currentTime }];
-        // Keep only last 10 entries for calculation
         return newHistory.slice(-10);
       });
 
-      // Calculate dynamic estimated time
       if (newProgress > 5 && newProgress < 95) {
         setProgressHistory(prev => {
           if (prev.length >= 3) {
             const recent = prev.slice(-3);
             const progressDiff = recent[recent.length - 1].progress - recent[0].progress;
             const timeDiff = recent[recent.length - 1].time - recent[0].time;
-            
+
             if (progressDiff > 0 && timeDiff > 0) {
               const progressRate = progressDiff / timeDiff;
               const remainingProgress = 100 - newProgress;
@@ -81,7 +75,6 @@ export const LoadingScreen = ({ onComplete }) => {
         });
       }
 
-      // Update current task based on progress
       const taskIndex = Math.min(Math.floor((newProgress / 100) * loadingTasks.length), loadingTasks.length - 1);
       setCurrentTask(loadingTasks[taskIndex]);
 
@@ -90,8 +83,7 @@ export const LoadingScreen = ({ onComplete }) => {
         clearInterval(timeInterval);
         setProgress(100);
         setCurrentTask("Entering page..");
-        
-        // Smooth completion with 2-second total target
+
         setTimeout(() => {
           setFadeOut(true);
           setTimeout(() => {
@@ -121,7 +113,6 @@ export const LoadingScreen = ({ onComplete }) => {
         overflow-hidden
       `}
     >
-      {/* Starfield Background */}
       <div className="absolute inset-0 pointer-events-none">
         {stars.map((star) => (
           <div
@@ -140,53 +131,45 @@ export const LoadingScreen = ({ onComplete }) => {
         ))}
       </div>
 
-      {/* Subtle nebula effect */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-blue-500 rounded-full opacity-6 blur-3xl animate-nebula-drift" />
         <div className="absolute top-3/4 right-1/4 w-64 h-64 bg-purple-500 rounded-full opacity-6 blur-3xl animate-nebula-drift-reverse" />
         <div className="absolute bottom-1/4 left-1/2 w-56 h-56 bg-cyan-500 rounded-full opacity-6 blur-3xl animate-nebula-pulse" />
       </div>
 
-      {/* Shooting stars */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-0 w-1 h-1 bg-white rounded-full animate-shooting-star opacity-80" />
         <div className="absolute top-1/2 right-0 w-1 h-1 bg-blue-200 rounded-full animate-shooting-star-2 opacity-60" />
         <div className="absolute bottom-1/3 left-1/4 w-1 h-1 bg-cyan-200 rounded-full animate-shooting-star-3 opacity-70" />
       </div>
 
-      {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center">
-        {/* Static Loading Text */}
         <div className="mb-8 text-5xl font-mono font-bold text-center select-none">
           <span className="text-white drop-shadow-2xl tracking-widest">
             Loading
           </span>
         </div>
 
-        {/* Enhanced Progress Bar */}
         <div className="relative mb-6 w-96">
           <div className="w-full h-3 bg-gray-800 bg-opacity-60 rounded-full relative overflow-hidden shadow-inner backdrop-blur-sm border border-gray-600 border-opacity-40">
-            <div 
+            <div
               className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 rounded-full transition-all duration-100 ease-out shadow-lg"
               style={{ width: `${progress}%` }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-25 animate-shimmer" />
           </div>
-          
-          {/* Progress percentage */}
+
           <div className="absolute -top-7 right-0 text-sm font-mono text-blue-300 tracking-wider">
             {Math.round(progress)}%
           </div>
         </div>
 
-        {/* Current Task */}
         <div className="text-center mb-3">
           <div className="text-base text-blue-200 tracking-wide font-mono transition-all duration-300 select-none min-h-[24px]">
             {currentTask}
           </div>
         </div>
 
-        {/* Time Information */}
         <div className="text-center mb-3">
           <div className="flex justify-center items-center space-x-8 text-sm font-mono text-gray-300">
             <div className="flex items-center space-x-2">
@@ -200,7 +183,6 @@ export const LoadingScreen = ({ onComplete }) => {
           </div>
         </div>
 
-        {/* System Status Link */}
         <div className="text-xs text-gray-400 tracking-wide font-mono opacity-60 select-none">
           <div>
             Having issues? <a href="https://www.githubstatus.com/" className="text-blue-400 hover:text-blue-300 transition-colors underline">Check GitHub status</a>.
@@ -427,4 +409,228 @@ export const LoadingScreen = ({ onComplete }) => {
       </style>
     </div>
   );
-};*/}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { useEffect, useState, useRef, useMemo } from "react";
+
+export const LoadingScreen = ({ onComplete }) => {
+  const [progress, setProgress] = useState(0);
+  const [fadeOut, setFadeOut] = useState(false);
+  const [currentTask, setCurrentTask] = useState("Initializing..");
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [estimatedTime, setEstimatedTime] = useState(1);
+  const [statusLevel, setStatusLevel] = useState("Medium");
+  const [done, setDone] = useState(false);
+
+  const startTime = useRef(performance.now());
+  const progressHistory = useRef([]);
+  const overflowRef = useRef({
+    body: document.body.style.overflow,
+    html: document.documentElement.style.overflow,
+  });
+
+  const loadingTasks = useMemo(() => [
+    "Initializing components..",
+    "Loading assets..",
+    "Finalizing setup..",
+    "Loading completed..",
+    "Entering page.."
+  ], []);
+
+  const stars = useMemo(() => {
+    return Array.from({ length: 120 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 2.5 + 1,
+      opacity: Math.random() * 0.7 + 0.3,
+      twinkleDelay: Math.random() * 2,
+      twinkleDuration: 1.5 + Math.random() * 1.5,
+    }));
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    const MIN_DURATION = 850;
+    const DELAY_AFTER_100 = 100;
+    const interval = setInterval(() => {
+      const now = performance.now();
+      const elapsed = now - startTime.current;
+      const elapsedSec = elapsed / 1000;
+      setElapsedTime(elapsedSec);
+
+      // Simulate a real loading process
+      const targetDuration = done ? Math.max(elapsed, MIN_DURATION) : 2000;
+      const newProgress = Math.min((elapsed / targetDuration) * 100, 100);
+      setProgress(newProgress);
+
+      progressHistory.current.push({ progress: newProgress, time: elapsedSec });
+      if (progressHistory.current.length > 10) progressHistory.current.shift();
+
+      const taskIndex = Math.min(Math.floor((newProgress / 100) * loadingTasks.length), loadingTasks.length - 1);
+      setCurrentTask(loadingTasks[taskIndex]);
+
+      // Estimate status level
+      if (elapsed < 1000) setStatusLevel("Fast");
+      else if (elapsed < 2000) setStatusLevel("Medium");
+      else setStatusLevel("Slow");
+
+      // Estimate remaining time
+      const recent = progressHistory.current;
+      if (recent.length >= 3) {
+        const diff = recent[recent.length - 1].progress - recent[0].progress;
+        const timeDiff = recent[recent.length - 1].time - recent[0].time;
+        if (diff > 0) {
+          const rate = diff / timeDiff;
+          const remaining = 100 - newProgress;
+          setEstimatedTime(remaining / rate);
+        }
+      }
+
+      if (newProgress >= 100 && !fadeOut) {
+        clearInterval(interval);
+        setTimeout(() => {
+          setFadeOut(true);
+          setTimeout(() => {
+            document.body.style.overflow = overflowRef.current.body;
+            document.documentElement.style.overflow = overflowRef.current.html;
+            onComplete();
+          }, 500);
+        }, DELAY_AFTER_100);
+      }
+    }, 16);
+
+    return () => {
+      clearInterval(interval);
+      document.body.style.overflow = overflowRef.current.body;
+      document.documentElement.style.overflow = overflowRef.current.html;
+    };
+  }, [done, fadeOut, onComplete, loadingTasks]);
+
+  useEffect(() => {
+    const minAutoFinish = setTimeout(() => setDone(true), 500);
+    return () => clearTimeout(minAutoFinish);
+  }, []);
+
+  return (
+    <div className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-indigo-950 via-blue-950 to-slate-900 transition-all duration-500 ease-out ${fadeOut ? "opacity-0 pointer-events-none scale-102" : "opacity-100 scale-100"} overflow-hidden`}>
+      <div className="absolute inset-0 pointer-events-none">
+        {stars.map((star) => (
+          <div
+            key={star.id}
+            className="absolute bg-white rounded-full animate-twinkle"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              opacity: star.opacity,
+              animationDelay: `${star.twinkleDelay}s`,
+              animationDuration: `${star.twinkleDuration}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="mb-8 text-5xl font-mono font-bold text-center select-none text-white drop-shadow-2xl tracking-widest">
+          Loading
+        </div>
+
+        <div className="relative mb-6 w-96">
+          <div className="w-full h-3 bg-gray-800 bg-opacity-60 rounded-full relative overflow-hidden shadow-inner backdrop-blur-sm border border-gray-600 border-opacity-40">
+            <div
+              className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 rounded-full transition-all duration-100 ease-out shadow-lg"
+              style={{ width: `${progress}%` }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-25 animate-shimmer" />
+          </div>
+          <div className="absolute -top-7 right-0 text-sm font-mono text-blue-300 tracking-wider">
+            {Math.round(progress)}%
+          </div>
+        </div>
+
+        <div className="text-center mb-2">
+          <div className="text-base text-blue-200 tracking-wide font-mono min-h-[24px] select-none">
+            {currentTask}
+          </div>
+        </div>
+
+        <div className="h-1" />
+
+        <div className="text-center mb-3">
+          <div className="flex justify-center items-center space-x-8 text-sm font-mono text-gray-300">
+            <div className="flex items-center space-x-2">
+              <span className="text-gray-400">Elapsed:</span>
+              <span className="text-blue-300 tabular-nums">{elapsedTime.toFixed(1)}s</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-gray-400">Estimated:</span>
+              <span className={`tabular-nums ${
+                statusLevel === "Fast" ? "text-green-300" :
+                statusLevel === "Medium" ? "text-yellow-300" :
+                "text-red-300"
+              }`}>
+                {statusLevel} ({estimatedTime.toFixed(1)}s)
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {progress >= 100 && (
+          <div className="text-center mb-4">
+            <div className="text-sm text-green-400 font-mono tracking-wide animate-pulse">
+              DONE
+            </div>
+          </div>
+        )}
+
+        <div className="text-xs text-gray-400 tracking-wide font-mono opacity-60 select-none">
+          <div>
+            Having issues? <a href="https://www.githubstatus.com/" className="text-blue-400 hover:text-blue-300 transition-colors underline">Check GitHub status</a>.
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        .animate-shimmer {
+          animation: shimmer 1.8s ease-in-out infinite;
+        }
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.1); }
+        }
+        .animate-twinkle {
+          animation: twinkle 2.5s ease-in-out infinite;
+        }
+      `}</style>
+    </div>
+  );
+};
+*/}
