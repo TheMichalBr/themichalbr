@@ -5,7 +5,7 @@
   "author": "MichalBr",
   "license": "MIT",
   "private": true,
-  "version": "4.6.8",
+  "version": "4.6.9",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -47,8 +47,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
-    "@types/react": "^19.1.2",
-    "@types/react-dom": "^19.0.4",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@typescript-eslint/eslint-plugin": "^8.36.0",
+    "@typescript-eslint/parser": "^8.36.0",
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
@@ -56,6 +58,7 @@
     "gh-pages": "^6.3.0",
     "globals": "^15.15.0",
     "sass": "^1.89.2",
+    "typescript": "^5.8.3",
     "vite": "^6.2.0",
     "vite-plugin-clean": "^2.0.1"
   }
