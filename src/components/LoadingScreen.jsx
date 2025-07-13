@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
 export const LoadingScreen = ({ onComplete }) => {
   const [fadeOut, setFadeOut] = useState(false);
@@ -6,19 +7,54 @@ export const LoadingScreen = ({ onComplete }) => {
   const [currentTask, setCurrentTask] = useState("");
   const [stars, setStars] = useState([]);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [estimatedTime, setEstimatedTime] = useState(3);
+  const [estimatedTime, setEstimatedTime] = useState(1);
   const [progressHistory, setProgressHistory] = useState([]);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isFirefox, setIsFirefox] = useState(false);
+  const [systemStatus, setSystemStatus] = useState("checking");
 
-  const loadingTasks = [
-    "Initializing components..",
-    "Loading assets..",
-    "Finalizing setup..",
-    "Loading completed..",
-    "Entering page.."
-  ];
+  const timeIntervalRef = useRef(null);
+  const progressIntervalRef = useRef(null);
+  const fadeTimeoutRef = useRef(null);
+  const completeTimeoutRef = useRef(null);
+
+  const loadingTasks = useMemo(
+    () => [
+      "Initializing components..",
+      "Loading assets..",
+      "Finalizing setup..",
+      "Loading completed..",
+      "Entering page..",
+    ],
+    []
+  );
 
   useEffect(() => {
-    const newStars = Array.from({ length: 120 }, (_, i) => ({
+    const userAgent = navigator.userAgent.toLowerCase();
+    setIsFirefox(userAgent.indexOf("firefox") > -1);
+  }, []);
+
+  useEffect(() => {
+    const checkGitHubStatus = async () => {
+      try {
+        const response = await fetch(
+          "https://www.githubstatus.com/api/v2/status.json"
+        );
+        const data = await response.json();
+        setSystemStatus(
+          data.status.indicator === "none" ? "operational" : "issues"
+        );
+      } catch (error) {
+        setSystemStatus("unknown");
+      }
+    };
+
+    checkGitHubStatus();
+  }, []);
+
+  const generateStars = useCallback(() => {
+    const starCount = window.innerWidth < 768 ? 80 : 120;
+    return Array.from({ length: starCount }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -27,8 +63,11 @@ export const LoadingScreen = ({ onComplete }) => {
       twinkleDelay: Math.random() * 2,
       twinkleDuration: 1.5 + Math.random() * 1.5,
     }));
-    setStars(newStars);
   }, []);
+
+  useEffect(() => {
+    setStars(generateStars());
+  }, [generateStars]);
 
   useEffect(() => {
     const originalBodyOverflow = document.body.style.overflow;
@@ -38,29 +77,45 @@ export const LoadingScreen = ({ onComplete }) => {
     document.documentElement.style.overflow = "hidden";
 
     const startTime = Date.now();
-    const totalDuration = 1500;
+    const totalDuration = 1000;
 
-    const timeInterval = setInterval(() => {
+    timeIntervalRef.current = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000;
       setElapsedTime(elapsed);
-    }, 20);
+    }, 16);
 
-    const progressInterval = setInterval(() => {
+    progressIntervalRef.current = setInterval(() => {
       const elapsed = Date.now() - startTime;
-      const newProgress = Math.min((elapsed / totalDuration) * 100, 100);
+
+      const normalizedTime = Math.min(elapsed / totalDuration, 1);
+      let newProgress;
+
+      if (normalizedTime < 0.2) {
+        newProgress = (normalizedTime / 0.2) * 25;
+      } else if (normalizedTime < 0.7) {
+        newProgress = 25 + ((normalizedTime - 0.2) / 0.5) * 50;
+      } else {
+        newProgress = 75 + ((normalizedTime - 0.7) / 0.3) * 25;
+      }
+
+      newProgress = Math.min(Math.max(newProgress, 0), 100);
       setProgress(newProgress);
 
       const currentTime = elapsed / 1000;
-      setProgressHistory(prev => {
-        const newHistory = [...prev, { progress: newProgress, time: currentTime }];
+      setProgressHistory((prev) => {
+        const newHistory = [
+          ...prev,
+          { progress: newProgress, time: currentTime },
+        ];
         return newHistory.slice(-10);
       });
 
       if (newProgress > 5 && newProgress < 95) {
-        setProgressHistory(prev => {
+        setProgressHistory((prev) => {
           if (prev.length >= 3) {
             const recent = prev.slice(-3);
-            const progressDiff = recent[recent.length - 1].progress - recent[0].progress;
+            const progressDiff =
+              recent[recent.length - 1].progress - recent[0].progress;
             const timeDiff = recent[recent.length - 1].time - recent[0].time;
 
             if (progressDiff > 0 && timeDiff > 0) {
@@ -68,51 +123,53 @@ export const LoadingScreen = ({ onComplete }) => {
               const remainingProgress = 100 - newProgress;
               const estimatedRemaining = remainingProgress / progressRate;
               const newEstimatedTotal = currentTime + estimatedRemaining;
-              setEstimatedTime(Math.max(newEstimatedTotal, currentTime + 0.1));
+              setEstimatedTime(
+                Math.max(Math.min(newEstimatedTotal, 2), currentTime + 0.1)
+              );
             }
           }
           return prev;
         });
       }
 
-      const taskIndex = Math.min(Math.floor((newProgress / 100) * loadingTasks.length), loadingTasks.length - 1);
-      setCurrentTask(loadingTasks[taskIndex]);
+      const taskIndex = Math.min(
+        Math.floor((newProgress / 100) * loadingTasks.length),
+        loadingTasks.length - 1
+      );
+      setCurrentTask(loadingTasks[taskIndex] || "");
 
       if (elapsed >= totalDuration) {
-        clearInterval(progressInterval);
-        clearInterval(timeInterval);
+        clearInterval(progressIntervalRef.current);
+        clearInterval(timeIntervalRef.current);
         setProgress(100);
         setCurrentTask("Entering page..");
 
-        setTimeout(() => {
+        fadeTimeoutRef.current = setTimeout(() => {
           setFadeOut(true);
-          setTimeout(() => {
+          completeTimeoutRef.current = setTimeout(() => {
+            setIsVisible(false);
             document.body.style.overflow = originalBodyOverflow;
             document.documentElement.style.overflow = originalHtmlOverflow;
-            onComplete();
-          }, 500);
-        }, 200);
+            if (onComplete) onComplete();
+          }, 300);
+        }, 100);
       }
-    }, 20);
+    }, 16);
 
     return () => {
-      clearInterval(progressInterval);
-      clearInterval(timeInterval);
+      if (timeIntervalRef.current) clearInterval(timeIntervalRef.current);
+      if (progressIntervalRef.current)
+        clearInterval(progressIntervalRef.current);
+      if (fadeTimeoutRef.current) clearTimeout(fadeTimeoutRef.current);
+      if (completeTimeoutRef.current) clearTimeout(completeTimeoutRef.current);
+
       document.body.style.overflow = originalBodyOverflow;
       document.documentElement.style.overflow = originalHtmlOverflow;
     };
-  }, [onComplete]);
+  }, [onComplete, loadingTasks]);
 
-  return (
-    <div
-      className={`
-        fixed inset-0 z-50 flex flex-col items-center justify-center
-        bg-gradient-to-br from-indigo-950 via-blue-950 to-slate-900
-        transition-all duration-500 ease-out
-        ${fadeOut ? "opacity-0 pointer-events-none scale-102" : "opacity-100 scale-100"}
-        overflow-hidden
-      `}
-    >
+  const StarField = useMemo(
+    () => (
       <div className="absolute inset-0 pointer-events-none">
         {stars.map((star) => (
           <div
@@ -126,10 +183,29 @@ export const LoadingScreen = ({ onComplete }) => {
               opacity: star.opacity,
               animationDelay: `${star.twinkleDelay}s`,
               animationDuration: `${star.twinkleDuration}s`,
+              willChange: "opacity, transform",
             }}
           />
         ))}
       </div>
+    ),
+    [stars]
+  );
+
+  if (!isVisible) return null;
+
+  return (
+    <div
+      className={`
+        fixed inset-0 z-50 flex flex-col items-center justify-center
+        bg-gradient-to-br from-indigo-950 via-blue-950 to-slate-900
+        transition-all duration-300 ease-out
+        ${fadeOut ? "opacity-0 pointer-events-none scale-105" : "opacity-100 scale-100"}
+        overflow-hidden
+      `}
+      style={{ willChange: "opacity" }}
+    >
+      {StarField}
 
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-blue-500 rounded-full opacity-6 blur-3xl animate-nebula-drift" />
@@ -153,8 +229,11 @@ export const LoadingScreen = ({ onComplete }) => {
         <div className="relative mb-6 w-96">
           <div className="w-full h-3 bg-gray-800 bg-opacity-60 rounded-full relative overflow-hidden shadow-inner backdrop-blur-sm border border-gray-600 border-opacity-40">
             <div
-              className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 rounded-full transition-all duration-100 ease-out shadow-lg"
-              style={{ width: `${progress}%` }}
+              className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 rounded-full transition-all duration-75 ease-out shadow-lg"
+              style={{
+                width: `${progress}%`,
+                willChange: "width",
+              }}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-25 animate-shimmer" />
           </div>
@@ -165,7 +244,7 @@ export const LoadingScreen = ({ onComplete }) => {
         </div>
 
         <div className="text-center mb-3">
-          <div className="text-base text-blue-200 tracking-wide font-mono transition-all duration-300 select-none min-h-[24px]">
+          <div className="text-base text-blue-200 tracking-wide font-mono transition-all duration-200 select-none min-h-[24px]">
             {currentTask}
           </div>
         </div>
@@ -173,19 +252,64 @@ export const LoadingScreen = ({ onComplete }) => {
         <div className="text-center mb-3">
           <div className="flex justify-center items-center space-x-8 text-sm font-mono text-gray-300">
             <div className="flex items-center space-x-2">
+              <div className="w-1 h-1 bg-blue-400 rounded-full animate-bounce-smooth" />
               <span className="text-gray-400">Elapsed:</span>
-              <span className="text-blue-300 tabular-nums">{elapsedTime.toFixed(1)}s</span>
+              <span className="text-blue-300 tabular-nums">
+                {elapsedTime.toFixed(1)}s
+              </span>
             </div>
             <div className="flex items-center space-x-2">
-              <span className="text-gray-400">Estimated:</span>
-              <span className="text-green-300 tabular-nums">{estimatedTime.toFixed(1)}s</span>
+              <div
+                className="w-1 h-1 bg-green-400 rounded-full animate-bounce-smooth"
+                style={{ animationDelay: "0.2s" }}
+              />
+              <span className="text-gray-400">ETA:</span>
+              <span className="text-green-300 tabular-nums">
+                {estimatedTime.toFixed(1)}s
+              </span>
             </div>
           </div>
         </div>
 
-        <div className="text-xs text-gray-400 tracking-wide font-mono opacity-60 select-none">
+        <div className="text-xs text-gray-400 tracking-wide font-mono opacity-70 select-none text-center">
+          <div className="flex items-center justify-center space-x-2 mb-2">
+            <div
+              className={`w-1 h-1 rounded-full animate-pulse ${systemStatus === "operational"
+                  ? "bg-green-400"
+                  : systemStatus === "issues"
+                    ? "bg-red-400"
+                    : "bg-yellow-400"
+                }`}
+            />
+            <span>
+              System Status:{" "}
+              {systemStatus === "operational"
+                ? "Operational"
+                : systemStatus === "issues"
+                  ? "Issues Detected"
+                  : "Checking..."}
+            </span>
+          </div>
+
+          {isFirefox && (
+            <div className="mb-2 text-amber-400 text-xs">
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-1 h-1 bg-amber-400 rounded-full animate-pulse" />
+                <span>Firefox detected: Experience may not be optimal</span>
+              </div>
+            </div>
+          )}
+
           <div>
-            Having issues? <a href="https://www.githubstatus.com/" className="text-blue-400 hover:text-blue-300 transition-colors underline">Check GitHub status</a>.
+            Having issues?{" "}
+            <a
+              href="https://www.githubstatus.com/"
+              className="text-blue-400 hover:text-blue-300 transition-colors underline decoration-dotted"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Check GitHub status
+            </a>
           </div>
         </div>
       </div>
@@ -197,7 +321,7 @@ export const LoadingScreen = ({ onComplete }) => {
             100% { transform: translateX(100%); }
           }
           .animate-shimmer {
-            animation: shimmer 1.8s ease-in-out infinite;
+            animation: shimmer 1.5s ease-in-out infinite;
           }
           
           @keyframes twinkle {
@@ -205,7 +329,7 @@ export const LoadingScreen = ({ onComplete }) => {
             50% { opacity: 1; transform: scale(1.1); }
           }
           .animate-twinkle {
-            animation: twinkle 2.5s ease-in-out infinite;
+            animation: twinkle 2.2s ease-in-out infinite;
           }
           
           @keyframes nebula-drift {
@@ -257,7 +381,7 @@ export const LoadingScreen = ({ onComplete }) => {
             }
           }
           .animate-shooting-star {
-            animation: shooting-star 7s ease-in-out infinite;
+            animation: shooting-star 5s ease-in-out infinite;
           }
           
           @keyframes shooting-star-2 {
@@ -281,7 +405,7 @@ export const LoadingScreen = ({ onComplete }) => {
             }
           }
           .animate-shooting-star-2 {
-            animation: shooting-star-2 10s ease-in-out infinite 2s;
+            animation: shooting-star-2 7s ease-in-out infinite 1.5s;
           }
           
           @keyframes shooting-star-3 {
@@ -305,7 +429,7 @@ export const LoadingScreen = ({ onComplete }) => {
             }
           }
           .animate-shooting-star-3 {
-            animation: shooting-star-3 8s ease-in-out infinite 4s;
+            animation: shooting-star-3 6s ease-in-out infinite 3s;
           }
           
           @keyframes bounce-smooth {
@@ -315,322 +439,31 @@ export const LoadingScreen = ({ onComplete }) => {
           .animate-bounce-smooth {
             animation: bounce-smooth 1.2s ease-in-out infinite;
           }
-        `}
-      </style>
-    </div>
-  );
-};
-
-
-
-{/*import { useEffect, useState } from "react";
-
-export const LoadingScreen = ({ onComplete }) => {
-  const [text, setText] = useState("");
-  const [fadeOut, setFadeOut] = useState(false);
-  const fullText = "/Loading.../>";
-
-  useEffect(() => {
-    const originalBodyOverflow = document.body.style.overflow;
-    const originalHtmlOverflow = document.documentElement.style.overflow;
-
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-
-    let index = 0;
-    const interval = setInterval(() => {
-      setText(fullText.substring(0, index));
-      index++;
-
-      if (index > fullText.length) {
-        clearInterval(interval);
-        setTimeout(() => {
-          setFadeOut(true);
-          setTimeout(() => {
-            document.body.style.overflow = originalBodyOverflow;
-            document.documentElement.style.overflow = originalHtmlOverflow;
-            onComplete();
-          }, 50);
-        }, 900);
-      }
-    }, 65);
-
-    return () => {
-      clearInterval(interval);
-      document.body.style.overflow = originalBodyOverflow;
-      document.documentElement.style.overflow = originalHtmlOverflow;
-    };
-  }, [onComplete]);
-
-  return (
-    <div
-      className={`
-        fixed inset-0 z-50 flex flex-col items-center justify-center
-        bg-gradient-to-br from-black via-black-900 to-blue-950
-        transition-opacity duration-700
-        ${fadeOut ? "opacity-0 pointer-events-none" : "opacity-100"}
-      `}
-    >
-      <div className="mb-6 text-4xl font-mono font-bold text-center flex items-center justify-center select-none">
-        <span className="transition-opacity duration-300 opacity-100 drop-shadow-lg tracking-widest animate-pulse">{text}</span>
-        <span className="animate-blink ml-1 text-blue-400 text-4xl">| </span>
-      </div>
-      <div className="w-[220px] h-[3px] bg-gray-800 rounded relative overflow-hidden mt-2 shadow-inner">
-        <div className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 via-blue-600 to-cyan-400 animate-loading-bar3 rounded"></div>
-      </div>
-      <div className="mt-8 text-xs text-gray-400 tracking-widest font-mono opacity-80 select-none">
-        Please wait... Still waiting? <a href="https://www.githubstatus.com/" className="text-blue-400">Check for issues</a>.
-      </div>
-      <style>
-        {`
-          @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
+          
+          @media (max-width: 768px) {
+            .animate-nebula-drift,
+            .animate-nebula-drift-reverse,
+            .animate-nebula-pulse {
+              animation-duration: 25s;
+            }
           }
-          .animate-blink {
-            animation: blink 1s steps(1) infinite;
-          }
-          @keyframes loading-bar3 {
-            0% { width: 0%; }
-            60% { width: 90%; }
-            100% { width: 100%; }
-          }
-          .animate-loading-bar3 {
-            animation: loading-bar3 1.5s cubic-bezier(.77,0,.18,1) forwards;
-          }
-          .animate-pulse {
-            animation: pulse 1.2s cubic-bezier(.4,0,.6,1) infinite alternate;
-          }
-          @keyframes pulse {
-            0% { opacity: 1; }
-            100% { opacity: 0.7; }
+          
+          @media (prefers-reduced-motion: reduce) {
+            .animate-twinkle,
+            .animate-shimmer,
+            .animate-nebula-drift,
+            .animate-nebula-drift-reverse,
+            .animate-nebula-pulse,
+            .animate-shooting-star,
+            .animate-shooting-star-2,
+            .animate-shooting-star-3,
+            .animate-bounce-smooth {
+              animation-duration: 0.01ms !important;
+              animation-iteration-count: 1 !important;
+            }
           }
         `}
       </style>
     </div>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import { useEffect, useState, useRef, useMemo } from "react";
-
-export const LoadingScreen = ({ onComplete }) => {
-  const [progress, setProgress] = useState(0);
-  const [fadeOut, setFadeOut] = useState(false);
-  const [currentTask, setCurrentTask] = useState("Initializing..");
-  const [elapsedTime, setElapsedTime] = useState(0);
-  const [estimatedTime, setEstimatedTime] = useState(1);
-  const [statusLevel, setStatusLevel] = useState("Medium");
-  const [done, setDone] = useState(false);
-
-  const startTime = useRef(performance.now());
-  const progressHistory = useRef([]);
-  const overflowRef = useRef({
-    body: document.body.style.overflow,
-    html: document.documentElement.style.overflow,
-  });
-
-  const loadingTasks = useMemo(() => [
-    "Initializing components..",
-    "Loading assets..",
-    "Finalizing setup..",
-    "Loading completed..",
-    "Entering page.."
-  ], []);
-
-  const stars = useMemo(() => {
-    return Array.from({ length: 120 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 2.5 + 1,
-      opacity: Math.random() * 0.7 + 0.3,
-      twinkleDelay: Math.random() * 2,
-      twinkleDuration: 1.5 + Math.random() * 1.5,
-    }));
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-
-    const MIN_DURATION = 850;
-    const DELAY_AFTER_100 = 100;
-    const interval = setInterval(() => {
-      const now = performance.now();
-      const elapsed = now - startTime.current;
-      const elapsedSec = elapsed / 1000;
-      setElapsedTime(elapsedSec);
-
-      // Simulate a real loading process
-      const targetDuration = done ? Math.max(elapsed, MIN_DURATION) : 2000;
-      const newProgress = Math.min((elapsed / targetDuration) * 100, 100);
-      setProgress(newProgress);
-
-      progressHistory.current.push({ progress: newProgress, time: elapsedSec });
-      if (progressHistory.current.length > 10) progressHistory.current.shift();
-
-      const taskIndex = Math.min(Math.floor((newProgress / 100) * loadingTasks.length), loadingTasks.length - 1);
-      setCurrentTask(loadingTasks[taskIndex]);
-
-      // Estimate status level
-      if (elapsed < 1000) setStatusLevel("Fast");
-      else if (elapsed < 2000) setStatusLevel("Medium");
-      else setStatusLevel("Slow");
-
-      // Estimate remaining time
-      const recent = progressHistory.current;
-      if (recent.length >= 3) {
-        const diff = recent[recent.length - 1].progress - recent[0].progress;
-        const timeDiff = recent[recent.length - 1].time - recent[0].time;
-        if (diff > 0) {
-          const rate = diff / timeDiff;
-          const remaining = 100 - newProgress;
-          setEstimatedTime(remaining / rate);
-        }
-      }
-
-      if (newProgress >= 100 && !fadeOut) {
-        clearInterval(interval);
-        setTimeout(() => {
-          setFadeOut(true);
-          setTimeout(() => {
-            document.body.style.overflow = overflowRef.current.body;
-            document.documentElement.style.overflow = overflowRef.current.html;
-            onComplete();
-          }, 500);
-        }, DELAY_AFTER_100);
-      }
-    }, 16);
-
-    return () => {
-      clearInterval(interval);
-      document.body.style.overflow = overflowRef.current.body;
-      document.documentElement.style.overflow = overflowRef.current.html;
-    };
-  }, [done, fadeOut, onComplete, loadingTasks]);
-
-  useEffect(() => {
-    const minAutoFinish = setTimeout(() => setDone(true), 500);
-    return () => clearTimeout(minAutoFinish);
-  }, []);
-
-  return (
-    <div className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-indigo-950 via-blue-950 to-slate-900 transition-all duration-500 ease-out ${fadeOut ? "opacity-0 pointer-events-none scale-102" : "opacity-100 scale-100"} overflow-hidden`}>
-      <div className="absolute inset-0 pointer-events-none">
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className="absolute bg-white rounded-full animate-twinkle"
-            style={{
-              left: `${star.x}%`,
-              top: `${star.y}%`,
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              opacity: star.opacity,
-              animationDelay: `${star.twinkleDelay}s`,
-              animationDuration: `${star.twinkleDuration}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="relative z-10 flex flex-col items-center">
-        <div className="mb-8 text-5xl font-mono font-bold text-center select-none text-white drop-shadow-2xl tracking-widest">
-          Loading
-        </div>
-
-        <div className="relative mb-6 w-96">
-          <div className="w-full h-3 bg-gray-800 bg-opacity-60 rounded-full relative overflow-hidden shadow-inner backdrop-blur-sm border border-gray-600 border-opacity-40">
-            <div
-              className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 rounded-full transition-all duration-100 ease-out shadow-lg"
-              style={{ width: `${progress}%` }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-25 animate-shimmer" />
-          </div>
-          <div className="absolute -top-7 right-0 text-sm font-mono text-blue-300 tracking-wider">
-            {Math.round(progress)}%
-          </div>
-        </div>
-
-        <div className="text-center mb-2">
-          <div className="text-base text-blue-200 tracking-wide font-mono min-h-[24px] select-none">
-            {currentTask}
-          </div>
-        </div>
-
-        <div className="h-1" />
-
-        <div className="text-center mb-3">
-          <div className="flex justify-center items-center space-x-8 text-sm font-mono text-gray-300">
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-400">Elapsed:</span>
-              <span className="text-blue-300 tabular-nums">{elapsedTime.toFixed(1)}s</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-gray-400">Estimated:</span>
-              <span className={`tabular-nums ${
-                statusLevel === "Fast" ? "text-green-300" :
-                statusLevel === "Medium" ? "text-yellow-300" :
-                "text-red-300"
-              }`}>
-                {statusLevel} ({estimatedTime.toFixed(1)}s)
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {progress >= 100 && (
-          <div className="text-center mb-4">
-            <div className="text-sm text-green-400 font-mono tracking-wide animate-pulse">
-              DONE
-            </div>
-          </div>
-        )}
-
-        <div className="text-xs text-gray-400 tracking-wide font-mono opacity-60 select-none">
-          <div>
-            Having issues? <a href="https://www.githubstatus.com/" className="text-blue-400 hover:text-blue-300 transition-colors underline">Check GitHub status</a>.
-          </div>
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        .animate-shimmer {
-          animation: shimmer 1.8s ease-in-out infinite;
-        }
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.1); }
-        }
-        .animate-twinkle {
-          animation: twinkle 2.5s ease-in-out infinite;
-        }
-      `}</style>
-    </div>
-  );
-};
-*/}
