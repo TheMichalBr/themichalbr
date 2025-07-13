@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
+import { useState, useEffect } from "react";
 
 import pm1 from "/projects/PM_1.webp";
 import pm2 from "/projects/PM_2.webp";
 import pm3 from "/projects/PM_3.webp";
 import pm4 from "/projects/PM_4.webp";
-import pm5 from "/projects/PM_5.webp";
-import pm6 from "/projects/PM_6.webp";
+{
+  /* import pm5 from "/projects/PM_5.webp"; */
+}
 
 const projectsData = [
   {
@@ -73,7 +74,7 @@ const projectsData = [
     version: "in development",
     desc: "You just want to have a blast with your friends? Or have a thrilling duel to compare who is the bigger shooter? Inspired by the legendary aim_redline map.",
     tech: ["Game Map", "CS2", "Source 2 Editor"],
-    image: pm5,
+    image: null,
     link: "#",
     linkLabel: "PLAY IN CS2",
     downloads: null,
@@ -88,7 +89,7 @@ const projectsData = [
     version: "no version",
     desc: "I have created several custom websites of various types, ranging from simple ones to portfolios.",
     tech: ["Website", "HTML", "CSS", "JS", "React"],
-    image: pm6,
+    image: null,
     link: "#",
     linkLabel: "",
     downloads: null,
