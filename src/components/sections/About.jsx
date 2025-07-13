@@ -2,11 +2,44 @@ import { RevealOnScroll } from "../RevealOnScroll";
 import Video from "./Video.jsx";
 
 export const About = () => {
-  const Hob = ["Games", "Programing", "Content creation", "Editing", "Development", "Music", "Films", "Chess", "Collecting", "Exploring", "Technology", "Memes"];
-  const Prog = ["C#", "C++", "HTML", "CSS", "JavaScript", "React", "Node.js", "Java", "Python", "SQL", "Godot", "Unity", "Source", "Unreal", "Photshop / Premiere", "Other"];
+  const Hob = [
+    "Games",
+    "Programing",
+    "Content creation",
+    "Editing",
+    "Development",
+    "Music",
+    "Films",
+    "Chess",
+    "Collecting",
+    "Exploring",
+    "Technology",
+    "Memes",
+  ];
+  const Prog = [
+    "C#",
+    "C++",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "React",
+    "Node.js",
+    "Java",
+    "Python",
+    "SQL",
+    "Godot",
+    "Unity",
+    "Source",
+    "Unreal",
+    "Photshop / Premiere",
+    "Other",
+  ];
 
   return (
-    <section id="aboutme" className="min-h-screen flex items-center justify-center py-20">
+    <section
+      id="aboutme"
+      className="min-h-screen flex items-center justify-center py-20"
+    >
       <RevealOnScroll>
         <div className="max-w-3xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
@@ -15,19 +48,32 @@ export const About = () => {
 
           <div className="rounded-xl p-8 border-white/10 border hover:-translate-y-1 transition-all bg-[#1e20243a]">
             <p className="text-gray-300 mb-6">
-              My name is Michal, I am 23 years old and I come from the Czech Republic and I currently live in Brno. I can speak Czech, Slovak, English and slightly German, Spanish and other similar languages.
-              I am passionate gamer, content creator and also a programmer and developer with some experience in various programming languages and technologies. I have a passion for creating creative and innovative solutions and building modern, slick and cool applications or games. I am always eager to learn and grow, and I am excited to take on new challenges.
-
+              My name is Michal, I am 23 years old and I come from the Czech
+              Republic and I currently live in Brno. I can speak Czech, Slovak,
+              English and slightly German, Spanish and other similar languages.
+              I am passionate gamer, content creator and also a programmer and
+              developer with some experience in various programming languages
+              and technologies. I have a passion for creating creative and
+              innovative solutions and building modern, clean, slick and
+              responsive applications, websites, games or mods. I am always
+              eager to learn and grow, and I am excited to take on new
+              challenges.
             </p>
 
-            <p className="text-gray-300 mb-6">If you're interested or have any questions, since I don't have everything written here, feel free to email me or message me at @MichalBr on Discord.</p>
+            <p className="text-gray-300 mb-6">
+              If you're interested or have any questions, since I don't have
+              everything written here, feel free to email me or message me at
+              @MichalBr on Discord.
+            </p>
 
             <ul className="list-disc list-inside text-gray-300 space-y-2 p-6">
               <li>
-                Studying <strong>Information Technologies </strong> - at the PEF Faculty of Mendel University (2024-Present)
+                Studying <strong>Information Technologies </strong> - at the PEF
+                Faculty of Mendel University (2024-Present)
               </li>
               <li>
-                I successfully finished studying Information technology in High school and English language school.
+                I successfully finished studying Information technology in High
+                school and English language school.
               </li>
               <li>
                 I am currently a full-time student and do not work anywhere.
@@ -67,7 +113,6 @@ export const About = () => {
                 </div>
               </div>
             </div>
-
           </div>
 
           <div className="rounded-xl p-4 border-white/10 border hover:-translate-y-1 transition-all mt-8 py-8 bg-[#1e20243a]">
@@ -75,7 +120,6 @@ export const About = () => {
               <Video videoUrl="https://www.youtube.com/watch?v=VgQDsqOi2wo" />
             </div>
           </div>
-
         </div>
       </RevealOnScroll>
     </section>
