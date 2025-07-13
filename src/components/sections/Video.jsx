@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const Video = ({ videoUrl }) => {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -6,7 +6,9 @@ const Video = ({ videoUrl }) => {
   const [videoViews, setVideoViews] = useState("Loading...");
 
   const getVideoId = (url) => {
-    const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+    const match = url.match(
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/
+    );
     return match ? match[1] : null;
   };
 
@@ -24,7 +26,9 @@ const Video = ({ videoUrl }) => {
           if (data.items && data.items.length > 0) {
             const videoData = data.items[0];
             setVideoTitle(videoData.snippet.title);
-            setVideoViews(`${parseInt(videoData.statistics.viewCount).toLocaleString()} views`);
+            setVideoViews(
+              `${parseInt(videoData.statistics.viewCount).toLocaleString()} views`
+            );
           }
         } catch (error) {
           console.error("Error fetching video data:", error);
@@ -78,7 +82,10 @@ const Video = ({ videoUrl }) => {
             </div>
           </div>
         ) : (
-          <div className="relative w-full max-w-4xl mx-auto" style={{ paddingTop: "56.25%" }}>
+          <div
+            className="relative w-full max-w-4xl mx-auto"
+            style={{ paddingTop: "56.25%" }}
+          >
             <iframe
               className="absolute top-0 left-0 w-full h-full rounded-xl shadow-lg border border-white/10"
               src={embedUrl}
