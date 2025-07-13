@@ -56,7 +56,7 @@ const projectsData = [
     order: 4,
     title: "shooter game",
     version: "v0.1 (alpha)",
-    desc: "First person shooter game on unknown island. Game will be made in Unreal Engine.",
+    desc: "First person shooter game on unknown island. Game will be made in Unreal Engine!",
     tech: ["Game", "Unreal"],
     image: pm4,
     link: "#",
@@ -112,7 +112,9 @@ const StatusBadge = ({ status }) => {
   };
 
   return (
-    <span className={`px-2 py-1 rounded-full text-xs border ${statusStyles[status] || statusStyles.completed}`}>
+    <span
+      className={`px-2 py-1 rounded-full text-xs border ${statusStyles[status] || statusStyles.completed}`}
+    >
       {statusLabels[status] || "Unknown"}
     </span>
   );
@@ -124,51 +126,55 @@ const ProjectCard = ({ project, downloads }) => {
   return (
     <div
       className={`group relative p-6 rounded-xl border transition-all duration-300 overflow-hidden ${project.featured
-        ? 'border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-cyan-500/5'
-        : 'border-white/10'
+          ? "border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-cyan-500/5"
+          : "border-white/10"
         } ${!project.disabled
-          ? 'hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-[0_8px_32px_rgba(59,130,246,0.15)]'
-          : 'opacity-70'
+          ? "hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-[0_8px_32px_rgba(59,130,246,0.15)]"
+          : "opacity-70"
         }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-
       {project.featured && (
         <div className="absolute top-4 right-4 z-20">
-          <span className="bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+          <span className="bg-gradient-to-r from-blue-600 to-cyan-700 text-white px-2 py-1 rounded-full text-xs font-medium">
             Featured
           </span>
         </div>
       )}
 
-
       <div
-        className={`absolute inset-0 bg-cover bg-center transition-all duration-500 ${isHovered ? 'scale-105 opacity-40' : 'scale-100 opacity-25'
+        className={`absolute inset-0 bg-cover bg-center transition-all duration-500 ${isHovered ? "scale-105 opacity-40" : "scale-100 opacity-25"
           }`}
         style={{
           backgroundImage: `url(${project.image})`,
-          filter: 'blur(0.5px)',
+          filter: "blur(0.5px)",
         }}
       />
 
-
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-
       <div className="absolute inset-0">
-        <div className={`absolute top-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl transition-all duration-700 ${isHovered ? 'translate-x-4 translate-y-4' : 'translate-x-0 translate-y-0'
-          }`} />
-        <div className={`absolute bottom-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl transition-all duration-700 ${isHovered ? '-translate-x-4 -translate-y-4' : 'translate-x-0 translate-y-0'
-          }`} />
+        <div
+          className={`absolute top-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl transition-all duration-700 ${isHovered
+              ? "translate-x-4 translate-y-4"
+              : "translate-x-0 translate-y-0"
+            }`}
+        />
+        <div
+          className={`absolute bottom-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl transition-all duration-700 ${isHovered
+              ? "-translate-x-4 -translate-y-4"
+              : "translate-x-0 translate-y-0"
+            }`}
+        />
       </div>
 
-
       <div className="relative z-10 h-full flex flex-col">
-
         <div className="flex justify-between items-start mb-3">
           <div>
-            <h3 className="text-xl font-bold mb-1 text-white group-hover:text-blue-300 transition-colors"> {/* mb-2 */}
+            <h3 className="text-xl font-bold mb-1 text-white group-hover:text-blue-300 transition-colors">
+              {" "}
+              {/* mb-2 */}
               {project.title}
             </h3>
             <div className="flex items-center gap-2">
@@ -177,7 +183,6 @@ const ProjectCard = ({ project, downloads }) => {
             </div>
           </div>
         </div>
-
 
         <p className="text-gray-300 mb-4 leading-relaxed flex-grow">
           {project.desc}
@@ -195,13 +200,12 @@ const ProjectCard = ({ project, downloads }) => {
           ))}
         </div>
 
-
         <div className="flex justify-between items-center pt-2">
           <a
             href={project.link}
             className={`group/link flex items-center gap-1 font-medium transition-all duration-300 ${project.disabled
-              ? "text-gray-500 cursor-not-allowed pointer-events-none"
-              : "text-blue-400 hover:text-blue-300"
+                ? "text-gray-500 cursor-not-allowed pointer-events-none"
+                : "text-blue-400 hover:text-blue-300"
               }`}
             style={project.disabled ? { pointerEvents: "none" } : {}}
             tabIndex={project.disabled ? -1 : 0}
@@ -214,11 +218,14 @@ const ProjectCard = ({ project, downloads }) => {
             )}
           </a>
 
-
           {project.downloads === "modrinth" && downloads !== null && (
             <div className="flex items-center gap-1 text-cyan-400 text-sm">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                <path
+                  fillRule="evenodd"
+                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
               </svg>
               <span>{downloads.toLocaleString()}</span>
             </div>
@@ -238,7 +245,9 @@ export const Projects = () => {
     const fetchModrinthData = async () => {
       try {
         setLoading(true);
-        const response = await fetch("https://api.modrinth.com/v2/project/G4nmS8ee");
+        const response = await fetch(
+          "https://api.modrinth.com/v2/project/G4nmS8ee"
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -265,42 +274,43 @@ export const Projects = () => {
     });
 
   return (
-    <section id="projects" className="min-h-screen flex items-center justify-center py-20 relative overflow-hidden">
-
+    <section
+      id="projects"
+      className="min-h-screen flex items-center justify-center py-20 relative overflow-hidden"
+    >
       <RevealOnScroll>
-
-        <div className="max-w-6xl mx-auto px-4 relative z-10"> {/* max-w-5xl ?*/}
-
-          <div className="text-center mb-12">
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
+          {" "}
+          {/* max-w-5xl ?*/}
+          <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
               Featured Projects
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Explore my collection of applications, games, and mods that I have created or contributed to with enthusiasm and creativity.
+              Explore some of my creations, such as various applications, games,
+              or mods I have developed with passion, or projects I have been
+              involved in.
             </p>
           </div>
-
-
           {error && (
             <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
               Failed to load download statistics: {error}
             </div>
           )}
-
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {visibleProjects.map((project, index) => (
               <div
                 key={project.id}
                 className="opacity-0 animate-fade-in"
-                style={{ animationDelay: `${index * 0.2}s`, animationFillMode: 'forwards' }}
+                style={{
+                  animationDelay: `${index * 0.2}s`,
+                  animationFillMode: "forwards",
+                }}
               >
                 <ProjectCard project={project} downloads={downloads} />
               </div>
             ))}
           </div>
-
-
           {loading && (
             <div className="text-center mt-6">
               <div className="inline-flex items-center gap-2 text-blue-400">
@@ -323,7 +333,7 @@ export const Projects = () => {
             transform: translateY(0);
           }
         }
-        
+
         .animate-fade-in {
           animation: fade-in 0.6s ease-out;
         }
