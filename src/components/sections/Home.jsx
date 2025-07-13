@@ -1,17 +1,19 @@
-import { RevealOnScroll } from "../RevealOnScroll";
 import { HomeBackGround } from "./HomeBackGround";
+import { RevealOnScroll } from "../RevealOnScroll";
 
 export const Home = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
       <HomeBackGround />
       <RevealOnScroll>
-
         <div className="text-center z-10 px-4 max-w-4xl mx-auto">
           <div className="relative mb-8">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-5 leading-tight tracking-tight">
               <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                Hi, I'm {" "}
+                Hi, I'm{" "}
               </span>
               <span className="relative inline-block bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 MichalBr
@@ -33,12 +35,20 @@ export const Home = () => {
 
           <div className="space-y-4 mb-10">
             <p className="text-gray-200 text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto">
-              Creating {" "}
+              Creating{" "}
               <span className="text-cyan-400 font-medium bg-cyan-400/10 px-1 py-0.5 rounded mx-0.5">
                 entertaining content
               </span>
-              , <span className="text-blue-400 font-medium bg-blue-400/10 px-1 py-0.5 rounded mx-0.5">clicking heads and dominating in games</span>, and building {" "}
-              <span className="text-purple-300 font-medium bg-purple-400/10 px-1 py-0.5 rounded mx-0.5">clean and responsive apps and great games</span>.</p>
+              ,{" "}
+              <span className="text-blue-400 font-medium bg-blue-400/10 px-1 py-0.5 rounded mx-0.5">
+                clicking heads and dominating in games
+              </span>
+              , and building{" "}
+              <span className="text-purple-300 font-medium bg-purple-400/10 px-1 py-0.5 rounded mx-0.5">
+                clean and responsive apps and great games
+              </span>
+              .
+            </p>
             <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
               From chicken dinners to clean code – creativity meets precision.
             </p>
@@ -52,8 +62,18 @@ export const Home = () => {
             >
               <span className="relative z-10 flex items-center justify-center gap-2 text-sm">
                 More About me
-                <svg className="w-3 h-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                <svg
+                  className="w-3 h-3 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -66,8 +86,18 @@ export const Home = () => {
             >
               <span className="relative z-10 flex items-center justify-center gap-2 text-sm animate-pulse">
                 Contact me
-                <svg className="w-3 h-3 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                <svg
+                  className="w-3 h-3 transition-transform group-hover:rotate-12"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  />
                 </svg>
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
