@@ -109,7 +109,8 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
                   focus:ring-2 focus:ring-cyan-400
                 `}
                 style={{
-                  transitionProperty: "background, color, transform, box-shadow",
+                  transitionProperty:
+                    "background, color, transform, box-shadow",
                 }}
                 tabIndex={menuOpen ? 0 : -1}
               >
