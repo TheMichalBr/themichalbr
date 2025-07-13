@@ -37,7 +37,8 @@ export function HomeBackGround() {
       for (let r = 1; r <= rings; r++) {
         const count = 8 + r * 4;
         for (let i = 0; i < count; i++) {
-          const [h, s, l] = blueColors[Math.floor(Math.random() * blueColors.length)];
+          const [h, s, l] =
+            blueColors[Math.floor(Math.random() * blueColors.length)];
           particles.push({
             baseRadius: 80 + r * (Math.min(width, height) / 7),
             angle: (i / count) * Math.PI * 2,
@@ -65,21 +66,32 @@ export function HomeBackGround() {
       lastTs = ts;
       const shouldShow = document.visibilityState === "visible";
       const target = shouldShow ? targetOpacity : 0;
-      opacityRef.current += (target - opacityRef.current) * Math.min(1, fadeSpeed * dt);
+      opacityRef.current +=
+        (target - opacityRef.current) * Math.min(1, fadeSpeed * dt);
       if (canvas.style.opacity !== opacityRef.current.toFixed(2)) {
         canvas.style.opacity = opacityRef.current.toFixed(2);
       }
 
       ctx.save();
       const grad = ctx.createRadialGradient(
-        center.x, center.y, 0,
-        center.x, center.y, Math.min(width, height) * 0.4
+        center.x,
+        center.y,
+        0,
+        center.x,
+        center.y,
+        Math.min(width, height) * 0.4
       );
       grad.addColorStop(0, "rgba(30,40,80,0.13)");
       grad.addColorStop(1, "rgba(0,0,0,0)");
       ctx.globalAlpha = 0.7;
       ctx.beginPath();
-      ctx.arc(center.x, center.y, Math.min(width, height) * 0.4, 0, 2 * Math.PI);
+      ctx.arc(
+        center.x,
+        center.y,
+        Math.min(width, height) * 0.4,
+        0,
+        2 * Math.PI
+      );
       ctx.fillStyle = grad;
       ctx.fill();
       ctx.restore();
