@@ -21,7 +21,6 @@ import headsetI from "/equipment/16_HEADSET.webp";
 import microphoneI from "/equipment/17_MICROPHONE.webp";
 import mobileI from "/equipment/18_MOBILE.webp";
 import consoleotherI from "/equipment/19_CONSOLE.webp";
-import vrI from "/equipment/20_VROTHER.webp";
 
 const equipmentData = [
   {
@@ -92,7 +91,7 @@ const equipmentData = [
   },
   {
     category: "COMPUTER MEMORY",
-    name: "Kingston Fury Beast..",
+    name: "Kingston Fury Beast",
     image: ramI,
     specs: {
       type: "DDR5",
@@ -125,13 +124,11 @@ const equipmentData = [
   },
   {
     category: "OPERATING SYSTEM",
-    name: "Windows 11 Pro",
+    name: "Windows 11",
     image: osI,
     specs: {
-      version: "Professional",
-      architecture: "64-bit",
-      license: "Retail",
-      support: "Extended",
+      version: "Professional (Pro)",
+      build: "24H2",
     },
   },
   {
@@ -140,9 +137,9 @@ const equipmentData = [
     image: mmonitorI,
     specs: {
       size: "27 inches",
-      resolution: "2560x1440",
-      refreshRate: "270Hz",
       panel: "IPS",
+      resolution: "2560x1440 (2K)",
+      refreshRate: "270Hz (275Hz)",
     },
   },
   {
@@ -151,9 +148,9 @@ const equipmentData = [
     image: smonitor1I,
     specs: {
       size: "27 inches",
-      resolution: "1920x1080",
-      refreshRate: "144Hz",
       panel: "TN",
+      resolution: "1920x1080 (FullHD)",
+      refreshRate: "144Hz",
     },
   },
   {
@@ -162,9 +159,9 @@ const equipmentData = [
     image: smonitor2I,
     specs: {
       size: "22 inches",
-      resolution: "1920x1080",
-      refreshRate: "60Hz",
       panel: "TN",
+      resolution: "1920x1080 (FullHD)",
+      refreshRate: "60Hz",
     },
   },
   {
@@ -173,9 +170,8 @@ const equipmentData = [
     image: keyboardI,
     specs: {
       switches: "GL Linear - Red",
-      connectivity: "Wireless",
-      backlight: "RGB",
       layout: "TKL",
+      connectivity: "Wireless",
     },
   },
   {
@@ -207,7 +203,6 @@ const equipmentData = [
     specs: {
       connectivity: "Wireless",
       battery: "50+ hours",
-      drivers: "50mm Pro-G",
       microphone: "Blue VO!CE",
     },
   },
@@ -216,10 +211,9 @@ const equipmentData = [
     name: "HyperX Quadcast",
     image: microphoneI,
     specs: {
+      connection: "USB",
       type: "Condenser",
       patterns: "4 polar patterns",
-      connection: "USB",
-      monitoring: "Real-time",
     },
   },
   {
@@ -227,7 +221,7 @@ const equipmentData = [
     name: "Samsung S20 FE",
     image: mobileI,
     specs: {
-      memory: "8GN",
+      memory: "8GB",
       storage: "128GB",
       processor: "Snapdragon 865",
     },
@@ -237,16 +231,9 @@ const equipmentData = [
     name: "Xbox 360",
     image: consoleotherI,
     specs: {
-      storage: "250GB HDD",
-    },
-  },
-  {
-    category: "OTHER",
-    name: "Mobile VR, Electric Table",
-    image: vrI,
-    specs: {
-      VR: "Samsung Gear VR",
-      table: "Basic",
+      storage: "250GB",
+      other: "Samsung Gear VR",
+      table: "Electric Table",
     },
   },
 ];
@@ -300,13 +287,12 @@ const EquipmentCard = ({ item, index, onClick }) => {
 
   return (
     <div
-      className={`group relative bg-gradient-to-br from-[#1e2024bb] to-[#15171abb] border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-700 ${isVisible
+      className={`group relative bg-gradient-to-br from-[#1e2024ab] to-[#15171abb] border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-700 ${isVisible
           ? "opacity-100 translate-y-0 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-500/50"
           : "opacity-0 translate-y-8"
         }`}
       onClick={() => onClick(item)}
     >
-      {/* Image Section */}
       <div className="relative h-48 bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center p-4">
         <img
           src={item.image}
@@ -323,7 +309,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
           </p>
         </div>
 
-        <h3 className="text-base font-semibold text-gray-200 leading-tight mb-4 line-clamp-2 group-hover:text-blue-300 transition-colors duration-300">
+        <h3 className="text-base font-semibold text-gray-200 leading-tight mb-4 line-clamp-2 group-hover:text-blue-100 transition-colors duration-300">
           {item.name}
         </h3>
 
@@ -339,7 +325,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
         </div>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-blue-500/10 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-blue-500/2 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
     </div>
   );
 };
@@ -532,11 +518,11 @@ export const Equipment = () => {
           {filteredEquipment.length === 0 && !isFilterChanging && (
             <div className="text-center py-20">
               <div className="text-6xl mb-4 opacity-50">📦</div>
-              <h3 className="text-xl font-semibold text-white mb-2">
-                No equipment found
+              <h3 className="text-xl font-semibold text-red-400 mb-2">
+                No equipment found!
               </h3>
               <p className="text-gray-400">
-                Try selecting a different category
+                Try selecting a different category.
               </p>
             </div>
           )}
