@@ -300,7 +300,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
 
   return (
     <div
-      className={`group relative bg-gradient-to-br from-[#1e2024] to-[#15171a] border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-700 ${isVisible
+      className={`group relative bg-gradient-to-br from-[#1e2024bb] to-[#15171abb] border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-700 ${isVisible
           ? "opacity-100 translate-y-0 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-500/50"
           : "opacity-0 translate-y-8"
         }`}
@@ -323,7 +323,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
           </p>
         </div>
 
-        <h3 className="text-base font-semibold text-gray-300 leading-tight mb-4 line-clamp-2 group-hover:text-blue-300 transition-colors duration-300">
+        <h3 className="text-base font-semibold text-gray-200 leading-tight mb-4 line-clamp-2 group-hover:text-blue-300 transition-colors duration-300">
           {item.name}
         </h3>
 
@@ -356,8 +356,8 @@ const FilterButton = ({ filter, isActive, onClick }) => {
   return (
     <button
       onClick={handleClick}
-      className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${isActive
-          ? "bg-gradient-to-r from-blue-500 to-cyan-400 text-white shadow-lg shadow-blue-500/25"
+      className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 cursor-pointer ${isActive
+          ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/25"
           : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10"
         } ${isClicked ? "scale-95" : "hover:scale-105"}`}
     >
@@ -401,7 +401,7 @@ const Modal = ({ item, onClose }) => {
       >
         <div className="sticky top-0 bg-gradient-to-r from-[#1e2024] to-[#15171a] p-6 border-b border-white/10">
           <div className="flex items-center justify-between">
-            <h3 className="text-xl font-bold text-white">Equipment Details</h3>
+            <h3 className="text-xl font-bold text-white">Specifications</h3>
             <button
               onClick={handleClose}
               className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg cursor-pointer"
@@ -446,9 +446,7 @@ const Modal = ({ item, onClose }) => {
               </h4>
 
               <div className="space-y-4">
-                <h5 className="text-lg font-semibold text-white border-b border-white/10 pb-2">
-                  Specifications
-                </h5>
+                <div className="border-b border-white/10 pb-1"></div>
                 {Object.entries(item.specs).map(([key, value]) => (
                   <div
                     key={key}
