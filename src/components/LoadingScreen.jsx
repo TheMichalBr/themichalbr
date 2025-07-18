@@ -23,7 +23,6 @@ export const LoadingScreen = ({ onComplete }) => {
       "Initializing components..",
       "Loading assets..",
       "Finalizing setup..",
-      "Loading completed..",
       "Entering page..",
     ],
     []
@@ -197,8 +196,7 @@ export const LoadingScreen = ({ onComplete }) => {
   return (
     <div
       className={`
-        fixed inset-0 z-50 flex flex-col items-center justify-center
-        bg-gradient-to-br from-indigo-950 via-blue-950 to-slate-900
+        fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950
         transition-all duration-300 ease-out
         ${fadeOut ? "opacity-0 pointer-events-none scale-105" : "opacity-100 scale-100"}
         overflow-hidden
@@ -206,12 +204,6 @@ export const LoadingScreen = ({ onComplete }) => {
       style={{ willChange: "opacity" }}
     >
       {StarField}
-
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-blue-500 rounded-full opacity-6 blur-3xl animate-nebula-drift" />
-        <div className="absolute top-3/4 right-1/4 w-64 h-64 bg-purple-500 rounded-full opacity-6 blur-3xl animate-nebula-drift-reverse" />
-        <div className="absolute bottom-1/4 left-1/2 w-56 h-56 bg-cyan-500 rounded-full opacity-6 blur-3xl animate-nebula-pulse" />
-      </div>
 
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-0 w-1 h-1 bg-white rounded-full animate-shooting-star opacity-80" />
@@ -292,10 +284,10 @@ export const LoadingScreen = ({ onComplete }) => {
           </div>
 
           {isFirefox && (
-            <div className="mb-2 text-amber-400 text-xs">
+            <div className="mb-2 text-amber-700 text-xs">
               <div className="flex items-center justify-center space-x-2">
-                <div className="w-1 h-1 bg-amber-400 rounded-full animate-pulse" />
-                <span>Firefox detected: Experience may not be optimal</span>
+                <div className="w-1 h-1 bg-amber-700 rounded-full animate-pulse" />
+                <span>Firefox detected: Experience may not be optimal!</span>
               </div>
             </div>
           )}
@@ -304,11 +296,11 @@ export const LoadingScreen = ({ onComplete }) => {
             Having issues?{" "}
             <a
               href="https://www.githubstatus.com/"
-              className="text-blue-400 hover:text-blue-300 transition-colors underline decoration-dotted"
+              className="text-blue-400 hover:text-blue-300 transition-colors"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Check GitHub status
+              Check GitHub status.
             </a>
           </div>
         </div>
@@ -320,46 +312,39 @@ export const LoadingScreen = ({ onComplete }) => {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
           }
+
           .animate-shimmer {
             animation: shimmer 1.5s ease-in-out infinite;
           }
-          
+
           @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.1); }
           }
+
           .animate-twinkle {
             animation: twinkle 2.2s ease-in-out infinite;
           }
-          
+
           @keyframes nebula-drift {
             0% { transform: translateX(0) translateY(0) rotate(0deg); }
             33% { transform: translateX(8px) translateY(-8px) rotate(120deg); }
             66% { transform: translateX(-4px) translateY(4px) rotate(240deg); }
             100% { transform: translateX(0) translateY(0) rotate(360deg); }
           }
-          .animate-nebula-drift {
-            animation: nebula-drift 18s ease-in-out infinite;
-          }
-          
+
           @keyframes nebula-drift-reverse {
             0% { transform: translateX(0) translateY(0) rotate(0deg); }
             33% { transform: translateX(-8px) translateY(8px) rotate(-120deg); }
             66% { transform: translateX(4px) translateY(-4px) rotate(-240deg); }
             100% { transform: translateX(0) translateY(0) rotate(-360deg); }
           }
-          .animate-nebula-drift-reverse {
-            animation: nebula-drift-reverse 22s ease-in-out infinite;
-          }
-          
+
           @keyframes nebula-pulse {
             0%, 100% { opacity: 0.03; transform: scale(1); }
             50% { opacity: 0.09; transform: scale(1.05); }
           }
-          .animate-nebula-pulse {
-            animation: nebula-pulse 7s ease-in-out infinite;
-          }
-          
+
           @keyframes shooting-star {
             0% { 
               transform: translateX(-50vw) translateY(0); 
@@ -380,10 +365,11 @@ export const LoadingScreen = ({ onComplete }) => {
               box-shadow: 0 0 0 transparent; 
             }
           }
+
           .animate-shooting-star {
             animation: shooting-star 5s ease-in-out infinite;
           }
-          
+
           @keyframes shooting-star-2 {
             0% { 
               transform: translateX(50vw) translateY(0); 
@@ -404,6 +390,7 @@ export const LoadingScreen = ({ onComplete }) => {
               box-shadow: 0 0 0 transparent; 
             }
           }
+
           .animate-shooting-star-2 {
             animation: shooting-star-2 7s ease-in-out infinite 1.5s;
           }
@@ -428,6 +415,7 @@ export const LoadingScreen = ({ onComplete }) => {
               box-shadow: 0 0 0 transparent; 
             }
           }
+
           .animate-shooting-star-3 {
             animation: shooting-star-3 6s ease-in-out infinite 3s;
           }
@@ -436,24 +424,14 @@ export const LoadingScreen = ({ onComplete }) => {
             0%, 80%, 100% { transform: scale(0.9) translateY(0); opacity: 0.6; }
             40% { transform: scale(1.1) translateY(-4px); opacity: 1; }
           }
+
           .animate-bounce-smooth {
             animation: bounce-smooth 1.2s ease-in-out infinite;
           }
-          
-          @media (max-width: 768px) {
-            .animate-nebula-drift,
-            .animate-nebula-drift-reverse,
-            .animate-nebula-pulse {
-              animation-duration: 25s;
-            }
-          }
-          
+
           @media (prefers-reduced-motion: reduce) {
             .animate-twinkle,
             .animate-shimmer,
-            .animate-nebula-drift,
-            .animate-nebula-drift-reverse,
-            .animate-nebula-pulse,
             .animate-shooting-star,
             .animate-shooting-star-2,
             .animate-shooting-star-3,
