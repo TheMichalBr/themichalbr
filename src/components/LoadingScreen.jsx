@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
+/* eslint-disable no-unused-vars */
 export const LoadingScreen = ({ onComplete }) => {
   const [fadeOut, setFadeOut] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -21,7 +21,7 @@ export const LoadingScreen = ({ onComplete }) => {
   const loadingTasks = useMemo(
     () => [
       "Initializing components..",
-      "Loading assets..",
+      "Loading all assets..",
       "Finalizing setup..",
       "Entering page..",
     ],
@@ -76,7 +76,7 @@ export const LoadingScreen = ({ onComplete }) => {
     document.documentElement.style.overflow = "hidden";
 
     const startTime = Date.now();
-    const totalDuration = 1000;
+    const totalDuration = 700;
 
     timeIntervalRef.current = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000;
@@ -204,12 +204,6 @@ export const LoadingScreen = ({ onComplete }) => {
       style={{ willChange: "opacity" }}
     >
       {StarField}
-
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-0 w-1 h-1 bg-white rounded-full animate-shooting-star opacity-80" />
-        <div className="absolute top-1/2 right-0 w-1 h-1 bg-blue-200 rounded-full animate-shooting-star-2 opacity-60" />
-        <div className="absolute bottom-1/3 left-1/4 w-1 h-1 bg-cyan-200 rounded-full animate-shooting-star-3 opacity-70" />
-      </div>
 
       <div className="relative z-10 flex flex-col items-center">
         <div className="mb-8 text-5xl font-mono font-bold text-center select-none">
@@ -366,10 +360,6 @@ export const LoadingScreen = ({ onComplete }) => {
             }
           }
 
-          .animate-shooting-star {
-            animation: shooting-star 5s ease-in-out infinite;
-          }
-
           @keyframes shooting-star-2 {
             0% { 
               transform: translateX(50vw) translateY(0); 
@@ -391,10 +381,6 @@ export const LoadingScreen = ({ onComplete }) => {
             }
           }
 
-          .animate-shooting-star-2 {
-            animation: shooting-star-2 7s ease-in-out infinite 1.5s;
-          }
-          
           @keyframes shooting-star-3 {
             0% { 
               transform: translateX(0) translateY(50vh); 
@@ -416,10 +402,6 @@ export const LoadingScreen = ({ onComplete }) => {
             }
           }
 
-          .animate-shooting-star-3 {
-            animation: shooting-star-3 6s ease-in-out infinite 3s;
-          }
-          
           @keyframes bounce-smooth {
             0%, 80%, 100% { transform: scale(0.9) translateY(0); opacity: 0.6; }
             40% { transform: scale(1.1) translateY(-4px); opacity: 1; }
@@ -432,9 +414,6 @@ export const LoadingScreen = ({ onComplete }) => {
           @media (prefers-reduced-motion: reduce) {
             .animate-twinkle,
             .animate-shimmer,
-            .animate-shooting-star,
-            .animate-shooting-star-2,
-            .animate-shooting-star-3,
             .animate-bounce-smooth {
               animation-duration: 0.01ms !important;
               animation-iteration-count: 1 !important;
