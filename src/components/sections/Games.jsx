@@ -131,7 +131,7 @@ export const Games = () => {
       id="games"
       className="min-h-screen text-white py-20 justify-center flex items-center"
     >
-      <div className="max-w-5xl mx-auto space-y-16 px-4">
+      <div className="max-w-6xl mx-auto space-y-16 px-4">
         <RevealOnScroll>
           <div>
             <div className="text-center mb-10">
