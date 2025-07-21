@@ -1,24 +1,24 @@
 import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 
-import RR from "/games/reviews/R_R.webp";
-import RC from "/games/reviews/R_C.webp";
+import R1 from "/games/GR_R1.webp";
+import R2 from "/games/GR_R2.webp";
 
-import G1 from "/games/CS2.webp";
-import G2 from "/games/OW2.webp";
-import G3 from "/games/APEX.webp";
-import G4 from "/games/FORTNITE.webp";
-import G5 from "/games/VALORANT.webp";
-import G6 from "/games/R6X.webp";
-import G7 from "/games/CHESS.webp";
+import G1 from "/games/G_CS2.webp";
+import G2 from "/games/G_OW2.webp";
+import G3 from "/games/G_APEX.webp";
+import G4 from "/games/G_FORTNITE.webp";
+import G5 from "/games/G_VALORANT.webp";
+import G6 from "/games/G_R6X.webp";
+import G7 from "/games/G_CHESS.webp";
 
-import R1 from "/games/CS2_R.webp";
-import R2 from "/games/OW2_R.webp";
-import R3 from "/games/APEX_R.webp";
-import R4 from "/games/FORTNITE_R.webp";
-import R5 from "/games/VALORANT_R.webp";
-import R6 from "/games/R6X_R.webp";
-import R7 from "/games/CHESS_R.webp";
+import GR1 from "/games/G_CS2_R.webp";
+import GR2 from "/games/G_OW2_R.webp";
+import GR3 from "/games/G_APEX_R.webp";
+import GR4 from "/games/G_FORTNITE_R.webp";
+import GR5 from "/games/G_VALORANT_R.webp";
+import GR6 from "/games/G_R6X_R.webp";
+import GR7 from "/games/G_CHESS_R.webp";
 
 export const Games = () => {
   const [showSettings, setShowSettings] = useState(null);
@@ -33,7 +33,7 @@ export const Games = () => {
       name: "Counter Strike 2",
       platform: "Steam (MichalBr)",
       rank: "Level 9",
-      rankIcon: R1,
+      rankIcon: GR1,
       image: G1,
       settings: {
         FACEIT: "Level 9",
@@ -50,7 +50,7 @@ export const Games = () => {
       name: "Overwatch 2",
       platform: "Battle.net (MichalBr#2144)",
       rank: "Platinum III",
-      rankIcon: R2,
+      rankIcon: GR2,
       image: G2,
       settings: {
         Crosshair: "2560x1440",
@@ -63,7 +63,7 @@ export const Games = () => {
       name: "Apex Legends",
       platform: "EA (TheMichalBr)",
       rank: "Platinum IV",
-      rankIcon: R3,
+      rankIcon: GR3,
       image: G3,
       settings: {
         Crosshair: "1920x1080",
@@ -76,7 +76,7 @@ export const Games = () => {
       name: "Fortnite",
       platform: "Epic Games (MichalBr)",
       rank: "Unreal",
-      rankIcon: R4,
+      rankIcon: GR4,
       image: G4,
       settings: {
         Statistics: "https://fortnite.gg/stats?player=MichalBr",
@@ -90,7 +90,7 @@ export const Games = () => {
       name: "Valorant",
       platform: "Riot Games (MichalBr#UwU)",
       rank: "Platinum II",
-      rankIcon: R5,
+      rankIcon: GR5,
       image: G5,
       settings: {
         Sensitivity: "0.82 / 1 / 1",
@@ -105,7 +105,7 @@ export const Games = () => {
       name: "Rainbow Six Siege X",
       platform: "Ubisoft (TheMichalBr)",
       rank: "Platinum IV",
-      rankIcon: R6,
+      rankIcon: GR6,
       image: G6,
       settings: {
         Sensitivity: "2.0",
@@ -117,7 +117,7 @@ export const Games = () => {
       name: "Chess",
       platform: "Chess.com (MichalBr13)",
       rank: "700+ Rating",
-      rankIcon: R7,
+      rankIcon: GR7,
       image: G7,
       settings: {
         Chessboard: "Dark Blue",
@@ -313,7 +313,7 @@ export const Games = () => {
           group-hover:scale-105
         "
                   style={{
-                    backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${RR})`,
+                    backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${R1})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
@@ -403,7 +403,7 @@ export const Games = () => {
           group-hover:scale-105
         "
                   style={{
-                    backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${RC})`,
+                    backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${R2})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
