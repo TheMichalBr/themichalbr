@@ -1,10 +1,10 @@
 import { RevealOnScroll } from "../RevealOnScroll";
 import { useState, useEffect } from "react";
 
-import pm1 from "/projects/PM_1.webp";
-import pm2 from "/projects/PM_2.webp";
-import pm3 from "/projects/PM_3.webp";
-import pm4 from "/projects/PM_4.webp";
+import pm1 from "/projects/P_1.webp";
+import pm2 from "/projects/P_2.webp";
+import pm3 from "/projects/P_3.webp";
+import pm4 from "/projects/P_4.webp";
 {
   /* import pm5 from "/projects/PM_5.webp"; */
 }
