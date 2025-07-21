@@ -3,12 +3,12 @@ import Tooltip from "@mui/material/Tooltip";
 import { Typography } from "@material-tailwind/react";
 import Zoom from "@mui/material/Zoom";
 
-import Youtube from "/socials/1_Youtube.svg";
-import Instagram from "/socials/2_Instagram.svg";
-import X from "/socials/3_X.svg";
-import Steam from "/socials/4_Steam.svg";
-import GitHub from "/socials/5_GitHub.svg";
-import Gmail from "/socials/6_Gmail.svg";
+import Youtube from "/socials/S_1_YOUTUBE.svg";
+import Instagram from "/socials/S_2_INSTAGRAM.svg";
+import X from "/socials/S_3_X.svg";
+import Steam from "/socials/S_4_STEAM.svg";
+import GitHub from "/socials/S_5_GITHUB.svg";
+import Gmail from "/socials/S_6_GMAIL.svg";
 
 const currentYear = new Date().getFullYear();
 
