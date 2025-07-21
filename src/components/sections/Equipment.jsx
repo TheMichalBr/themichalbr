@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 
-import caseI from "/equipment/1_CASE.webp";
-import psuI from "/equipment/2_PSU.webp";
-import mbI from "/equipment/3_MB.webp";
-import cpuI from "/equipment/4_CPU.webp";
-import cpucoolerI from "/equipment/5_CPUCOOLER.webp";
-import gpuI from "/equipment/6_GPU.webp";
-import ramI from "/equipment/7_RAM.webp";
-import hddI from "/equipment/8_HDD.webp";
-import ssdI from "/equipment/9_SSD.webp";
-import osI from "/equipment/10_OS.webp";
-import mmonitorI from "/equipment/11_MMONITOR.webp";
-import smonitor1I from "/equipment/12_SMONITOR1.webp";
-import smonitor2I from "/equipment/12_SMONITOR2.webp";
-import keyboardI from "/equipment/13_KEYBOARD.webp";
-import mouseI from "/equipment/14_MOUSE.webp";
-import mousepadI from "/equipment/15_MOUSEPAD.webp";
-import headsetI from "/equipment/16_HEADSET.webp";
-import microphoneI from "/equipment/17_MICROPHONE.webp";
-import mobileI from "/equipment/18_MOBILE.webp";
-import consoleotherI from "/equipment/19_CONSOLE.webp";
+import caseI from "/equipment/E_1_CASE.webp";
+import psuI from "/equipment/E_2_PSU.webp";
+import mbI from "/equipment/E_3_MB.webp";
+import cpuI from "/equipment/E_4_CPU.webp";
+import cpucoolerI from "/equipment/E_5_CPUCOOLER.webp";
+import gpuI from "/equipment/E_6_GPU.webp";
+import ramI from "/equipment/E_7_RAM.webp";
+import hddI from "/equipment/E_8_HDD.webp";
+import ssdI from "/equipment/E_9_SSD.webp";
+import osI from "/equipment/E_10_OS.webp";
+import mmonitorI from "/equipment/E_11_MMONITOR.webp";
+import smonitor1I from "/equipment/E_12_SMONITOR.webp";
+import smonitor2I from "/equipment/E_13_SMONITOR.webp";
+import keyboardI from "/equipment/E_14_KEYBOARD.webp";
+import mouseI from "/equipment/E_15_MOUSE.webp";
+import mousepadI from "/equipment/E_16_MOUSEPAD.webp";
+import headsetI from "/equipment/E_17_HEADSET.webp";
+import microphoneI from "/equipment/E_18_MICROPHONE.webp";
+import mobileI from "/equipment/E_19_MOBILE.webp";
+import consoleI from "/equipment/E_20_CONSOLE.webp";
 
 const equipmentData = [
   {
@@ -229,7 +229,7 @@ const equipmentData = [
   {
     category: "CONSOLE",
     name: "Xbox 360",
-    image: consoleotherI,
+    image: consoleI,
     specs: {
       storage: "250GB",
       other: "Samsung Gear VR",
