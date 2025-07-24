@@ -135,8 +135,8 @@ export const Games = () => {
         <RevealOnScroll>
           <div>
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
-                Games Information
+              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
+                Games information
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
                 You will find information about my highest rank in a given game,
@@ -283,8 +283,8 @@ export const Games = () => {
 
           <div>
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
-                Latest Reviews
+              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
+                Latest reviews
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
                 I like games, so I sometimes write about them. lol
