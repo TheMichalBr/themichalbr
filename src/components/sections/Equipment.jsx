@@ -315,10 +315,15 @@ const EquipmentCard = ({ item, index, onClick }) => {
 
         <div className="text-xs text-gray-400 space-y-2">
           {Object.entries(item.specs)
-            .slice(0, 3)
+            .slice(0, 2)
             .map(([key, value]) => (
               <div key={key} className="flex justify-between items-center">
-                <span className="capitalize font-medium">{key}:</span>
+                <span className="capitalize font-medium">
+                  {key
+                    .replace(/([A-Z])/g, " $1")
+                    .replace(/^./, (str) => str.toUpperCase())}
+                  :
+                </span>
                 <span className="text-gray-300 font-semibold">{value}</span>
               </div>
             ))}
