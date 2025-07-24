@@ -28,9 +28,9 @@ const equipmentData = [
     name: "Fractal Design Define 7",
     image: caseI,
     specs: {
-      size: "Midi Tower",
       color: "Black",
       glass: "TG Dark Tint",
+      size: "Midi Tower",
     },
   },
   {
@@ -48,10 +48,10 @@ const equipmentData = [
     name: "MSI MPG X870E CARBON WIFI",
     image: mbI,
     specs: {
+      biosVersion: "7E49v1A50",
       formFactor: "ATX",
       chipset: "X870E",
       socket: "AM5",
-      biosVersion: "7E49v1A50",
     },
   },
   {
@@ -74,7 +74,6 @@ const equipmentData = [
       version: "chromax.black",
       type: "PWM - Air Cooler",
       height: "125mm",
-      compatibility: "AM5",
     },
   },
   {
@@ -86,7 +85,7 @@ const equipmentData = [
       memory: "8GB GDDR6",
       baseClock: "1410 MHz",
       boostClock: "1620 MHz",
-      architecture: "Turing (TU104)",
+      architecture: "TU104 - Turing",
     },
   },
   {
@@ -106,8 +105,8 @@ const equipmentData = [
     image: hddI,
     specs: {
       capacity: "8TB",
-      rpm: "7200 RPM",
       interface: "SATA III",
+      rpm: "7200 RPM",
       cache: "256MB",
     },
   },
@@ -117,9 +116,7 @@ const equipmentData = [
     image: ssdI,
     specs: {
       capacity: "1TB",
-      interface: "PCIe 4.0",
-      type: "NVMe",
-      readSpeed: "7,450 MB/s",
+      interface: "NVMe - PCIe 4.0",
     },
   },
   {
@@ -183,6 +180,7 @@ const equipmentData = [
       pollingRate: "8000 Hz",
       weight: "60g",
       sensor: "HERO 25K",
+      connectivity: "Wireless",
     },
   },
   {
@@ -201,9 +199,9 @@ const equipmentData = [
     name: "Logitech G Pro X 2 LIGHTSPEED",
     image: headsetI,
     specs: {
-      connectivity: "Wireless",
       battery: "50+ hours",
       microphone: "Blue VO!CE",
+      connectivity: "Wireless",
     },
   },
   {
