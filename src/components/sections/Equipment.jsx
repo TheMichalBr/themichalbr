@@ -287,7 +287,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
 
   return (
     <div
-      className={`group relative bg-gradient-to-br from-[#1e2024ab] to-[#15171abb] border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-700 ${isVisible
+      className={`group relative bg-gradient-to-br from-[#1e2024a1] via-[#1e2024a1] to-[#15171aa1] border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-700 ${isVisible
           ? "opacity-100 translate-y-0 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-500/50"
           : "opacity-0 translate-y-8"
         }`}
