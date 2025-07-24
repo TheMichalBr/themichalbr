@@ -43,6 +43,7 @@ export const Games = () => {
           "viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2",
         Sensitivity: "2.52",
         Resolution: "1280x960, Almost everything on low quality",
+        Config: "Soon..."
       },
     },
     {
@@ -135,7 +136,7 @@ export const Games = () => {
         <RevealOnScroll>
           <div>
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
+              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
                 Games information
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
@@ -283,12 +284,9 @@ export const Games = () => {
 
           <div>
             <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
+              <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
                 Latest reviews
               </h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
-                I like games, so I sometimes write about them. lol
-              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -334,7 +332,7 @@ export const Games = () => {
               "
                       >
                         <p className="text-sm text-gray-200 select-none">
-                          Platform: PC
+                          Platform: PC (Game)
                         </p>
                         <p className="text-sm text-gray-200 select-none">
                           Difficulty: Nightmare (100%)
@@ -424,7 +422,7 @@ export const Games = () => {
               "
                       >
                         <p className="text-sm text-gray-200 select-none">
-                          Platform: PC
+                          Platform: PC (Game)
                         </p>
                         <p className="text-sm text-gray-200 select-none">
                           Including datadisk: Phantom Liberty
