@@ -285,7 +285,7 @@ export const Projects = () => {
           {/* max-w-5xl ?*/}
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent select-none">
-              Featured Projects
+              Featured projects
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
               Explore some of my creations, such as various applications, games,
