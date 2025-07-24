@@ -105,7 +105,7 @@ export const About = () => {
                     d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z"
                   />
                 </svg>{" "}
-                Education & status
+                Education & Status
               </h3>
               <div className="space-y-3 text-gray-300">
                 <div className="flex items-start">
