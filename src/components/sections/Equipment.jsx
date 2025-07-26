@@ -554,18 +554,18 @@ const Modal = ({ item, onClose }) => {
                   {item.name}
                 </h3>
 
-                <div className="space-y-1">
+                <div className="space-y-4">
                   <div className="border-b border-white/10 mb-4" />
-                  <dl className="space-y-3">
+                  <dl className="grid grid-cols-2 gap-3">
                     {Object.entries(item.specs).map(([key, value]) => (
                       <div
                         key={key}
-                        className="flex justify-between items-start py-2 border-b border-white/5"
+                        className="bg-slate-800/30 rounded-md p-3 border border-white/5 hover:border-white/10 transition-colors duration-200"
                       >
-                        <dt className="text-gray-400 capitalize font-medium flex-shrink-0 mr-4 min-w-0">
+                        <dt className="text-gray-400 text-xs font-medium uppercase tracking-wide mb-1">
                           {formatSpecKey(key)}
                         </dt>
-                        <dd className="text-white font-semibold text-right break-words min-w-0 flex-1">
+                        <dd className="text-white text-sm font-semibold">
                           {value}
                         </dd>
                       </div>
