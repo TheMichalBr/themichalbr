@@ -497,12 +497,13 @@ const Modal = ({ item, onClose }) => {
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
+      {/* from-[#1e2024] to-[#15171a] from-[#1e2024] to-[#15171a] from-slate-800/40 via-slate-800/40 to-slate-900/40*/}
       <div
-        className={`bg-gradient-to-br from-[#1e2024] to-[#15171a] rounded-2xl border border-white/20 max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 ${isVisible ? "scale-100" : "scale-95"
+        className={`bg-gradient-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 rounded-2xl border border-white/20 max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 ${isVisible ? "scale-100" : "scale-95"
           }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="sticky top-0 bg-gradient-to-r from-[#1e2024] to-[#15171a] p-6 border-b border-white/10 z-10 rounded-2xl">
+        <header className="sticky top-0 bg-gradient-to-r from-slate-800/40 via-slate-800/40 to-slate-900/40 p-6 border-b border-white/10 z-10 rounded-2xl">
           <div className="flex items-center justify-between">
             <h3 id="modal-title" className="text-xl font-bold text-white">
               Specifications
