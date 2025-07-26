@@ -270,6 +270,13 @@ const categoryMap = {
 
 const getCategoryGroup = (category) => categoryMap[category] || "OTHER";
 
+const formatSpecKey = (key) => {
+  return key
+    .replace(/([A-Z])/g, " $1")
+    .replace(/^./, (str) => str.toUpperCase())
+    .trim();
+};
+
 const EquipmentCard = ({ item, index, onClick }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -277,17 +284,14 @@ const EquipmentCard = ({ item, index, onClick }) => {
 
   useEffect(() => {
     const timer = setTimeout(
-      () => {
-        setIsVisible(true);
-      },
+      () => setIsVisible(true),
       Math.min(index * 50, 1000)
     );
-
     return () => clearTimeout(timer);
   }, [index]);
 
   const handleClick = useCallback(() => {
-    if (onClick) onClick(item);
+    onClick?.(item);
   }, [item, onClick]);
 
   const handleImageLoad = useCallback(() => {
@@ -315,18 +319,14 @@ const EquipmentCard = ({ item, index, onClick }) => {
     [item.specs]
   );
 
-  const formatSpecKey = useCallback((key) => {
-    return key
-      .replace(/([A-Z])/g, " $1")
-      .replace(/^./, (str) => str.toUpperCase())
-      .trim();
-  }, []);
-
-{/* bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" className="absolute inset-0 bg-gradient-to-t from-blue-500/2 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" */}
+  {
+    /* bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" className="absolute inset-0 bg-gradient-to-t from-blue-500/2 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" */
+  }
 
   return (
     <article
-      className={`group relative bg-gradient-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-400/40 hover:bg-gradient-to-br hover:from-slate-800/60 hover:to-slate-900/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      className={`group relative bg-gradient-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-400/40 hover:bg-gradient-to-br hover:from-slate-800/60 hover:to-slate-900/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}
       onClick={handleClick}
       role="button"
       tabIndex={0}
@@ -336,7 +336,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
       <div className="relative h-48 bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center p-4">
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
           </div>
         )}
 
@@ -361,7 +361,8 @@ const EquipmentCard = ({ item, index, onClick }) => {
           <img
             src={item.image}
             alt={`${item.name} - ${item.category}`}
-            className={`max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-105 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+            className={`max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-105 ${imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
             onLoad={handleImageLoad}
             onError={handleImageError}
             loading="lazy"
@@ -378,10 +379,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
           </span>
         </div>
 
-        <h3
-          className="text-base font-semibold text-gray-200 leading-tight mb-4 
-                      group-hover:text-blue-100 transition-colors duration-300 line-clamp-2"
-        >
+        <h3 className="text-base font-semibold text-gray-200 leading-tight mb-4 group-hover:text-blue-100 transition-colors duration-300 line-clamp-2">
           {item.name}
         </h3>
 
@@ -404,94 +402,95 @@ const EquipmentCard = ({ item, index, onClick }) => {
   );
 };
 
-const FilterButton = ({ filter, isActive, onClick }) => {
-  const handleClick = useCallback(() => {
-    onClick(filter);
-  }, [filter, onClick]);
-
-  return (
-    <button
-      onClick={handleClick}
-      className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400/50 ${isActive
-          ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/25"
-          : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20"
-        }`}
-      aria-pressed={isActive}
-    >
-      {filter}
-    </button>
-  );
-};
+const FilterButton = ({ filter, isActive, onClick }) => (
+  <button
+    onClick={() => onClick(filter)}
+    className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400/50 ${isActive
+        ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/25"
+        : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20"
+      }`}
+    aria-pressed={isActive}
+  >
+    {filter}
+  </button>
+);
 
 const Modal = ({ item, onClose }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     const scrollY = window.scrollY;
-    
-    document.body.style.overflow = "hidden";
+    const style = document.body.style;
+
+    style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = "100%";
+    style.position = "fixed";
+    style.top = `-${scrollY}px`;
+    style.width = "100%";
 
     const handleEscape = (e) => {
       if (e.key === "Escape") {
-        handleClose();
+        setIsVisible(false);
+
+        const currentScrollY =
+          parseInt(document.body.style.top || "0", 10) * -1;
+        const currentStyle = document.body.style;
+
+        currentStyle.overflow = "unset";
+        document.documentElement.style.overflow = "unset";
+        currentStyle.position = "unset";
+        currentStyle.top = "unset";
+        currentStyle.width = "unset";
+        window.scrollTo(0, currentScrollY);
+
+        setTimeout(onClose, 200);
       }
     };
 
     document.addEventListener("keydown", handleEscape);
 
     return () => {
-      document.body.style.overflow = "unset";
+      style.overflow = "unset";
       document.documentElement.style.overflow = "unset";
-      document.body.style.position = "unset";
-      document.body.style.top = "unset";
-      document.body.style.width = "unset";
+      style.position = "unset";
+      style.top = "unset";
+      style.width = "unset";
       window.scrollTo(0, scrollY);
-      
       document.removeEventListener("keydown", handleEscape);
     };
-  }, []);
+  }, [onClose]);
 
   const handleClose = useCallback(() => {
     setIsVisible(false);
-    
-    const scrollY = parseInt(document.body.style.top || '0') * -1;
-    document.body.style.overflow = "unset";
+
+    const scrollY = parseInt(document.body.style.top || "0", 10) * -1;
+    const style = document.body.style;
+
+    style.overflow = "unset";
     document.documentElement.style.overflow = "unset";
-    document.body.style.position = "unset";
-    document.body.style.top = "unset";
-    document.body.style.width = "unset";
+    style.position = "unset";
+    style.top = "unset";
+    style.width = "unset";
     window.scrollTo(0, scrollY);
-    
+
     setTimeout(onClose, 200);
   }, [onClose]);
 
   const handleBackdropClick = useCallback(
     (e) => {
-      if (e.target === e.currentTarget) {
-        handleClose();
-      }
+      if (e.target === e.currentTarget) handleClose();
     },
     [handleClose]
   );
-
-  const formatSpecKey = useCallback((key) => {
-    return key
-      .replace(/([A-Z])/g, " $1")
-      .trim()
-      .replace(/^./, (str) => str.toUpperCase());
-  }, []);
 
   if (!item) return null;
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+      className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
+        }`}
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
@@ -499,22 +498,18 @@ const Modal = ({ item, onClose }) => {
       aria-describedby="modal-description"
     >
       <div
-        className={`bg-gradient-to-br from-[#1e2024] to-[#15171a] rounded-2xl border border-white/20 max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 ${isVisible ? "scale-100" : "scale-95"}`}
+        className={`bg-gradient-to-br from-[#1e2024] to-[#15171a] rounded-2xl border border-white/20 max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 ${isVisible ? "scale-100" : "scale-95"
+          }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <header
-          className="sticky top-0 bg-gradient-to-r from-[#1e2024] to-[#15171a]
-                          p-6 border-b border-white/10 z-10 rounded-2xl"
-        >
+        <header className="sticky top-0 bg-gradient-to-r from-[#1e2024] to-[#15171a] p-6 border-b border-white/10 z-10 rounded-2xl">
           <div className="flex items-center justify-between">
             <h3 id="modal-title" className="text-xl font-bold text-white">
               Specifications
             </h3>
             <button
               onClick={handleClose}
-              className="text-gray-400 hover:text-white transition-colors p-2 
-                        hover:bg-white/10 rounded-lg focus:outline-none focus:ring-2 
-                        focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-800 cursor-pointer"
+              className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-800 cursor-pointer"
               aria-label="Close modal"
             >
               <svg
@@ -560,7 +555,7 @@ const Modal = ({ item, onClose }) => {
                 </h3>
 
                 <div className="space-y-1">
-                  <div className="border-b border-white/10 mb-4"></div>
+                  <div className="border-b border-white/10 mb-4" />
                   <dl className="space-y-3">
                     {Object.entries(item.specs).map(([key, value]) => (
                       <div
@@ -605,21 +600,13 @@ export const Equipment = () => {
     [selectedFilter]
   );
 
-  const handleItemSelect = useCallback((item) => {
-    setSelectedItem(item);
-  }, []);
-
-  const handleModalClose = useCallback(() => {
-    setSelectedItem(null);
-  }, []);
-
-  const handleSearchChange = useCallback((e) => {
-    setSearchTerm(e.target.value);
-  }, []);
-
-  const handleClearSearch = useCallback(() => {
-    setSearchTerm("");
-  }, []);
+  const handleItemSelect = useCallback((item) => setSelectedItem(item), []);
+  const handleModalClose = useCallback(() => setSelectedItem(null), []);
+  const handleSearchChange = useCallback(
+    (e) => setSearchTerm(e.target.value),
+    []
+  );
+  const handleClearSearch = useCallback(() => setSearchTerm(""), []);
 
   const filteredEquipment = useMemo(() => {
     let filtered = equipmentData;
@@ -654,11 +641,7 @@ export const Equipment = () => {
         <RevealOnScroll>
           <header className="text-center mb-10">
             {/* className= px-4/10 lg:px-10 horizontal-scroll max-w-5xl and 6/7 "group relative bg-[#1e20243a] border border-white/10 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300" w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-300" "p-4 bg-[#1e202470]/90 backdrop-blur-md rounded-b-xl w-full h-full" */}
-            <h2
-              className="text-4xl font-bold mb-8 bg-gradient-to-r 
-                          from-blue-500 via-sky-600 to-cyan-400 bg-clip-text 
-                          text-transparent drop-shadow-lg select-none text-center"
-            >
+            <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none text-center">
               Equipment
             </h2>
 
@@ -669,6 +652,7 @@ export const Equipment = () => {
                   placeholder="Search equipment..."
                   value={searchTerm}
                   onChange={handleSearchChange}
+                  maxLength={40}
                   className="w-full px-4 py-3 pl-12 pr-10 bg-slate-800/50 border border-white/10 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 transition-all duration-300"
                 />
                 <svg
@@ -727,12 +711,14 @@ export const Equipment = () => {
             <p className="text-gray-400 text-sm">
               {searchTerm
                 ? `Found ${equipmentCount} of ${totalCount} items.`
-                : `Showing ${equipmentCount} item${equipmentCount !== 1 ? "s" : ""}${selectedFilter !== "ALL" ? ` in ${selectedFilter}` : ""}.`}
+                : `Showing ${equipmentCount} item${equipmentCount !== 1 ? "s" : ""}${selectedFilter !== "ALL" ? ` in ${selectedFilter}` : ""
+                }.`}
             </p>
           </div>
 
           <div
-            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 transition-opacity duration-300 ${isFilterChanging ? "opacity-0" : "opacity-100"}`}
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 transition-opacity duration-300 ${isFilterChanging ? "opacity-0" : "opacity-100"
+              }`}
           >
             {filteredEquipment.map((item, index) => (
               <EquipmentCard
