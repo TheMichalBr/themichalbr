@@ -361,7 +361,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
           <img
             src={item.image}
             alt={`${item.name} - ${item.category}`}
-            className={`max-w-full max-h-full object-contain transition-all duration-300 group-hover:scale-105 ${imageLoaded ? "opacity-100" : "opacity-0"
+            className={`max-w-full max-h-full object-contain transition-all duration-450 group-hover:scale-110 ${imageLoaded ? "opacity-100" : "opacity-0"
               }`}
             onLoad={handleImageLoad}
             onError={handleImageError}
