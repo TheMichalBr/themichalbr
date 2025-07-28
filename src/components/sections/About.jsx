@@ -1,5 +1,6 @@
 import { RevealOnScroll } from "../RevealOnScroll";
-import Video from "./Video.jsx";
+import Blog from "./Blog";
+import Video from "./Video";
 
 export const About = () => {
   const hobbies = [
@@ -303,7 +304,13 @@ export const About = () => {
             </div>
           </div>
 
-          <div className={`${cardClasses}`}>
+          <div className={`${cardClasses} mb-8`}>
+            <div className="max-w-4xl mx-auto">
+              <Blog />
+            </div>
+          </div>
+
+          <div className={`${cardClasses} mb-8`}>
             <div className="max-w-4xl mx-auto">
               <Video videoUrl="https://www.youtube.com/watch?v=VgQDsqOi2wo" />
             </div>
