@@ -49,22 +49,32 @@ export const About = () => {
   ];
 
   const cardClasses =
+    "rounded-xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-2xl";
+  const sectionClasses = "bg-white/5 rounded-lg p-4 md:p-6";
+  const tagClasses =
+    "py-2 px-3 rounded-full text-sm transition-all duration-200 cursor-default flex-shrink-0";
+
+  {
+    /* 
+    className="bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]"   from-slate-800/40 via-slate-800/40 to-slate-900/40
+    TADY OVERFLOW!!!!!!!!! FIX https://www.joshwcomeau.com/
+
+  const cardClasses =
     "rounded-xl p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-2xl";
   const sectionClasses = "bg-white/5 rounded-lg p-6";
   const tagClasses =
     "py-2 px-3 rounded-full text-sm transition-all duration-200 cursor-default";
 
-  {
-    /* className="bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]" */
+    */
   }
-{/*TADY OVERFLOW!!!!!!!!! FIX https://www.joshwcomeau.com/ */}
+
   return (
     <section
       id="aboutme"
-      className="min-h-screen flex items-center justify-center py-20 overflow-x-hidden"
+      className="min-h-screen flex items-center justify-center py-20 overflow-hidden"
     >
       <RevealOnScroll>
-        <div className="max-w-4xl mx-auto px-4">
+        <div className="max-w-4xl mx-auto px-4 w-full">
           <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent text-center drop-shadow-lg select-none">
             About me
           </h2>
@@ -110,7 +120,7 @@ export const About = () => {
               <div className="space-y-3 text-gray-300">
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
-                  <div>
+                  <div className="min-w-0">
                     <strong>Information Technologies</strong> - Mendel
                     University
                     <span className="block text-sm text-gray-400">
@@ -120,7 +130,7 @@ export const About = () => {
                 </div>
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0" />
-                  <div>
+                  <div className="min-w-0">
                     Completed <strong>Information Technology </strong> studies
                     in High School and also finished{" "}
                     <strong>English language</strong> school.
@@ -128,7 +138,7 @@ export const About = () => {
                 </div>
                 <div className="flex items-start">
                   <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0" />
-                  <div>
+                  <div className="min-w-0">
                     Currently a full-time student, and do not work anywhere.
                   </div>
                 </div>
@@ -159,7 +169,7 @@ export const About = () => {
                 </svg>{" "}
                 Languages
               </h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {languages.map((lang, index) => (
                   <div
                     key={index}
@@ -174,8 +184,8 @@ export const About = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-              <div className={sectionClasses}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
+              <div className={`${sectionClasses} min-w-0`}>
                 <h3 className="text-xl font-semibold mb-4 text-blue-400 flex items-center">
                   <svg
                     className="w-6 h-6 text-blue-400 mr-2 inline-block"
@@ -193,7 +203,7 @@ export const About = () => {
                   </svg>{" "}
                   Hobbies
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 min-w-0">
                   {hobbies.map((hobby, index) => (
                     <span
                       key={index}
@@ -205,7 +215,7 @@ export const About = () => {
                 </div>
               </div>
 
-              <div className={sectionClasses}>
+              <div className={`${sectionClasses} min-w-0`}>
                 <h3 className="text-xl font-semibold mb-4 text-cyan-400 flex items-center">
                   <svg
                     className="w-6 h-6 text-cyan-400 mr-2 inline-block"
@@ -231,7 +241,7 @@ export const About = () => {
                   </svg>{" "}
                   Experience
                 </h3>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 min-w-0">
                   {technologies.map((tech, index) => (
                     <span
                       key={index}
@@ -276,14 +286,16 @@ export const About = () => {
                 free to email me or message on Discord.
               </p>
 
-              <div className="flex flex-wrap gap-3">
-                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 transition-colors">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 transition-colors min-w-0">
                   <span className="text-sm text-gray-400">Discord:</span>
-                  <span className="ml-2 text-white font-medium">@MichalBr</span>
+                  <span className="ml-2 text-white font-medium break-all">
+                    @MichalBr
+                  </span>
                 </div>
-                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 transition-colors">
+                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 transition-colors min-w-0">
                   <span className="text-sm text-gray-400">Email:</span>
-                  <span className="ml-2 text-white font-medium">
+                  <span className="ml-2 text-white font-medium break-all">
                     biz.michalbr@gmail.com
                   </span>
                 </div>
@@ -291,7 +303,7 @@ export const About = () => {
             </div>
           </div>
 
-          <div className={cardClasses}>
+          <div className={`${cardClasses}`}>
             <div className="max-w-4xl mx-auto">
               <Video videoUrl="https://www.youtube.com/watch?v=VgQDsqOi2wo" />
             </div>
