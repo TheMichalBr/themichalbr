@@ -57,7 +57,7 @@ export function Footer() {
                             >
                                 <Typography
                                     as="a"
-                                    href="https://www.instagram.com/brmichl/"
+                                    href="https://www.instagram.com/brmihal/"
                                     className="opacity-80 transition-opacity hover:opacity-100"
                                 >
                                     <img
