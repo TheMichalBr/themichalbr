@@ -281,6 +281,18 @@ export const Projects = () => {
     >
       <RevealOnScroll>
         <div className="max-w-6xl mx-auto px-4 relative z-10">
+          {" "}
+          {/* max-w-5xl ?*/}
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent select-none">
+              Featured projects
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
+              Explore some of my creations, such as various applications, games,
+              or mods I have developed with passion, or projects I have been
+              involved in.
+            </p>
+          </div>
           {error && (
             <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
               Failed to load download statistics: {error}
