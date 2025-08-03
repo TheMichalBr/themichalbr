@@ -405,8 +405,8 @@ const EquipmentCard = ({ item, index, onClick }) => {
 const FilterButton = ({ filter, isActive, onClick }) => (
   <button
     onClick={() => onClick(filter)}
-    className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400/50 ${isActive
-        ? "bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/25"
+    className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-slate-400/50 ${isActive
+        ? "bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-lg hover:from-slate-800 hover:to-slate-900 shadow-blue-500/20 hover:shadow-blue-500/30"
         : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20"
       }`}
     aria-pressed={isActive}
