@@ -41,23 +41,25 @@ export const About = () => {
   ];
 
   const languages = [
-    { name: "Czech", level: "Native" },
-    { name: "Slovak", level: "Advanced" },
-    { name: "English", level: "Advanced" },
-    { name: "German", level: "Intermediate" },
-    { name: "Spanish", level: "Beginner" },
+    { name: "Czech", level: "Native", flag: "🇨🇿" },
+    { name: "Slovak", level: "Advanced", flag: "🇸🇰" },
+    { name: "English", level: "Advanced", flag: "🇬🇧" },
+    { name: "German", level: "Intermediate", flag: "🇩🇪" },
+    { name: "Spanish", level: "Beginner", flag: "🇪🇸" },
   ];
 
   const cardClasses =
-    "rounded-xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-2xl";
-  const sectionClasses = "bg-white/5 rounded-lg p-4 md:p-6";
+    "rounded-xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-xl hover:shadow-2xl";
+  const sectionClasses =
+    "bg-white/5 rounded-xl p-4 md:p-6 border border-white/5 hover:border-white/20 transition-all duration-300";
   const tagClasses =
-    "py-2 px-3 rounded-full text-sm transition-all duration-200 cursor-default flex-shrink-0 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]";
+    "py-2 px-3 rounded-full text-sm transition-all duration-200 transform cursor-default flex-shrink-0 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]";
 
   return (
     <section
       id="aboutme"
       className="min-h-screen flex items-center justify-center py-20 overflow-hidden"
+      aria-label="About me - Section"
     >
       <RevealOnScroll>
         <div className="max-w-4xl mx-auto px-4 w-full">
@@ -65,12 +67,13 @@ export const About = () => {
             About me
           </h2>
 
+          {/* About */}
           <div className={`${cardClasses} mb-8`}>
             <div className="mb-8">
               <p className="text-gray-300 leading-relaxed text-lg">
-                My name is Michal. I am 23 years old, from the Czech Republic,
-                and currently living in Brno. I am a passionate gamer and
-                content creator, as well as an experienced programmer and
+                My name is Michal. I am 23 years old boy, from the Czech
+                Republic, and currently living in Brno. I am a passionate gamer
+                and content creator, as well as an experienced programmer and
                 developer with some knowledge of various programming languages
                 and technologies. I am a chill guy with a questionable sense of
                 humour. I am passionate about creating innovative and creative
@@ -81,14 +84,17 @@ export const About = () => {
               </p>
             </div>
 
+            {/* Education */}
             <div className={`${sectionClasses} mb-8`}>
-              <h3 className="text-xl font-semibold mb-4 text-cyan-400 flex items-center">
+              <h3 className="text-xl font-semibold mb-5 text-yellow-400 flex items-center">
                 <svg
-                  className="w-6 h-6 text-cyan-400 mr-2 inline-block"
+                  className="w-6 h-6 mr-2 inline-block text-yellow-400"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
                   viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -100,45 +106,68 @@ export const About = () => {
                     strokeLinejoin="round"
                     d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z"
                   />
-                </svg>{" "}
-                Education & Status
+                </svg>
+                Education
               </h3>
-              <div className="space-y-3 text-gray-300">
+
+              <div className="space-y-4 text-gray-300">
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                  <div
+                    className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-4 flex-shrink-0"
+                    aria-hidden="true"
+                  />
                   <div className="min-w-0">
-                    <strong>Information Technologies</strong> - Mendel
-                    University
+                    <strong className="text-blue-500">
+                      Information Technologies
+                    </strong>{" "}
+                    - Mendel University
                     <span className="block text-sm text-gray-400">
                       2024 - Present
                     </span>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                  <div
+                    className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 flex-shrink-0"
+                    aria-hidden="true"
+                  />
                   <div className="min-w-0">
-                    Completed <strong>Information Technology </strong> studies
-                    in High School and also finished{" "}
-                    <strong>English language</strong> school.
+                    Completed{" "}
+                    <strong className="text-green-500">
+                      Information Technology
+                    </strong>{" "}
+                    studies in High School and also finished{" "}
+                    <strong className="text-green-500">English language</strong>{" "}
+                    school.
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                  <div
+                    className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-4 flex-shrink-0"
+                    aria-hidden="true"
+                  />
                   <div className="min-w-0">
-                    Currently a full-time student, and do not work anywhere.
+                    Currently a{" "}
+                    <strong className="text-yellow-500">
+                      full-time student
+                    </strong>
+                    , and do not work anywhere.
                   </div>
                 </div>
               </div>
             </div>
 
+            {/* Languages */}
             <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-4 text-purple-400 flex items-center">
+              <h3 className="text-xl font-semibold mb-5 text-purple-400 flex items-center">
                 <svg
-                  className="w-6 h-6 text-purple-400 mr-2 inline-block"
+                  className="w-6 h-6 mr-2 inline-block text-purple-400"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
                   viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
                 >
                   <circle
                     cx="12"
@@ -152,17 +181,21 @@ export const About = () => {
                     strokeLinejoin="round"
                     d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"
                   />
-                </svg>{" "}
+                </svg>
                 Languages
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {languages.map((lang, index) => (
                   <div
                     key={index}
-                    className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-center hover:bg-purple-500/20 transition-colors"
+                    className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-center hover:bg-purple-500/20 transition-colors duration-300 transform"
                   >
-                    <span className="font-medium text-purple-300">
-                      {lang.name}
+                    <span
+                      className="font-medium text-purple-300"
+                      role="img"
+                      aria-label="{`${lang.name} flag`}"
+                    >
+                      {lang.name} {lang.flag}
                     </span>
                     <div className="text-sm text-gray-400">{lang.level}</div>
                   </div>
@@ -170,15 +203,18 @@ export const About = () => {
               </div>
             </div>
 
+            {/* Hobbies */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
               <div className={`${sectionClasses} min-w-0`}>
-                <h3 className="text-xl font-semibold mb-4 text-blue-400 flex items-center">
+                <h3 className="text-xl font-semibold mb-5 text-blue-400 flex items-center">
                   <svg
-                    className="w-6 h-6 text-blue-400 mr-2 inline-block"
+                    className="w-6 h-6 mr-2 inline-block text-blue-400"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
                     viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
                   >
                     <polygon
                       points="12 2 15 8.5 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 9 8.5 12 2"
@@ -186,7 +222,7 @@ export const About = () => {
                       strokeWidth="2"
                       fill="none"
                     />
-                  </svg>{" "}
+                  </svg>
                   Hobbies
                 </h3>
                 <div className="flex flex-wrap gap-2 min-w-0">
@@ -201,14 +237,17 @@ export const About = () => {
                 </div>
               </div>
 
+              {/* Experience */}
               <div className={`${sectionClasses} min-w-0`}>
-                <h3 className="text-xl font-semibold mb-4 text-cyan-400 flex items-center">
+                <h3 className="text-xl font-semibold mb-5 text-cyan-400 flex items-center">
                   <svg
-                    className="w-6 h-6 text-cyan-400 mr-2 inline-block"
+                    className="w-6 h-6 mr-2 inline-block text-cyan-400"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
                     viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
                   >
                     <rect
                       x="3"
@@ -224,7 +263,7 @@ export const About = () => {
                       stroke="currentColor"
                       strokeWidth="2"
                     />
-                  </svg>{" "}
+                  </svg>
                   Experience
                 </h3>
                 <div className="flex flex-wrap gap-2 min-w-0">
@@ -240,14 +279,17 @@ export const About = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-lg p-6 border border-white/10">
+            {/* Let's Connect */}
+            <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300">
               <h3 className="text-xl font-semibold mb-3 text-white flex items-center">
                 <svg
-                  className="w-6 h-6 text-white mr-2 inline-block"
+                  className="w-6 h-6 mr-2 inline-block text-white"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
                   viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
                 >
                   <rect
                     x="3"
@@ -263,32 +305,37 @@ export const About = () => {
                     stroke="currentColor"
                     strokeWidth="2"
                   />
-                </svg>{" "}
+                </svg>
                 Let's Connect
               </h3>
-              <p className="text-gray-300 mb-4">
+              <p className="text-gray-300 mb-4 leading-relaxed">
                 Interested in collaboration or have questions, since I don't
                 have everything written here? I'd love to hear from you! Feel
                 free to email me or message on Discord.
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 transition-colors min-w-0">
-                  <span className="text-sm text-gray-400">Discord:</span>
-                  <span className="ml-2 text-white font-medium break-all">
-                    @MichalBr
-                  </span>
+                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
+                  <div className="flex items-center">
+                    <span className="text-sm text-gray-400">Discord:</span>
+                    <span className="ml-2 text-white font-medium break-all">
+                      @MichalBr
+                    </span>
+                  </div>
                 </div>
-                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 transition-colors min-w-0">
-                  <span className="text-sm text-gray-400">Email:</span>
-                  <span className="ml-2 text-white font-medium break-all">
-                    biz.michalbr@gmail.com
-                  </span>
+                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
+                  <div className="flex items-center">
+                    <span className="text-sm text-gray-400">Email:</span>
+                    <span className="ml-2 text-white font-medium break-all">
+                      biz.michalbr@gmail.com
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
+          {/* Video */}
           <div className={`${cardClasses} mb-8`}>
             <div className="max-w-4xl mx-auto">
               <Video videoUrl="https://www.youtube.com/watch?v=VgQDsqOi2wo" />
