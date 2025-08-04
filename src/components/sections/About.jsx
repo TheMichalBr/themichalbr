@@ -1,5 +1,4 @@
 import { RevealOnScroll } from "../RevealOnScroll";
-import Blog from "./Blog";
 import Video from "./Video";
 
 export const About = () => {
@@ -53,21 +52,7 @@ export const About = () => {
     "rounded-xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-2xl";
   const sectionClasses = "bg-white/5 rounded-lg p-4 md:p-6";
   const tagClasses =
-    "py-2 px-3 rounded-full text-sm transition-all duration-200 cursor-default flex-shrink-0";
-
-  {
-    /* 
-    className="bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]"   from-slate-800/40 via-slate-800/40 to-slate-900/40
-    TADY OVERFLOW!!!!!!!!! FIX https://www.joshwcomeau.com/
-
-  const cardClasses =
-    "rounded-xl p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-2xl";
-  const sectionClasses = "bg-white/5 rounded-lg p-6";
-  const tagClasses =
-    "py-2 px-3 rounded-full text-sm transition-all duration-200 cursor-default";
-
-    */
-  }
+    "py-2 px-3 rounded-full text-sm transition-all duration-200 cursor-default flex-shrink-0 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]";
 
   return (
     <section
@@ -301,12 +286,6 @@ export const About = () => {
                   </span>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className={`${cardClasses} mb-8`}>
-            <div className="max-w-4xl mx-auto">
-              <Blog />
             </div>
           </div>
 
