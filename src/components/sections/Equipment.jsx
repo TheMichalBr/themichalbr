@@ -48,7 +48,7 @@ const equipmentData = [
     name: "MSI MPG X870E CARBON WIFI",
     image: mbI,
     specs: {
-      biosVersion: "7E49v1A50",
+      biosVersion: "7E49v1A60",
       formFactor: "ATX",
       chipset: "X870E",
       socket: "AM5",
@@ -406,7 +406,7 @@ const FilterButton = ({ filter, isActive, onClick }) => (
   <button
     onClick={() => onClick(filter)}
     className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-slate-400/50 ${isActive
-        ? "bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-lg hover:from-slate-800 hover:to-slate-900 shadow-blue-500/20 hover:shadow-blue-500/30"
+        ? "bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-lg hover:from-slate-800 hover:to-slate-900"
         : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20"
       }`}
     aria-pressed={isActive}
@@ -497,7 +497,7 @@ const Modal = ({ item, onClose }) => {
       aria-labelledby="modal-title"
       aria-describedby="modal-description"
     >
-      {/* from-[#1e2024] to-[#15171a] from-[#1e2024] to-[#15171a] from-slate-800/40 via-slate-800/40 to-slate-900/40*/}
+      {/* from-[#1e2024] to-[#15171a] from-slate-800/40 via-slate-800/40 to-slate-900/40*/}
       <div
         className={`bg-gradient-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 rounded-2xl border border-white/20 max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 ${isVisible ? "scale-100" : "scale-95"
           }`}
