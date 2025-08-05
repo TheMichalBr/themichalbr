@@ -41,17 +41,17 @@ export const About = () => {
   ];
 
   const languages = [
-    { name: "Czech", level: "Native", flag: "🇨🇿" },
-    { name: "Slovak", level: "Advanced", flag: "🇸🇰" },
-    { name: "English", level: "Advanced", flag: "🇬🇧" },
-    { name: "German", level: "Intermediate", flag: "🇩🇪" },
-    { name: "Spanish", level: "Beginner", flag: "🇪🇸" },
+    { name: "Czech", level: "Native" },
+    { name: "Slovak", level: "Advanced" },
+    { name: "English", level: "Advanced" },
+    { name: "German", level: "Intermediate" },
+    { name: "Spanish", level: "Beginner" },
   ];
 
   const cardClasses =
     "rounded-xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-xl hover:shadow-2xl";
   const sectionClasses =
-    "bg-white/5 rounded-xl p-4 md:p-6 border border-white/5 hover:border-white/20 transition-all duration-300";
+    "bg-white/5 rounded-xl p-4 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300";
   const tagClasses =
     "py-2 px-3 rounded-full text-sm transition-all duration-200 transform cursor-default flex-shrink-0 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]";
 
@@ -190,12 +190,8 @@ export const About = () => {
                     key={index}
                     className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-center hover:bg-purple-500/20 transition-colors duration-300 transform"
                   >
-                    <span
-                      className="font-medium text-purple-300"
-                      role="img"
-                      aria-label="{`${lang.name} flag`}"
-                    >
-                      {lang.name} {lang.flag}
+                    <span className="font-medium text-purple-300">
+                      {lang.name}
                     </span>
                     <div className="text-sm text-gray-400">{lang.level}</div>
                   </div>
