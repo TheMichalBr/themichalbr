@@ -72,7 +72,7 @@ const Video = ({ videoUrl }) => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-16 w-16 text-white hover:scale-110 transition-transform"
+                  className="h-16 w-16 hover:scale-110 transition-transform text-white"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
