@@ -43,7 +43,7 @@ export const Games = () => {
           "viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2",
         Sensitivity: "2.52",
         Resolution: "1280x960, Almost everything on low quality",
-        Config: "Soon..."
+        Config: "Soon...",
       },
     },
     {
@@ -105,12 +105,13 @@ export const Games = () => {
       id: "rainbowsixsiegex",
       name: "Rainbow Six Siege X",
       platform: "Ubisoft (TheMichalBr)",
-      rank: "Platinum III",
+      rank: "Platinum II",
       rankIcon: GR6,
       image: G6,
       settings: {
-        Sensitivity: "2.0",
-        Resolution: "2560x1440, Almost everything on low quality",
+        Sensitivity: "16/16",
+        Resolution: "2560x1440",
+        Graphics: "Almost everything on low/medium quality",
       },
     },
     {
