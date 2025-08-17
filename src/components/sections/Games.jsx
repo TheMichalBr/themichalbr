@@ -105,7 +105,7 @@ export const Games = () => {
       id: "rainbowsixsiegex",
       name: "Rainbow Six Siege X",
       platform: "Ubisoft (TheMichalBr)",
-      rank: "Platinum II",
+      rank: "Platinum I",
       rankIcon: GR6,
       image: G6,
       settings: {
