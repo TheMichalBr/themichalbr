@@ -4,7 +4,7 @@ export const moviesData = [
     title: "Policejní akademie",
     year: 1984,
     genre: "Comedy",
-    rating: 7.2,
+    rating: 7.5,
     notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651156_2277a3.jpg",
@@ -14,7 +14,7 @@ export const moviesData = [
     title: "Policejní akademie 2: První nasazení",
     year: 1985,
     genre: "Comedy",
-    rating: 7.0,
+    rating: 7.4,
     notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651157_913a78.jpg",
@@ -24,7 +24,7 @@ export const moviesData = [
     title: "Policejní akademie 3: Znovu ve výcviku",
     year: 1986,
     genre: "Comedy",
-    rating: 6.9,
+    rating: 7.2,
     notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651158_8ee031.jpg",
@@ -34,7 +34,7 @@ export const moviesData = [
     title: "Policejní akademie 4: Občanská patrola",
     year: 1987,
     genre: "Comedy",
-    rating: 6.7,
+    rating: 7.0,
     notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651159_69bb17.jpg",
@@ -44,7 +44,7 @@ export const moviesData = [
     title: "Policejní akademie 5: Nasazení v Miami Beach",
     year: 1988,
     genre: "Comedy",
-    rating: 6.5,
+    rating: 6.9,
     notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651160_ceba89.jpg",
@@ -54,7 +54,7 @@ export const moviesData = [
     title: "Policejní akademie 6: Město v obležení",
     year: 1989,
     genre: "Comedy",
-    rating: 6.4,
+    rating: 6.7,
     notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651155_698ca7.jpg",
@@ -64,7 +64,7 @@ export const moviesData = [
     title: "Policejní akademie 7: Moskevská mise",
     year: 1994,
     genre: "Comedy",
-    rating: 5.2,
+    rating: 6.0,
     notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651161_77c108.jpg",
@@ -74,7 +74,7 @@ export const moviesData = [
     title: "Růžový panter",
     year: 2006,
     genre: "Comedy",
-    rating: 7.0,
+    rating: 7.5,
     notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/000/042/42209_fae7f0.jpg",
@@ -84,7 +84,7 @@ export const moviesData = [
     title: "Růžový panter 2",
     year: 2009,
     genre: "Comedy",
-    rating: 6.5,
+    rating: 7.0,
     notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w140/files/images/film/posters/000/054/54794_424716.jpg",
@@ -101,11 +101,11 @@ export const moviesData = [
   },
   {
     id: 11,
-    title: "Comeback",
+    title: "Comeback (1. and 2. series)",
     year: 2008,
     genre: "Comedy",
-    rating: 9.2,
-    notes: "Both series",
+    rating: 9.5,
+    notes: "",
     coverUrl:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/170/044/170044994_9nto2l.jpg",
   },
