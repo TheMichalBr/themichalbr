@@ -6,6 +6,7 @@ import { Home } from "./components/sections/Home";
 import { About } from "./components/sections/About";
 import { Equipment } from "./components/sections/Equipment";
 import { Games } from "./components/sections/Games";
+import Watched from "./components/sections/Watched";
 import { Projects } from "./components/sections/Projects";
 import Footer from "./components/sections/Footer";
 
@@ -27,6 +28,7 @@ function App() {
         <About />
         <Equipment />
         <Games />
+        <Watched />
         <Projects />
         <Footer />
       </div>
