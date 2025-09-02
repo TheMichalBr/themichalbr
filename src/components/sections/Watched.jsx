@@ -44,10 +44,10 @@ export default function MoviesTable() {
                         </h1>
                         <div className="flex items-center space-x-6 text-sm">
                             <span className="text-blue-200/90 font-medium">
-                                {displayedMovies.length} of {allMovies.length} movies and series
+                                {displayedMovies.length} of {allMovies.length} movies and series.
                             </span>
                             {hasMoreMovies && (
-                                <span className="text-white/60">• Scroll to load more</span>
+                                <span className="text-white/60">• Scroll to load more.</span>
                             )}
                         </div>
                     </div>
@@ -155,7 +155,6 @@ export default function MoviesTable() {
                             </tbody>
                         </table>
 
-                        {/* Load More Section with Frosted Glass */}
                         {hasMoreMovies && (
                             <div className="backdrop-blur-md bg-black/20 border-t border-white/10">
                                 <div className="px-8 py-6 text-center">
@@ -186,21 +185,19 @@ export default function MoviesTable() {
                             </div>
                         )}
 
-                        {/* All Loaded Message */}
                         {!hasMoreMovies && displayedMovies.length > 0 && (
                             <div className="backdrop-blur-md bg-black/20 border-t border-white/10 px-8 py-4 text-center">
                                 <span className="text-sm text-white/60 font-medium drop-shadow-sm">
-                                    ✨ All {displayedMovies.length} movies loaded
+                                    All {displayedMovies.length} movies loaded.
                                 </span>
                             </div>
                         )}
                     </div>
 
-                    {/* Empty State */}
                     {displayedMovies.length === 0 && !loading && (
                         <div className="text-center py-16 backdrop-blur-sm">
                             <p className="text-lg text-white/60 font-medium drop-shadow-sm">
-                                No movies in database
+                                No movies in database.
                             </p>
                         </div>
                     )}
