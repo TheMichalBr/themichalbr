@@ -17,6 +17,7 @@ export const About = () => {
     "Exploring",
     "Technology",
     "Memes",
+    "F1",
   ];
 
   const technologies = [
