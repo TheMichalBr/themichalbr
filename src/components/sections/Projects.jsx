@@ -138,7 +138,7 @@ const ProjectCard = ({ project, downloads }) => {
     >
       {project.featured && (
         <div className="absolute top-4 right-4 z-20">
-          <span className="bg-gradient-to-r from-blue-600 to-cyan-700 text-white px-2 py-1 rounded-full text-xs font-medium">
+          <span className="bg-gradient-to-br from-indigo-600 via-blue-500 to-blue-700 text-white px-2 py-1 rounded-full text-xs font-medium">
             Featured
           </span>
         </div>
@@ -282,9 +282,9 @@ export const Projects = () => {
       <RevealOnScroll>
         <div className="max-w-6xl mx-auto px-4 relative z-10">
           {" "}
-          {/* max-w-5xl ?*/}
+          {/* max-w-5xl ? bg-gradient-to-r from-blue-600 to-cyan-700*/}
           <div className="text-center mb-10">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent select-none">
+            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-indigo-600 via-blue-500 to-blue-700 bg-clip-text text-transparent select-none">
               Featured projects
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
