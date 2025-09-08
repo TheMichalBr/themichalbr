@@ -133,11 +133,12 @@ export const Games = () => {
       id="games"
       className="min-h-screen text-white py-20 justify-center flex items-center"
     >
+      {/* bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 */}
       <div className="max-w-6xl mx-auto space-y-16 px-4">
         <RevealOnScroll>
           <div>
             <div className="text-center mb-10">
-              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
+              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-indigo-600 via-blue-500 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
                 Games information
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
@@ -285,7 +286,7 @@ export const Games = () => {
 
           <div>
             <div className="text-center mb-10">
-              <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg select-none">
+              <h2 className="text-4xl font-bold mb-8 bg-gradient-to-br from-indigo-600 via-blue-500 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
                 Latest reviews
               </h2>
             </div>
