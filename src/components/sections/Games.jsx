@@ -203,7 +203,7 @@ export const Games = () => {
                     <button
                       onClick={() => toggleSettings(game.id)}
                       className={`
-    absolute top-5 right-5 z-20 bg-sky-900 text-white p-2 rounded-full shadow-lg
+    absolute top-5 right-5 z-20 bg-blue-700 text-white p-2 rounded-full shadow-lg
     transition-all duration-300
     focus:outline-none focus:ring-2 focus:ring-cyan-400
     group/arrow
