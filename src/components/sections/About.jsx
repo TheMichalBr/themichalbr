@@ -87,7 +87,7 @@ export const About = () => {
 
             {/* Education */}
             <div className={`${sectionClasses} mb-8`}>
-              <h3 className="text-xl font-semibold mb-5 text-yellow-400 flex items-center">
+              <h3 className="text-xl font-semibold mb-5 text-yellow-400 flex items-center select-none">
                 <svg
                   className="w-6 h-6 mr-2 inline-block text-yellow-400"
                   fill="none"
@@ -160,7 +160,7 @@ export const About = () => {
 
             {/* Languages */}
             <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-5 text-purple-400 flex items-center">
+              <h3 className="text-xl font-semibold mb-5 text-purple-400 flex items-center select-none">
                 <svg
                   className="w-6 h-6 mr-2 inline-block text-purple-400"
                   fill="none"
@@ -203,7 +203,7 @@ export const About = () => {
             {/* Hobbies */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
               <div className={`${sectionClasses} min-w-0`}>
-                <h3 className="text-xl font-semibold mb-5 text-blue-400 flex items-center">
+                <h3 className="text-xl font-semibold mb-5 text-blue-400 flex items-center select-none">
                   <svg
                     className="w-6 h-6 mr-2 inline-block text-blue-400"
                     fill="none"
@@ -226,7 +226,7 @@ export const About = () => {
                   {hobbies.map((hobby, index) => (
                     <span
                       key={index}
-                      className={`${tagClasses} bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 hover:shadow-[0_2px_12px_rgba(59,130,246,0.3)]`}
+                      className={`${tagClasses} bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 hover:shadow-[0_2px_12px_rgba(59,130,246,0.3)] select-none`}
                     >
                       {hobby}
                     </span>
@@ -236,7 +236,7 @@ export const About = () => {
 
               {/* Experience */}
               <div className={`${sectionClasses} min-w-0`}>
-                <h3 className="text-xl font-semibold mb-5 text-cyan-400 flex items-center">
+                <h3 className="text-xl font-semibold mb-5 text-cyan-400 flex items-center select-none">
                   <svg
                     className="w-6 h-6 mr-2 inline-block text-cyan-400"
                     fill="none"
@@ -267,7 +267,7 @@ export const About = () => {
                   {technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className={`${tagClasses} bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/25 hover:border-cyan-500/50 hover:shadow-[0_2px_12px_rgba(6,182,212,0.3)]`}
+                      className={`${tagClasses} bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/25 hover:border-cyan-500/50 hover:shadow-[0_2px_12px_rgba(6,182,212,0.3)] select-none`}
                     >
                       {tech}
                     </span>
@@ -278,7 +278,7 @@ export const About = () => {
 
             {/* Let's Connect */}
             <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300">
-              <h3 className="text-xl font-semibold mb-3 text-white flex items-center">
+              <h3 className="text-xl font-semibold mb-3 text-white flex items-center select-none">
                 <svg
                   className="w-6 h-6 mr-2 inline-block text-white"
                   fill="none"
@@ -305,7 +305,7 @@ export const About = () => {
                 </svg>
                 Let's Connect
               </h3>
-              <p className="text-gray-300 mb-4 leading-relaxed">
+              <p className="text-gray-300 mb-4 leading-relaxed select-none">
                 Interested in collaboration or have questions, since I don't
                 have everything written here? I'd love to hear from you! Feel
                 free to email me or message on Discord.
@@ -314,7 +314,7 @@ export const About = () => {
               <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                 <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
                   <div className="flex items-center">
-                    <span className="text-sm text-gray-400">Discord:</span>
+                    <span className="text-sm text-gray-400 select-none">Discord:</span>
                     <span className="ml-2 text-white font-medium break-all">
                       @MichalBr
                     </span>
@@ -322,7 +322,7 @@ export const About = () => {
                 </div>
                 <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
                   <div className="flex items-center">
-                    <span className="text-sm text-gray-400">Email:</span>
+                    <span className="text-sm text-gray-400 select-none">Email:</span>
                     <span className="ml-2 text-white font-medium break-all">
                       biz.michalbr@gmail.com
                     </span>
