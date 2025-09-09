@@ -505,7 +505,7 @@ const Modal = ({ item, onClose }) => {
       >
         <header className="sticky top-0 bg-gradient-to-r from-slate-800/40 via-slate-800/40 to-slate-900/40 p-6 border-b border-white/10 z-10 rounded-2xl">
           <div className="flex items-center justify-between">
-            <h3 id="modal-title" className="text-xl font-bold text-white">
+            <h3 id="modal-title" className="text-xl font-bold text-white select-none">
               Specifications
             </h3>
             <button
@@ -654,7 +654,7 @@ export const Equipment = () => {
                   value={searchTerm}
                   onChange={handleSearchChange}
                   maxLength={40}
-                  className="w-full px-4 py-3 pl-12 pr-10 bg-slate-800/50 border border-white/10 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 transition-all duration-300"
+                  className="w-full px-4 py-3 pl-12 pr-10 bg-slate-800/50 border border-white/10 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 transition-all duration-300 select-none"
                 />
                 <svg
                   className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
@@ -695,7 +695,7 @@ export const Equipment = () => {
           </header>
 
           <nav
-            className="flex flex-wrap justify-center gap-3 mb-8"
+            className="flex flex-wrap justify-center gap-3 mb-8 select-none"
             role="tablist"
           >
             {categoryFilters.map((filter) => (
@@ -763,10 +763,10 @@ export const Equipment = () => {
                   </svg>
                 )}
               </div>
-              <h3 className="text-xl font-semibold text-gray-300 mb-2">
+              <h3 className="text-xl font-semibold text-gray-300 mb-2 select-none">
                 {searchTerm ? "No results found!" : "No equipment found!"}
               </h3>
-              <p className="text-gray-400 mb-4">
+              <p className="text-gray-400 mb-4 select-none">
                 {searchTerm
                   ? `No equipment matches "${searchTerm}".`
                   : "Try selecting a different category."}
