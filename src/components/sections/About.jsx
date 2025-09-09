@@ -64,7 +64,7 @@ export const About = () => {
     >
       <RevealOnScroll>
         <div className="max-w-4xl mx-auto px-4 w-full">
-          <h2 className="text-4xl font-bold mb-8 bg-gradient-to-br from-indigo-600 via-blue-500 to-blue-700 bg-clip-text text-transparent text-center drop-shadow-lg select-none">
+          <h2 className="text-4xl font-bold mb-8 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent text-center drop-shadow-lg select-none">
             About me
           </h2>
 
@@ -189,7 +189,7 @@ export const About = () => {
                 {languages.map((lang, index) => (
                   <div
                     key={index}
-                    className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-center hover:bg-purple-500/20 transition-colors duration-300 transform"
+                    className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-center hover:bg-purple-500/20 transition-colors duration-300 transform select-none"
                   >
                     <span className="font-medium text-purple-300">
                       {lang.name}
