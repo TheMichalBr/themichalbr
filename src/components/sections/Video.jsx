@@ -103,8 +103,8 @@ const Video = ({ videoUrl }) => {
         )}
       </div>
       <div className="mt-4 flex justify-between w-full max-w-4xl">
-        <h3 className="text-lg font-bold text-white">{videoTitle}</h3>
-        <p className="text-sm text-gray-400">{videoViews}</p>
+        <h3 className="text-lg font-bold text-white select-none">{videoTitle}</h3>
+        <p className="text-sm text-gray-400 select-none">{videoViews}</p>
       </div>
     </div>
   );
