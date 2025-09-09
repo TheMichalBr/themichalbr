@@ -12,19 +12,19 @@ export const Home = () => {
         <div className="text-center z-10 px-4 max-w-4xl mx-auto">
           <div className="relative mb-8">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-5 leading-tight tracking-tight">
-              <span className="bg-gradient-to-br from-indigo-600 via-blue-500 to-blue-700 bg-clip-text text-transparent select-none">
+              <span className="bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent select-none">
                 Hi, I'm MichalBr
               </span>
             </h1>
 
             <div className="flex flex-wrap justify-center gap-2 mb-6">
-              <span className="px-3 py-1.5 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-300 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-cyan-500/30 hover:scale-105">
+              <span className="px-3 py-1.5 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-cyan-500/30 hover:scale-105 select-none">
                 🎥 Content Creator
               </span>
-              <span className="px-3 py-1.5 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-blue-500/30 hover:scale-105">
+              <span className="px-3 py-1.5 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-400 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-blue-500/30 hover:scale-105 select-none">
                 🎮 Gamer
               </span>
-              <span className="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-300 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/30 hover:scale-105">
+              <span className="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-400 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/30 hover:scale-105 select-none">
                 💻 Developer
               </span>
             </div>
@@ -41,7 +41,7 @@ export const Home = () => {
                 games to dominate the battleground,
               </span>{" "}
               and building{" "}
-              <span className="text-purple-300 font-medium bg-purple-400/10 px-1 py-0.5 rounded mx-0.5">
+              <span className="text-purple-400 font-medium bg-purple-400/10 px-1 py-0.5 rounded mx-0.5">
                 clean and responsive apps and great games.
               </span>
             </p>
@@ -53,7 +53,7 @@ export const Home = () => {
           <div className="flex flex-col sm:flex-row justify-center gap-4 items-center mb-12">
             <a
               href="#aboutme"
-              className="group relative bg-gradient-to-br from-indigo-600 via-blue-500 to-blue-700 text-white py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transform active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+              className="group relative bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 text-white py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transform active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
               aria-label="Learn more about me"
             >
               <span className="relative z-10 flex items-center justify-center gap-2 text-sm">
