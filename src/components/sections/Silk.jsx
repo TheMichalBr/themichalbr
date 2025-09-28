@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { forwardRef, useRef, useMemo, useLayoutEffect } from "react";
 import { Color } from "three";
+import { forwardRef, useRef, useMemo, useLayoutEffect } from "react";
 
 const hexToNormalizedRGB = (hex) => {
     hex = hex.replace("#", "");
@@ -116,7 +116,19 @@ const Silk = ({
     );
 
     return (
-        <Canvas dpr={[1, 2]} frameloop="always">
+        <Canvas
+            dpr={[1, 2]}
+            frameloop="always"
+            style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                zIndex: 0,
+                pointerEvents: "none",
+            }}
+        >
             <SilkPlane ref={meshRef} uniforms={uniforms} />
         </Canvas>
     );
