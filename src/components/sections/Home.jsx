@@ -1,5 +1,5 @@
-import { HomeBackGround } from "./HomeBackGround";
 import { RevealOnScroll } from "../RevealOnScroll";
+import Silk from "./elements/HomeBG_Silk";
 
 export const Home = () => {
   return (
@@ -7,7 +7,13 @@ export const Home = () => {
       id="home"
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      <HomeBackGround />
+      <Silk
+        speed={4.5}
+        scale={0.925}
+        color="#071936"
+        noiseIntensity={1.5}
+        rotation={4.55}
+      />
       <RevealOnScroll>
         <div className="text-center z-10 px-4 max-w-4xl mx-auto">
           <div className="relative mb-8">
