@@ -40,11 +40,11 @@ export default function MoviesTable() {
                 <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
                     <div className="backdrop-blur-md bg-gradient-to-r from-black/30 to-blue-900/30 border-b border-white/10 px-8 py-6">
                         <h1 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
-                            My Watched Database
+                            My Database
                         </h1>
                         <div className="flex items-center space-x-6 text-sm">
                             <span className="text-blue-200/90 font-medium">
-                                {displayedMovies.length} of {allMovies.length} movies and series.
+                                {displayedMovies.length} of {allMovies.length} games, movies and series.
                             </span>
                             {hasMoreMovies && (
                                 <span className="text-white/60">• Scroll to load more.</span>
@@ -137,7 +137,7 @@ export default function MoviesTable() {
                                             <div className="flex items-center space-x-1">
                                                 <div className="flex items-center backdrop-blur-sm bg-yellow-500/20 border border-yellow-400/30 rounded-lg px-2 py-1 shadow-lg">
                                                     <span className="text-sm font-bold text-yellow-300 drop-shadow-sm">
-                                                        {movie.rating}
+                                                        {movie.rating} ★
                                                     </span>
                                                     <span className="text-xs text-yellow-200/70 ml-1">
                                                         /10
