@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export function HomeBackGround() {
+export function Circle() {
   const canvasRef = useRef(null);
   const opacityRef = useRef(0);
   const targetOpacity = 0.9;
