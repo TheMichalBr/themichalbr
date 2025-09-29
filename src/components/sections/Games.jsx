@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
+import Watched from "./Watched";
 
 import R1 from "/games/GR_R1.webp";
 import R2 from "/games/GR_R2.webp";
@@ -474,6 +475,7 @@ export const Games = () => {
               </div>
             </div>
           </div>
+          <Watched />
         </RevealOnScroll>
       </div>
     </section>
