@@ -134,7 +134,6 @@ export default function MoviesTable() {
         <div className="flex justify-center items-start p-8">
             <div className="w-full max-w-6xl">
                 <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
-                    {/* Header */}
                     <div className="backdrop-blur-md bg-gradient-to-r from-black/30 to-blue-900/30 border-b border-white/10 px-8 py-6">
                         <h1 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
                             My Database
@@ -155,7 +154,6 @@ export default function MoviesTable() {
                             </div>
                         </div>
 
-                        {/* Filters */}
                         <div className="mt-4 flex flex-wrap gap-4 items-center">
                             <div className="flex-1 min-w-64">
                                 <input
