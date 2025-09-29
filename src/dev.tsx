@@ -796,4 +796,386 @@ export const Games = () => {
     </section>
   );
 };
+
+
+
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { getAllMovies } from "../data/WatchedList";
+
+export default function MoviesTable() {
+    const [displayedMovies, setDisplayedMovies] = useState([]);
+    const [allMovies, setAllMovies] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [sortBy, setSortBy] = useState("id");
+    const [sortOrder, setSortOrder] = useState("desc");
+    const [selectedGenre, setSelectedGenre] = useState("all");
+
+    const moviesPerPage = 10;
+
+    const filteredAndSortedMovies = useMemo(() => {
+        let movies = [...allMovies];
+
+        if (searchTerm) {
+            const term = searchTerm.toLowerCase();
+            movies = movies.filter(
+                (movie) =>
+                    movie.title.toLowerCase().includes(term) ||
+                    movie.genre.toLowerCase().includes(term) ||
+                    movie.notes.toLowerCase().includes(term)
+            );
+        }
+
+        if (selectedGenre !== "all") {
+            movies = movies.filter(
+                (movie) => movie.genre.toLowerCase() === selectedGenre.toLowerCase()
+            );
+        }
+
+        movies.sort((a, b) => {
+            let aVal = a[sortBy];
+            let bVal = b[sortBy];
+
+            if (sortBy === "rating") {
+                aVal = parseFloat(aVal) || 0;
+                bVal = parseFloat(bVal) || 0;
+            } else if (sortBy === "year") {
+                aVal = parseInt(aVal) || 0;
+                bVal = parseInt(bVal) || 0;
+            } else if (typeof aVal === "string") {
+                aVal = aVal.toLowerCase();
+                bVal = bVal.toLowerCase();
+            }
+
+            if (sortOrder === "asc") {
+                return aVal > bVal ? 1 : -1;
+            } else {
+                return aVal < bVal ? 1 : -1;
+            }
+        });
+
+        return movies;
+    }, [allMovies, searchTerm, selectedGenre, sortBy, sortOrder]);
+
+    const genres = useMemo(() => {
+        const uniqueGenres = [...new Set(allMovies.map((movie) => movie.genre))];
+        return uniqueGenres.sort();
+    }, [allMovies]);
+
+    const stats = useMemo(() => {
+        if (allMovies.length === 0) return null;
+        
+        const ratings = allMovies.map(m => parseFloat(m.rating) || 0);
+        const avgRating = (ratings.reduce((a, b) => a + b, 0) / ratings.length).toFixed(1);
+        const topRated = allMovies.filter(m => parseFloat(m.rating) >= 9).length;
+        
+        return { avgRating, topRated };
+    }, [allMovies]);
+
+    useEffect(() => {
+        const movies = getAllMovies();
+        setAllMovies(movies);
+        setLoading(false);
+    }, []);
+
+    useEffect(() => {
+        setCurrentPage(1);
+        setDisplayedMovies(filteredAndSortedMovies.slice(0, moviesPerPage));
+    }, [filteredAndSortedMovies, moviesPerPage]);
+
+    useEffect(() => {
+        const handleScroll = (e) => {
+            const element = e.target;
+            const bottom = element.scrollHeight - element.scrollTop <= element.clientHeight + 50;
+            
+            if (bottom && hasMoreMovies && !loading) {
+                loadMoreMovies();
+            }
+        };
+
+        const scrollContainer = document.querySelector('.scrollable-table');
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', handleScroll);
+            return () => scrollContainer.removeEventListener('scroll', handleScroll);
+        }
+    }, [displayedMovies.length, filteredAndSortedMovies.length, loading]);
+
+    const loadMoreMovies = useCallback(() => {
+        if (loading) return;
+        
+        setLoading(true);
+        setTimeout(() => {
+            const startIndex = currentPage * moviesPerPage;
+            const endIndex = startIndex + moviesPerPage;
+            const newMovies = filteredAndSortedMovies.slice(startIndex, endIndex);
+
+            setDisplayedMovies((prev) => [...prev, ...newMovies]);
+            setCurrentPage((prev) => prev + 1);
+            setLoading(false);
+        }, 300);
+    }, [currentPage, moviesPerPage, filteredAndSortedMovies, loading]);
+
+    const handleSort = useCallback(
+        (field) => {
+            if (sortBy === field) {
+                setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+            } else {
+                setSortBy(field);
+                setSortOrder("desc");
+            }
+        },
+        [sortBy]
+    );
+
+    const clearFilters = useCallback(() => {
+        setSearchTerm("");
+        setSelectedGenre("all");
+        setSortBy("id");
+        setSortOrder("desc");
+    }, []);
+
+    const hasMoreMovies = displayedMovies.length < filteredAndSortedMovies.length;
+
+    const SortButton = ({ field, children }) => (
+        <button
+            onClick={() => handleSort(field)}
+            className="flex items-center space-x-1 hover:text-blue-200 transition-colors duration-200 group"
+        >
+            <span>{children}</span>
+            {sortBy === field && (
+                <span className="text-blue-300">{sortOrder === "asc" ? "↑" : "↓"}</span>
+            )}
+        </button>
+    );
+
+    if (loading && allMovies.length === 0) {
+        return (
+            <div className="flex justify-center items-center p-8 min-h-96">
+                <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-2xl shadow-2xl p-8">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
+                    <p className="text-white/80 text-center">Načítám databázi...</p>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="flex justify-center items-start p-8">
+            <div className="w-full max-w-6xl">
+                <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
+                    <div className="backdrop-blur-md bg-gradient-to-r from-black/30 to-blue-900/30 border-b border-white/10 px-8 py-6">
+                        <div className="flex items-start justify-between mb-4">
+                            <div>
+                                <h1 className="text-3xl font-bold text-white mb-2 drop-shadow-lg">
+                                    Moje Databáze
+                                </h1>
+                                <div className="flex items-center space-x-6 text-sm">
+                                    <span className="text-blue-200/90 font-medium">
+                                        {displayedMovies.length} z {filteredAndSortedMovies.length}{" "}
+                                        položek
+                                        {searchTerm || selectedGenre !== "all"
+                                            ? ` (filtrováno z ${allMovies.length} celkem)`
+                                            : ""}
+                                    </span>
+                                    {hasMoreMovies && (
+                                        <span className="text-white/60">• Scrolluj pro načtení dalších</span>
+                                    )}
+                                </div>
+                            </div>
+                            
+                            {stats && (
+                                <div className="flex gap-3">
+                                    <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-lg px-4 py-2">
+                                        <div className="text-xs text-white/70 uppercase tracking-wider">Průměr</div>
+                                        <div className="text-lg font-bold text-yellow-300">{stats.avgRating} ★</div>
+                                    </div>
+                                    <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-lg px-4 py-2">
+                                        <div className="text-xs text-white/70 uppercase tracking-wider">Top rated</div>
+                                        <div className="text-lg font-bold text-green-300">{stats.topRated}</div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="mt-4 flex flex-wrap gap-4 items-center">
+                            <div className="flex-1 min-w-64">
+                                <input
+                                    type="text"
+                                    placeholder="🔍 Hledat podle názvu, žánru nebo poznámek..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="w-full px-4 py-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 transition-all duration-300"
+                                />
+                            </div>
+                            <div className="flex items-center space-x-3">
+                                <select
+                                    value={selectedGenre}
+                                    onChange={(e) => setSelectedGenre(e.target.value)}
+                                    className="px-4 py-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
+                                >
+                                    <option value="all" className="bg-gray-800">
+                                        Všechny žánry
+                                    </option>
+                                    {genres.map((genre) => (
+                                        <option key={genre} value={genre} className="bg-gray-800">
+                                            {genre}
+                                        </option>
+                                    ))}
+                                </select>
+                                {(searchTerm || selectedGenre !== "all") && (
+                                    <button
+                                        onClick={clearFilters}
+                                        className="px-3 py-2 backdrop-blur-md bg-red-500/20 hover:bg-red-500/30 border border-red-400/30 text-red-200 rounded-lg transition-all duration-300 text-sm font-medium"
+                                    >
+                                        Vymazat
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        className="scrollable-table max-h-96 overflow-y-auto backdrop-blur-sm bg-black/10"
+                        style={{
+                            scrollbarWidth: "thin",
+                            scrollbarColor: "rgba(59, 130, 246, 0.5) rgba(0, 0, 0, 0.2)",
+                        }}
+                    >
+                        <style jsx>{`
+                .scrollable-table::-webkit-scrollbar {
+                    width: 8px;
+                }
+                .scrollable-table::-webkit-scrollbar-track {
+                    background: rgba(0, 0, 0, 0.2);
+                    border-radius: 10px;
+                }
+                .scrollable-table::-webkit-scrollbar-thumb {
+                    background: rgba(59, 130, 246, 0.5);
+                    border-radius: 10px;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                }
+                .scrollable-table::-webkit-scrollbar-thumb:hover {
+                    background: rgba(59, 130, 246, 0.7);
+                }
+            `}</style>
+                        <table className="w-full">
+                            <thead className="backdrop-blur-md bg-black/40 sticky top-0 z-10 border-b border-white/10">
+                                <tr>
+                                    <th className="px-4 py-4 text-left text-xs font-bold text-white/90 uppercase tracking-wider">
+                                        Obal
+                                    </th>
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-white/90 uppercase tracking-wider">
+                                        <SortButton field="title">Název</SortButton>
+                                    </th>
+                                    <th className="px-4 py-4 text-left text-xs font-bold text-white/90 uppercase tracking-wider">
+                                        <SortButton field="year">Rok</SortButton>
+                                    </th>
+                                    <th className="px-4 py-4 text-left text-xs font-bold text-white/90 uppercase tracking-wider">
+                                        <SortButton field="genre">Žánr</SortButton>
+                                    </th>
+                                    <th className="px-4 py-4 text-left text-xs font-bold text-white/90 uppercase tracking-wider">
+                                        <SortButton field="rating">Hodnocení</SortButton>
+                                    </th>
+                                    <th className="px-6 py-4 text-left text-xs font-bold text-white/90 uppercase tracking-wider">
+                                        Poznámky
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {displayedMovies.map((movie, index) => (
+                                    <tr
+                                        key={`${movie.id}-${index}`}
+                                        className="backdrop-blur-sm border-b border-white/5 hover:bg-white/5 transition-all duration-300 group"
+                                    >
+                                        <td className="px-4 py-4">
+                                            <div className="w-10 h-15 backdrop-blur-sm bg-black/30 border border-white/10 rounded-lg overflow-hidden flex-shrink-0 shadow-xl group-hover:shadow-2xl group-hover:scale-105 transition-all duration-300">
+                                                <img
+                                                    src={movie.coverUrl}
+                                                    alt={`${movie.title} cover`}
+                                                    className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                                                    loading="lazy"
+                                                    onError={(e) => {
+                                                        e.target.src = `https://via.placeholder.com/40x60/374151/white?text=${movie.title.charAt(0)}`;
+                                                    }}
+                                                />
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="text-sm font-semibold text-white/95 drop-shadow-sm group-hover:text-white transition-colors duration-300">
+                                                {movie.title}
+                                            </div>
+                                        </td>
+                                        <td className="px-4 py-4">
+                                            <span className="inline-flex px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm bg-blue-500/20 border border-blue-400/20 text-blue-200 shadow-lg">
+                                                {movie.year}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-4">
+                                            <span className="inline-flex px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm bg-white/10 border border-white/20 text-white/90 shadow-lg">
+                                                {movie.genre}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-4">
+                                            <div className="flex items-center space-x-1">
+                                                <div className="flex items-center backdrop-blur-sm bg-yellow-500/20 border border-yellow-400/30 rounded-lg px-2 py-1 shadow-lg">
+                                                    <span className="text-sm font-bold text-yellow-300 drop-shadow-sm">
+                                                        {movie.rating} ★
+                                                    </span>
+                                                    <span className="text-xs text-yellow-200/70 ml-1">
+                                                        /10
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="text-xs text-white/80 max-w-xs line-clamp-2 leading-relaxed drop-shadow-sm group-hover:text-white/90 transition-colors duration-300">
+                                                {movie.notes}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+
+                        {loading && displayedMovies.length > 0 && (
+                            <div className="backdrop-blur-md bg-black/20 border-t border-white/10 px-8 py-4 text-center">
+                                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-400 mx-auto"></div>
+                            </div>
+                        )}
+
+                        {!hasMoreMovies && displayedMovies.length > 0 && (
+                            <div className="backdrop-blur-md bg-black/20 border-t border-white/10 px-8 py-4 text-center">
+                                <span className="text-sm text-white/60 font-medium drop-shadow-sm">
+                                    {searchTerm || selectedGenre !== "all"
+                                        ? `✓ Zobrazeno všech ${displayedMovies.length} filtrovaných výsledků`
+                                        : `✓ Načteno všech ${displayedMovies.length} položek`}
+                                </span>
+                            </div>
+                        )}
+                    </div>
+
+                    {displayedMovies.length === 0 && !loading && (
+                        <div className="text-center py-16 backdrop-blur-sm">
+                            <div className="text-5xl mb-4">🎬</div>
+                            <p className="text-lg text-white/60 font-medium drop-shadow-sm mb-4">
+                                {searchTerm || selectedGenre !== "all"
+                                    ? "Žádné filmy neodpovídají vašim filtrům"
+                                    : "Databáze je prázdná"}
+                            </p>
+                            {(searchTerm || selectedGenre !== "all") && (
+                                <button
+                                    onClick={clearFilters}
+                                    className="px-6 py-2 backdrop-blur-md bg-blue-600/30 hover:bg-blue-500/40 border border-blue-400/30 text-white rounded-lg transition-all duration-300 font-medium"
+                                >
+                                    Vymazat filtry
+                                </button>
+                            )}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+}
 */}
