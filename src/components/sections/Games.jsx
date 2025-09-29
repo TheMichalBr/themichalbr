@@ -475,6 +475,7 @@ export const Games = () => {
               </div>
             </div>
           </div>
+          <div className="h-16"></div>
           <Watched />
         </RevealOnScroll>
       </div>
