@@ -1,5 +1,5 @@
 import { RevealOnScroll } from "../RevealOnScroll";
-import Silk from "./elements/HomeBG_Silk";
+import Silk from "../elements/HomeBG_Silk";
 
 export const Home = () => {
   return (
