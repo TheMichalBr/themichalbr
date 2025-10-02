@@ -1,4 +1,4 @@
-export const moviesData = [
+export const gamesandmoviesRData = [
   {
     id: 1,
     title: "Policejní akademie",
@@ -110,32 +110,3 @@ export const moviesData = [
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/170/044/170044994_9nto2l.jpg",
   },
 ];
-
-export const addMovie = (newMovie) => {
-  const nextId = Math.max(...moviesData.map((m) => m.id)) + 1;
-  const movieWithId = {
-    id: nextId,
-    ...newMovie,
-    dateAdded: new Date().toISOString(),
-  };
-  moviesData.push(movieWithId);
-  return movieWithId;
-};
-
-export const getAllMovies = () => {
-  return [...moviesData];
-};
-
-export const getMovieById = (id) => {
-  return moviesData.find((movie) => movie.id === id);
-};
-
-export const deleteMovie = (id) => {
-  const index = moviesData.findIndex((movie) => movie.id === id);
-  if (index > -1) {
-    return moviesData.splice(index, 1)[0];
-  }
-  return null;
-};
-
-export default moviesData;
