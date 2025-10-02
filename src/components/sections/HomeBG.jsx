@@ -94,7 +94,7 @@ const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
 });
 SilkPlane.displayName = "SilkPlane";
 
-const Silk = ({
+const HomeBG = ({
     speed = 5,
     scale = 1,
     color = "#7B7481",
@@ -134,4 +134,4 @@ const Silk = ({
     );
 };
 
-export default Silk;
+export default HomeBG;
