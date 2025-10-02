@@ -1,5 +1,5 @@
 import { RevealOnScroll } from "../RevealOnScroll";
-import HomeBG from "./HomeBG";
+import HomeBackGround from "./HomeBackGround";
 
 export const Home = () => {
   return (
@@ -7,7 +7,7 @@ export const Home = () => {
       id="home"
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      <HomeBG
+      <HomeBackGround
         speed={4.5}
         scale={0.925}
         color="#071936"
