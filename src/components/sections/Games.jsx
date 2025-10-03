@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
-import Watched from "./Watched";
+import { reviews } from "./GamesData";
 
 import R1 from "/games/GR_R1.webp";
 import R2 from "/games/GR_R2.webp";
@@ -285,6 +285,96 @@ export const Games = () => {
 
           <div className="h-16"></div>
 
+{/* revid z gamedata... Reviews sekce */}
+
+<div>
+  <div className="text-center mb-10">
+    <h2 className="text-4xl font-bold mb-8 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
+      Latest reviews
+    </h2>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {reviews.slice(0, 2).map((review) => (
+      <div
+        key={review.id}
+        className="group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/10
+          transition-all duration-500 select-none focus:outline-none focus:ring-4 focus:ring-cyan-500/40 overflow-hidden"
+        tabIndex={0}
+        style={{ cursor: "pointer" }}
+      >
+        <div
+          className="absolute inset-0 rounded-3xl z-0 transition-transform duration-700 ease-[cubic-bezier(.4,2,.3,1)]
+            will-change-transform group-hover:scale-105"
+          style={{
+            backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${review.image})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+          aria-hidden="true"
+        />
+        <div className="absolute inset-0 pointer-events-none rounded-3xl bg-black/40 transition-all duration-500 group-hover:bg-black/70 z-10"></div>
+        <div className="relative z-20 flex flex-col h-full justify-between">
+          <div>
+            <h3 className="text-2xl font-extrabold text-white tracking-tight drop-shadow select-none mb-2">
+              {review.title}
+            </h3>
+{review.tag && (
+      <span 
+        className={`
+          inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium
+          ${getTagInfo(review.tag).bgColor}
+          ${getTagInfo(review.tag).color}
+          ${getTagInfo(review.tag).borderColor}
+          border backdrop-blur-sm
+          transition-all duration-300
+        `}
+      >
+        <span className="text-sm">{getTagInfo(review.tag).icon}</span>
+        {getTagInfo(review.tag).text}
+      </span>
+    )}
+          <div className="h-3"></div>
+            <div className="space-y-1">
+              <div className="transition-all duration-500 ease-in-out opacity-0 max-h-0 translate-y-2 pointer-events-none
+                  group-hover:opacity-100 group-hover:max-h-20 group-hover:translate-y-0 group-hover:pointer-events-auto">
+                {review.additionalInfo.map((info, index) => (
+                  <p key={index} className="text-sm text-gray-200 select-none">{info}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="flex items-end justify-between mt-6 h-10 relative">
+            <span className="text-lg font-bold text-yellow-400 drop-shadow select-none absolute bottom-0 transition-all duration-500
+              right-0 group-hover:left-0 group-hover:right-auto group-hover:translate-x-0 group-hover:opacity-100 opacity-100 z-10"
+              style={{ transition: "all 0.5s cubic-bezier(.4,2,.3,1)" }}>
+              ★★★★★ {review.rating}
+            </span>
+            {review.isReviewAvailable && review.reviewUrl && (
+  <a
+    href={review.reviewUrl}
+    className="text-blue-500 hover:text-cyan-200 text-base font-semibold select-text focus:outline-none focus:ring-2
+      focus:ring-cyan-400 rounded-full px-3 py-1 bg-black/30 backdrop-blur-md absolute right-0 bottom-0 opacity-0
+      pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-500 z-10"
+    tabIndex={0}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Read review →
+  </a>
+)}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+
+
+{/*
+
           <div>
             <div className="text-center mb-10">
               <h2 className="text-4xl font-bold mb-8 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
@@ -295,7 +385,7 @@ export const Games = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div
                 className="
-        group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-cyan-700/30
+        group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/10
         transition-all duration-500
         select-none
         focus:outline-none focus:ring-4 focus:ring-cyan-500/40
@@ -335,7 +425,10 @@ export const Games = () => {
               "
                       >
                         <p className="text-sm text-gray-200 select-none">
-                          Platform: PC (Game)
+                          Game
+                        </p>
+                        <p className="text-sm text-gray-200 select-none">
+                          Platform: PC (Steam)
                         </p>
                         <p className="text-sm text-gray-200 select-none">
                           Difficulty: Nightmare (100%)
@@ -385,7 +478,7 @@ export const Games = () => {
               </div>
               <div
                 className="
-        group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-cyan-700/30
+        group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/10
         transition-all duration-500
         select-none
         focus:outline-none focus:ring-4 focus:ring-cyan-500/40
@@ -425,7 +518,10 @@ export const Games = () => {
               "
                       >
                         <p className="text-sm text-gray-200 select-none">
-                          Platform: PC (Game)
+                          Game
+                        </p>
+                        <p className="text-sm text-gray-200 select-none">
+                          Platform: PC (Steam)
                         </p>
                         <p className="text-sm text-gray-200 select-none">
                           Including datadisk: Phantom Liberty
@@ -475,10 +571,38 @@ export const Games = () => {
               </div>
             </div>
           </div>
-          <div className="h-16"></div>
-          <Watched />
+          */}
         </RevealOnScroll>
       </div>
     </section>
   );
+};
+
+export const getTagInfo = (tag) => {
+  switch (tag) {
+    case 'game':
+      return {
+        icon: '🎮',
+        color: 'text-white/90',
+        bgColor: 'bg-white/10',
+        borderColor: 'border-cyan-500/20 backdrop-blur-sm',
+        text: 'Game'
+      };
+    case 'film':
+      return {
+        icon: '🎬',
+        color: 'text-white/90',
+        bgColor: 'bg-white/10',
+        borderColor: 'border-purple-500/20 backdrop-blur-sm',
+        text: 'Film'
+      };
+    case 'series':
+      return {
+        icon: '📺',
+        color: 'text-white/90',
+        bgColor: 'bg-white/10',
+        borderColor: 'border-orange-500/20 backdrop-blur-sm',
+        text: 'Series'
+      };
+  }
 };
