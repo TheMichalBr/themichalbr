@@ -456,10 +456,11 @@ export const Games = () => {
       <div
         key={index}
         tabIndex={0}
-        className="group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-800
-          transition-all duration-500 ease-out select-none will-change-transform
-          focus:outline-none focus:ring-4 focus:ring-cyan-500/40
-          hover:scale-[1.02] hover:shadow-3xl hover:border-cyan-500/20"
+        className="group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl 
+                   border border-gray-800 overflow-hidden
+                   transition-all duration-500 ease-out select-none will-change-transform
+                   hover:scale-[1.02] hover:shadow-3xl hover:border-cyan-500/20
+                   focus:outline-none focus:ring-4 focus:ring-cyan-500/40"
         style={{
           backgroundImage: `linear-gradient(165deg,
             rgba(0,0,0,0.92) 0%,
@@ -468,22 +469,27 @@ export const Games = () => {
             url(${review.image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          cursor: "pointer",
+          willChange: "transform",
         }}
       >
-        <div className="absolute inset-0 pointer-events-none rounded-2xl bg-gradient-to-br from-black/80 via-black/60 to-transparent 
-          transition-all duration-700 ease-out opacity-60
-          group-hover:opacity-40 group-hover:from-black/70">
+        {/* Pozadí s gradientem */}
+        <div className="absolute inset-0 pointer-events-none rounded-2xl 
+                       bg-gradient-to-br from-black/80 via-black/60 to-transparent 
+                       transition-opacity duration-700 ease-out opacity-60
+                       group-hover:opacity-40 group-hover:from-black/70">
         </div>
 
+        {/* Hlavní obsah */}
         <div className="relative z-10 flex flex-col h-full justify-between">
           <div>
+            {/* Nadpis */}
             <h3 className="text-xl font-extrabold text-white tracking-tight drop-shadow-lg mb-2
                          transition-colors duration-300 ease-out
                          group-hover:text-blue-300">
               {review.title}
             </h3>
             
+            {/* Tag */}
             {review.tag && (
               <div className="inline-flex items-center gap-2 px-2.5 py-1 
                             rounded-full border border-gray-700/50
@@ -499,23 +505,33 @@ export const Games = () => {
               </div>
             )}
 
-            <div className="space-y-1 mt-4">
-              <div className="transition-all duration-500 ease-out
-                            opacity-0 max-h-0 translate-y-2 pointer-events-none
-                            group-hover:opacity-100 group-hover:max-h-32 group-hover:translate-y-0 
-                            group-hover:pointer-events-auto [transition-delay:100ms]">
-                {Object.entries(review.info).map(([key, value], index) => (
-                  <p key={index} className="text-sm text-gray-200 leading-relaxed mb-1
-                                          [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-                    <span className="text-gray-400">{key.charAt(0).toUpperCase() + key.slice(1)}:</span>{' '}
-                    <span className="text-gray-200">{value}</span>
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
+            {/* Info sekce */}
+<div className="relative mt-4">
+  <div className="transition-all duration-700 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform
+                  opacity-0 max-h-0 translate-y-1 overflow-hidden
+                  group-hover:opacity-100 group-hover:max-h-[500px] group-hover:translate-y-0
+                  [transition-delay:75ms]">
+    <div className="space-y-1">
+      {Object.entries(review.info).map(([key, value], index) => (
+        <div key={index} 
+             className="flex gap-2 text-sm text-gray-200 leading-relaxed
+                        [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+          <span className="text-gray-400 min-w-[70px] font-medium">
+            {key.charAt(0).toUpperCase() + key.slice(1)}:
+          </span>
+          <span className="text-gray-300 break-words flex-1">
+            {value}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+</div>
 
-          <div className="flex items-end justify-between mt-4">
+          {/* Spodní část s hodnocením a tlačítkem */}
+          <div className="relative flex items-end justify-between mt-4 h-8">
+            {/* Hodnocení s animací */}
             <div className={`
               absolute transform transition-all duration-700 ease-[cubic-bezier(.4,0,.2,1)]
               ${review.review ? 'right-0 group-hover:left-0 group-hover:right-auto' : 'right-0'}
@@ -529,6 +545,7 @@ export const Games = () => {
               </span>
             </div>
             
+            {/* Tlačítko recenze */}
             {review.review && (
               <a
                 href={review.review}
