@@ -1,175 +1,173 @@
-import R1 from "/games/GR_R1.webp";
-import R2 from "/games/GR_R2.webp";
+import RH from "/games/GR_RH.webp";
 
 export const reviews = [
-{
-    id: "g2",
+  {
+    title: "The SpongeBob SquarePants Movie",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/346/158346718_8fc204.jpg",
+    tag: "film",
+    rating: "7.5/10",
+    info: {
+      year: "2004",
+      genre: "Animated",
+    },
+  },
+  {
     title: "Cyberpunk 2077",
-    image: R2,
+    image: RH,
     tag: "game",
-    additionalInfo: [
-      "Platform: PC (Steam)",
-      "Including datadisk: Phantom Liberty",
-    ],
     rating: "10/10",
-    reviewUrl: "https://steamcommunity.com/id/misakbr2/recommended/1091500/",
-    isReviewAvailable: true,
-},
-{
-    id: "s1",
-    title: "Comeback",
+    info: {
+      year: "2023",
+      genre: "RPG",
+      platform: "PC (Steam)",
+      additional: "Including datadisk: Phantom Liberty",
+    },
+  },
+  {
+    title: "SpongeBob SquarePants",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/165/214/165214155_e427d6.jpg",
     tag: "series",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/170/044/170044994_9nto2l.jpg",
-    additionalInfo: [
-      "Year: 2008",
-      "Genre: Comedy",
-      "Seasons: 2",
-    ],
-    rating: "9.5/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "g1",
-    title: "Doom Eternal", 
-    image: R1,
-    tag: "game",
-    additionalInfo: [
-      "Platform: PC (Steam)",
-      "Difficulty: Nightmare (100%)",
-    ],
-    rating: "9.2/10",
-    reviewUrl: "https://steamcommunity.com/id/misakbr2/recommended/782330/",
-    isReviewAvailable: true,
-},
-{
-    id: "f10",
-    title: "Simpsonovi ve filmu",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/000/004/4599_41e971.jpg",
-    tag: "film",
-    additionalInfo: [
-      "Year: 2007",
-      "Genre: Animated",
-    ],
     rating: "9.0/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "f9",
-    title: "Růžový panter 2",
-    image: "https://image.pmgstatic.com/cache/resized/w140/files/images/film/posters/000/054/54794_424716.jpg",
+    info: {
+      year: "1999",
+      genre: "Animated",
+    },
+  },
+  {
+    title: "Comeback",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/170/044/170044994_9nto2l.jpg",
+    tag: "series",
+    rating: "9.5/10",
+    info: {
+      year: "2008",
+      genre: "Comedy",
+    },
+  },
+  {
+    title: "Doom Eternal",
+    image:
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/782330/header.jpg?t=1755109910",
+    tag: "game",
+    rating: "9.2/10",
+    info: {
+      year: "2020",
+      genre: "FPS",
+      platform: "PC (Steam)",
+      additional: "Difficulty: Nightmare (100%)",
+    },
+    review: "https://steamcommunity.com/id/misakbr2/recommended/782330/",
+  },
+  {
+    title: "The Simpsons Movie",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/000/004/4599_41e971.jpg",
     tag: "film",
-    additionalInfo: [
-      "Year: 2009",
-      "Genre: Comedy",
-    ],
+    rating: "9.0/10",
+    info: {
+      year: "2007",
+      genre: "Animated",
+    },
+  },
+  {
+    title: "The Pink Panther 2",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w140/files/images/film/posters/000/054/54794_424716.jpg",
+    tag: "film",
     rating: "7.0/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "f8",
-    title: "Růžový panter",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/000/042/42209_fae7f0.jpg",
+    info: {
+      year: "2009",
+      genre: "Comedy",
+    },
+  },
+  {
+    title: "The Pink Panther",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/000/042/42209_fae7f0.jpg",
     tag: "film",
-    additionalInfo: [
-      "Year: 2006",
-      "Genre: Comedy",
-    ],
     rating: "7.5/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "f7",
-    title: "Policejní akademie 7: Moskevská mise",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651161_77c108.jpg",
+    info: {
+      year: "2006",
+      genre: "Comedy",
+    },
+  },
+  {
+    title: "Police Academy 7: Mission to Moscow",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651161_77c108.jpg",
     tag: "film",
-    additionalInfo: [
-      "Year: 1994",
-      "Genre: Comedy",
-    ],
     rating: "6.0/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "f6",
-    title: "Policejní akademie 6: Město v obležení",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651155_698ca7.jpg",
+    info: {
+      year: "1994",
+      genre: "Comedy",
+    },
+  },
+  {
+    title: "Police Academy 6: City Under Siege",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651155_698ca7.jpg",
     tag: "film",
-    additionalInfo: [
-      "Year: 1989",
-      "Genre: Comedy",
-    ],
     rating: "6.7/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "f5",
-    title: "Policejní akademie 5: Nasazení v Miami Beach",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651160_ceba89.jpg",
+    info: {
+      year: "1989",
+      genre: "Comedy",
+    },
+  },
+  {
+    title: "Police Academy 5: Assignment: Miami Beach",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651160_ceba89.jpg",
     tag: "film",
-    additionalInfo: [
-      "Year: 1988",
-      "Genre: Comedy",
-    ],
     rating: "6.9/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "f4",
-    title: "Policejní akademie 4: Občanská patrola",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651159_69bb17.jpg",
+    info: {
+      year: "1988",
+      genre: "Comedy",
+    },
+  },
+  {
+    title: "Police Academy 4: Citizens on Patrol",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651159_69bb17.jpg",
     tag: "film",
-    additionalInfo: [
-      "Year: 1987",
-      "Genre: Comedy",
-    ],
     rating: "7.0/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "f3",
-    title: "Policejní akademie 3: Znovu ve výcviku",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651158_8ee031.jpg",
+    info: {
+      year: "1987",
+      genre: "Comedy",
+    },
+  },
+  {
+    title: "Police Academy 3: Back in Training",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651158_8ee031.jpg",
     tag: "film",
-    additionalInfo: [
-      "Year: 1986",
-      "Genre: Comedy",
-    ],
     rating: "7.2/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "f2",
-    title: "Policejní akademie 2: První nasazení",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651157_913a78.jpg",
+    info: {
+      year: "1986",
+      genre: "Comedy",
+    },
+  },
+  {
+    title: "Police Academy 2: Their First Assignment",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651157_913a78.jpg",
     tag: "film",
-    additionalInfo: [
-      "Year: 1985",
-      "Genre: Comedy",
-    ],
     rating: "7.4/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
-{
-    id: "f1",
-    title: "Policejní akademie",
-    image: "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651156_2277a3.jpg",
+    info: {
+      year: "1985",
+      genre: "Comedy",
+    },
+  },
+  {
+    title: "Police Academy",
+    image:
+      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651156_2277a3.jpg",
     tag: "film",
-    additionalInfo: [
-      "Year: 1984",
-      "Genre: Comedy",
-    ],
     rating: "7.5/10",
-    reviewUrl: "#",
-    isReviewAvailable: false,
-},
+    info: {
+      year: "1984",
+      genre: "Comedy",
+    },
+  },
 ];
