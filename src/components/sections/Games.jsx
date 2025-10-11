@@ -155,7 +155,7 @@ export const Games = () => {
                    border border-gray-800 overflow-hidden
                    transition-all duration-500 ease-out select-none will-change-transform
                    hover:scale-[1.02] hover:shadow-3xl hover:border-cyan-500/20
-                   focus:outline-none focus:ring-4 focus:ring-cyan-500/40"
+                   focus:outline-none focus:ring-3 focus:ring-blue-500/40"
         style={{
           backgroundImage: `linear-gradient(165deg,
             rgba(0,0,0,0.92) 0%,
@@ -178,7 +178,7 @@ export const Games = () => {
         <div className="relative z-10 flex flex-col h-full justify-between">
           <div>
             {/* Nadpis */}
-            <h3 className="text-xl font-extrabold text-white tracking-tight drop-shadow-lg mb-2
+            <h3 className="text-xl font-bold text-white tracking-tight drop-shadow-lg mb-2
                          transition-colors duration-300 ease-out
                          group-hover:text-blue-300">
               {review.title}
@@ -276,7 +276,7 @@ export const Games = () => {
                   className={`
               group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-800
               transition-all duration-500
-              focus:outline-none focus:ring-4 focus:ring-cyan-500/40
+              focus:outline-none focus:ring-3 focus:ring-blue-500/40
               hover:scale-[1.025] hover:shadow-3xl
               select-none
               ${showSettings === game.id ? "ring-2 ring-blue-400/60" : ""}
@@ -300,13 +300,13 @@ export const Games = () => {
                         style={{ userSelect: "none" }}
                       />
                       <div>
-                        <h3 className="text-xl font-extrabold text-white tracking-tight drop-shadow select-none">
+                        <h3 className="text-xl font-bold text-white tracking-tight drop-shadow select-none">
                           {game.name}
                         </h3>
-                        <p className="text-sm text-gray-300 select-none">
+                        <p className="text-sm text-gray-400 select-none mt-0.5 truncate transition-colors duration-300 group-hover:text-gray-300">
                           {game.platform}
                         </p>
-                        <div className="flex items-center gap-2 mt-1">
+                        <div className="flex items-center gap-2 mt-2 px-1">
                           <img
                             src={game.rankIcon}
                             alt={`${game.rank} Icon`}
@@ -403,7 +403,7 @@ export const Games = () => {
             </div>
           </div>
 
-<div className="h-16"></div> //test kod
+{/* <div className="h-16"></div> //test kod
 
 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
   {games.map((game) => (
@@ -416,7 +416,7 @@ export const Games = () => {
         transition-all duration-500 ease-out will-change-transform
         hover:scale-[1.02] hover:border-cyan-500/30 
         hover:shadow-[0_0_45px_rgba(6,182,212,0.15)]
-        focus:outline-none focus:ring-2 focus:ring-cyan-500/50
+        focus:outline-none focus:ring-3 focus:ring-blue-500/40
         active:scale-[0.99] active:shadow-[0_0_30px_rgba(6,182,212,0.1)]
         select-none cursor-pointer
         motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.99]
@@ -522,7 +522,7 @@ export const Games = () => {
               motion-safe:hover:scale-110 motion-safe:active:scale-95
               ${showSettings === game.id 
                 ? 'bg-red-500/20 hover:bg-red-500/30 text-red-400' 
-                : 'bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400'}
+                : 'bg-blue-500/20 hover:bg-cyan-500/30 text-cyan-400'}
             `}
             aria-label={showSettings === game.id ? 'Hide settings' : 'Show settings'}
           >
@@ -586,7 +586,7 @@ export const Games = () => {
     </div>
   ))}
 </div>
-
+*/}
 {/* nova vaerze */}
 {/* 
           <div>
