@@ -415,44 +415,48 @@ export const Games = () => {
         border border-white/10 overflow-hidden
         transition-all duration-500 ease-out will-change-transform
         hover:scale-[1.02] hover:border-cyan-500/30 
-        hover:shadow-[0_0_40px_rgba(6,182,212,0.15)]
+        hover:shadow-[0_0_45px_rgba(6,182,212,0.15)]
         focus:outline-none focus:ring-2 focus:ring-cyan-500/50
-        active:scale-[0.99]
+        active:scale-[0.99] active:shadow-[0_0_30px_rgba(6,182,212,0.1)]
         select-none cursor-pointer
-        ${showSettings === game.id ? "ring-2 ring-cyan-400/60" : ""}
+        motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.99]
+        ${showSettings === game.id ? "ring-2 ring-cyan-400/60 shadow-[0_0_30px_rgba(6,182,212,0.2)]" : ""}
       `}
       onClick={() => toggleSettings(game.id)}
       style={{
         backgroundImage: `linear-gradient(165deg,
           rgba(0,0,0,0.97) 0%,
-          rgba(0,0,0,0.90) 50%,
+          rgba(0,0,0,0.92) 40%,
           rgba(0,0,0,0.85) 100%), 
           url(${game.image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        willChange: "transform",
+        willChange: "transform, opacity",
       }}
     >
       <div 
         className="absolute inset-0 pointer-events-none rounded-2xl opacity-60
                    bg-gradient-to-br from-black/90 via-black/70 to-transparent 
                    transition-opacity duration-700 group-hover:opacity-40
-                   group-hover:via-black/60" 
+                   group-hover:via-black/60
+                   motion-safe:transition-all" 
       />
 
       <div className="relative z-10 flex flex-col gap-4">
         <div className="flex items-start justify-between">
           <div className="flex gap-4 items-start flex-1">
-            <div className="relative group/image">
+            <div className="relative group/image perspective">
               <img
                 src={game.image}
                 alt={game.name}
                 width="64"
                 height="64"
+                fetchPriority="high"
                 className="w-16 h-16 rounded-xl shadow-lg object-cover
                          transition-all duration-500 transform
                          group-hover/image:scale-105 group-hover/image:shadow-cyan-500/20
-                         group-hover/image:rotate-2"
+                         group-hover/image:rotate-2 group-hover/image:-translate-y-0.5
+                         motion-safe:transform-gpu motion-safe:backface-visibility-hidden"
                 loading="lazy"
                 draggable={false}
                 onClick={(e) => e.stopPropagation()}
@@ -464,10 +468,11 @@ export const Games = () => {
             </div>
 
             <div className="flex-1 min-w-0">
-              <h3 className="text-xl font-bold text-white tracking-tight
-                         bg-gradient-to-r from-white to-white/90 bg-clip-text
-                         transition-colors duration-300
-                         group-hover:from-cyan-200 group-hover:to-white">
+              <h3 className="text-xl font-bold text-transparent bg-clip-text
+                         bg-gradient-to-r from-white to-white/90
+                         transition-all duration-300
+                         group-hover:from-cyan-200 group-hover:to-white
+                         motion-safe:transform">
                 {game.name}
               </h3>
               <p className="text-sm text-gray-400 mt-0.5 truncate
@@ -481,14 +486,16 @@ export const Games = () => {
                            backdrop-blur-sm transition-all duration-300
                            group-hover:border-cyan-500/30
                            group-hover:bg-black/40
-                           group-hover:translate-x-1">
+                           group-hover:translate-x-1
+                           motion-safe:transform-gpu">
                 <img
                   src={game.rankIcon}
                   alt={game.rank}
                   width="20"
                   height="20"
                   className="w-5 h-5 transition-transform duration-500
-                           group-hover:scale-110 group-hover:rotate-6"
+                           group-hover:scale-110 group-hover:rotate-6
+                           motion-safe:transform-gpu"
                   loading="lazy"
                   draggable={false}
                 />
@@ -512,6 +519,7 @@ export const Games = () => {
               backdrop-blur-sm transform
               hover:scale-110 active:scale-95
               focus:outline-none focus:ring-2 focus:ring-cyan-500/50
+              motion-safe:hover:scale-110 motion-safe:active:scale-95
               ${showSettings === game.id 
                 ? 'bg-red-500/20 hover:bg-red-500/30 text-red-400' 
                 : 'bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400'}
@@ -520,7 +528,8 @@ export const Games = () => {
           >
             <svg
               className={`w-5 h-5 transition-transform duration-500 ease-out
-                       ${showSettings === game.id ? 'rotate-180' : 'rotate-0'}`}
+                       ${showSettings === game.id ? 'rotate-180' : 'rotate-0'}
+                       motion-safe:transform-gpu`}
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -540,9 +549,10 @@ export const Games = () => {
         <div 
           className={`
             overflow-hidden transition-all duration-500 ease-in-out
+            motion-safe:transform-gpu
             ${showSettings === game.id 
-              ? 'max-h-[500px] opacity-100 translate-y-0' 
-              : 'max-h-0 opacity-0 -translate-y-4'}
+              ? 'max-h-[500px] opacity-100 translate-y-0 scale-100' 
+              : 'max-h-0 opacity-0 -translate-y-4 scale-95'}
           `}
         >
           <div className="bg-black/40 backdrop-blur-sm rounded-xl p-4
