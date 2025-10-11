@@ -141,9 +141,132 @@ export const Games = () => {
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
                 You will find information about my highest rank in a given game,
-                my name on the platform, and other game settings.
+                my name on the platform, and other game settings and my reviews.
               </p>
             </div>
+
+            <div>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {reviews.slice(0, 2).map((review, index) => (
+      <div
+        key={index}
+        tabIndex={0}
+        className="group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl 
+                   border border-gray-800 overflow-hidden
+                   transition-all duration-500 ease-out select-none will-change-transform
+                   hover:scale-[1.02] hover:shadow-3xl hover:border-cyan-500/20
+                   focus:outline-none focus:ring-4 focus:ring-cyan-500/40"
+        style={{
+          backgroundImage: `linear-gradient(165deg,
+            rgba(0,0,0,0.92) 0%,
+            rgba(0,0,0,0.85) 50%,
+            rgba(0,0,0,0.80) 100%), 
+            url(${review.image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          willChange: "transform",
+        }}
+      >
+        {/* Pozadí s gradientem */}
+        <div className="absolute inset-0 pointer-events-none rounded-2xl 
+                       bg-gradient-to-br from-black/80 via-black/60 to-transparent 
+                       transition-opacity duration-700 ease-out opacity-60
+                       group-hover:opacity-40 group-hover:from-black/70">
+        </div>
+
+        {/* Hlavní obsah */}
+        <div className="relative z-10 flex flex-col h-full justify-between">
+          <div>
+            {/* Nadpis */}
+            <h3 className="text-xl font-extrabold text-white tracking-tight drop-shadow-lg mb-2
+                         transition-colors duration-300 ease-out
+                         group-hover:text-blue-300">
+              {review.title}
+            </h3>
+            
+            {/* Tag */}
+            {review.tag && (
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 
+                            rounded-full border border-gray-700/50
+                            shadow-lg backdrop-blur-sm
+                            transition-all duration-500 ease-out
+                            group-hover:border-cyan-500/30 group-hover:scale-[1.02]">
+                <span className="text-sm text-gray-300 flex items-center gap-1.5">
+                  <span className="transition-transform duration-500 ease-out group-hover:scale-110">
+                    {getTagInfo(review.tag).icon}
+                  </span>
+                  <span className="font-medium">{getTagInfo(review.tag).text}</span>
+                </span>
+              </div>
+            )}
+
+            {/* Info sekce */}
+<div className="relative mt-4">
+  <div className="transition-all duration-700 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform
+                  opacity-0 max-h-0 translate-y-1 overflow-hidden
+                  group-hover:opacity-100 group-hover:max-h-[500px] group-hover:translate-y-0
+                  [transition-delay:75ms]">
+    <div className="space-y-1">
+      {Object.entries(review.info).map(([key, value], index) => (
+        <div key={index} 
+             className="flex gap-2 text-sm text-gray-200 leading-relaxed
+                        [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+          <span className="text-gray-400 min-w-[70px] font-medium">
+            {key.charAt(0).toUpperCase() + key.slice(1)}:
+          </span>
+          <span className="text-gray-300 break-words flex-1">
+            {value}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+</div>
+
+          {/* Spodní část s hodnocením a tlačítkem */}
+          <div className="relative flex items-end justify-between mt-4 h-8">
+            {/* Hodnocení s animací */}
+            <div className={`
+              absolute transform transition-all duration-700 ease-[cubic-bezier(.4,0,.2,1)]
+              ${review.review ? 'right-0 group-hover:left-0 group-hover:right-auto' : 'right-0'}
+            `}>
+              <span className="text-lg font-bold text-yellow-400 flex items-center gap-1.5
+                             [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]
+                             transition-colors duration-300
+                             group-hover:text-yellow-300">
+                <span className="text-yellow-500/90">★★★★★</span>
+                <span>{review.rating}</span>
+              </span>
+            </div>
+            
+            {/* Tlačítko recenze */}
+            {review.review && (
+              <a
+                href={review.review}
+                className="absolute right-0 transform transition-all duration-500 ease-out
+                         text-cyan-400 hover:text-cyan-300 text-sm font-semibold
+                         bg-black/30 hover:bg-black/50 backdrop-blur-sm 
+                         px-3 py-1.5 rounded-full
+                         border border-cyan-500/20 hover:border-cyan-500/30
+                         shadow-lg hover:shadow-cyan-500/10
+                         opacity-0 translate-x-2
+                         group-hover:opacity-100 group-hover:translate-x-0
+                         focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read review →
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="h-16"></div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {games.map((game) => (
@@ -283,31 +406,9 @@ export const Games = () => {
 
 
 
-
-
-
-
-
-
-
-
-
 {/* nova vaerze */}
-
-
-
-
+{/* 
           <div>
-            <div className="text-center mb-10">
-              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
-                Games
-              </h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
-                You will find information about my highest rank in a given game,
-                my name on the platform, and other game settings.
-              </p>
-            </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {games.map((game) => (
                 <div
@@ -425,151 +526,7 @@ export const Games = () => {
               ))}
             </div>
           </div>
-
-
-
-
-
-
-
-
-
-
-
-          <div className="h-16"></div>
-
-{/* revid z gamedata... Reviews sekce */}
-
-<div>
-  <div className="text-center mb-10">
-    <h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 
-                   bg-clip-text text-transparent drop-shadow-lg select-none">
-      Latest reviews
-    </h2>
-    <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
-      Check out my latest reviews of games, movies and TV series.
-    </p>
-  </div>
-
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {reviews.slice(0, 2).map((review, index) => (
-      <div
-        key={index}
-        tabIndex={0}
-        className="group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl 
-                   border border-gray-800 overflow-hidden
-                   transition-all duration-500 ease-out select-none will-change-transform
-                   hover:scale-[1.02] hover:shadow-3xl hover:border-cyan-500/20
-                   focus:outline-none focus:ring-4 focus:ring-cyan-500/40"
-        style={{
-          backgroundImage: `linear-gradient(165deg,
-            rgba(0,0,0,0.92) 0%,
-            rgba(0,0,0,0.85) 50%,
-            rgba(0,0,0,0.80) 100%), 
-            url(${review.image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          willChange: "transform",
-        }}
-      >
-        {/* Pozadí s gradientem */}
-        <div className="absolute inset-0 pointer-events-none rounded-2xl 
-                       bg-gradient-to-br from-black/80 via-black/60 to-transparent 
-                       transition-opacity duration-700 ease-out opacity-60
-                       group-hover:opacity-40 group-hover:from-black/70">
-        </div>
-
-        {/* Hlavní obsah */}
-        <div className="relative z-10 flex flex-col h-full justify-between">
-          <div>
-            {/* Nadpis */}
-            <h3 className="text-xl font-extrabold text-white tracking-tight drop-shadow-lg mb-2
-                         transition-colors duration-300 ease-out
-                         group-hover:text-blue-300">
-              {review.title}
-            </h3>
-            
-            {/* Tag */}
-            {review.tag && (
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 
-                            rounded-full border border-gray-700/50
-                            shadow-lg backdrop-blur-sm
-                            transition-all duration-500 ease-out
-                            group-hover:border-cyan-500/30 group-hover:scale-[1.02]">
-                <span className="text-sm text-gray-300 flex items-center gap-1.5">
-                  <span className="transition-transform duration-500 ease-out group-hover:scale-110">
-                    {getTagInfo(review.tag).icon}
-                  </span>
-                  <span className="font-medium">{getTagInfo(review.tag).text}</span>
-                </span>
-              </div>
-            )}
-
-            {/* Info sekce */}
-<div className="relative mt-4">
-  <div className="transition-all duration-700 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform
-                  opacity-0 max-h-0 translate-y-1 overflow-hidden
-                  group-hover:opacity-100 group-hover:max-h-[500px] group-hover:translate-y-0
-                  [transition-delay:75ms]">
-    <div className="space-y-1">
-      {Object.entries(review.info).map(([key, value], index) => (
-        <div key={index} 
-             className="flex gap-2 text-sm text-gray-200 leading-relaxed
-                        [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-          <span className="text-gray-400 min-w-[70px] font-medium">
-            {key.charAt(0).toUpperCase() + key.slice(1)}:
-          </span>
-          <span className="text-gray-300 break-words flex-1">
-            {value}
-          </span>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
-</div>
-
-          {/* Spodní část s hodnocením a tlačítkem */}
-          <div className="relative flex items-end justify-between mt-4 h-8">
-            {/* Hodnocení s animací */}
-            <div className={`
-              absolute transform transition-all duration-700 ease-[cubic-bezier(.4,0,.2,1)]
-              ${review.review ? 'right-0 group-hover:left-0 group-hover:right-auto' : 'right-0'}
-            `}>
-              <span className="text-lg font-bold text-yellow-400 flex items-center gap-1.5
-                             [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]
-                             transition-colors duration-300
-                             group-hover:text-yellow-300">
-                <span className="text-yellow-500/90">★★★★★</span>
-                <span>{review.rating}</span>
-              </span>
-            </div>
-            
-            {/* Tlačítko recenze */}
-            {review.review && (
-              <a
-                href={review.review}
-                className="absolute right-0 transform transition-all duration-500 ease-out
-                         text-cyan-400 hover:text-cyan-300 text-sm font-semibold
-                         bg-black/30 hover:bg-black/50 backdrop-blur-sm 
-                         px-3 py-1.5 rounded-full
-                         border border-cyan-500/20 hover:border-cyan-500/30
-                         shadow-lg hover:shadow-cyan-500/10
-                         opacity-0 translate-x-2
-                         group-hover:opacity-100 group-hover:translate-x-0
-                         focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Read review →
-              </a>
-            )}
-          </div>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
+*/}
 
         </RevealOnScroll>
       </div>
