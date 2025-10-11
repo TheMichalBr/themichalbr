@@ -18,7 +18,7 @@ export const reviews = [
     tag: "game",
     rating: "10/10",
     info: {
-      year: "2023",
+      year: "2020",
       genre: "RPG",
       platform: "PC (Steam)",
       additional: "Including datadisk: Phantom Liberty",
