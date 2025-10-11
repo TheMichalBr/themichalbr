@@ -2,9 +2,6 @@ import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { reviews } from "./GamesData";
 
-import R1 from "/games/GR_R1.webp";
-import R2 from "/games/GR_R2.webp";
-
 import G1 from "/games/G_CS2.webp";
 import G2 from "/games/G_OW2.webp";
 import G3 from "/games/G_APEX.webp";
@@ -140,7 +137,7 @@ export const Games = () => {
           <div>
             <div className="text-center mb-10">
               <h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
-                Games information
+                Games
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
                 You will find information about my highest rank in a given game,
@@ -283,86 +280,273 @@ export const Games = () => {
             </div>
           </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+{/* nova vaerze */}
+
+
+
+
+          <div>
+            <div className="text-center mb-10">
+              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
+                Games
+              </h2>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
+                You will find information about my highest rank in a given game,
+                my name on the platform, and other game settings.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {games.map((game) => (
+                <div
+                  key={game.id}
+                  tabIndex={0}
+                  className={`
+                    group relative p-6 bg-black/60 backdrop-blur-xl rounded-2xl 
+                    border border-white/10 shadow-2xl
+                    transition-all duration-500
+                    hover:scale-[1.02] hover:shadow-3xl hover:border-blue-500/30
+                    focus:outline-none focus:ring-2 focus:ring-blue-500/50
+                    select-none
+                    ${showSettings === game.id ? "ring-2 ring-blue-400/60" : ""}
+                  `}
+                >
+                  
+                  <div 
+                    className="absolute inset-0 rounded-2xl z-0"
+                    style={{
+                      backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.95) 50%, rgba(0,0,0,0.8)), url(${game.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  />
+
+                  
+                  <div className="relative z-10">
+                    <div className="flex items-start gap-4">
+                      
+                      <div className="relative group/image">
+                        <img
+                          src={game.image}
+                          alt={game.name}
+                          className="w-16 h-16 rounded-xl border border-gray-700/50 
+                                   shadow-lg transition-all duration-500 
+                                   group-hover/image:scale-105 group-hover/image:border-blue-500/30"
+                          draggable={false}
+                        />
+                      </div>
+
+                      
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-xl font-extrabold text-white tracking-tight drop-shadow">
+                          {game.name}
+                        </h3>
+                        <p className="text-sm text-gray-400 mt-0.5">
+                          {game.platform}
+                        </p>
+                        <div className="flex items-center gap-2 mt-2">
+                          <img
+                            src={game.rankIcon}
+                            alt={`${game.rank} Icon`}
+                            className="w-5 h-5 drop-shadow"
+                            draggable={false}
+                          />
+                          <p className="text-sm font-semibold bg-gradient-to-r 
+                                      from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                            {game.rank}
+                          </p>
+                        </div>
+                      </div>
+
+                      
+                      <button
+                        onClick={() => toggleSettings(game.id)}
+                        className={`
+                          p-2.5 rounded-full transition-all duration-300
+                          ${showSettings === game.id 
+                            ? "bg-red-500/20 hover:bg-red-500/30 text-red-400"
+                            : "bg-blue-500/20 hover:bg-blue-500/30 text-blue-400"}
+                        `}
+                        aria-label="Toggle Settings"
+                      >
+                        <svg
+                          className={`w-5 h-5 transition-transform duration-500
+                            ${showSettings === game.id ? "rotate-180" : "rotate-0"}`}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                    </div>
+
+                   
+                    <div
+                      className={`
+                        mt-4 overflow-hidden transition-all duration-500
+                        ${showSettings === game.id ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}
+                      `}
+                    >
+                      <div className="bg-black/40 backdrop-blur-sm rounded-xl p-4 
+                                    border border-gray-700/50">
+                        <h4 className="text-sm font-medium text-cyan-400 mb-3">
+                          Settings and information
+                        </h4>
+                        <div className="space-y-2 text-sm">
+                          {Object.entries(game.settings).map(([key, value]) => (
+                            <div key={key} className="flex gap-2">
+                              <span className="text-gray-400 font-medium min-w-[80px]">
+                                {key}:
+                              </span>
+                              <span className="text-gray-300 break-words">
+                                {value}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
           <div className="h-16"></div>
 
 {/* revid z gamedata... Reviews sekce */}
 
 <div>
   <div className="text-center mb-10">
-    <h2 className="text-4xl font-bold mb-8 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
+    <h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 
+                   bg-clip-text text-transparent drop-shadow-lg select-none">
       Latest reviews
     </h2>
+    <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
+      Check out my latest reviews of games, movies and TV series.
+    </p>
   </div>
 
   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-    {reviews.slice(0, 2).map((review) => (
+    {reviews.slice(0, 2).map((review, index) => (
       <div
-        key={review.id}
-        className="group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/10
-          transition-all duration-500 select-none focus:outline-none focus:ring-4 focus:ring-cyan-500/40 overflow-hidden"
+        key={index}
         tabIndex={0}
-        style={{ cursor: "pointer" }}
+        className="group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-800
+          transition-all duration-500 ease-out select-none will-change-transform
+          focus:outline-none focus:ring-4 focus:ring-cyan-500/40
+          hover:scale-[1.02] hover:shadow-3xl hover:border-cyan-500/20"
+        style={{
+          backgroundImage: `linear-gradient(165deg,
+            rgba(0,0,0,0.92) 0%,
+            rgba(0,0,0,0.85) 50%,
+            rgba(0,0,0,0.80) 100%), 
+            url(${review.image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          cursor: "pointer",
+        }}
       >
-        <div
-          className="absolute inset-0 rounded-3xl z-0 transition-transform duration-700 ease-[cubic-bezier(.4,2,.3,1)]
-            will-change-transform group-hover:scale-105"
-          style={{
-            backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${review.image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          aria-hidden="true"
-        />
-        <div className="absolute inset-0 pointer-events-none rounded-3xl bg-black/40 transition-all duration-500 group-hover:bg-black/70 z-10"></div>
-        <div className="relative z-20 flex flex-col h-full justify-between">
+        <div className="absolute inset-0 pointer-events-none rounded-2xl bg-gradient-to-br from-black/80 via-black/60 to-transparent 
+          transition-all duration-700 ease-out opacity-60
+          group-hover:opacity-40 group-hover:from-black/70">
+        </div>
+
+        <div className="relative z-10 flex flex-col h-full justify-between">
           <div>
-            <h3 className="text-2xl font-extrabold text-white tracking-tight drop-shadow select-none mb-2">
+            <h3 className="text-xl font-extrabold text-white tracking-tight drop-shadow-lg mb-2
+                         transition-colors duration-300 ease-out
+                         group-hover:text-blue-300">
               {review.title}
             </h3>
-{review.tag && (
-      <span 
-        className={`
-          inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium
-          ${getTagInfo(review.tag).bgColor}
-          ${getTagInfo(review.tag).color}
-          ${getTagInfo(review.tag).borderColor}
-          border backdrop-blur-sm
-          transition-all duration-300
-        `}
-      >
-        <span className="text-sm">{getTagInfo(review.tag).icon}</span>
-        {getTagInfo(review.tag).text}
-      </span>
-    )}
-          <div className="h-3"></div>
-            <div className="space-y-1">
-              <div className="transition-all duration-500 ease-in-out opacity-0 max-h-0 translate-y-2 pointer-events-none
-                  group-hover:opacity-100 group-hover:max-h-20 group-hover:translate-y-0 group-hover:pointer-events-auto">
-                {review.additionalInfo.map((info, index) => (
-                  <p key={index} className="text-sm text-gray-200 select-none">{info}</p>
+            
+            {review.tag && (
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 
+                            rounded-full border border-gray-700/50
+                            shadow-lg backdrop-blur-sm
+                            transition-all duration-500 ease-out
+                            group-hover:border-cyan-500/30 group-hover:scale-[1.02]">
+                <span className="text-sm text-gray-300 flex items-center gap-1.5">
+                  <span className="transition-transform duration-500 ease-out group-hover:scale-110">
+                    {getTagInfo(review.tag).icon}
+                  </span>
+                  <span className="font-medium">{getTagInfo(review.tag).text}</span>
+                </span>
+              </div>
+            )}
+
+            <div className="space-y-1 mt-4">
+              <div className="transition-all duration-500 ease-out
+                            opacity-0 max-h-0 translate-y-2 pointer-events-none
+                            group-hover:opacity-100 group-hover:max-h-32 group-hover:translate-y-0 
+                            group-hover:pointer-events-auto [transition-delay:100ms]">
+                {Object.entries(review.info).map(([key, value], index) => (
+                  <p key={index} className="text-sm text-gray-200 leading-relaxed mb-1
+                                          [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                    <span className="text-gray-400">{key.charAt(0).toUpperCase() + key.slice(1)}:</span>{' '}
+                    <span className="text-gray-200">{value}</span>
+                  </p>
                 ))}
               </div>
             </div>
           </div>
-          <div className="flex items-end justify-between mt-6 h-10 relative">
-            <span className="text-lg font-bold text-yellow-400 drop-shadow select-none absolute bottom-0 transition-all duration-500
-              right-0 group-hover:left-0 group-hover:right-auto group-hover:translate-x-0 group-hover:opacity-100 opacity-100 z-10"
-              style={{ transition: "all 0.5s cubic-bezier(.4,2,.3,1)" }}>
-              ★★★★★ {review.rating}
-            </span>
-            {review.isReviewAvailable && review.reviewUrl && (
-  <a
-    href={review.reviewUrl}
-    className="text-blue-500 hover:text-cyan-200 text-base font-semibold select-text focus:outline-none focus:ring-2
-      focus:ring-cyan-400 rounded-full px-3 py-1 bg-black/30 backdrop-blur-md absolute right-0 bottom-0 opacity-0
-      pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-500 z-10"
-    tabIndex={0}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Read review →
-  </a>
-)}
+
+          <div className="flex items-end justify-between mt-4">
+            <div className={`
+              absolute transform transition-all duration-700 ease-[cubic-bezier(.4,0,.2,1)]
+              ${review.review ? 'right-0 group-hover:left-0 group-hover:right-auto' : 'right-0'}
+            `}>
+              <span className="text-lg font-bold text-yellow-400 flex items-center gap-1.5
+                             [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]
+                             transition-colors duration-300
+                             group-hover:text-yellow-300">
+                <span className="text-yellow-500/90">★★★★★</span>
+                <span>{review.rating}</span>
+              </span>
+            </div>
+            
+            {review.review && (
+              <a
+                href={review.review}
+                className="absolute right-0 transform transition-all duration-500 ease-out
+                         text-cyan-400 hover:text-cyan-300 text-sm font-semibold
+                         bg-black/30 hover:bg-black/50 backdrop-blur-sm 
+                         px-3 py-1.5 rounded-full
+                         border border-cyan-500/20 hover:border-cyan-500/30
+                         shadow-lg hover:shadow-cyan-500/10
+                         opacity-0 translate-x-2
+                         group-hover:opacity-100 group-hover:translate-x-0
+                         focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Read review →
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -370,214 +554,13 @@ export const Games = () => {
   </div>
 </div>
 
-
-
-
-{/*
-
-          <div>
-            <div className="text-center mb-10">
-              <h2 className="text-4xl font-bold mb-8 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
-                Latest reviews
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div
-                className="
-        group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/10
-        transition-all duration-500
-        select-none
-        focus:outline-none focus:ring-4 focus:ring-cyan-500/40
-        overflow-hidden
-      "
-                tabIndex={0}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <div
-                  className="
-          absolute inset-0 rounded-3xl z-0
-          transition-transform duration-700 ease-[cubic-bezier(.4,2,.3,1)]
-          will-change-transform
-          group-hover:scale-105
-        "
-                  style={{
-                    backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${R1})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                  aria-hidden="true"
-                />
-                <div className="absolute inset-0 pointer-events-none rounded-3xl bg-black/40 transition-all duration-500 group-hover:bg-black/70 z-10"></div>
-                <div className="relative z-20 flex flex-col h-full justify-between">
-                  <div>
-                    <h3 className="text-2xl font-extrabold text-white tracking-tight drop-shadow select-none mb-2">
-                      Doom Eternal
-                    </h3>
-                    <div className="space-y-1">
-                      <div
-                        className="
-                transition-all duration-500 ease-in-out
-                opacity-0 max-h-0 translate-y-2 pointer-events-none
-                group-hover:opacity-100 group-hover:max-h-20 group-hover:translate-y-0 group-hover:pointer-events-auto
-              "
-                      >
-                        <p className="text-sm text-gray-200 select-none">
-                          Game
-                        </p>
-                        <p className="text-sm text-gray-200 select-none">
-                          Platform: PC (Steam)
-                        </p>
-                        <p className="text-sm text-gray-200 select-none">
-                          Difficulty: Nightmare (100%)
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-end justify-between mt-6 h-10 relative">
-                    <span
-                      className={`
-              text-lg font-bold text-yellow-400 drop-shadow select-none
-              absolute bottom-0 transition-all duration-500
-              right-0 group-hover:left-0 group-hover:right-auto
-              group-hover:translate-x-0
-              group-hover:opacity-100
-              opacity-100
-              z-10
-            `}
-                      style={{
-                        transition: "all 0.5s cubic-bezier(.4,2,.3,1)",
-                      }}
-                    >
-                      ★★★★★ 9.2/10
-                    </span>
-                    <a
-                      href="https://steamcommunity.com/id/misakbr2/recommended/782330/"
-                      className={`
-              text-cyan-300 hover:text-cyan-200 text-base font-semibold select-text focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded px-3 py-1 bg-black/30 backdrop-blur-md
-              absolute right-0 bottom-0 opacity-0 pointer-events-none
-              group-hover:opacity-100 group-hover:pointer-events-auto
-              transition-all duration-500
-              z-10
-            `}
-                      tabIndex={0}
-                      style={{
-                        WebkitUserSelect: "text",
-                        userSelect: "text",
-                        transition: "all 0.5s cubic-bezier(.4,2,.3,1)",
-                      }}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Read review →
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="
-        group relative p-8 min-h-[320px] bg-black/60 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/10
-        transition-all duration-500
-        select-none
-        focus:outline-none focus:ring-4 focus:ring-cyan-500/40
-        overflow-hidden
-      "
-                tabIndex={0}
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                <div
-                  className="
-          absolute inset-0 rounded-3xl z-0
-          transition-transform duration-700 ease-[cubic-bezier(.4,2,.3,1)]
-          will-change-transform
-          group-hover:scale-105
-        "
-                  style={{
-                    backgroundImage: `linear-gradient(to bottom right, rgba(10,30,60,0.18) 60%, rgba(0,0,0,0.18)), url(${R2})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                  aria-hidden="true"
-                />
-                <div className="absolute inset-0 pointer-events-none rounded-3xl bg-black/40 transition-all duration-500 group-hover:bg-black/70 z-10"></div>
-                <div className="relative z-20 flex flex-col h-full justify-between">
-                  <div>
-                    <h3 className="text-2xl font-extrabold text-white tracking-tight drop-shadow select-none mb-2">
-                      Cyberpunk 2077
-                    </h3>
-                    <div className="space-y-1">
-                      <div
-                        className="
-                transition-all duration-500 ease-in-out
-                opacity-0 max-h-0 translate-y-2 pointer-events-none
-                group-hover:opacity-100 group-hover:max-h-20 group-hover:translate-y-0 group-hover:pointer-events-auto
-              "
-                      >
-                        <p className="text-sm text-gray-200 select-none">
-                          Game
-                        </p>
-                        <p className="text-sm text-gray-200 select-none">
-                          Platform: PC (Steam)
-                        </p>
-                        <p className="text-sm text-gray-200 select-none">
-                          Including datadisk: Phantom Liberty
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-end justify-between mt-6 h-10 relative">
-                    <span
-                      className={`
-              text-lg font-bold text-yellow-400 drop-shadow select-none
-              absolute bottom-0 transition-all duration-500
-              right-0 group-hover:left-0 group-hover:right-auto
-              group-hover:translate-x-0
-              group-hover:opacity-100
-              opacity-100
-              z-10
-            `}
-                      style={{
-                        transition: "all 0.5s cubic-bezier(.4,2,.3,1)",
-                      }}
-                    >
-                      ★★★★★ 10/10
-                    </span>
-                    <a
-                      href="#"
-                      className={`
-              text-cyan-300 hover:text-cyan-200 text-base font-semibold select-text focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded px-3 py-1 bg-black/30 backdrop-blur-md
-              absolute right-0 bottom-0 opacity-0 pointer-events-none
-              group-hover:opacity-100 group-hover:pointer-events-auto
-              transition-all duration-500
-              z-10
-            `}
-                      tabIndex={0}
-                      style={{
-                        WebkitUserSelect: "text",
-                        userSelect: "text",
-                        transition: "all 0.5s cubic-bezier(.4,2,.3,1)",
-                      }}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Read review →
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          */}
         </RevealOnScroll>
       </div>
     </section>
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const getTagInfo = (tag) => {
   switch (tag) {
     case 'game':
