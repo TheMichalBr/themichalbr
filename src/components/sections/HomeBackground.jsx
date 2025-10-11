@@ -1,17 +1,24 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Color } from "three";
-import { forwardRef, useRef, useMemo, useLayoutEffect } from "react";
+import { Color, PlaneGeometry } from "three";
+import { forwardRef, useRef, useMemo, useLayoutEffect, useEffect } from "react";
 
 const hexToNormalizedRGB = (hex) => {
-    hex = hex.replace("#", "");
-    return [
-        parseInt(hex.slice(0, 2), 16) / 255,
-        parseInt(hex.slice(2, 4), 16) / 255,
-        parseInt(hex.slice(4, 6), 16) / 255,
-    ];
+    try {
+        const value = parseInt(hex.slice(1), 16);
+        return [
+            ((value >> 16) & 255) / 255,
+            ((value >> 8) & 255) / 255,
+            (value & 255) / 255,
+        ];
+        // eslint-disable-next-line no-unused-vars
+    } catch (e) {
+        console.warn("Invalid hex color:", hex);
+        return [0, 0, 0];
+    }
 };
 
 const vertexShader = `
+precision highp float;
 varying vec2 vUv;
 varying vec3 vPosition;
 
@@ -23,6 +30,7 @@ void main() {
 `;
 
 const fragmentShader = `
+precision highp float;
 varying vec2 vUv;
 varying vec3 vPosition;
 
@@ -33,66 +41,83 @@ uniform float uScale;
 uniform float uRotation;
 uniform float uNoiseIntensity;
 
-const float e = 2.71828182845904523536;
+#define E 2.71828182845904523536
+#define PI 3.14159265359
 
 float noise(vec2 texCoord) {
-    float G = e;
-    vec2  r = (G * sin(G * texCoord));
+    vec2 r = (E * sin(E * texCoord));
     return fract(r.x * r.y * (1.0 + texCoord.x));
 }
 
 vec2 rotateUvs(vec2 uv, float angle) {
     float c = cos(angle);
     float s = sin(angle);
-    mat2  rot = mat2(c, -s, s, c);
-    return rot * uv;
+    return mat2(c, -s, s, c) * uv;
 }
 
 void main() {
-    float rnd        = noise(gl_FragCoord.xy);
-    vec2  uv         = rotateUvs(vUv * uScale, uRotation);
-    vec2  tex        = uv * uScale;
-    float tOffset    = uSpeed * uTime;
+    float rnd = noise(gl_FragCoord.xy);
+    vec2  uv = rotateUvs(vUv * uScale, uRotation);
+    float tOffset = uSpeed * uTime;
 
-    tex.y += 0.03 * sin(8.0 * tex.x - tOffset);
+    vec2 tex = uv * uScale;
+    float wave = 0.03 * sin(8.0 * tex.x - tOffset);
+    tex.y += wave;
 
-    float pattern = 0.6 +
-                  0.4 * sin(5.0 * (tex.x + tex.y +
-                                   cos(3.0 * tex.x + 5.0 * tex.y) +
-                                   0.02 * tOffset) +
-                           sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
+    float pattern = 0.6 + 0.4 * sin(
+        5.0 * (tex.x + tex.y + cos(3.0 * tex.x + 5.0 * tex.y) + 0.02 * tOffset) +
+        sin(20.0 * (tex.x + tex.y - 0.1 * tOffset))
+    );
 
-    vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 15.0 * uNoiseIntensity;
-    col.a = 1.0;
-    gl_FragColor = col;
+    vec3 finalColor = uColor * pattern - (rnd / 15.0 * uNoiseIntensity);
+    finalColor = pow(finalColor, vec3(0.9));
+    gl_FragColor = vec4(finalColor, 1.0);
 }
 `;
 
 const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
     const { viewport } = useThree();
+    const isActive = useRef(true);
+    const lastTime = useRef(0);
+
+    useEffect(() => {
+        return () => {
+            isActive.current = false;
+        };
+    }, []);
 
     useLayoutEffect(() => {
-        if (ref.current) {
+        if (ref.current && isActive.current) {
             ref.current.scale.set(viewport.width, viewport.height, 1);
         }
     }, [ref, viewport]);
 
     useFrame((_, delta) => {
-        ref.current.material.uniforms.uTime.value += 0.1 * delta;
+        if (!isActive.current || !ref.current?.material?.uniforms) return;
+
+        const targetDelta = Math.min(delta, 0.016667);
+        const smoothDelta = lastTime.current * 0.9 + targetDelta * 0.1;
+        lastTime.current = smoothDelta;
+
+        ref.current.material.uniforms.uTime.value += smoothDelta * 0.5;
     });
+
+    const geometry = useMemo(() => new PlaneGeometry(1, 1, 1, 1), []);
 
     return (
         <mesh ref={ref}>
-            <planeGeometry args={[1, 1, 1, 1]} />
+            <primitive object={geometry} attach="geometry" />
             <shaderMaterial
                 uniforms={uniforms}
                 vertexShader={vertexShader}
                 fragmentShader={fragmentShader}
+                transparent={false}
+                depthTest={false}
+                depthWrite={false}
             />
         </mesh>
     );
 });
-SilkPlane.displayName = "SilkPlane";
 
 const HomeBackGround = ({
     speed = 5,
@@ -117,7 +142,7 @@ const HomeBackGround = ({
 
     return (
         <Canvas
-            dpr={[1, 2]}
+            dpr={Math.min(window.devicePixelRatio, 2)}
             frameloop="always"
             style={{
                 position: "absolute",
@@ -127,6 +152,17 @@ const HomeBackGround = ({
                 height: "100%",
                 zIndex: 0,
                 pointerEvents: "none",
+                willChange: "transform",
+                WebkitBackfaceVisibility: "hidden",
+                MozBackfaceVisibility: "hidden",
+            }}
+            gl={{
+                antialias: false,
+                alpha: false,
+                powerPreference: "high-performance",
+                stencil: false,
+                depth: false,
+                failIfMajorPerformanceCaveat: true,
             }}
         >
             <SilkPlane ref={meshRef} uniforms={uniforms} />
