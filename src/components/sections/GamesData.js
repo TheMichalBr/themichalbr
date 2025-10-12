@@ -2,6 +2,17 @@ import RH from "/games/GR_RH.webp";
 
 export const reviews = [
   {
+    title: "Blue Protocol: Star Resonance",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3681810/bab705e2414243cd247a14a07b2d5490dcd2cefd/header.jpg?t=1760243884",
+    tag: "game",
+    rating: "5.0/10",
+    info: {
+      year: "2025",
+      genre: "MMORPG",
+      platform: "PC (Steam)",
+    },
+  },
+  {
     title: "The SpongeBob SquarePants Movie",
     image:
       "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/346/158346718_8fc204.jpg",
