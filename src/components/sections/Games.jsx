@@ -140,8 +140,9 @@ export const Games = () => {
                 Games
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
-                You will find information about my highest rank in these games,
-                my name on the platform, game settings, reviews and more.
+                Here you can find few information about my competitive games, 
+                my highest ranks in these games, in-game settings, 
+                and my newest reviews.
               </p>
             </div>
 
@@ -152,9 +153,9 @@ export const Games = () => {
         key={index}
         tabIndex={0}
         className="group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl 
-                   border border-gray-800 overflow-hidden
+                   border border-gray-900 overflow-hidden
                    transition-all duration-500 ease-out select-none will-change-transform
-                   hover:scale-[1.02] hover:shadow-3xl hover:border-cyan-500/20
+                   hover:scale-[1.02] hover:shadow-2xl hover:border-cyan-500/20
                    focus:outline-none focus:ring-3 focus:ring-blue-500/40"
         style={{
           backgroundImage: `linear-gradient(165deg,
@@ -178,9 +179,9 @@ export const Games = () => {
         <div className="relative z-10 flex flex-col h-full justify-between">
           <div>
             {/* Nadpis */}
-            <h3 className="text-xl font-bold text-white tracking-tight drop-shadow-lg mb-2
+            <h3 className="text-xl font-bold text-gray-300 tracking-tight drop-shadow-lg mb-2
                          transition-colors duration-300 ease-out
-                         group-hover:text-blue-300">
+                         group-hover:text-gray-200">
               {review.title}
             </h3>
             
@@ -235,7 +236,25 @@ export const Games = () => {
                              [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]
                              transition-colors duration-300
                              group-hover:text-yellow-300">
-                <span className="text-yellow-500/90">★★★★★</span>
+                <span className="relative flex">
+                  {/* Šedé hvězdičky na pozadí */}
+                  <span className="flex text-gray-600">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span key={`bg-${star}`}>★</span>
+                    ))}
+                  </span>
+                  {/* Žluté hvězdičky přes ně */}
+                  <span 
+                    className="absolute top-0 left-0 flex overflow-hidden text-yellow-500/90"
+                    style={{
+                      width: `${(parseFloat(review.rating) / 2 / 5) * 100}%`
+                    }}
+                  >
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span key={`fg-${star}`}>★</span>
+                    ))}
+                  </span>
+                </span>
                 <span>{review.rating}</span>
               </span>
             </div>
@@ -274,7 +293,7 @@ export const Games = () => {
                   key={game.id}
                   tabIndex={0}
                   className={`
-              group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-800
+              group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-900
               transition-all duration-500
               focus:outline-none focus:ring-3 focus:ring-blue-500/40
               hover:scale-[1.025] hover:shadow-3xl
@@ -324,52 +343,36 @@ export const Games = () => {
                     <button
                       onClick={() => toggleSettings(game.id)}
                       className={`
-    absolute top-5 right-5 z-20 bg-blue-700 text-white p-2 rounded-full shadow-lg
+    absolute top-5 right-5 z-20  p-2 rounded-full shadow-lg
     transition-all duration-300
     focus:outline-none focus:ring-2 focus:ring-cyan-400
-    group/arrow
+    group/arrow bg-blue-500/20 hover:bg-cyan-500/30 text-cyan-400
     ${showSettings === game.id
                           ? "bg-red-500 hover:bg-red-400 scale-110"
                           : "hover:bg-blue-400 hover:scale-110 active:scale-95"
                         }
   `}
-                      aria-label="Toggle Settings"
+                      aria-label="Show settings"
                       tabIndex={0}
                     >
                       <span className="block w-6 h-6 relative">
                         <svg
-                          className={`
-        absolute left-0 top-0 w-6 h-6 transition-transform duration-500 ease-[cubic-bezier(.4,2,.3,1)]
-        ${showSettings === game.id
-                              ? "rotate-180 translate-y-1"
-                              : "rotate-0 -translate-y-1"
-                            }
-      `}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <polyline points="6 15 12 9 18 15" />
-                        </svg>
-
-                        <svg
-                          className={`
-        absolute left-0 top-0 w-6 h-6 opacity-30 blur-[2px] transition-all duration-500
-        ${showSettings === game.id ? "text-red-300" : "text-cyan-300"}
-      `}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          aria-hidden="true"
-                        >
-                          <polyline points="6 15 12 9 18 15" />
-                        </svg>
+              className={`w-5 h-5 transition-transform duration-500 ease-out
+                       ${showSettings === game.id ? 'rotate-180' : 'rotate-0'}
+                       motion-safe:transform-gpu`}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                d="M19 9l-7 7-7-7"
+                className="transition-all duration-300
+                         group-hover:stroke-current" 
+              />
+            </svg>
                       </span>
                     </button>
 
@@ -379,7 +382,10 @@ export const Games = () => {
                   ${showSettings === game.id ? "max-h-60 mt-4 opacity-100" : "max-h-0 opacity-0"}
                 `}
                     >
-                      <div className="bg-gray-950/95 text-white p-6 rounded-xl shadow-lg border border-gray-700 hover:border-cyan-500 transition-colors duration-300 select-text">
+                      <div className="bg-black/40 backdrop-blur-sm rounded-xl p-4
+                       border border-white/10 transition-all duration-300
+                       hover:border-cyan-500/30 hover:bg-black/50
+                       group-hover:shadow-lg">
                         <h4 className="text-sm font-bold mb-4 tracking-wide text-cyan-400">
                           Settings and information
                         </h4>
@@ -389,7 +395,7 @@ export const Games = () => {
                               <span className="font-semibold text-gray-200">
                                 {key}:
                               </span>
-                              <span className="text-gray-300 break-all">
+                              <span className="text-gray-300 break-all select-text cursor-text">
                                 {value}
                               </span>
                             </li>
@@ -403,7 +409,7 @@ export const Games = () => {
             </div>
           </div>
 
-{/* <div className="h-16"></div> //test kod
+ <div className="h-16"></div>
 
 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
   {games.map((game) => (
@@ -586,129 +592,6 @@ export const Games = () => {
     </div>
   ))}
 </div>
-*/}
-{/* nova vaerze */}
-{/* 
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {games.map((game) => (
-                <div
-                  key={game.id}
-                  tabIndex={0}
-                  className={`
-                    group relative p-6 bg-black/60 backdrop-blur-xl rounded-2xl 
-                    border border-white/10 shadow-2xl
-                    transition-all duration-500
-                    hover:scale-[1.02] hover:shadow-3xl hover:border-blue-500/30
-                    focus:outline-none focus:ring-2 focus:ring-blue-500/50
-                    select-none
-                    ${showSettings === game.id ? "ring-2 ring-blue-400/60" : ""}
-                  `}
-                >
-                  
-                  <div 
-                    className="absolute inset-0 rounded-2xl z-0"
-                    style={{
-                      backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.95) 50%, rgba(0,0,0,0.8)), url(${game.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  />
-
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-start gap-4">
-                      
-                      <div className="relative group/image">
-                        <img
-                          src={game.image}
-                          alt={game.name}
-                          className="w-16 h-16 rounded-xl border border-gray-700/50 
-                                   shadow-lg transition-all duration-500 
-                                   group-hover/image:scale-105 group-hover/image:border-blue-500/30"
-                          draggable={false}
-                        />
-                      </div>
-
-                      
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-xl font-extrabold text-white tracking-tight drop-shadow">
-                          {game.name}
-                        </h3>
-                        <p className="text-sm text-gray-400 mt-0.5">
-                          {game.platform}
-                        </p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <img
-                            src={game.rankIcon}
-                            alt={`${game.rank} Icon`}
-                            className="w-5 h-5 drop-shadow"
-                            draggable={false}
-                          />
-                          <p className="text-sm font-semibold bg-gradient-to-r 
-                                      from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                            {game.rank}
-                          </p>
-                        </div>
-                      </div>
-
-                      
-                      <button
-                        onClick={() => toggleSettings(game.id)}
-                        className={`
-                          p-2.5 rounded-full transition-all duration-300
-                          ${showSettings === game.id 
-                            ? "bg-red-500/20 hover:bg-red-500/30 text-red-400"
-                            : "bg-blue-500/20 hover:bg-blue-500/30 text-blue-400"}
-                        `}
-                        aria-label="Toggle Settings"
-                      >
-                        <svg
-                          className={`w-5 h-5 transition-transform duration-500
-                            ${showSettings === game.id ? "rotate-180" : "rotate-0"}`}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </button>
-                    </div>
-
-                   
-                    <div
-                      className={`
-                        mt-4 overflow-hidden transition-all duration-500
-                        ${showSettings === game.id ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}
-                      `}
-                    >
-                      <div className="bg-black/40 backdrop-blur-sm rounded-xl p-4 
-                                    border border-gray-700/50">
-                        <h4 className="text-sm font-medium text-cyan-400 mb-3">
-                          Settings and information
-                        </h4>
-                        <div className="space-y-2 text-sm">
-                          {Object.entries(game.settings).map(([key, value]) => (
-                            <div key={key} className="flex gap-2">
-                              <span className="text-gray-400 font-medium min-w-[80px]">
-                                {key}:
-                              </span>
-                              <span className="text-gray-300 break-words">
-                                {value}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-*/}
-
         </RevealOnScroll>
       </div>
     </section>
