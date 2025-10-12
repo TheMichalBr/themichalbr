@@ -59,7 +59,7 @@ export const Home = () => {
           <div className="flex flex-col sm:flex-row justify-center gap-4 items-center mb-12">
             <a
               href="#aboutme"
-              className="group relative bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 text-white py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transform active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+              className="group relative bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 text-white py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transform active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 select-none cursor-pointer"
               aria-label="Learn more about me"
             >
               <span className="relative z-10 flex items-center justify-center gap-2 text-sm">
@@ -83,7 +83,7 @@ export const Home = () => {
 
             <a
               href="#footer"
-              className="group relative border-2 border-indigo-600/50 text-blue-500 py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:border-blue-400 hover:text-blue-200 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-blue-500/10 backdrop-blur-sm transform hover:scale-105 active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+              className="group relative border-2 border-indigo-600/50 text-blue-500 py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:border-blue-400 hover:text-blue-200 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-blue-500/10 backdrop-blur-sm transform hover:scale-105 active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 select-none cursor-pointer"
               aria-label="Get in touch with me"
             >
               <span className="relative z-10 flex items-center justify-center gap-2 text-sm animate-pulse">
