@@ -27,7 +27,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
         <div className="flex justify-between items-center h-16">
           <a
             href="#home"
-            className="font-mono text-4xl text-white hover:scale-106 transition-colors duration-100"
+            className="font-mono text-4xl text-white hover:scale-106 transition-colors duration-100 select-none cursor-pointer"
             style={{ fontFamily: "Bellibish" }}
           >
             M
@@ -61,7 +61,7 @@ export const Navbar = ({ menuOpen, setMenuOpen }) => {
               }}
             />
           </div>
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-8 select-none cursor-pointer">
             <a
               href="#aboutme"
               className={`text-gray-300 hover:text-white transition-colors hover:scale-102 duration-300 ${activeSection === "aboutme" ? "font-bold" : ""}`}
