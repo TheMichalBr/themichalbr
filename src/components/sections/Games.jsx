@@ -306,34 +306,9 @@ export const Games = () => {
 
             <div className="h-16"></div>
 
-            {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {games.map((game) => (
-                <div
-                  key={game.id}
-                  tabIndex={0}
-                  className={`
-              group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-900
-              transition-all duration-500
-              focus:outline-none focus:ring-3 focus:ring-blue-500/40
-              hover:scale-[1.025] hover:shadow-3xl
-              select-none
-              ${showSettings === game.id ? "ring-2 ring-blue-400/60" : ""}
-            `}
-                  style={{
-                    backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.92) 60%, rgba(0,0,0,0.7)), url(${game.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <div className="absolute inset-0 pointer-events-none rounded-2xl bg-gradient-to-br from-black/80 via-black/60 to-transparent transition-all duration-500 group-hover:from-black/90 group-hover:via-black/70"></div>
-
-                  </div>
-                </div>
-              ))}
-            </div> */}
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {" "}
+              {/* p-5 */}
               {games.map((game) => (
                 <div
                   key={game.id}
@@ -342,13 +317,12 @@ export const Games = () => {
         group relative p-6 bg-black/70 backdrop-blur-xl rounded-2xl 
         border border-gray-900 overflow-hidden
         transition-all duration-500 ease-out will-change-transform
-        hover:scale-[1.02] hover:border-cyan-500/30 
-        hover:shadow-[0_0_45px_rgba(6,182,212,0.15)]
+        hover:scale-[1.02] hover:border-cyan-500/20 
         focus:outline-none focus:ring-3 focus:ring-blue-500/40
         active:scale-[0.99] active:shadow-[0_0_30px_rgba(6,182,212,0.1)]
-        select-none cursor-pointer
+        select-none cursor-pointer shadow-2xl hover:shadow-3xl
         motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.99]
-        ${showSettings === game.id ? "ring-2 ring-cyan-400/60 shadow-[0_0_30px_rgba(6,182,212,0.2)]" : ""}
+        ${showSettings === game.id ? "ring-2 ring-blue-500/40" : ""}
       `}
                   onClick={() => toggleSettings(game.id)}
                   style={{
@@ -383,8 +357,8 @@ export const Games = () => {
                             className="w-16 h-16 rounded-xl shadow-lg object-cover
                          transition-all duration-500 transform
                          group-hover/image:scale-105 group-hover/image:shadow-cyan-500/20
-                         group-hover/image:rotate-2 group-hover/image:-translate-y-0.5
-                         motion-safe:transform-gpu motion-safe:backface-visibility-hidden border-2 border-gray-700 shadow-md transition-transform group-hover:scale-105"
+                         group-hover/image:rotate-3 group-hover/image:-translate-y-0.5
+                         motion-safe:transform-gpu motion-safe:backface-visibility-hidden border-2 border-white/10 group-hover:scale-105"
                             loading="lazy"
                             draggable={false}
                             style={{ userSelect: "none" }}
@@ -460,7 +434,7 @@ export const Games = () => {
               backdrop-blur-sm transform
               hover:scale-110 active:scale-95
               focus:outline-none focus:ring-2 focus:ring-cyan-500/50
-              motion-safe:hover:scale-110 motion-safe:active:scale-95
+              motion-safe:hover:scale-110 motion-safe:active:scale-95 cursor-pointer
               ${showSettings === game.id
                             ? "bg-red-500/20 hover:bg-red-500/30 text-red-400"
                             : "bg-blue-500/20 hover:bg-cyan-500/30 text-cyan-400"
