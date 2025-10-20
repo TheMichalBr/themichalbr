@@ -308,7 +308,7 @@ export const Games = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {" "}
-              {/* p-5 */}
+              {/* p-5 pridat copy tlacitko pro values */}
               {games.map((game) => (
                 <div
                   key={game.id}
@@ -490,26 +490,51 @@ export const Games = () => {
                         >
                           Settings & Information
                         </h4>
-                        <div className="space-y-2.25">
-                          {Object.entries(game.settings).map(([key, value]) => (
-                            <div key={key} className="flex text-sm group/item">
-                              <span
-                                className="text-gray-400 font-medium min-w-[100px]
-                                transition-colors duration-300
-                                group-hover/item:text-gray-300"
-                              >
-                                {key}:
-                              </span>
-                              <span
-                                className="text-gray-300 break-words flex-1
-                                transition-colors duration-300 
-                                group-hover/item:text-gray-200 cursor-text select-text"
-                              >
-                                {value}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
+<div className="space-y-2.25">
+  {Object.entries(game.settings).map(([key, value]) => (
+    <div key={key} className="flex text-sm group/item items-center gap-2 cursor-auto">
+      <span
+        className="text-gray-400 font-medium min-w-[100px]
+        transition-colors duration-300
+        group-hover/item:text-gray-300"
+      >
+        {key}:
+      </span>
+      <span
+        className="text-gray-300 break-words flex-1
+        transition-colors duration-300 
+        group-hover/item:text-gray-200"
+      >
+        {value}
+      </span>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          navigator.clipboard.writeText(value);
+        }}
+        className="p-1.5 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20
+        text-cyan-400 hover:text-cyan-300 transition-all duration-200
+        opacity-0 group-hover/item:opacity-100 active:scale-95
+        focus:outline-none focus:ring-2 focus:ring-cyan-500/50 cursor-pointer"
+        aria-label={`Copy ${key}`}
+        title="Copy"
+      >
+        <svg
+          className="w-3.5 h-3.5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+        </svg>
+      </button>
+    </div>
+  ))}
+</div>
+
+
                       </div>
                     </div>
                   </div>
