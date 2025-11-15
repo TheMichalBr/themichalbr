@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Color } from "three";
-import { forwardRef, useRef, useMemo, useLayoutEffect } from "react";
+import { forwardRef, useRef, useMemo, useLayoutEffect, useState, useEffect } from "react";
 
 const hexToNormalizedRGB = (hex) => {
     hex = hex.replace("#", "");
@@ -11,20 +11,8 @@ const hexToNormalizedRGB = (hex) => {
     ];
 };
 
-const vertexShader = `
-varying vec2 vUv;
-varying vec3 vPosition;
-
-void main() {
-    vPosition = position;
-    vUv = uv;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-}
-`;
-
 const fragmentShader = `
 varying vec2 vUv;
-varying vec3 vPosition;
 
 uniform float uTime;
 uniform vec3  uColor;
@@ -36,35 +24,44 @@ uniform float uNoiseIntensity;
 const float e = 2.71828182845904523536;
 
 float noise(vec2 texCoord) {
-    float G = e;
-    vec2  r = (G * sin(G * texCoord));
-    return fract(r.x * r.y * (1.0 + texCoord.x));
+	float G = e;
+	vec2  r = (G * sin(G * texCoord));
+	return fract(r.x * r.y * (1.0 + texCoord.x));
 }
 
 vec2 rotateUvs(vec2 uv, float angle) {
-    float c = cos(angle);
-    float s = sin(angle);
-    mat2  rot = mat2(c, -s, s, c);
-    return rot * uv;
+	float c = cos(angle);
+	float s = sin(angle);
+	mat2  rot = mat2(c, -s, s, c);
+	return rot * uv;
 }
 
 void main() {
-    float rnd        = noise(gl_FragCoord.xy);
-    vec2  uv         = rotateUvs(vUv * uScale, uRotation);
-    vec2  tex        = uv * uScale;
-    float tOffset    = uSpeed * uTime;
+	vec2  uv      = rotateUvs(vUv * uScale, uRotation);
+	vec2  tex     = uv * uScale;
+	float tOffset = uSpeed * uTime;
 
-    tex.y += 0.03 * sin(8.0 * tex.x - tOffset);
+	tex.y += 0.03 * sin(8.0 * tex.x - tOffset);
 
-    float pattern = 0.6 +
-                  0.4 * sin(5.0 * (tex.x + tex.y +
-                                   cos(3.0 * tex.x + 5.0 * tex.y) +
-                                   0.02 * tOffset) +
-                           sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
+	float pattern = 0.6 +
+		0.4 * sin(5.0 * (tex.x + tex.y +
+			cos(3.0 * tex.x + 5.0 * tex.y) +
+			0.02 * tOffset) +
+		sin(20.0 * (tex.x + tex.y - 0.1 * tOffset)));
 
-    vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd / 15.0 * uNoiseIntensity;
-    col.a = 1.0;
-    gl_FragColor = col;
+	float rnd = noise(gl_FragCoord.xy) / 15.0 * uNoiseIntensity;
+	vec4 col = vec4(uColor, 1.0) * vec4(pattern) - rnd;
+	col.a = 1.0;
+	gl_FragColor = col;
+}
+`;
+
+const vertexShader = `
+varying vec2 vUv;
+
+void main() {
+	vUv = uv;
+	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 `;
 
@@ -78,7 +75,9 @@ const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
     }, [ref, viewport]);
 
     useFrame((_, delta) => {
-        ref.current.material.uniforms.uTime.value += 0.1 * delta;
+        if (ref.current?.material?.uniforms?.uTime) {
+            ref.current.material.uniforms.uTime.value += 0.1 * delta;
+        }
     });
 
     return (
@@ -88,11 +87,32 @@ const SilkPlane = forwardRef(function SilkPlane({ uniforms }, ref) {
                 uniforms={uniforms}
                 vertexShader={vertexShader}
                 fragmentShader={fragmentShader}
+                transparent={false}
+                depthWrite={false}
+                depthTest={false}
             />
         </mesh>
     );
 });
 SilkPlane.displayName = "SilkPlane";
+
+const getDeviceLevel = () => {
+    if (typeof window === "undefined") return "high";
+
+    const dpr = window.devicePixelRatio || 1;
+    const memory = navigator.deviceMemory || 8;
+
+    if (memory <= 2 || dpr < 1) return "low";
+    if (memory <= 4 || dpr === 1) return "mid";
+    return "high";
+};
+
+const getDprForDevice = () => {
+    const level = getDeviceLevel();
+    if (level === "low") return 0.75;
+    if (level === "mid") return 1;
+    return Math.min(window.devicePixelRatio || 1, 1.5);
+};
 
 const HomeBackGround = ({
     speed = 5,
@@ -102,6 +122,11 @@ const HomeBackGround = ({
     rotation = 0,
 }) => {
     const meshRef = useRef();
+    const [deviceLevel, setDeviceLevel] = useState("high");
+
+    useEffect(() => {
+        setDeviceLevel(getDeviceLevel());
+    }, []);
 
     const uniforms = useMemo(
         () => ({
@@ -115,10 +140,36 @@ const HomeBackGround = ({
         [speed, scale, noiseIntensity, color, rotation]
     );
 
+    const glConfig = useMemo(() => {
+        if (deviceLevel === "low") {
+            return {
+                antialias: false,
+                alpha: true,
+                powerPreference: "low-power",
+                precision: "lowp",
+            };
+        }
+        if (deviceLevel === "mid") {
+            return {
+                antialias: false,
+                alpha: true,
+                powerPreference: "high-performance",
+                precision: "mediump",
+            };
+        }
+        return {
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance",
+            precision: "highp",
+        };
+    }, [deviceLevel]);
+
     return (
         <Canvas
-            dpr={[1, 2]}
+            dpr={getDprForDevice()}
             frameloop="always"
+            gl={glConfig}
             style={{
                 position: "absolute",
                 top: 0,
