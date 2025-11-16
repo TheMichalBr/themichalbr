@@ -65,7 +65,7 @@ const InterestCard = React.memo(({ interest, idx, reducedMotion, handleCardKeyDo
 				reducedMotion ? "duration-150" : "duration-300"
 			} hover:border-gray-700/80 hover:bg-gray-900/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 group-hover:shadow-lg group-hover:shadow-gray-900/30`}
 		>
-			<div className="absolute inset-0 rounded-lg bg-gradient-to-br from-white/2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+			<div className="absolute inset-0 rounded-lg bg-linear-to-br from-white/2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
 			<div className="relative z-10 space-y-3">
 				<div className={`w-14 h-14 flex items-center justify-center rounded-lg bg-gray-800/50 group-hover:bg-gray-800/80 transition-all ${reducedMotion ? "" : "duration-300 group-hover:scale-105 group-hover:-rotate-3"} text-white`} aria-hidden="true">
@@ -175,8 +175,8 @@ export const Home = () => {
 									<div className="flex items-baseline justify-center lg:justify-start gap-2">
 										<span className="text-lg sm:text-2xl text-gray-300 font-light leading-none">Hello, I am</span>
 
-										<span className="relative inline-flex items-baseline h-[32px] sm:h-[40px] overflow-visible" aria-live="polite" aria-atomic="true">
-											<span className="inline-block text-lg sm:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300 leading-none">
+										<span className="relative inline-flex items-baseline h-8 sm:h-10 overflow-visible" aria-live="polite" aria-atomic="true">
+											<span className="inline-block text-lg sm:text-2xl font-semibold bg-clip-text text-transparent bg-linear-to-r from-cyan-300 to-blue-300 leading-none">
 												{text}
 											</span>
 											<span className="inline-block ml-2 text-lg sm:text-2xl font-semibold text-cyan-300" style={{lineHeight:1, willChange: "opacity"}}>
@@ -242,15 +242,6 @@ export const Home = () => {
 										smoothScrollTo={smoothScrollTo}
 									/>
 								))}
-							</div>
-						</div>
-					</div>
-
-					<div className="flex justify-center pt-16 lg:pt-24">
-						<div className="flex flex-col items-center gap-2 group cursor-pointer hover:opacity-70 transition-opacity duration-300">
-							<span className="text-gray-500 text-xs sm:text-sm group-hover:text-gray-400 transition-colors duration-300">Scroll down</span>
-							<div className="w-5 h-8 border border-gray-500 rounded-full flex justify-center group-hover:border-gray-400 transition-colors duration-300">
-								<div className="w-0.5 h-1.5 bg-gray-500 rounded-full mt-1.5 animate-bounce group-hover:bg-gray-400" />
 							</div>
 						</div>
 					</div>
