@@ -64,7 +64,7 @@ export const About = () => {
     >
       <RevealOnScroll>
         <div className="max-w-4xl mx-auto px-4 w-full">
-          <h2 className="text-4xl font-bold mb-8 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent text-center drop-shadow-lg select-none">
+          <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent text-center drop-shadow-lg select-none">
             About me
           </h2>
 
@@ -114,7 +114,7 @@ export const About = () => {
               <div className="space-y-4 text-gray-300">
                 <div className="flex items-start">
                   <div
-                    className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-4 flex-shrink-0"
+                    className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-4 shrink-0"
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
@@ -129,7 +129,7 @@ export const About = () => {
                 </div>
                 <div className="flex items-start">
                   <div
-                    className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 flex-shrink-0"
+                    className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 shrink-0"
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
@@ -144,7 +144,7 @@ export const About = () => {
                 </div>
                 <div className="flex items-start">
                   <div
-                    className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-4 flex-shrink-0"
+                    className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-4 shrink-0"
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
@@ -277,7 +277,7 @@ export const About = () => {
             </div>
 
             {/* Let's Connect */}
-            <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300">
+            <div className="bg-linear-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300">
               <h3 className="text-xl font-semibold mb-3 text-white flex items-center select-none">
                 <svg
                   className="w-6 h-6 mr-2 inline-block text-white"
