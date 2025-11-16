@@ -216,12 +216,12 @@ const equipmentData = [
   },
   {
     category: "MOBILE",
-    name: "Samsung S20 FE",
+    name: "iPhone 17",
     image: mobileI,
     specs: {
-      memory: "8GB",
-      storage: "128GB",
-      processor: "Snapdragon 865",
+      memory: "8 GB",
+      storage: "256 GB",
+      processor: "Apple A19",
     },
   },
   {
