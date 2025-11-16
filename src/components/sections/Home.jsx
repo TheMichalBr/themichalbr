@@ -99,7 +99,7 @@ export const Home = () => {
 		return () => mq.removeEventListener("change", apply);
 	}, []);
 
-	const roles = useMemo(() => ["Content Creator", "Developer", "Gamer"], []);
+	const roles = useMemo(() => ["Content Creator.", "Developer.", "Gamer."], []);
 	const [text, setText] = useState(roles[0]);
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [loopNum, setLoopNum] = useState(0);
@@ -142,7 +142,7 @@ export const Home = () => {
 		}
 	}, []);
 
-	// memoized blink style so it isn't recreated each render
+	// eslint-disable-next-line no-unused-vars
 	const blinkStyle = useMemo(() => (
 		<style>{`@keyframes blink{50%{opacity:0}}`}</style>
 	), []);
@@ -172,8 +172,8 @@ export const Home = () => {
 										<span className="block text-white">MichalBr</span>
 									</h1>
 
-									<div className="flex items-baseline justify-center lg:justify-start gap-3">
-										<span className="text-lg sm:text-2xl text-gray-300 font-light leading-none">I am</span>
+									<div className="flex items-baseline justify-center lg:justify-start gap-2">
+										<span className="text-lg sm:text-2xl text-gray-300 font-light leading-none">Hello, I am</span>
 
 										<span className="relative inline-flex items-baseline h-[32px] sm:h-[40px] overflow-visible" aria-live="polite" aria-atomic="true">
 											<span className="inline-block text-lg sm:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-300 leading-none">
@@ -188,7 +188,7 @@ export const Home = () => {
 								</div>
 
 								<p className="text-gray-400 text-sm sm:text-base leading-relaxed font-light">
-									Building beautiful digital experiences with clean code and creative vision. I blend entertainment, gaming passion, and professional development into every project I touch.
+									Creating entertaining content, playing games to dominate the battleground, and building clean and responsive apps and great games.
 								</p>
 							</div>
 
@@ -200,7 +200,7 @@ export const Home = () => {
 									aria-label="Go to about section"
 								>
 									<span className="relative z-10 flex items-center justify-center gap-2">
-										More About Me
+										More About me
 										<svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
 										</svg>
@@ -215,7 +215,7 @@ export const Home = () => {
 									aria-label="Contact me"
 								>
 									<span className="flex items-center justify-center gap-2">
-										Contact Me
+										Contact me
 										<svg className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
 										</svg>
@@ -259,3 +259,244 @@ export const Home = () => {
 		</section>
 	);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/*
+
+import { RevealOnScroll } from "../RevealOnScroll";
+import HomeBackGround from "./HomeBackGround";
+
+export const Home = () => {
+  return (
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
+      <HomeBackGround
+        speed={4.5}
+        scale={0.925}
+        color="#071936"
+        noiseIntensity={1.5}
+        rotation={4.55}
+      />
+      <RevealOnScroll>
+        <div className="text-center z-10 px-4 max-w-4xl mx-auto">
+          <div className="relative mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-5 leading-tight tracking-tight">
+              <span className="bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent select-none">
+                Hi, I'm MichalBr
+              </span>
+            </h1>
+
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              <span className="px-3 py-1.5 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-cyan-500/30 hover:scale-105 select-none">
+                🎥 Content Creator
+              </span>
+              <span className="px-3 py-1.5 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-400 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-blue-500/30 hover:scale-105 select-none">
+                🎮 Gamer
+              </span>
+              <span className="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-400 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/30 hover:scale-105 select-none">
+                💻 Developer
+              </span>
+            </div>
+          </div>
+
+          <div className="space-y-4 mb-10 select-none">
+            <p className="text-gray-200 text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto">
+              Creating{" "}
+              <span className="text-cyan-400 font-medium bg-cyan-400/10 px-1 py-0.5 rounded mx-0.5">
+                entertaining content,
+              </span>{" "}
+              playing{" "}
+              <span className="text-blue-400 font-medium bg-blue-400/10 px-1 py-0.5 rounded mx-0.5">
+                games to dominate the battleground,
+              </span>{" "}
+              and building{" "}
+              <span className="text-purple-400 font-medium bg-purple-400/10 px-1 py-0.5 rounded mx-0.5">
+                clean and responsive apps and great games.
+              </span>
+            </p>
+            <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+              From chicken dinners to clean code – creativity meets precision.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4 items-center mb-12">
+            <a
+              href="#aboutme"
+              className="group relative bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 text-white py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transform active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 select-none cursor-pointer"
+              aria-label="Learn more about me"
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2 text-sm">
+                More About me
+                <svg
+                  className="w-3 h-3 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+
+            <a
+              href="#footer"
+              className="group relative border-2 border-indigo-600/50 text-blue-500 py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:border-blue-400 hover:text-blue-200 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-blue-500/10 backdrop-blur-sm transform hover:scale-105 active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 select-none cursor-pointer"
+              aria-label="Get in touch with me"
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2 text-sm animate-pulse">
+                Contact me
+                <svg
+                  className="w-3 h-3 transition-transform group-hover:rotate-12"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+          </div>
+        </div>
+      </RevealOnScroll>
+    </section>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div className="flex justify-center pt-20">
+            <div className="flex flex-col items-center gap-3 group cursor-pointer">
+              <span className="text-gray-500 text-sm group-hover:text-gray-400 transition-colors">Scroll down</span>
+              <div className="w-6 h-10 border-2 border-gray-500 rounded-full flex justify-center group-hover:border-gray-400 transition-colors">
+                <div className="w-1 h-2 bg-gray-500 rounded-full mt-2 animate-bounce group-hover:bg-gray-400"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </RevealOnScroll>
+    </section>
+  );
+
+
+
+    return (
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden py-20 md:py-0"
+    >
+      <HomeBackGround
+        speed={4.5}
+        scale={0.925}
+        color="#071936"
+        noiseIntensity={1.5}
+        rotation={4.55}
+      />
+
+  
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      <RevealOnScroll>
+        <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+          
+          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16 xl:gap-24">
+            
+         
+            <div className="flex-1 space-y-8">
+              
+            
+              <div className="space-y-6">
+                
+                <div className="space-y-3">
+                  <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
+                    <span className="block text-white">MichalBr</span>
+                  </h1>
+                  <p className="text-xl sm:text-2xl text-gray-300 font-light">
+                    Creative Developer & Content Creator
+                  </p>
+                </div>
+
+                <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-xl font-light">
+                  Building beautiful digital experiences with clean code and creative vision. I blend entertainment, gaming passion, and professional development into every project I touch.
+                </p>
+              </div>
+
+             
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <a
+                  href="#aboutme"
+                  className="group relative px-8 py-4 bg-white text-gray-900 font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 text-center overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Explore My Work
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </a>
+
+                <a
+                  href="#footer"
+                  className="group relative px-8 py-4 border-2 border-gray-400 text-gray-300 font-bold rounded-lg transition-all duration-300 hover:border-white hover:text-white hover:bg-white/10 hover:shadow-lg hover:-translate-y-1 active:translate-y-0 text-center"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    Contact Me
+                    <svg className="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                </a>
+              </div>
+
+              
+              <div className="pt-8 border-t border-gray-700">
+                <p className="text-gray-400 text-sm italic">
+                  "From chicken dinners to clean code – creativity meets precision."
+                </p>
+              </div>
+            </div>
+*/}
