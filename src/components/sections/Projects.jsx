@@ -127,7 +127,7 @@ const ProjectCard = ({ project, downloads }) => {
   return (
     <div
       className={`group relative p-6 rounded-xl border transition-all duration-300 overflow-hidden ${project.featured
-          ? "border-blue-500/30 bg-gradient-to-br from-blue-500/5 to-cyan-500/5"
+          ? "border-blue-500/30 bg-linear-to-br from-blue-500/5 to-cyan-500/5"
           : "border-white/10"
         } ${!project.disabled
           ? "hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-[0_8px_32px_rgba(59,130,246,0.15)]"
@@ -138,7 +138,7 @@ const ProjectCard = ({ project, downloads }) => {
     >
       {project.featured && (
         <div className="absolute top-4 right-4 z-20">
-          <span className="bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 text-white px-2 py-1 rounded-full text-xs font-medium">
+          <span className="bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 text-white px-2 py-1 rounded-full text-xs font-medium">
             Featured
           </span>
         </div>
@@ -153,7 +153,7 @@ const ProjectCard = ({ project, downloads }) => {
         }}
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
 
       <div className="absolute inset-0">
         <div
@@ -185,7 +185,7 @@ const ProjectCard = ({ project, downloads }) => {
           </div>
         </div>
 
-        <p className="text-gray-300 mb-4 leading-relaxed flex-grow">
+        <p className="text-gray-300 mb-4 leading-relaxed grow">
           {project.desc}
         </p>
 
@@ -284,7 +284,7 @@ export const Projects = () => {
           {" "}
           {/* max-w-5xl ? bg-gradient-to-r from-blue-600 to-cyan-700*/}
           <div className="text-center mb-10">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent select-none">
+            <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent select-none">
               Featured projects
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
