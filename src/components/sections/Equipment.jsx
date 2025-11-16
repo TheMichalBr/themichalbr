@@ -38,7 +38,7 @@ const equipmentData = [
     name: "Corsair HX1000",
     image: psuI,
     specs: {
-      power: "1000W",
+      power: "1000 W",
       efficiency: "80 PLUS Platinum",
       modularity: "Fully",
     },
@@ -73,7 +73,7 @@ const equipmentData = [
     specs: {
       version: "chromax.black",
       type: "PWM - Air Cooler",
-      height: "125mm",
+      height: "125 mm",
     },
   },
   {
@@ -82,7 +82,7 @@ const equipmentData = [
     image: gpuI,
     specs: {
       version: "GAMING Z",
-      memory: "8GB GDDR6",
+      memory: "8 GB GDDR6",
       baseClock: "1410 MHz",
       boostClock: "1620 MHz",
       architecture: "TU104 - Turing",
@@ -94,8 +94,8 @@ const equipmentData = [
     image: ramI,
     specs: {
       type: "DDR5",
-      capacity: "32GB (2x16GB)",
-      speed: "6000MHz",
+      capacity: "32 GB (2x16 GB)",
+      speed: "6000 MHz",
       latency: "CL30",
     },
   },
@@ -104,10 +104,10 @@ const equipmentData = [
     name: "WD Ultrastar DC HC320",
     image: hddI,
     specs: {
-      capacity: "8TB",
+      capacity: "8 TB",
       interface: "SATA III",
       rpm: "7200 RPM",
-      cache: "256MB",
+      cache: "256 MB",
     },
   },
   {
@@ -115,7 +115,7 @@ const equipmentData = [
     name: "Samsung SSD 990 PRO",
     image: ssdI,
     specs: {
-      capacity: "1TB",
+      capacity: "1 TB",
       interface: "NVMe - PCIe 4.0",
     },
   },
@@ -136,7 +136,7 @@ const equipmentData = [
       size: "27 inches",
       panel: "IPS",
       resolution: "2560x1440 (2K)",
-      refreshRate: "270Hz (275Hz)",
+      refreshRate: "270 Hz",
     },
   },
   {
@@ -147,7 +147,7 @@ const equipmentData = [
       size: "27 inches",
       panel: "TN",
       resolution: "1920x1080 (FullHD)",
-      refreshRate: "144Hz",
+      refreshRate: "144 Hz",
     },
   },
   {
@@ -158,7 +158,7 @@ const equipmentData = [
       size: "22 inches",
       panel: "TN",
       resolution: "1920x1080 (FullHD)",
-      refreshRate: "60Hz",
+      refreshRate: "60 Hz",
     },
   },
   {
@@ -178,7 +178,7 @@ const equipmentData = [
     specs: {
       dpi: "400 DPI",
       pollingRate: "8000 Hz",
-      weight: "60g",
+      weight: "60 g",
       sensor: "HERO 25K",
       connectivity: "Wireless",
     },
@@ -190,7 +190,7 @@ const equipmentData = [
     specs: {
       size: "Large",
       surface: "Cloth",
-      thickness: "3mm",
+      thickness: "3 mm",
       base: "Rubber",
     },
   },
@@ -199,9 +199,9 @@ const equipmentData = [
     name: "Logitech G Pro X 2 LIGHTSPEED",
     image: headsetI,
     specs: {
-      battery: "50+ hours",
-      microphone: "Blue VO!CE",
       connectivity: "Wireless",
+      microphone: "Blue VO!CE",
+      battery: "50+ hours",
     },
   },
   {
@@ -211,7 +211,6 @@ const equipmentData = [
     specs: {
       connection: "USB",
       type: "Condenser",
-      patterns: "4 polar patterns",
     },
   },
   {
@@ -229,7 +228,7 @@ const equipmentData = [
     name: "Xbox 360",
     image: consoleI,
     specs: {
-      storage: "250GB",
+      storage: "250 GB",
       other: "Samsung Gear VR",
       table: "Electric Table",
     },
@@ -325,7 +324,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
 
   return (
     <article
-      className={`group relative bg-gradient-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-400/40 hover:bg-gradient-to-br hover:from-slate-800/60 hover:to-slate-900/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      className={`group relative bg-linear-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-400/40 hover:bg-linear-to-br hover:from-slate-800/60 hover:to-slate-900/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       onClick={handleClick}
       role="button"
@@ -333,7 +332,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
       onKeyDown={handleKeyDown}
       aria-label={`View details for ${item.name}`}
     >
-      <div className="relative h-48 bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center p-4">
+      <div className="relative h-48 bg-linear-to-br from-white/5 to-transparent flex items-center justify-center p-4">
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
@@ -369,7 +368,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
           />
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
       <div className="p-5">
@@ -386,7 +385,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
         <dl className="text-xs text-gray-400 space-y-2">
           {displaySpecs.map(([key, value]) => (
             <div key={key} className="flex justify-between items-center gap-2">
-              <dt className="capitalize font-medium text-gray-400 flex-shrink-0">
+              <dt className="capitalize font-medium text-gray-400 shrink-0">
                 {formatSpecKey(key)}
               </dt>
               <dd className="text-gray-200 font-semibold text-right truncate flex-1 min-w-0">
@@ -397,7 +396,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
         </dl>
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-t from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-t from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
     </article>
   );
 };
@@ -406,7 +405,7 @@ const FilterButton = ({ filter, isActive, onClick }) => (
   <button
     onClick={() => onClick(filter)}
     className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-slate-400/50 ${isActive
-        ? "bg-gradient-to-r from-slate-700 to-slate-800 text-white shadow-lg hover:from-slate-800 hover:to-slate-900"
+        ? "bg-linear-to-r from-slate-700 to-slate-800 text-white shadow-lg hover:from-slate-800 hover:to-slate-900"
         : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20"
       }`}
     aria-pressed={isActive}
@@ -499,11 +498,11 @@ const Modal = ({ item, onClose }) => {
     >
       {/* from-[#1e2024] to-[#15171a] from-slate-800/40 via-slate-800/40 to-slate-900/40*/}
       <div
-        className={`bg-gradient-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 rounded-2xl border border-white/20 max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 ${isVisible ? "scale-100" : "scale-95"
+        className={`bg-linear-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 rounded-2xl border border-white/20 max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 ${isVisible ? "scale-100" : "scale-95"
           }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="sticky top-0 bg-gradient-to-r from-slate-800/40 via-slate-800/40 to-slate-900/40 p-6 border-b border-white/10 z-10 rounded-2xl">
+        <header className="sticky top-0 bg-linear-to-r from-slate-800/40 via-slate-800/40 to-slate-900/40 p-6 border-b border-white/10 z-10 rounded-2xl">
           <div className="flex items-center justify-between">
             <h3 id="modal-title" className="text-xl font-bold text-white select-none">
               Specifications
@@ -533,8 +532,8 @@ const Modal = ({ item, onClose }) => {
         <div className="overflow-y-auto max-h-[calc(90vh-100px)]">
           <div className="p-8">
             <div className="flex flex-col md:flex-row gap-8">
-              <div className="flex-shrink-0">
-                <div className="w-48 h-48 bg-gradient-to-br from-white/5 to-transparent rounded-xl flex items-center justify-center p-4">
+              <div className="shrink-0">
+                <div className="w-48 h-48 bg-linear-to-br from-white/5 to-transparent rounded-xl flex items-center justify-center p-4">
                   <img
                     src={item.image}
                     alt={`${item.name} - ${item.category}`}
@@ -550,7 +549,7 @@ const Modal = ({ item, onClose }) => {
 
                 <h3
                   id="modal-description"
-                  className="text-2xl font-bold text-white mb-6 break-words"
+                  className="text-2xl font-bold text-white mb-6 wrap-break-word"
                 >
                   {item.name}
                 </h3>
@@ -642,7 +641,7 @@ export const Equipment = () => {
         <RevealOnScroll>
           <header className="text-center mb-10">
             {/* className= px-4/10 lg:px-10 horizontal-scroll max-w-5xl and 6/7 "group relative bg-[#1e20243a] border border-white/10 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300" w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-300" "p-4 bg-[#1e202470]/90 backdrop-blur-md rounded-b-xl w-full h-full" */}
-            <h2 className="text-4xl font-bold mb-8 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none text-center">
+            <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none text-center">
               Equipment
             </h2>
 
