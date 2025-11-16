@@ -215,13 +215,13 @@ export const LoadingScreen = ({ onComplete }) => {
         <div className="relative mb-6 w-96">
           <div className="w-full h-3 bg-gray-800 bg-opacity-60 rounded-full relative overflow-hidden shadow-inner backdrop-blur-sm border border-gray-600 border-opacity-40">
             <div
-              className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 rounded-full transition-all duration-75 ease-out shadow-lg"
+              className="absolute left-0 top-0 h-full bg-linear-to-r from-blue-400 via-cyan-400 to-blue-500 rounded-full transition-all duration-75 ease-out shadow-lg"
               style={{
                 width: `${progress}%`,
                 willChange: "width",
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-25 animate-shimmer" />
+            <div className="absolute inset-0 bg-linear-to-r from-transparent via-white to-transparent opacity-25 animate-shimmer" />
           </div>
 
           <div className="absolute -top-7 right-0 text-sm font-mono text-blue-300 tracking-wider">
@@ -230,7 +230,7 @@ export const LoadingScreen = ({ onComplete }) => {
         </div>
 
         <div className="text-center mb-3">
-          <div className="text-base text-blue-200 tracking-wide font-mono transition-all duration-200 select-none min-h-[24px]">
+          <div className="text-base text-blue-200 tracking-wide font-mono transition-all duration-200 select-none min-h-6">
             {currentTask}
           </div>
         </div>
