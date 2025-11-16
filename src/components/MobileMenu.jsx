@@ -98,7 +98,7 @@ export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
                 className={`
                   text-3xl md:text-4xl font-extrabold tracking-tight
                   text-gray-200 px-10 py-4 rounded-xl w-full max-w-xs text-center
-                  bg-gradient-to-r from-cyan-800/10 to-blue-900/10
+                  bg-linear-to-r from-cyan-800/10 to-blue-900/10
                   shadow-xl shadow-cyan-900/10
                   transition-all duration-600
                   hover:bg-cyan-900/20 hover:text-blue-400
