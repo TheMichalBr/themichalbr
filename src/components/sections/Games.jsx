@@ -136,7 +136,7 @@ export const Games = () => {
         <RevealOnScroll>
           <div>
             <div className="text-center mb-10">
-              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
+              <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
                 Games
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
@@ -171,7 +171,7 @@ export const Games = () => {
                     {/* Pozadí s gradientem */}
                     <div
                       className="absolute inset-0 pointer-events-none rounded-2xl 
-                       bg-gradient-to-br from-black/80 via-black/60 to-transparent 
+                       bg-linear-to-br from-black/80 via-black/60 to-transparent 
                        transition-opacity duration-700 ease-out opacity-60
                        group-hover:opacity-40 group-hover:from-black/70"
                     ></div>
@@ -213,9 +213,7 @@ export const Games = () => {
                           <div
                             className="transition-all duration-700 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform
                   opacity-0 max-h-0 translate-y-1 overflow-hidden
-                  group-hover:opacity-100 group-hover:max-h-[500px] group-hover:translate-y-0
-                  [transition-delay:75ms]"
-                          >
+                  group-hover:opacity-100 group-hover:max-h-[500px] group-hover:translate-y-0 delay-75">
                             <div className="space-y-1">
                               {Object.entries(review.info).map(
                                 ([key, value], index) => (
@@ -229,7 +227,7 @@ export const Games = () => {
                                         key.slice(1)}
                                       :
                                     </span>
-                                    <span className="text-gray-300 break-words flex-1">
+                                    <span className="text-gray-300 wrap-break-word flex-1">
                                       {value}
                                     </span>
                                   </div>
@@ -245,7 +243,7 @@ export const Games = () => {
                         {/* Hodnocení s animací */}
                         <div
                           className={`
-              absolute transform transition-all duration-700 ease-[cubic-bezier(.4,0,.2,1)]
+              absolute transform transition-all duration-700 ease-in-out
               ${review.review ? "right-0 group-hover:left-0 group-hover:right-auto" : "right-0"}
             `}
                         >
@@ -338,7 +336,7 @@ export const Games = () => {
                 >
                   <div
                     className="absolute inset-0 pointer-events-none rounded-2xl opacity-60
-                   bg-gradient-to-br from-black/90 via-black/70 to-transparent 
+                   bg-linear-to-br from-black/90 via-black/70 to-transparent 
                    transition-opacity duration-700 group-hover:opacity-40
                    group-hover:via-black/60
                    motion-safe:transition-all"
@@ -365,7 +363,7 @@ export const Games = () => {
                             onClick={(e) => e.stopPropagation()}
                           />
                           <div
-                            className="absolute inset-0 rounded-xl bg-gradient-to-br 
+                            className="absolute inset-0 rounded-xl bg-linear-to-br 
                            from-black/20 to-transparent opacity-0 
                            group-hover/image:opacity-100 transition-opacity duration-300"
                           />
@@ -374,7 +372,7 @@ export const Games = () => {
                         <div className="flex-1 min-w-0">
                           <h3
                             className="text-xl font-bold text-transparent bg-clip-text
-                         bg-gradient-to-r from-white to-white/90
+                         bg-linear-to-r from-white to-white/90
                          transition-all duration-300
                          group-hover:from-cyan-200 group-hover:to-white
                          motion-safe:transform drop-shadow select-none"
@@ -413,7 +411,7 @@ export const Games = () => {
                               style={{ userSelect: "none" }}
                             />
                             <span
-                              className="text-sm font-semibold bg-gradient-to-r
+                              className="text-sm font-semibold bg-linear-to-r
                               from-sky-400 to-cyan-300 bg-clip-text text-transparent
                               transition-all duration-300
                               group-hover:from-cyan-300 group-hover:to-blue-300"
@@ -501,7 +499,7 @@ export const Games = () => {
         {key}:
       </span>
       <span
-        className="text-gray-300 break-words flex-1
+        className="text-gray-300 wrap-break-word flex-1
         transition-colors duration-300 
         group-hover/item:text-gray-200"
       >
