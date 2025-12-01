@@ -324,7 +324,7 @@ const EquipmentCard = ({ item, index, onClick }) => {
 
   return (
     <article
-      className={`group relative bg-linear-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-400/40 hover:bg-linear-to-br hover:from-slate-800/60 hover:to-slate-900/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      className={`group relative bg-linear-to-br from-[#1e20243a] to-[#2a2d353a] border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-400/40 hover:bg-linear-to-br hover:from-slate-800/60 hover:to-slate-900/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       onClick={handleClick}
       role="button"
