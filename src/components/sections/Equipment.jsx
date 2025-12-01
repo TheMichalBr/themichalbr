@@ -641,7 +641,7 @@ export const Equipment = () => {
         <RevealOnScroll>
           <header className="text-center mb-10">
             {/* className= px-4/10 lg:px-10 horizontal-scroll max-w-5xl and 6/7 "group relative bg-[#1e20243a] border border-white/10 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300" w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-300" "p-4 bg-[#1e202470]/90 backdrop-blur-md rounded-b-xl w-full h-full" */}
-            <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none text-center">
+            <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent drop-shadow-lg select-none text-center">
               Equipment
             </h2>
 
