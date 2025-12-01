@@ -136,7 +136,7 @@ export const Games = () => {
         <RevealOnScroll>
           <div>
             <div className="text-center mb-10">
-              <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
+              <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent drop-shadow-lg select-none">
                 Games
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
