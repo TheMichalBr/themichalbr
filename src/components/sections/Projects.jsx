@@ -284,7 +284,7 @@ export const Projects = () => {
           {" "}
           {/* max-w-5xl ? bg-gradient-to-r from-blue-600 to-cyan-700*/}
           <div className="text-center mb-10">
-            <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent select-none">
+            <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent select-none">
               Featured projects
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
