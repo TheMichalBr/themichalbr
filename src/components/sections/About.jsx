@@ -60,7 +60,7 @@ export const About = () => {
     >
       <RevealOnScroll>
         <div className="max-w-4xl mx-auto px-4 w-full">
-          <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-[#0533a0] to-[#005a9b] bg-clip-text text-transparent text-center drop-shadow-lg select-none">
+          <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent text-center drop-shadow-lg select-none">
             About me
           </h2>
 
