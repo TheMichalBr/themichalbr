@@ -3,42 +3,38 @@ import Video from "./Video";
 
 export const About = () => {
   const hobbies = [
-    "Games",
-    "Content creation",
-    "Programming",
-    "Development",
-    "Editing",
-    "Drawing",
-    "Design",
+    "Gaming",
+    "Movies",
     "Music",
-    "Films",
-    "Chess",
-    "Collecting",
-    "Exploring",
-    "Technology",
     "Memes",
-    "F1",
+    "Art",
+    "Creativity",
+    "Content creation",
+    "Editing",
+    "Development",
+    "Technology",
+    "Travel",
+    "Sports",
+    "Collecting",
   ];
 
-  const technologies = [
-    "C#",
+  const experience = [
     "C++",
+    "C#",
     "HTML",
     "CSS",
     "JavaScript",
     "React",
-    "Node.js",
     "Java",
     "Python",
     "SQL",
     "Godot",
-    "Unity",
-    "Source",
+    "Source 2",
     "Unreal",
-    "Photoshop",
-    "Premiere",
+    "Adobe apps",
     "Git",
-    "Other",
+    "Krita",
+    "Blender",
   ];
 
   const languages = [
@@ -64,7 +60,7 @@ export const About = () => {
     >
       <RevealOnScroll>
         <div className="max-w-4xl mx-auto px-4 w-full">
-          <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent text-center drop-shadow-lg select-none">
+          <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-[#0533a0] to-[#005a9b] bg-clip-text text-transparent text-center drop-shadow-lg select-none">
             About me
           </h2>
 
@@ -74,12 +70,11 @@ export const About = () => {
               <p className="text-gray-300 leading-relaxed text-lg">
                 My name is Michal. I am 23 years old boy, from the Czech
                 Republic, and currently living in Brno. I am a passionate gamer
-                and content creator, as well as an experienced programmer and
-                developer with some knowledge of various programming languages
-                and technologies. I am a chill guy with a questionable sense of
-                humour. I am passionate about creating innovative and creative
-                solutions, as well as building modern, clean, sleek and
-                responsive applications, websites and good games or
+                and content creator, as well as a developer with some knowledge
+                of various programming languages and technologies. I am a chill
+                guy with a questionable sense of humour. I am passionate about
+                creating creative solutions, as well as building modern, clean,
+                and responsive applications, websites and good games or
                 modifications. I am eager to learn and grow, and I am excited by
                 new challenges.
               </p>
@@ -264,7 +259,7 @@ export const About = () => {
                   Experience
                 </h3>
                 <div className="flex flex-wrap gap-2 min-w-0">
-                  {technologies.map((tech, index) => (
+                  {experience.map((tech, index) => (
                     <span
                       key={index}
                       className={`${tagClasses} bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/25 hover:border-cyan-500/50 hover:shadow-[0_2px_12px_rgba(6,182,212,0.3)] select-none`}
@@ -314,7 +309,9 @@ export const About = () => {
               <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                 <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
                   <div className="flex items-center">
-                    <span className="text-sm text-gray-400 select-none">Discord:</span>
+                    <span className="text-sm text-gray-400 select-none">
+                      Discord:
+                    </span>
                     <span className="ml-2 text-white font-medium break-all">
                       @MichalBr
                     </span>
@@ -322,7 +319,9 @@ export const About = () => {
                 </div>
                 <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
                   <div className="flex items-center">
-                    <span className="text-sm text-gray-400 select-none">Email:</span>
+                    <span className="text-sm text-gray-400 select-none">
+                      Email:
+                    </span>
                     <span className="ml-2 text-white font-medium break-all">
                       biz.michalbr@gmail.com
                     </span>
