@@ -585,7 +585,7 @@ export const Equipment = () => {
   const [selectedFilter, setSelectedFilter] = useState("ALL");
   const [selectedItem, setSelectedItem] = useState(null);
   const [isFilterChanging, setIsFilterChanging] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm] = useState("");
 
   const handleFilterChange = useCallback(
     (filter) => {
@@ -602,11 +602,6 @@ export const Equipment = () => {
 
   const handleItemSelect = useCallback((item) => setSelectedItem(item), []);
   const handleModalClose = useCallback(() => setSelectedItem(null), []);
-  const handleSearchChange = useCallback(
-    (e) => setSearchTerm(e.target.value),
-    []
-  );
-  const handleClearSearch = useCallback(() => setSearchTerm(""), []);
 
   const filteredEquipment = useMemo(() => {
     let filtered = equipmentData;
@@ -644,53 +639,6 @@ export const Equipment = () => {
             <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent drop-shadow-lg select-none text-center">
               Equipment
             </h2>
-
-            <div className="max-w-md mx-auto relative">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search equipment..."
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  maxLength={40}
-                  className="w-full px-4 py-3 pl-12 pr-10 bg-slate-800/50 border border-white/10 rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:border-blue-400/50 transition-all duration-300 select-none"
-                />
-                <svg
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
-                {searchTerm && (
-                  <button
-                    onClick={handleClearSearch}
-                    className="cursor-pointer absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors p-1"
-                    aria-label="Clear search"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                )}
-              </div>
-            </div>
           </header>
 
           <nav
@@ -772,14 +720,6 @@ export const Equipment = () => {
               </p>
               {(searchTerm || selectedFilter !== "ALL") && (
                 <div className="flex flex-wrap justify-center gap-2">
-                  {searchTerm && (
-                    <button
-                      onClick={handleClearSearch}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-200 cursor-pointer"
-                    >
-                      Clear search
-                    </button>
-                  )}
                   {selectedFilter !== "ALL" && (
                     <button
                       onClick={() => handleFilterChange("ALL")}
