@@ -70,7 +70,7 @@ export const Home = React.memo(() => {
 	), []);
 
 	return (
-		<section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden py-24 md:py-0">
+		<section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden py-24 md:py-0 select-none">
 			{blinkStyle}
 			<HomeBackGround speed={4.5} scale={0.925} color="#071936" noiseIntensity={1.5} rotation={4.55} />
 
