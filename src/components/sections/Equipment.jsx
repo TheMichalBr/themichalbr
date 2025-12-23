@@ -632,7 +632,7 @@ export const Equipment = () => {
 
   return (
     <section id="equipment" className="min-h-screen py-20 lg:px-10">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4 select-none">
         <RevealOnScroll>
           <header className="text-center mb-10">
             {/* className= px-4/10 lg:px-10 horizontal-scroll max-w-5xl and 6/7 "group relative bg-[#1e20243a] border border-white/10 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300" w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-300" "p-4 bg-[#1e202470]/90 backdrop-blur-md rounded-b-xl w-full h-full" */}
