@@ -2,6 +2,53 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import HomeBackGround from "./HomeBackGround";
 
+const INTERESTS = [
+	{ title: "Content Creator", desc: "Entertaining & Engaging", icon: "camera", color: "from-cyan-500 to-blue-500" },
+	{ title: "Developer", desc: "Clean & Responsive Code", icon: "code", color: "from-purple-500 to-pink-500" },
+	{ title: "Gamer", desc: "Competitive & Creative", icon: "crosshair", color: "from-blue-500 to-purple-500" },
+	{ title: "Creator", desc: "Visuals & Streams", icon: "palette", color: "from-pink-500 to-cyan-500" }
+];
+
+const ROLES = ["Content Creator.", "Developer.", "Gamer."];
+const TYPING_SPEED = { typing: 120, deleting: 50 };
+const PAUSE_DURATION = 1200;
+const ANIMATION_DELAY_BASE = 80;
+
+const useTypingEffect = (roles, reducedMotion) => {
+	const [text, setText] = useState(roles[0]);
+	const [isDeleting, setIsDeleting] = useState(false);
+	const [loopNum, setLoopNum] = useState(0);
+
+	useEffect(() => {
+		if (reducedMotion) {
+			setText(roles[0]);
+			return;
+		}
+
+		const fullText = roles[loopNum % roles.length];
+		let timeout = null;
+
+		if (!isDeleting && text === fullText) {
+			timeout = setTimeout(() => setIsDeleting(true), PAUSE_DURATION);
+		} else if (isDeleting && text === "") {
+			setIsDeleting(false);
+			setLoopNum((n) => (n + 1) % roles.length);
+		} else {
+			const speed = isDeleting ? TYPING_SPEED.deleting : TYPING_SPEED.typing;
+			timeout = setTimeout(() => {
+				const nextText = isDeleting
+					? fullText.substring(0, text.length - 1)
+					: fullText.substring(0, text.length + 1);
+				setText(nextText);
+			}, speed);
+		}
+
+		return () => clearTimeout(timeout);
+	}, [text, isDeleting, loopNum, reducedMotion, roles]);
+
+	return text;
+};
+
 const Icon = React.memo(({ name, className = "w-6 h-6" }) => {
 	switch (name) {
 		case "camera":
@@ -58,17 +105,19 @@ const InterestCard = React.memo(({ interest, idx, reducedMotion, handleCardKeyDo
 		className={`group relative rounded-lg cursor-pointer will-change-transform ${
 			reducedMotion ? "" : "animate-fade-in"
 		}`}
-		style={!reducedMotion ? { animationDelay: `${idx * 80}ms` } : {}}
+		style={!reducedMotion ? { animationDelay: `${idx * ANIMATION_DELAY_BASE}ms` } : {}}
 	>
 		<div
 			className={`relative p-5 sm:p-6 rounded-lg bg-gray-900/40 border border-gray-800/50 backdrop-blur-sm transition-all ${
 				reducedMotion ? "duration-150" : "duration-300"
-			} hover:border-gray-700/80 hover:bg-gray-900/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 group-hover:shadow-lg group-hover:shadow-gray-900/30`}
+			} hover:border-gray-700/80 hover:bg-gray-900/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 focus-within:ring-2 focus-within:ring-cyan-300/40 group-hover:shadow-lg group-hover:shadow-gray-900/30 active:scale-95`}
 		>
 			<div className="absolute inset-0 rounded-lg bg-linear-to-br from-white/2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
 			<div className="relative z-10 space-y-3">
-				<div className={`w-14 h-14 flex items-center justify-center rounded-lg bg-gray-800/50 group-hover:bg-gray-800/80 transition-all ${reducedMotion ? "" : "duration-300 group-hover:scale-105 group-hover:-rotate-3"} text-white`} aria-hidden="true">
+				<div className={`w-14 h-14 flex items-center justify-center rounded-lg bg-gray-800/50 group-hover:bg-gray-800/80 transition-all ${
+					reducedMotion ? "" : "duration-300 group-hover:scale-110 group-hover:-rotate-6"
+				} text-white`} aria-hidden="true">
 					<Icon name={interest.icon} className="w-7 h-7" />
 				</div>
 
@@ -82,13 +131,8 @@ const InterestCard = React.memo(({ interest, idx, reducedMotion, handleCardKeyDo
 ));
 InterestCard.displayName = "InterestCard";
 
-export const Home = () => {
-	const interests = useMemo(() => [
-		{ title: "Content Creator", desc: "Entertaining & Engaging", icon: "camera", color: "from-cyan-500 to-blue-500" },
-		{ title: "Developer", desc: "Clean & Responsive Code", icon: "code", color: "from-purple-500 to-pink-500" },
-		{ title: "Gamer", desc: "Competitive & Creative", icon: "crosshair", color: "from-blue-500 to-purple-500" },
-		{ title: "Creator", desc: "Visuals & Streams", icon: "palette", color: "from-pink-500 to-cyan-500" }
-	], []);
+export const Home = React.memo(() => {
+	const interests = useMemo(() => INTERESTS, []);
 
 	const [reducedMotion, setReducedMotion] = useState(false);
 	useEffect(() => {
@@ -99,35 +143,7 @@ export const Home = () => {
 		return () => mq.removeEventListener("change", apply);
 	}, []);
 
-	const roles = useMemo(() => ["Content Creator.", "Developer.", "Gamer."], []);
-	const [text, setText] = useState(roles[0]);
-	const [isDeleting, setIsDeleting] = useState(false);
-	const [loopNum, setLoopNum] = useState(0);
-
-	useEffect(() => {
-		if (reducedMotion) {
-			setText(roles[0]);
-			return;
-		}
-		const fullText = roles[loopNum % roles.length];
-		let timeout = null;
-		const typingSpeed = isDeleting ? 50 : 120;
-
-		if (!isDeleting && text === fullText) {
-			timeout = setTimeout(() => setIsDeleting(true), 1200);
-		} else if (isDeleting && text === "") {
-			setIsDeleting(false);
-			setLoopNum((n) => (n + 1) % roles.length);
-		} else {
-			timeout = setTimeout(() => {
-				const nextText = isDeleting
-					? fullText.substring(0, text.length - 1)
-					: fullText.substring(0, text.length + 1);
-				setText(nextText);
-			}, typingSpeed);
-		}
-		return () => clearTimeout(timeout);
-	}, [text, isDeleting, loopNum, reducedMotion, roles]);
+	const text = useTypingEffect(ROLES, reducedMotion);
 
 	const smoothScrollTo = useCallback((selector) => {
 		const el = document.querySelector(selector);
@@ -142,13 +158,13 @@ export const Home = () => {
 		}
 	}, []);
 
-	// eslint-disable-next-line no-unused-vars
 	const blinkStyle = useMemo(() => (
 		<style>{`@keyframes blink{50%{opacity:0}}`}</style>
 	), []);
 
 	return (
 		<section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden py-24 md:py-0">
+			{blinkStyle}
 			<HomeBackGround speed={4.5} scale={0.925} color="#071936" noiseIntensity={1.5} rotation={4.55} />
 
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -175,13 +191,25 @@ export const Home = () => {
 									<div className="flex items-baseline justify-center lg:justify-start gap-2">
 										<span className="text-lg sm:text-2xl text-gray-300 font-light leading-none">Hello, I am</span>
 
-										<span className="relative inline-flex items-baseline h-8 sm:h-10 overflow-visible" aria-live="polite" aria-atomic="true">
+										<span
+											className="relative inline-flex items-baseline h-8 sm:h-10 overflow-visible"
+											aria-live="polite"
+											aria-atomic="true"
+											aria-describedby="typing-description"
+										>
 											<span className="inline-block text-lg sm:text-2xl font-semibold bg-clip-text text-transparent bg-linear-to-r from-cyan-300 to-blue-300 leading-none">
 												{text}
 											</span>
-											<span className="inline-block ml-2 text-lg sm:text-2xl font-semibold text-cyan-300" style={{lineHeight:1, willChange: "opacity"}}>
-												<span style={{display:"inline-block", animation:"blink 1.2s steps(2,start) infinite"}}>|</span>
+											<span
+												className="inline-block ml-2 text-lg sm:text-2xl font-semibold text-cyan-300"
+												style={{ lineHeight: 1, willChange: "opacity" }}
+												aria-hidden="true"
+											>
+												<span style={{ display: "inline-block", animation: "blink 1.2s steps(2,start) infinite" }}>|</span>
 											</span>
+										</span>
+										<span id="typing-description" className="sr-only">
+											Typing animation showing different roles: Content Creator, Developer, Gamer
 										</span>
 									</div>
 
@@ -196,7 +224,7 @@ export const Home = () => {
 								<a
 									href="#aboutme"
 									onClick={(e) => { e.preventDefault(); smoothScrollTo("#aboutme"); }}
-									className="group relative px-7 py-3.5 bg-white text-gray-900 font-semibold text-sm sm:text-base rounded-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/30 overflow-hidden will-change-transform"
+									className="group relative px-7 py-3.5 bg-white text-gray-900 font-semibold text-sm sm:text-base rounded-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/30 overflow-hidden will-change-transform"
 									aria-label="Go to about section"
 								>
 									<span className="relative z-10 flex items-center justify-center gap-2">
@@ -211,7 +239,7 @@ export const Home = () => {
 								<a
 									href="#footer"
 									onClick={(e) => { e.preventDefault(); smoothScrollTo("#footer"); }}
-									className="group relative px-7 py-3.5 border-2 border-gray-400 text-gray-300 font-semibold text-sm sm:text-base rounded-lg transition-all duration-300 hover:border-white hover:text-white hover:bg-white/5 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-200/20 will-change-transform"
+									className="group relative px-7 py-3.5 border-2 border-gray-400 text-gray-300 font-semibold text-sm sm:text-base rounded-lg transition-all duration-300 hover:border-white hover:text-white hover:bg-white/5 active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-200/20 will-change-transform"
 									aria-label="Contact me"
 								>
 									<span className="flex items-center justify-center gap-2">
@@ -225,7 +253,7 @@ export const Home = () => {
 						</div>
 
 						<div className="flex-1 mt-16 lg:mt-0 max-w-2xl mx-auto lg:mx-0 w-full">
-							<div className="grid grid-cols-2 gap-3 sm:gap-4">
+							<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
 								{interests.map((interest, idx) => (
 									<InterestCard
 										key={interest.title}
@@ -243,4 +271,6 @@ export const Home = () => {
 			</RevealOnScroll>
 		</section>
 	);
-};
+});
+
+Home.displayName = "Home";
