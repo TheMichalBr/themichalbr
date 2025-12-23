@@ -2,26 +2,24 @@ import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import HomeBackGround from "./HomeBackGround";
 
-const INTERESTS = [
-	{ title: "Content Creator", desc: "xxx", icon: "camera", color: "from-cyan-500 to-blue-500" },
-	{ title: "Developer", desc: "xxx", icon: "code", color: "from-purple-500 to-pink-500" },
-	{ title: "Gamer", desc: "xxx", icon: "crosshair", color: "from-blue-500 to-purple-500" },
-	{ title: "Creator", desc: "xxx", icon: "palette", color: "from-pink-500 to-cyan-500" }
-];
-
 const ROLES = ["Content Creator.", "Developer.", "Gamer."];
 const TYPING_SPEED = { typing: 120, deleting: 50 };
 const PAUSE_DURATION = 1200;
-const ANIMATION_DELAY_BASE = 80;
 
 const useTypingEffect = (roles, reducedMotion) => {
-	const [text, setText] = useState(roles[0]);
+	const [text, setText] = useState("");
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [loopNum, setLoopNum] = useState(0);
+	const [hasStarted, setHasStarted] = useState(false);
 
 	useEffect(() => {
-		if (reducedMotion) {
-			setText(roles[0]);
+		if (reducedMotion) return;
+		const startTimeout = setTimeout(() => setHasStarted(true), 1000);
+		return () => clearTimeout(startTimeout);
+	}, [reducedMotion]);
+
+	useEffect(() => {
+		if (reducedMotion || !hasStarted) {
 			return;
 		}
 
@@ -44,96 +42,12 @@ const useTypingEffect = (roles, reducedMotion) => {
 		}
 
 		return () => clearTimeout(timeout);
-	}, [text, isDeleting, loopNum, reducedMotion, roles]);
+	}, [text, isDeleting, loopNum, reducedMotion, roles, hasStarted]);
 
 	return text;
 };
 
-const Icon = React.memo(({ name, className = "w-6 h-6" }) => {
-	switch (name) {
-		case "camera":
-			return (
-				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-					<rect x="3" y="7" width="18" height="13" rx="2" ry="2"></rect>
-					<path d="M16 3h-8l-1.5 4H3"></path>
-					<circle cx="12" cy="13.5" r="3"></circle>
-				</svg>
-			);
-		case "gamepad":
-			return (
-				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-					<rect x="2" y="7" width="20" height="10" rx="3"></rect>
-					<path d="M8 12h.01M11 10v4M14 12h.01M17 11v2" />
-				</svg>
-			);
-		case "code":
-			return (
-				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-					<polyline points="16 18 22 12 16 6"></polyline>
-					<polyline points="8 6 2 12 8 18"></polyline>
-				</svg>
-			);
-		case "palette":
-			return (
-				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-					<path d="M12 3C7 3 3 6 3 10.5S7 18 12 18c.9 0 1.7-.1 2.5-.4.7-.3 1.8.1 2.4.7.8.8 2.1.8 2.9 0 .8-.8.8-2.1 0-2.9-.6-.6-1-1.6-.7-2.4C20 11.7 20 10.9 20 10.5 20 6 16 3 12 3z"/>
-					<circle cx="9" cy="9" r="0.8" />
-					<circle cx="14" cy="8" r="0.8" />
-					<circle cx="16" cy="13" r="0.8" />
-				</svg>
-			);
-		case "crosshair":
-			return (
-				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-					<circle cx="12" cy="12" r="7"></circle>
-					<path d="M12 5v2M12 17v2M5 12h2M17 12h2M19 5l-2 2M7 17l-2 2M19 19l-2-2M7 7L5 5" />
-				</svg>
-			);
-		default:
-			return <span className={className} aria-hidden="true">?</span>;
-	}
-});
-Icon.displayName = "Icon";
-
-const InterestCard = React.memo(({ interest, idx, reducedMotion, handleCardKeyDown, smoothScrollTo }) => (
-	<div
-		role="button"
-		tabIndex={0}
-		aria-label={`${interest.title} — ${interest.desc}`}
-		onClick={() => smoothScrollTo("#aboutme")}
-		onKeyDown={(e) => handleCardKeyDown(e, () => smoothScrollTo("#aboutme"))}
-		className={`group relative rounded-lg cursor-pointer will-change-transform ${
-			reducedMotion ? "" : "animate-fade-in"
-		}`}
-		style={!reducedMotion ? { animationDelay: `${idx * ANIMATION_DELAY_BASE}ms` } : {}}
-	>
-		<div
-			className={`relative p-5 sm:p-6 rounded-lg bg-gray-900/40 border border-gray-800/50 backdrop-blur-sm transition-all ${
-				reducedMotion ? "duration-150" : "duration-300"
-			} hover:border-gray-700/80 hover:bg-gray-900/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 focus-within:ring-2 focus-within:ring-cyan-300/40 group-hover:shadow-lg group-hover:shadow-gray-900/30 active:scale-95`}
-		>
-			<div className="absolute inset-0 rounded-lg bg-linear-to-br from-white/2 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-			<div className="relative z-10 space-y-3">
-				<div className={`w-14 h-14 flex items-center justify-center rounded-lg bg-gray-800/50 group-hover:bg-gray-800/80 transition-all ${
-					reducedMotion ? "" : "duration-300 group-hover:scale-110 group-hover:-rotate-6"
-				} text-white`} aria-hidden="true">
-					<Icon name={interest.icon} className="w-7 h-7" />
-				</div>
-
-				<div className="space-y-1">
-					<h3 className="text-sm sm:text-base font-bold text-white leading-tight">{interest.title}</h3>
-					<p className="text-xs sm:text-sm text-gray-400 leading-relaxed font-light">{interest.desc}</p>
-				</div>
-			</div>
-		</div>
-	</div>
-));
-InterestCard.displayName = "InterestCard";
-
 export const Home = React.memo(() => {
-	const interests = useMemo(() => INTERESTS, []);
-
 	const [reducedMotion, setReducedMotion] = useState(false);
 	useEffect(() => {
 		const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -150,13 +64,6 @@ export const Home = React.memo(() => {
 		if (!el) return;
 		el.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
 	}, [reducedMotion]);
-
-	const handleCardKeyDown = useCallback((e, onClick) => {
-		if (e.key === "Enter" || e.key === " ") {
-			e.preventDefault();
-			onClick();
-		}
-	}, []);
 
 	const blinkStyle = useMemo(() => (
 		<style>{`@keyframes blink{50%{opacity:0}}`}</style>
@@ -220,7 +127,7 @@ export const Home = React.memo(() => {
 								</p>
 							</div>
 
-							<div className="flex flex-col sm:flex-row gap-3 pt-4">
+							<div className="flex flex-col sm:flex-row gap-3 pt-4 pb-4">
 								<a
 									href="#aboutme"
 									onClick={(e) => { e.preventDefault(); smoothScrollTo("#aboutme"); }}
@@ -252,20 +159,6 @@ export const Home = React.memo(() => {
 							</div>
 						</div>
 
-						<div className="flex-1 mt-16 lg:mt-0 max-w-2xl mx-auto lg:mx-0 w-full">
-							<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-								{interests.map((interest, idx) => (
-									<InterestCard
-										key={interest.title}
-										interest={interest}
-										idx={idx}
-										reducedMotion={reducedMotion}
-										handleCardKeyDown={handleCardKeyDown}
-										smoothScrollTo={smoothScrollTo}
-									/>
-								))}
-							</div>
-						</div>
 					</div>
 				</div>
 			</RevealOnScroll>
