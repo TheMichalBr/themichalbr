@@ -126,7 +126,7 @@ const ProjectCard = ({ project, downloads }) => {
 
   return (
     <div
-      className={`group relative p-6 rounded-xl border transition-all duration-300 overflow-hidden ${project.featured
+      className={`group relative p-6 rounded-xl border transition-all duration-300 overflow-hidden select-none ${project.featured
           ? "border-blue-500/30 bg-linear-to-br from-blue-500/5 to-cyan-500/5"
           : "border-white/10"
         } ${!project.disabled
