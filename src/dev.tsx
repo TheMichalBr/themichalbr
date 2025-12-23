@@ -1,3 +1,1361 @@
+home verze
+
+
+{/*
+
+import { RevealOnScroll } from "../RevealOnScroll";
+import HomeBackGround from "./HomeBackGround";
+
+export const Home = () => {
+  return (
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
+      <HomeBackGround
+        speed={4.5}
+        scale={0.925}
+        color="#071936"
+        noiseIntensity={1.5}
+        rotation={4.55}
+      />
+      <RevealOnScroll>
+        <div className="text-center z-10 px-4 max-w-4xl mx-auto">
+          <div className="relative mb-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-5 leading-tight tracking-tight">
+              <span className="bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 bg-clip-text text-transparent select-none">
+                Hi, I'm MichalBr
+              </span>
+            </h1>
+
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              <span className="px-3 py-1.5 bg-cyan-500/20 border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-cyan-500/30 hover:scale-105 select-none">
+                🎥 Content Creator
+              </span>
+              <span className="px-3 py-1.5 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-400 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-blue-500/30 hover:scale-105 select-none">
+                🎮 Gamer
+              </span>
+              <span className="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-400 text-xs font-medium backdrop-blur-sm transition-all duration-300 hover:bg-purple-500/30 hover:scale-105 select-none">
+                💻 Developer
+              </span>
+            </div>
+          </div>
+
+          <div className="space-y-4 mb-10 select-none">
+            <p className="text-gray-200 text-lg md:text-xl font-light leading-relaxed max-w-3xl mx-auto">
+              Creating{" "}
+              <span className="text-cyan-400 font-medium bg-cyan-400/10 px-1 py-0.5 rounded mx-0.5">
+                entertaining content,
+              </span>{" "}
+              playing{" "}
+              <span className="text-blue-400 font-medium bg-blue-400/10 px-1 py-0.5 rounded mx-0.5">
+                games to dominate the battleground,
+              </span>{" "}
+              and building{" "}
+              <span className="text-purple-400 font-medium bg-purple-400/10 px-1 py-0.5 rounded mx-0.5">
+                clean and responsive apps and great games.
+              </span>
+            </p>
+            <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+              From chicken dinners to clean code – creativity meets precision.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4 items-center mb-12">
+            <a
+              href="#aboutme"
+              className="group relative bg-gradient-to-br from-indigo-700 via-blue-600 to-blue-700 text-white py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] hover:scale-105 transform active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 select-none cursor-pointer"
+              aria-label="Learn more about me"
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2 text-sm">
+                More About me
+                <svg
+                  className="w-3 h-3 transition-transform group-hover:translate-x-1"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+
+            <a
+              href="#footer"
+              className="group relative border-2 border-indigo-600/50 text-blue-500 py-3 px-6 rounded-full font-semibold transition-all duration-300 hover:border-blue-400 hover:text-blue-200 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:bg-blue-500/10 backdrop-blur-sm transform hover:scale-105 active:scale-95 w-full sm:w-auto min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 select-none cursor-pointer"
+              aria-label="Get in touch with me"
+            >
+              <span className="relative z-10 flex items-center justify-center gap-2 text-sm animate-pulse">
+                Contact me
+                <svg
+                  className="w-3 h-3 transition-transform group-hover:rotate-12"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  />
+                </svg>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-cyan-600/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </a>
+          </div>
+        </div>
+      </RevealOnScroll>
+    </section>
+  );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div className="flex justify-center pt-20">
+            <div className="flex flex-col items-center gap-3 group cursor-pointer">
+              <span className="text-gray-500 text-sm group-hover:text-gray-400 transition-colors">Scroll down</span>
+              <div className="w-6 h-10 border-2 border-gray-500 rounded-full flex justify-center group-hover:border-gray-400 transition-colors">
+                <div className="w-1 h-2 bg-gray-500 rounded-full mt-2 animate-bounce group-hover:bg-gray-400"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </RevealOnScroll>
+    </section>
+  );
+
+
+
+    return (
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden py-20 md:py-0"
+    >
+      <HomeBackGround
+        speed={4.5}
+        scale={0.925}
+        color="#071936"
+        noiseIntensity={1.5}
+        rotation={4.55}
+      />
+
+  
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      <RevealOnScroll>
+        <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+          
+          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16 xl:gap-24">
+            
+         
+            <div className="flex-1 space-y-8">
+              
+            
+              <div className="space-y-6">
+                
+                <div className="space-y-3">
+                  <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black leading-none tracking-tighter">
+                    <span className="block text-white">MichalBr</span>
+                  </h1>
+                  <p className="text-xl sm:text-2xl text-gray-300 font-light">
+                    Creative Developer & Content Creator
+                  </p>
+                </div>
+
+                <p className="text-gray-400 text-base sm:text-lg leading-relaxed max-w-xl font-light">
+                  Building beautiful digital experiences with clean code and creative vision. I blend entertainment, gaming passion, and professional development into every project I touch.
+                </p>
+              </div>
+
+             
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <a
+                  href="#aboutme"
+                  className="group relative px-8 py-4 bg-white text-gray-900 font-bold rounded-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 active:translate-y-0 text-center overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Explore My Work
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </a>
+
+                <a
+                  href="#footer"
+                  className="group relative px-8 py-4 border-2 border-gray-400 text-gray-300 font-bold rounded-lg transition-all duration-300 hover:border-white hover:text-white hover:bg-white/10 hover:shadow-lg hover:-translate-y-1 active:translate-y-0 text-center"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    Contact Me
+                    <svg className="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </span>
+                </a>
+              </div>
+
+              
+              <div className="pt-8 border-t border-gray-700">
+                <p className="text-gray-400 text-sm italic">
+                  "From chicken dinners to clean code – creativity meets precision."
+                </p>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			nova verze
+
+
+
+			import React, { useEffect, useState, useCallback, useMemo } from "react";
+import { RevealOnScroll } from "../RevealOnScroll";
+import HomeBackGround from "./HomeBackGround";
+
+const Icon = React.memo(({ name, className = "w-6 h-6" }) => {
+	switch (name) {
+		case "camera":
+			return (
+				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+					<rect x="3" y="7" width="18" height="13" rx="2" ry="2"></rect>
+					<path d="M16 3h-8l-1.5 4H3"></path>
+					<circle cx="12" cy="13.5" r="3"></circle>
+				</svg>
+			);
+		case "gamepad":
+			return (
+				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+					<rect x="2" y="7" width="20" height="10" rx="3"></rect>
+					<path d="M8 12h.01M11 10v4M14 12h.01M17 11v2" />
+				</svg>
+			);
+		case "code":
+			return (
+				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+					<polyline points="16 18 22 12 16 6"></polyline>
+					<polyline points="8 6 2 12 8 18"></polyline>
+				</svg>
+			);
+		case "palette":
+			return (
+				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+					<path d="M12 3C7 3 3 6 3 10.5S7 18 12 18c.9 0 1.7-.1 2.5-.4.7-.3 1.8.1 2.4.7.8.8 2.1.8 2.9 0 .8-.8.8-2.1 0-2.9-.6-.6-1-1.6-.7-2.4C20 11.7 20 10.9 20 10.5 20 6 16 3 12 3z"/>
+					<circle cx="9" cy="9" r="0.8" />
+					<circle cx="14" cy="8" r="0.8" />
+					<circle cx="16" cy="13" r="0.8" />
+				</svg>
+			);
+		case "crosshair":
+			return (
+				<svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+					<circle cx="12" cy="12" r="7"></circle>
+					<path d="M12 5v2M12 17v2M5 12h2M17 12h2M19 5l-2 2M7 17l-2 2M19 19l-2-2M7 7L5 5" />
+				</svg>
+			);
+		default:
+			return <span className={className} aria-hidden="true">?</span>;
+	}
+});
+Icon.displayName = "Icon";
+
+const InterestCard = React.memo(({ interest, idx, reducedMotion, handleCardKeyDown, smoothScrollTo }) => (
+	<div
+		role="button"
+		tabIndex={0}
+		aria-label={`${interest.title} — ${interest.desc}`}
+		onClick={() => smoothScrollTo("#aboutme")}
+		onKeyDown={(e) => handleCardKeyDown(e, () => smoothScrollTo("#aboutme"))}
+		className={`group relative rounded-lg cursor-pointer will-change-transform ${
+			reducedMotion ? "" : "animate-fade-in"
+		}`}
+		style={!reducedMotion ? { animationDelay: `${idx * 80}ms` } : {}}
+		data-reveal
+	>
+		<div
+			className={`relative p-5 sm:p-6 rounded-lg bg-gradient-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 border border-white/10 backdrop-blur-sm transition-all ${
+				reducedMotion ? "duration-150" : "duration-300"
+			} hover:border-white/30 hover:bg-gradient-to-br hover:from-slate-800/60 hover:to-slate-900/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/40 group-hover:shadow-xl group-hover:shadow-cyan-500/10`}
+		>
+			<div className="absolute inset-0 rounded-lg bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+
+			<div className="relative z-10 space-y-3">
+				<div className={`w-14 h-14 flex items-center justify-center rounded-lg bg-gradient-to-br from-slate-700/50 to-slate-800/50 border border-white/10 group-hover:border-white/30 group-hover:bg-gradient-to-br group-hover:from-slate-700/80 group-hover:to-slate-800/80 transition-all ${
+					reducedMotion ? "" : "duration-300 group-hover:scale-110 group-hover:-rotate-3"
+				} text-white`} aria-hidden="true">
+					<Icon name={interest.icon} className="w-7 h-7" />
+				</div>
+
+				<div className="space-y-2">
+					<h3 className="text-sm sm:text-base font-bold text-white leading-tight group-hover:text-cyan-200 transition-colors duration-300">{interest.title}</h3>
+					<p className="text-xs sm:text-sm text-gray-400 group-hover:text-gray-300 leading-relaxed font-light transition-colors duration-300">{interest.desc}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+));
+InterestCard.displayName = "InterestCard";
+
+export const Home = () => {
+	const interests = useMemo(() => [
+		{ title: "Content Creator", desc: "Entertaining & Engaging", icon: "camera", color: "from-cyan-500 to-blue-500" },
+		{ title: "Developer", desc: "Clean & Responsive Code", icon: "code", color: "from-purple-500 to-pink-500" },
+		{ title: "Gamer", desc: "Competitive & Creative", icon: "crosshair", color: "from-blue-500 to-purple-500" },
+		{ title: "Creator", desc: "Visuals & Streams", icon: "palette", color: "from-pink-500 to-cyan-500" }
+	], []);
+
+	const [reducedMotion, setReducedMotion] = useState(false);
+	useEffect(() => {
+		const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+		const apply = () => setReducedMotion(mq.matches);
+		apply();
+		mq.addEventListener("change", apply);
+		return () => mq.removeEventListener("change", apply);
+	}, []);
+
+	const roles = useMemo(() => ["Content Creator.", "Developer.", "Gamer."], []);
+	const [text, setText] = useState(roles[0]);
+	const [isDeleting, setIsDeleting] = useState(false);
+	const [loopNum, setLoopNum] = useState(0);
+
+	useEffect(() => {
+		if (reducedMotion) {
+			setText(roles[0]);
+			return;
+		}
+		const fullText = roles[loopNum % roles.length];
+		let timeout = null;
+		const typingSpeed = isDeleting ? 50 : 120;
+
+		if (!isDeleting && text === fullText) {
+			timeout = setTimeout(() => setIsDeleting(true), 1200);
+		} else if (isDeleting && text === "") {
+			setIsDeleting(false);
+			setLoopNum((n) => (n + 1) % roles.length);
+		} else {
+			timeout = setTimeout(() => {
+				const nextText = isDeleting
+					? fullText.substring(0, text.length - 1)
+					: fullText.substring(0, text.length + 1);
+				setText(nextText);
+			}, typingSpeed);
+		}
+		return () => clearTimeout(timeout);
+	}, [text, isDeleting, loopNum, reducedMotion, roles]);
+
+	const smoothScrollTo = useCallback((selector) => {
+		const el = document.querySelector(selector);
+		if (!el) return;
+		el.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+	}, [reducedMotion]);
+
+	const handleCardKeyDown = useCallback((e, onClick) => {
+		if (e.key === "Enter" || e.key === " ") {
+			e.preventDefault();
+			onClick();
+		}
+	}, []);
+
+	return (
+		<section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden py-24 md:py-0">
+			<HomeBackGround speed={4.5} scale={0.925} color="#071936" noiseIntensity={1.5} rotation={4.55} />
+
+			<div className="absolute inset-0 overflow-hidden pointer-events-none">
+				<div className="absolute top-1/4 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-pulse"></div>
+				<div className="absolute bottom-1/4 -left-32 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+			</div>
+			
+			<RevealOnScroll distance={40} stagger={80}>
+				<div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
+					<div className="flex flex-col lg:flex-row lg:items-center lg:justify-center lg:gap-20 xl:gap-28">
+						
+						<div className="flex-1 space-y-8 max-w-2xl mx-auto lg:mx-0" data-reveal>
+							<div className="space-y-6">
+								<div className="space-y-3">
+									<h1
+										className={`text-6xl sm:text-7xl lg:text-8xl font-black leading-tight tracking-tight will-change-transform ${
+											reducedMotion ? "transition-none" : "transition-all duration-1000"
+										}`}
+										aria-label="Name"
+									>
+										<span className="block text-white">MichalBr</span>
+									</h1>
+
+									<div className="flex items-baseline justify-center lg:justify-start gap-3 flex-wrap">
+										<span className="text-lg sm:text-2xl text-gray-300 font-light leading-none">Hello, I am</span>
+
+										<span className="relative inline-flex items-baseline h-[32px] sm:h-[40px] overflow-visible" aria-live="polite" aria-atomic="true">
+											<span className="inline-block text-lg sm:text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 leading-none">
+												{text}
+											</span>
+											<span className="inline-block ml-2 text-lg sm:text-2xl font-semibold text-cyan-400" style={{lineHeight:1, willChange: "opacity"}}>
+												<span style={{display:"inline-block", animation:"blink 1.2s steps(2,start) infinite"}}>|</span>
+											</span>
+										</span>
+									</div>
+
+								</div>
+
+								<p className="text-gray-400 text-sm sm:text-base leading-relaxed font-light group-hover:text-gray-300 transition-colors duration-300">
+									Creating entertaining content, playing games to dominate the battleground, and building clean and responsive apps and great games.
+								</p>
+							</div>
+
+							<div className="flex flex-col sm:flex-row gap-4 pt-2">
+								<a
+									href="#aboutme"
+									onClick={(e) => { e.preventDefault(); smoothScrollTo("#aboutme"); }}
+									className="group relative px-7 py-3.5 bg-white text-gray-900 font-semibold text-sm sm:text-base rounded-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 active:translate-y-0 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/30 overflow-hidden will-change-transform"
+									aria-label="Go to about section"
+								>
+									<span className="relative z-10 flex items-center justify-center gap-2">
+										More About me
+										<svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+										</svg>
+									</span>
+									<div className="absolute inset-0 bg-gray-100 -z-10 opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
+								</a>
+
+								<a
+									href="#footer"
+									onClick={(e) => { e.preventDefault(); smoothScrollTo("#footer"); }}
+									className="group relative px-7 py-3.5 border-2 border-gray-500 text-gray-300 font-semibold text-sm sm:text-base rounded-lg transition-all duration-300 hover:border-white hover:text-white hover:bg-white/10 hover:shadow-lg hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-300/30 will-change-transform"
+									aria-label="Contact me"
+								>
+									<span className="flex items-center justify-center gap-2">
+										Contact me
+										<svg className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+										</svg>
+									</span>
+								</a>
+							</div>
+
+							<div className="pt-6 border-t border-gray-700/50">
+								<p className="text-gray-400 text-xs sm:text-sm italic leading-relaxed">
+									"From chicken dinners to clean code – creativity meets precision."
+								</p>
+							</div>
+						</div>
+
+						<div className="flex-1 mt-16 lg:mt-0 max-w-2xl mx-auto lg:mx-0 w-full">
+							<div className="grid grid-cols-2 gap-4 sm:gap-5">
+								{interests.map((interest, idx) => (
+									<InterestCard
+										key={interest.title}
+										interest={interest}
+										idx={idx}
+										reducedMotion={reducedMotion}
+										handleCardKeyDown={handleCardKeyDown}
+										smoothScrollTo={smoothScrollTo}
+									/>
+								))}
+							</div>
+						</div>
+					</div>
+
+					<div className="flex justify-center pt-20 lg:pt-24">
+						<button
+							onClick={() => smoothScrollTo("#equipment")}
+							className="group flex flex-col items-center gap-3 text-gray-500 hover:text-gray-300 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/30 rounded-lg p-2"
+							aria-label="Scroll to next section"
+						>
+							<span className="text-xs sm:text-sm font-medium group-hover:text-gray-200 transition-colors">Scroll down</span>
+							<svg className="w-6 h-6 animate-bounce group-hover:text-cyan-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+							</svg>
+						</button>
+					</div>
+				</div>
+			</RevealOnScroll>
+
+			<style>{`@keyframes blink{50%{opacity:0}}`}</style>
+		</section>
+	);
+};
+*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { RevealOnScroll } from "../RevealOnScroll";
+
+import caseI from "/equipment/E_1_CASE.webp";
+import psuI from "/equipment/E_2_PSU.webp";
+import mbI from "/equipment/E_3_MB.webp";
+import cpuI from "/equipment/E_4_CPU.webp";
+import cpucoolerI from "/equipment/E_5_CPUCOOLER.webp";
+import gpuI from "/equipment/E_6_GPU.webp";
+import ramI from "/equipment/E_7_RAM.webp";
+import hddI from "/equipment/E_8_HDD.webp";
+import ssdI from "/equipment/E_9_SSD.webp";
+import osI from "/equipment/E_10_OS.webp";
+import mmonitorI from "/equipment/E_11_MMONITOR.webp";
+import smonitor1I from "/equipment/E_12_SMONITOR.webp";
+import smonitor2I from "/equipment/E_13_SMONITOR.webp";
+import keyboardI from "/equipment/E_14_KEYBOARD.webp";
+import mouseI from "/equipment/E_15_MOUSE.webp";
+import mousepadI from "/equipment/E_16_MOUSEPAD.webp";
+import headsetI from "/equipment/E_17_HEADSET.webp";
+import microphoneI from "/equipment/E_18_MICROPHONE.webp";
+import mobileI from "/equipment/E_19_MOBILE.webp";
+import consoleI from "/equipment/E_20_CONSOLE.webp";
+
+const equipmentData = [
+	{
+		category: "COMPUTER CASE",
+		name: "Fractal Design Define 7",
+		image: caseI,
+		specs: {
+			color: "Black",
+			glass: "TG Dark Tint",
+			size: "Midi Tower",
+		},
+	},
+	{
+		category: "POWER SUPPLY",
+		name: "Corsair HX1000",
+		image: psuI,
+		specs: {
+			power: "1000 W",
+			efficiency: "80 PLUS Platinum",
+			modularity: "Fully",
+		},
+	},
+	{
+		category: "MOTHERBOARD",
+		name: "MSI MPG X870E CARBON WIFI",
+		image: mbI,
+		specs: {
+			biosVersion: "7E49v1A70",
+			formFactor: "ATX",
+			socket: "AM5",
+			chipset: "X870E",
+		},
+	},
+	{
+		category: "PROCESSOR",
+		name: "AMD Ryzen 9 9900X",
+		image: cpuI,
+		specs: {
+			cores: "12 cores / 24 threads",
+			baseClock: "4.4 GHz",
+			boostClock: "5.6 GHz",
+			socket: "AM5",
+			architecture: "Zen 5 - Granite Ridge",
+		},
+	},
+	{
+		category: "PROCESSOR COOLER",
+		name: "Noctua NH-U9S",
+		image: cpucoolerI,
+		specs: {
+			version: "chromax.black",
+			type: "PWM - Air Cooler",
+			height: "125 mm",
+		},
+	},
+	{
+		category: "GRAPHICS CARD",
+		name: "NVIDIA MSI GeForce RTX 2070",
+		image: gpuI,
+		specs: {
+			version: "GAMING Z",
+			memory: "8 GB GDDR6",
+			baseClock: "1410 MHz",
+			boostClock: "1620 MHz",
+			architecture: "TU104 - Turing",
+		},
+	},
+	{
+		category: "COMPUTER MEMORY",
+		name: "Kingston Fury Beast",
+		image: ramI,
+		specs: {
+			type: "DDR5",
+			capacity: "32 GB (2x16 GB)",
+			speed: "6000 MHz",
+			latency: "CL30",
+		},
+	},
+	{
+		category: "HARD DISK DRIVE",
+		name: "WD Ultrastar DC HC320",
+		image: hddI,
+		specs: {
+			capacity: "8 TB",
+			interface: "SATA III",
+			rpm: "7200 RPM",
+			cache: "256 MB",
+		},
+	},
+	{
+		category: "SOLID STATE DRIVE",
+		name: "Samsung SSD 990 PRO",
+		image: ssdI,
+		specs: {
+			capacity: "1 TB",
+			interface: "NVMe - PCIe 4.0",
+		},
+	},
+	{
+		category: "OPERATING SYSTEM",
+		name: "Windows 11",
+		image: osI,
+		specs: {
+			version: "Professional (Pro)",
+			build: "25H2",
+		},
+	},
+	{
+		category: "MAIN MONITOR",
+		name: "Acer Predator XB273UNX",
+		image: mmonitorI,
+		specs: {
+			size: "27 inches",
+			panel: "IPS",
+			resolution: "2560x1440 (2K)",
+			refreshRate: "270 Hz",
+		},
+	},
+	{
+		category: "SIDE MONITOR",
+		name: "Zowie by BenQ XL2720",
+		image: smonitor1I,
+		specs: {
+			size: "27 inches",
+			panel: "TN",
+			resolution: "1920x1080 (FullHD)",
+			refreshRate: "144 Hz",
+		},
+	},
+	{
+		category: "SIDE MONITOR",
+		name: "Iiyama PLE2209HDS",
+		image: smonitor2I,
+		specs: {
+			size: "22 inches",
+			panel: "TN",
+			resolution: "1920x1080 (FullHD)",
+			refreshRate: "60 Hz",
+		},
+	},
+	{
+		category: "KEYBOARD",
+		name: "Logitech G915 LIGHTSPEED TKL",
+		image: keyboardI,
+		specs: {
+			switches: "GL Linear - Red",
+			layout: "TKL",
+			connectivity: "Wireless",
+		},
+	},
+	{
+		category: "MOUSE",
+		name: "Logitech G Pro X Superlight 2",
+		image: mouseI,
+		specs: {
+			dpi: "400 DPI",
+			pollingRate: "8000 Hz",
+			weight: "60 g",
+			sensor: "HERO 25K",
+			connectivity: "Wireless",
+		},
+	},
+	{
+		category: "MOUSEPAD",
+		name: "Logitech G640 Large Cloth",
+		image: mousepadI,
+		specs: {
+			size: "Large",
+			surface: "Cloth",
+			thickness: "3 mm",
+			base: "Rubber",
+		},
+	},
+	{
+		category: "HEADSET",
+		name: "Logitech G Pro X 2 LIGHTSPEED",
+		image: headsetI,
+		specs: {
+			connectivity: "Wireless",
+			microphone: "Blue VO!CE",
+			battery: "50+ hours",
+		},
+	},
+	{
+		category: "MICROPHONE",
+		name: "HyperX Quadcast",
+		image: microphoneI,
+		specs: {
+			connection: "USB",
+			type: "Condenser",
+		},
+	},
+	{
+		category: "MOBILE",
+		name: "iPhone 17",
+		image: mobileI,
+		specs: {
+			memory: "8 GB",
+			storage: "256 GB",
+			processor: "Apple A19",
+		},
+	},
+	{
+		category: "CONSOLE",
+		name: "Xbox 360",
+		image: consoleI,
+		specs: {
+			storage: "250 GB",
+			other: "Samsung Gear VR",
+			table: "Electric Table",
+		},
+	},
+];
+
+const categoryFilters = [
+	"ALL",
+	"COMPUTER",
+	"PERIPHERALS",
+	"MONITORS",
+	"AUDIO",
+	"MOBILE & CONSOLES",
+	"OTHER",
+];
+
+const categoryMap = {
+	"COMPUTER CASE": "COMPUTER",
+	"POWER SUPPLY": "COMPUTER",
+	MOTHERBOARD: "COMPUTER",
+	PROCESSOR: "COMPUTER",
+	"PROCESSOR COOLER": "COMPUTER",
+	"GRAPHICS CARD": "COMPUTER",
+	"COMPUTER MEMORY": "COMPUTER",
+	"HARD DISK DRIVE": "COMPUTER",
+	"SOLID STATE DRIVE": "COMPUTER",
+	"OPERATING SYSTEM": "COMPUTER",
+	KEYBOARD: "PERIPHERALS",
+	MOUSE: "PERIPHERALS",
+	MOUSEPAD: "PERIPHERALS",
+	"MAIN MONITOR": "MONITORS",
+	"SIDE MONITOR": "MONITORS",
+	HEADSET: "AUDIO",
+	MICROPHONE: "AUDIO",
+	MOBILE: "MOBILE & CONSOLES",
+	CONSOLE: "MOBILE & CONSOLES",
+};
+
+const getCategoryGroup = (category) => categoryMap[category] || "OTHER";
+
+const formatSpecKey = (key) => {
+	return key
+		.replace(/([A-Z])/g, " $1")
+		.replace(/^./, (str) => str.toUpperCase())
+		.trim();
+};
+
+const EquipmentCard = ({ item, index, onClick }) => {
+	const [isVisible, setIsVisible] = useState(false);
+	const [imageLoaded, setImageLoaded] = useState(false);
+	const [imageError, setImageError] = useState(false);
+
+	useEffect(() => {
+		const timer = setTimeout(
+			() => setIsVisible(true),
+			Math.min(index * 50, 1000)
+		);
+		return () => clearTimeout(timer);
+	}, [index]);
+
+	const handleClick = useCallback(() => {
+		onClick?.(item);
+	}, [item, onClick]);
+
+	const handleImageLoad = useCallback(() => {
+		setImageLoaded(true);
+		setImageError(false);
+	}, []);
+
+	const handleImageError = useCallback(() => {
+		setImageError(true);
+		setImageLoaded(true);
+	}, []);
+
+	const handleKeyDown = useCallback(
+		(e) => {
+			if (e.key === "Enter" || e.key === " ") {
+				e.preventDefault();
+				handleClick();
+			}
+		},
+		[handleClick]
+	);
+
+	const displaySpecs = useMemo(
+		() => Object.entries(item.specs).slice(0, 2),
+		[item.specs]
+	);
+
+	return (
+		<article
+			className={`group relative bg-gradient-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-400/40 hover:bg-gradient-to-br hover:from-slate-800/60 hover:to-slate-900/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+				}`}
+			onClick={handleClick}
+			role="button"
+			tabIndex={0}
+			onKeyDown={handleKeyDown}
+			aria-label={`View details for ${item.name}`}
+			data-reveal
+		>
+			<div className="relative h-48 bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center p-4">
+				{!imageLoaded && (
+					<div className="absolute inset-0 flex items-center justify-center">
+						<div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+					</div>
+				)}
+
+				{imageError ? (
+					<div className="flex flex-col items-center justify-center text-gray-400">
+						<svg
+							className="w-12 h-12 mb-2"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth="2"
+								d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+							/>
+						</svg>
+						<span className="text-xs">Image not available</span>
+					</div>
+				) : (
+					<img
+						src={item.image}
+						alt={`${item.name} - ${item.category}`}
+						className={`max-w-full max-h-full object-contain transition-all duration-450 group-hover:scale-110 ${imageLoaded ? "opacity-100" : "opacity-0"
+							}`}
+						onLoad={handleImageLoad}
+						onError={handleImageError}
+						loading="lazy"
+					/>
+				)}
+
+				<div className="absolute inset-0 bg-linear-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+			</div>
+
+			<div className="p-5">
+				<div className="mb-2">
+					<span className="text-xs font-bold text-blue-400 uppercase tracking-wider">
+						{item.category}
+					</span>
+				</div>
+
+				<h3 className="text-base font-semibold text-gray-200 leading-tight mb-4 group-hover:text-blue-100 transition-colors duration-300 line-clamp-2">
+					{item.name}
+				</h3>
+
+				<dl className="text-xs text-gray-400 space-y-2">
+					{displaySpecs.map(([key, value]) => (
+						<div key={key} className="flex justify-between items-center gap-2">
+							<dt className="capitalize font-medium text-gray-400 shrink-0">
+								{formatSpecKey(key)}
+							</dt>
+							<dd className="text-gray-200 font-semibold text-right truncate flex-1 min-w-0">
+								{value}
+							</dd>
+						</div>
+					))}
+				</dl>
+			</div>
+
+			<div className="absolute inset-0 bg-linear-to-t from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+		</article>
+	);
+};
+
+const FilterButton = ({ filter, isActive, onClick }) => (
+	<button
+		onClick={() => onClick(filter)}
+		className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400/50 ${isActive
+			? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50"
+			: "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20"
+		}`}
+		aria-pressed={isActive}
+	>
+		{filter}
+	</button>
+);
+
+const Modal = ({ item, onClose }) => {
+	const [isVisible, setIsVisible] = useState(false);
+
+	useEffect(() => {
+		setIsVisible(true);
+
+		const scrollY = window.scrollY;
+		const style = document.body.style;
+
+		style.overflow = "hidden";
+		document.documentElement.style.overflow = "hidden";
+		style.position = "fixed";
+		style.top = `-${scrollY}px`;
+		style.width = "100%";
+
+		const handleEscape = (e) => {
+			if (e.key === "Escape") {
+				setIsVisible(false);
+
+				const currentScrollY =
+					parseInt(document.body.style.top || "0", 10) * -1;
+				const currentStyle = document.body.style;
+
+				currentStyle.overflow = "unset";
+				document.documentElement.style.overflow = "unset";
+				currentStyle.position = "unset";
+				currentStyle.top = "unset";
+				currentStyle.width = "unset";
+				window.scrollTo(0, currentScrollY);
+
+				setTimeout(onClose, 200);
+			}
+		};
+
+		document.addEventListener("keydown", handleEscape);
+
+		return () => {
+			style.overflow = "unset";
+			document.documentElement.style.overflow = "unset";
+			style.position = "unset";
+			style.top = "unset";
+			style.width = "unset";
+			window.scrollTo(0, scrollY);
+			document.removeEventListener("keydown", handleEscape);
+		};
+	}, [onClose]);
+
+	const handleClose = useCallback(() => {
+		setIsVisible(false);
+
+		const scrollY = parseInt(document.body.style.top || "0", 10) * -1;
+		const style = document.body.style;
+
+		style.overflow = "unset";
+		document.documentElement.style.overflow = "unset";
+		style.position = "unset";
+		style.top = "unset";
+		style.width = "unset";
+		window.scrollTo(0, scrollY);
+
+		setTimeout(onClose, 200);
+	}, [onClose]);
+
+	const handleBackdropClick = useCallback(
+		(e) => {
+			if (e.target === e.currentTarget) handleClose();
+		},
+		[handleClose]
+	);
+
+	if (!item) return null;
+
+	return (
+		<div
+			className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
+				}`}
+			onClick={handleBackdropClick}
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="modal-title"
+			aria-describedby="modal-description"
+		>
+			<div className={`bg-gradient-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 rounded-2xl border border-white/20 max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 ${isVisible ? "scale-100" : "scale-95"
+				}`} onClick={(e) => e.stopPropagation()}>
+				<header className="sticky top-0 bg-linear-to-r from-slate-800/40 via-slate-800/40 to-slate-900/40 p-6 border-b border-white/10 z-10 rounded-2xl">
+					<div className="flex items-center justify-between">
+						<h3 id="modal-title" className="text-xl font-bold text-white select-none">
+							Specifications
+						</h3>
+						<button
+							onClick={handleClose}
+							className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-800 cursor-pointer"
+							aria-label="Close modal"
+						>
+							<svg
+								className="w-6 h-6"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M6 18L18 6M6 6l12 12"
+								/>
+							</svg>
+						</button>
+					</div>
+				</header>
+
+				<div className="overflow-y-auto max-h-[calc(90vh-100px)]">
+					<div className="p-8">
+						<div className="flex flex-col md:flex-row gap-8">
+							<div className="shrink-0">
+								<div className="w-48 h-48 bg-linear-to-br from-white/5 to-transparent rounded-xl flex items-center justify-center p-4">
+									<img
+										src={item.image}
+										alt={`${item.name} - ${item.category}`}
+										className="max-w-full max-h-full object-contain"
+									/>
+								</div>
+							</div>
+
+							<div className="flex-1 min-w-0">
+								<span className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-3 block">
+									{item.category}
+								</span>
+
+								<h3
+									id="modal-description"
+									className="text-2xl font-bold text-white mb-6 wrap-break-word"
+								>
+									{item.name}
+								</h3>
+
+								<div className="space-y-4">
+									<div className="border-b border-white/10 mb-4" />
+									<dl className="grid grid-cols-2 gap-3">
+										{Object.entries(item.specs).map(([key, value]) => (
+											<div
+												key={key}
+												className="bg-slate-800/30 rounded-md p-3 border border-white/5 hover:border-white/10 transition-colors duration-200"
+											>
+												<dt className="text-gray-400 text-xs font-medium uppercase tracking-wide mb-1">
+													{formatSpecKey(key)}
+												</dt>
+												<dd className="text-white text-sm font-semibold">
+													{value}
+												</dd>
+											</div>
+										))}
+									</dl>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export const Equipment = () => {
+	const [selectedFilter, setSelectedFilter] = useState("ALL");
+	const [selectedItem, setSelectedItem] = useState(null);
+	const [isFilterChanging, setIsFilterChanging] = useState(false);
+
+	const handleFilterChange = useCallback(
+		(filter) => {
+			if (filter === selectedFilter) return;
+
+			setIsFilterChanging(true);
+			setTimeout(() => {
+				setSelectedFilter(filter);
+				setIsFilterChanging(false);
+			}, 175);
+		},
+		[selectedFilter]
+	);
+
+	const handleItemSelect = useCallback((item) => setSelectedItem(item), []);
+	const handleModalClose = useCallback(() => setSelectedItem(null), []);
+
+	const filteredEquipment = useMemo(() => {
+		let filtered = equipmentData;
+
+		if (selectedFilter !== "ALL") {
+			filtered = filtered.filter(
+				(item) => getCategoryGroup(item.category) === selectedFilter
+			);
+		}
+
+		return filtered;
+	}, [selectedFilter]);
+
+	const equipmentCount = filteredEquipment.length;
+
+
+	return (
+		<section id="equipment" className="relative min-h-screen py-20 overflow-hidden">
+			{/* Animated background */}
+			<div className="absolute inset-0 pointer-events-none">
+				<div className="absolute top-0 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+				<div className="absolute bottom-0 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+			</div>
+
+			<div className="max-w-6xl mx-auto px-4 relative z-10">
+				<RevealOnScroll distance={30} stagger={80}>
+					<header className="text-center mb-12" data-reveal>
+						<h2 className="text-4xl font-bold mb-4 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 bg-clip-text text-transparent drop-shadow-lg select-none">
+							Equipment
+						</h2>
+						<p className="text-gray-400 max-w-2xl mx-auto">
+							Complete setup overview of my gaming and development hardware
+						</p>
+					</header>
+
+					<nav className="flex flex-wrap justify-center gap-3 mb-8 select-none" role="tablist" data-reveal>
+						{categoryFilters.map((filter) => (
+							<FilterButton
+								key={filter}
+								filter={filter}
+								isActive={selectedFilter === filter}
+								onClick={handleFilterChange}
+							/>
+						))}
+					</nav>
+
+					<div className="text-center mb-8">
+						<p className="text-gray-400 text-sm select-none">
+							{`Showing ${equipmentCount} item${equipmentCount !== 1 ? "s" : ""}${selectedFilter !== "ALL" ? ` in ${selectedFilter}` : ""}.`}
+						</p>
+					</div>
+
+					<div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-300 ${isFilterChanging ? "opacity-0 scale-95" : "opacity-100 scale-100"}`} data-reveal>
+						{filteredEquipment.map((item, index) => (
+							<EquipmentCard
+								key={`${item.name}-${selectedFilter}`}
+								item={item}
+								index={index}
+								onClick={handleItemSelect}
+							/>
+						))}
+					</div>
+
+					{equipmentCount === 0 && !isFilterChanging && (
+						<div className="flex flex-col items-center justify-center py-24 px-4">
+							<div className="w-24 h-24 mb-6 rounded-2xl bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center">
+								<svg className="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<rect x="3" y="3" width="18" height="18" rx="2" />
+									<path d="M9 9h6v6H9z" />
+								</svg>
+							</div>
+							<h3 className="text-2xl font-bold text-white mb-2 select-none">No equipment found</h3>
+							<p className="text-gray-400 text-center mb-8 select-none max-w-sm">
+								Try selecting a different category to view available equipment.
+							</p>
+							{selectedFilter !== "ALL" && (
+								<button
+									onClick={() => handleFilterChange("ALL")}
+									className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg transition-all duration-200 cursor-pointer"
+								>
+									Show all categories
+								</button>
+							)}
+						</div>
+					)}
+				</RevealOnScroll>
+			</div>
+
+			{selectedItem && <Modal item={selectedItem} onClose={handleModalClose} />}
+		</section>
+	);
+};
+
+export default Equipment;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {/* # Thanks to Pedro Tech for amazing tutorial.
 
 # DEV
