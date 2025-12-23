@@ -3,10 +3,10 @@ import { RevealOnScroll } from "../RevealOnScroll";
 import HomeBackGround from "./HomeBackGround";
 
 const INTERESTS = [
-	{ title: "Content Creator", desc: "Entertaining & Engaging", icon: "camera", color: "from-cyan-500 to-blue-500" },
-	{ title: "Developer", desc: "Clean & Responsive Code", icon: "code", color: "from-purple-500 to-pink-500" },
-	{ title: "Gamer", desc: "Competitive & Creative", icon: "crosshair", color: "from-blue-500 to-purple-500" },
-	{ title: "Creator", desc: "Visuals & Streams", icon: "palette", color: "from-pink-500 to-cyan-500" }
+	{ title: "Content Creator", desc: "xxx", icon: "camera", color: "from-cyan-500 to-blue-500" },
+	{ title: "Developer", desc: "xxx", icon: "code", color: "from-purple-500 to-pink-500" },
+	{ title: "Gamer", desc: "xxx", icon: "crosshair", color: "from-blue-500 to-purple-500" },
+	{ title: "Creator", desc: "xxx", icon: "palette", color: "from-pink-500 to-cyan-500" }
 ];
 
 const ROLES = ["Content Creator.", "Developer.", "Gamer."];
@@ -177,7 +177,7 @@ export const Home = React.memo(() => {
 					<div className="flex flex-col lg:flex-row lg:items-center lg:justify-center lg:gap-20 xl:gap-28">
 						
 						<div className="flex-1 space-y-8 max-w-2xl mx-auto lg:mx-0">
-							<div className="space-y-6">
+							<div className="space-y-4">
 								<div className="space-y-3">
 									<h1
 										className={`text-6xl sm:text-7xl lg:text-8xl font-black leading-tight tracking-tight will-change-transform ${
@@ -188,7 +188,7 @@ export const Home = React.memo(() => {
 										<span className="block text-white select-none">MichalBr</span>
 									</h1>
 
-									<div className="flex items-baseline justify-center lg:justify-start gap-2">
+									<div className="flex items-baseline justify-left lg:justify-start gap-2">
 										<span className="text-lg sm:text-2xl text-gray-300 font-light leading-none select-none">Hello, I am</span>
 
 										<span
@@ -215,7 +215,7 @@ export const Home = React.memo(() => {
 
 								</div>
 
-								<p className="text-gray-400 text-sm sm:text-base leading-relaxed font-light select-none">
+								<p className="text-gray-400 text-lg base:text-base leading-relaxed font-light select-none">
 									Creating entertaining content, playing games to dominate the battleground, and building clean and responsive apps and great games.
 								</p>
 							</div>
