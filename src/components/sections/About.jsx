@@ -82,31 +82,7 @@ export const About = () => {
 
             {/* Education */}
             <div className={`${sectionClasses} mb-8`}>
-              <h3 className="text-xl font-semibold mb-5 text-yellow-400 flex items-center select-none">
-                <svg
-                  className="w-6 h-6 mr-2 inline-block text-yellow-400"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 14l9-5-9-5-9 5 9 5z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-10.922L12 14z"
-                  />
-                </svg>
-                Education
-              </h3>
-
-              <div className="space-y-4 text-gray-300">
+              <div className="space-y-4 text-gray-300 select-none">
                 <div className="flex items-start">
                   <div
                     className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-4 shrink-0"
@@ -128,26 +104,28 @@ export const About = () => {
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
-                    Completed{" "}
                     <strong className="text-green-500">
-                      Information Technology
+                      English Language
                     </strong>{" "}
-                    studies in High School and also finished{" "}
-                    <strong className="text-green-500">English language</strong>{" "}
-                    school.
+                    - AMIGAS Language School
+                    <span className="block text-sm text-gray-400">
+                      2022 - 2023 (Completed)
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <div
-                    className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-4 shrink-0"
+                    className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 shrink-0"
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
-                    Currently a{" "}
-                    <strong className="text-yellow-500">
-                      full-time student
-                    </strong>
-                    , and do not work anywhere.
+                    <strong className="text-green-500">
+                      Mobile Applications
+                    </strong>{" "}
+                    - High School of Information Technology, Postal Services, and Finance
+                    <span className="block text-sm text-gray-400">
+                      2018 - 2022 (Completed)
+                    </span>
                   </div>
                 </div>
               </div>
