@@ -82,7 +82,7 @@ export const About = () => {
 
             {/* Education */}
             <div className={`${sectionClasses} mb-8`}>
-              <div className="space-y-5 text-gray-300 select-none">
+              <div className="space-y-5 text-gray-300 leading-relaxed select-none">
                 <div className="flex items-start">
                   <div
                     className="w-2 h-2 bg-blue-500/60 rounded-full mt-2 mr-4 shrink-0"
@@ -176,9 +176,9 @@ export const About = () => {
             {/* Hobbies */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
               <div className={`${sectionClasses} min-w-0`}>
-                <h3 className="text-xl font-semibold mb-5 text-blue-400 flex items-center select-none">
+                <h3 className="text-xl font-semibold mb-5 text-blue-500 flex items-center select-none">
                   <svg
-                    className="w-6 h-6 mr-2 inline-block text-blue-400"
+                    className="w-6 h-6 mr-2 inline-block text-blue-500"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
@@ -209,9 +209,9 @@ export const About = () => {
 
               {/* Experience */}
               <div className={`${sectionClasses} min-w-0`}>
-                <h3 className="text-xl font-semibold mb-5 text-cyan-400 flex items-center select-none">
+                <h3 className="text-xl font-semibold mb-5 text-blue-500 flex items-center select-none">
                   <svg
-                    className="w-6 h-6 mr-2 inline-block text-cyan-400"
+                    className="w-6 h-6 mr-2 inline-block text-blue-500"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
@@ -240,7 +240,7 @@ export const About = () => {
                   {experience.map((tech, index) => (
                     <span
                       key={index}
-                      className={`${tagClasses} bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/25 hover:border-cyan-500/50 hover:shadow-[0_2px_12px_rgba(6,182,212,0.3)] select-none`}
+                      className={`${tagClasses} bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 hover:shadow-[0_2px_12px_rgba(59,130,246,0.3)] select-none`}
                     >
                       {tech}
                     </span>
