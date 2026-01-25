@@ -82,10 +82,10 @@ export const About = () => {
 
             {/* Education */}
             <div className={`${sectionClasses} mb-8`}>
-              <div className="space-y-4 text-gray-300 select-none">
+              <div className="space-y-5 text-gray-300 select-none">
                 <div className="flex items-start">
                   <div
-                    className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-4 shrink-0"
+                    className="w-2 h-2 bg-blue-500/60 rounded-full mt-2 mr-4 shrink-0"
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
@@ -100,31 +100,31 @@ export const About = () => {
                 </div>
                 <div className="flex items-start">
                   <div
-                    className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 shrink-0"
+                    className="w-2 h-2 bg-blue-500/60 rounded-full mt-2 mr-4 shrink-0"
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
-                    <strong className="text-green-500">
+                    <strong className="text-blue-500">
                       English Language
                     </strong>{" "}
                     - AMIGAS Language School
                     <span className="block text-sm text-gray-400">
-                      2022 - 2023 (Completed)
+                      2022 - 2023 <span className="text-gray-500 text-xs">(Completed)</span>
                     </span>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <div
-                    className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4 shrink-0"
+                    className="w-2 h-2 bg-blue-500/60 rounded-full mt-2 mr-4 shrink-0"
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
-                    <strong className="text-green-500">
+                    <strong className="text-blue-500">
                       Mobile Applications
                     </strong>{" "}
                     - High School of Information Technology, Postal Services, and Finance
                     <span className="block text-sm text-gray-400">
-                      2018 - 2022 (Completed)
+                      2018 - 2022 <span className="text-gray-500 text-xs">(Completed)</span>
                     </span>
                   </div>
                 </div>
