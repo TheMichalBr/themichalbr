@@ -72,7 +72,7 @@ const Video = ({ videoUrl }) => {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-16 w-16 hover:scale-110 transition-transform text-white"
+                  className="h-16 w-16 hover:scale-110 transition-transform text-gray-300"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -95,7 +95,7 @@ const Video = ({ videoUrl }) => {
             ></iframe>
             <button
               onClick={() => setIsVideoPlaying(false)}
-              className="absolute top-4 right-4 bg-black/70 text-white p-2 rounded-full hover:bg-black/80 transition-colors cursor-pointer"
+              className="absolute top-4 right-4 bg-black/70 text-gray-300 p-2 rounded-full hover:bg-black/80 transition-colors cursor-pointer"
             >
               ✖
             </button>
@@ -103,7 +103,7 @@ const Video = ({ videoUrl }) => {
         )}
       </div>
       <div className="mt-4 flex justify-between w-full max-w-4xl">
-        <h3 className="text-lg font-bold text-white select-none">{videoTitle}</h3>
+        <h3 className="text-lg font-semibold text-gray-300 select-none">{videoTitle}</h3>
         <p className="text-sm text-gray-400 select-none">{videoViews}</p>
       </div>
     </div>
