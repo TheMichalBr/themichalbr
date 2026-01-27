@@ -48,7 +48,7 @@ export const About = () => {
   const cardClasses =
     "rounded-xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-xl hover:shadow-2xl";
   const sectionClasses =
-    "bg-white/5 rounded-xl p-4 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300";
+    "bg-white/5 rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300"; {/* bg-white/5 , dobré i bez*/}
   const tagClasses =
     "py-2 px-3 rounded-full text-sm transition-all duration-200 transform cursor-default flex-shrink-0 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]";
 
@@ -67,7 +67,7 @@ export const About = () => {
           {/* About */}
           <div className={`${cardClasses} mb-8`}>
             <div className="mb-8">
-              <p className="text-gray-300 leading-relaxed text-lg">
+              <p className="text-gray-300 leading-relaxed text-lg select-none">
                 My name is Michal. I am 23 years old boy, from the Czech
                 Republic, and currently living in Brno. I am a passionate gamer
                 and content creator, as well as a developer with some knowledge
@@ -132,10 +132,10 @@ export const About = () => {
             </div>
 
             {/* Languages */}
-            <div className="mb-8">
-              <h3 className="text-xl font-semibold mb-5 text-purple-400 flex items-center select-none">
+            <div className={`${sectionClasses} mb-8`}>
+              <h3 className="text-xl font-semibold mb-5 text-blue-500 flex items-center select-none">
                 <svg
-                  className="w-6 h-6 mr-2 inline-block text-purple-400"
+                  className="w-6 h-6 mr-2 inline-block text-blue-500"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -162,9 +162,9 @@ export const About = () => {
                 {languages.map((lang, index) => (
                   <div
                     key={index}
-                    className="bg-purple-500/10 border border-purple-500/20 rounded-lg p-3 text-center hover:bg-purple-500/20 transition-colors duration-300 transform select-none"
+                    className="bg-blue-500/15 border border-blue-500/30 rounded-lg p-3 text-center hover:bg-blue-500/25 hover:border-blue-500/50 transition-colors duration-300 transform select-none hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]"
                   >
-                    <span className="font-medium text-purple-300">
+                    <span className="font-medium text-blue-300">
                       {lang.name}
                     </span>
                     <div className="text-sm text-gray-400">{lang.level}</div>
@@ -199,7 +199,7 @@ export const About = () => {
                   {hobbies.map((hobby, index) => (
                     <span
                       key={index}
-                      className={`${tagClasses} bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 hover:shadow-[0_2px_12px_rgba(59,130,246,0.3)] select-none`}
+                      className={`${tagClasses} bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 select-none`}
                     >
                       {hobby}
                     </span>
@@ -240,7 +240,7 @@ export const About = () => {
                   {experience.map((tech, index) => (
                     <span
                       key={index}
-                      className={`${tagClasses} bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 hover:shadow-[0_2px_12px_rgba(59,130,246,0.3)] select-none`}
+                      className={`${tagClasses} bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 select-none`}
                     >
                       {tech}
                     </span>
@@ -250,10 +250,10 @@ export const About = () => {
             </div>
 
             {/* Let's Connect */}
-            <div className="bg-linear-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300">
-              <h3 className="text-xl font-semibold mb-3 text-white flex items-center select-none">
+            <div className="rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 min-w-0">
+              <h3 className="text-xl font-semibold mb-3 text-gray-300 flex items-center select-none">
                 <svg
-                  className="w-6 h-6 mr-2 inline-block text-white"
+                  className="w-6 h-6 mr-2 inline-block text-gray-300"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -285,22 +285,22 @@ export const About = () => {
               </p>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
+                <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
                   <div className="flex items-center">
-                    <span className="text-sm text-gray-400 select-none">
+                    <span className="text-sm text-gray-500 select-none">
                       Discord:
                     </span>
-                    <span className="ml-2 text-white font-medium break-all">
+                    <span className="ml-2 text-gray-300 font-medium break-all select-auto">
                       @MichalBr
                     </span>
                   </div>
                 </div>
-                <div className="bg-white/10 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
+                <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
                   <div className="flex items-center">
-                    <span className="text-sm text-gray-400 select-none">
+                    <span className="text-sm text-gray-500 select-none">
                       Email:
                     </span>
-                    <span className="ml-2 text-white font-medium break-all">
+                    <span className="ml-2 text-gray-300 font-medium break-all select-auto">
                       biz.michalbr@gmail.com
                     </span>
                   </div>
