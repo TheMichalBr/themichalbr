@@ -104,12 +104,11 @@ export const About = () => {
                     aria-hidden="true"
                   />
                   <div className="min-w-0">
-                    <strong className="text-blue-500">
-                      English Language
-                    </strong>{" "}
+                    <strong className="text-blue-500">English Language</strong>{" "}
                     - AMIGAS Language School
                     <span className="block text-sm text-gray-400">
-                      2022 - 2023 <span className="text-gray-500 text-xs">(Completed)</span>
+                      2022 - 2023{" "}
+                      <span className="text-gray-500 text-xs">(Completed)</span>
                     </span>
                   </div>
                 </div>
@@ -122,9 +121,11 @@ export const About = () => {
                     <strong className="text-blue-500">
                       Mobile Applications
                     </strong>{" "}
-                    - High School of Information Technology, Postal Services, and Finance
+                    - High School of Information Technology, Postal Services,
+                    and Finance
                     <span className="block text-sm text-gray-400">
-                      2018 - 2022 <span className="text-gray-500 text-xs">(Completed)</span>
+                      2018 - 2022{" "}
+                      <span className="text-gray-500 text-xs">(Completed)</span>
                     </span>
                   </div>
                 </div>
@@ -162,9 +163,9 @@ export const About = () => {
                 {languages.map((lang, index) => (
                   <div
                     key={index}
-                    className="bg-blue-500/15 border border-blue-500/30 rounded-lg p-3 text-center hover:bg-blue-500/25 hover:border-blue-500/50 transition-colors duration-300 transform select-none hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]"
+                    className="bg-blue-600/15 border border-blue-500/30 rounded-lg p-3 text-center hover:bg-blue-500/25 hover:border-blue-500/50 transition-colors duration-300 transform select-none hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]"
                   >
-                    <span className="font-medium text-blue-300">
+                    <span className="font-medium text-blue-400">
                       {lang.name}
                     </span>
                     <div className="text-sm text-gray-400">{lang.level}</div>
@@ -199,7 +200,7 @@ export const About = () => {
                   {hobbies.map((hobby, index) => (
                     <span
                       key={index}
-                      className={`${tagClasses} bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 select-none`}
+                      className={`${tagClasses} bg-blue-600/15 text-blue-400 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 select-none`}
                     >
                       {hobby}
                     </span>
@@ -240,7 +241,7 @@ export const About = () => {
                   {experience.map((tech, index) => (
                     <span
                       key={index}
-                      className={`${tagClasses} bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 select-none`}
+                      className={`${tagClasses} bg-blue-600/15 text-blue-400 border border-blue-500/30 hover:bg-blue-500/25 hover:border-blue-500/50 select-none`}
                     >
                       {tech}
                     </span>
