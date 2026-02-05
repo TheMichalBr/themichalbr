@@ -3,7 +3,7 @@ import { RevealOnScroll } from "../RevealOnScroll";
 import { reviews } from "./GamesData";
 
 import G1 from "/games/G_CS2.webp";
-import G2 from "/games/G_OW2.webp";
+import G2 from "/games/G_OW.webp";
 import G3 from "/games/G_APEX.webp";
 import G4 from "/games/G_FORTNITE.webp";
 import G5 from "/games/G_VALORANT.webp";
@@ -11,7 +11,7 @@ import G6 from "/games/G_R6X.webp";
 import G7 from "/games/G_CHESS.webp";
 
 import GR1 from "/games/G_CS2_R.webp";
-import GR2 from "/games/G_OW2_R.webp";
+import GR2 from "/games/G_OW_R.webp";
 import GR3 from "/games/G_APEX_R.webp";
 import GR4 from "/games/G_FORTNITE_R.webp";
 import GR5 from "/games/G_VALORANT_R.webp";
@@ -30,11 +30,11 @@ export const Games = () => {
       id: "cs2",
       name: "Counter Strike 2",
       platform: "Steam (MichalBr)",
-      rank: "Level 9",
+      rank: "Level 10",
       rankIcon: GR1,
       image: G1,
       settings: {
-        FACEIT: "Level 9",
+        FACEIT: "Level 10",
         Premier: "21 000+ ELO (MM p. Global Elite)",
         Crosshair: "CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D",
         Viewmodel:
@@ -45,8 +45,8 @@ export const Games = () => {
       },
     },
     {
-      id: "overwatch2",
-      name: "Overwatch 2",
+      id: "overwatch",
+      name: "Overwatch",
       platform: "Battle.net (MichalBr#2144)",
       rank: "Platinum III",
       rankIcon: GR2,
