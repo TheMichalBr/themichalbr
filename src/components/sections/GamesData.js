@@ -1,5 +1,3 @@
-import RH from "/games/GR_RH.webp";
-
 export const reviews = [
   {
     title: "Blue Protocol: Star Resonance",
@@ -25,7 +23,7 @@ export const reviews = [
   },
   {
     title: "Cyberpunk 2077",
-    image: RH,
+    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1769690377",
     tag: "game",
     rating: "10/10",
     info: {
