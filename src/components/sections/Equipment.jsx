@@ -70,7 +70,10 @@ const equipmentData = [
     category: "PROCESSOR COOLER",
     name: "Noctua NH-U9S chromax.black",
     image: cpucoolerI,
-    specs: {},
+    specs: {
+      type: "PWM - Air Cooler",
+      height: "125 mm",
+    },
   },
   {
     category: "GRAPHICS CARD",
