@@ -68,7 +68,7 @@ export const About = () => {
           <div className={`${cardClasses} mb-8`}>
             <div className="mb-8">
               <p className="text-gray-300 leading-relaxed text-lg select-none">
-                My name is Michal. I am 23 years old boy, from the Czech
+                My name is Michal. I am 24 years old boy, from the Czech
                 Republic, and currently living in Brno. I am a passionate gamer
                 and content creator, as well as a developer with some knowledge
                 of various programming languages and technologies. I am a chill
