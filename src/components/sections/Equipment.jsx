@@ -48,7 +48,7 @@ const equipmentData = [
     name: "MSI MPG X870E CARBON WIFI",
     image: mbI,
     specs: {
-      biosVersion: "7E49v1A70",
+      biosVersion: "7E49v1A8",
       formFactor: "ATX",
       socket: "AM5",
       chipset: "X870E",
@@ -68,24 +68,21 @@ const equipmentData = [
   },
   {
     category: "PROCESSOR COOLER",
-    name: "Noctua NH-U9S",
+    name: "Noctua NH-U9S chromax.black",
     image: cpucoolerI,
-    specs: {
-      version: "chromax.black",
-      type: "PWM - Air Cooler",
-      height: "125 mm",
-    },
+    specs: {},
   },
   {
     category: "GRAPHICS CARD",
-    name: "NVIDIA MSI GeForce RTX 2070",
+    name: "MSI GeForce RTX 5070 12G GAMING TRIO OC",
     image: gpuI,
     specs: {
-      version: "GAMING Z",
-      memory: "8 GB GDDR6",
-      baseClock: "1410 MHz",
-      boostClock: "1620 MHz",
-      architecture: "TU104 - Turing",
+      memory: "12 GB GDDR7",
+      baseClock: "2325 MHz",
+      memoryBus: "192 bit",
+      boostClock: "2610 Mhz",
+      architecture: "NVIDIA - Blackwell 2.0 (GB205)",
+      previousGpu: "MSI GeForce RTX 2070 GAMING Z",
     },
   },
   {
