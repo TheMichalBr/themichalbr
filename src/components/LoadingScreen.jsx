@@ -10,7 +10,6 @@ export const LoadingScreen = ({ onComplete }) => {
   const [estimatedTime, setEstimatedTime] = useState(1);
   const [progressHistory, setProgressHistory] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
-  const [isFirefox, setIsFirefox] = useState(false);
   const [systemStatus, setSystemStatus] = useState("checking");
 
   const timeIntervalRef = useRef(null);
@@ -27,11 +26,6 @@ export const LoadingScreen = ({ onComplete }) => {
     ],
     []
   );
-
-  useEffect(() => {
-    const userAgent = navigator.userAgent.toLowerCase();
-    setIsFirefox(userAgent.indexOf("firefox") > -1);
-  }, []);
 
   useEffect(() => {
     const checkGitHubStatus = async () => {
@@ -276,15 +270,6 @@ export const LoadingScreen = ({ onComplete }) => {
                   : "Checking..."}
             </span>
           </div>
-
-          {isFirefox && (
-            <div className="mb-2 text-amber-700 text-xs">
-              <div className="flex items-center justify-center space-x-2">
-                <div className="w-1 h-1 bg-amber-700 rounded-full animate-pulse" />
-                <span>Firefox detected: Experience may not be optimal!</span>
-              </div>
-            </div>
-          )}
 
           <div>
             Having issues?{" "}
