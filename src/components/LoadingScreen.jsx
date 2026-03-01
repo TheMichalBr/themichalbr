@@ -1,6 +1,43 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
 
-/* eslint-disable no-unused-vars */
+const TOTAL_DURATION = 700;
+const STAR_CONFIG = {
+  MOBILE_COUNT: 80,
+  DESKTOP_COUNT: 120,
+};
+const GITHUB_STATUS_TIMEOUT = 5000;
+const PROGRESS_PHASES = {
+  phase1: { end: 0.2, targetProgress: 25 },
+  phase2: { start: 0.2, end: 0.7, targetProgress: 50 },
+  phase3: { start: 0.7, end: 1, targetProgress: 25 },
+};
+
+const calculateProgress = (normalizedTime) => {
+  if (normalizedTime < PROGRESS_PHASES.phase1.end) {
+    return (
+      (normalizedTime / PROGRESS_PHASES.phase1.end) *
+      PROGRESS_PHASES.phase1.targetProgress
+    );
+  } else if (normalizedTime < PROGRESS_PHASES.phase2.end) {
+    const phaseProgress =
+      (normalizedTime - PROGRESS_PHASES.phase2.start) /
+      (PROGRESS_PHASES.phase2.end - PROGRESS_PHASES.phase2.start);
+    return (
+      PROGRESS_PHASES.phase1.targetProgress +
+      phaseProgress * PROGRESS_PHASES.phase2.targetProgress
+    );
+  } else {
+    const phaseProgress =
+      (normalizedTime - PROGRESS_PHASES.phase3.start) /
+      (PROGRESS_PHASES.phase3.end - PROGRESS_PHASES.phase3.start);
+    return (
+      PROGRESS_PHASES.phase1.targetProgress +
+      PROGRESS_PHASES.phase2.targetProgress +
+      phaseProgress * PROGRESS_PHASES.phase3.targetProgress
+    );
+  }
+};
+
 export const LoadingScreen = ({ onComplete }) => {
   const [fadeOut, setFadeOut] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -8,7 +45,6 @@ export const LoadingScreen = ({ onComplete }) => {
   const [stars, setStars] = useState([]);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [estimatedTime, setEstimatedTime] = useState(1);
-  const [progressHistory, setProgressHistory] = useState([]);
   const [isVisible, setIsVisible] = useState(true);
   const [systemStatus, setSystemStatus] = useState("checking");
 
@@ -24,21 +60,30 @@ export const LoadingScreen = ({ onComplete }) => {
       "Finalizing setup..",
       "Entering page..",
     ],
-    []
+    [],
   );
 
   useEffect(() => {
     const checkGitHubStatus = async () => {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(
+        () => controller.abort(),
+        GITHUB_STATUS_TIMEOUT,
+      );
+
       try {
         const response = await fetch(
-          "https://www.githubstatus.com/api/v2/status.json"
+          "https://www.githubstatus.com/api/v2/status.json",
+          { signal: controller.signal },
         );
         const data = await response.json();
         setSystemStatus(
-          data.status.indicator === "none" ? "operational" : "issues"
+          data.status.indicator === "none" ? "operational" : "issues",
         );
-      } catch (error) {
+      } catch {
         setSystemStatus("unknown");
+      } finally {
+        clearTimeout(timeoutId);
       }
     };
 
@@ -46,7 +91,10 @@ export const LoadingScreen = ({ onComplete }) => {
   }, []);
 
   const generateStars = useCallback(() => {
-    const starCount = window.innerWidth < 768 ? 80 : 120;
+    const starCount =
+      window.innerWidth < 768
+        ? STAR_CONFIG.MOBILE_COUNT
+        : STAR_CONFIG.DESKTOP_COUNT;
     return Array.from({ length: starCount }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
@@ -60,6 +108,13 @@ export const LoadingScreen = ({ onComplete }) => {
 
   useEffect(() => {
     setStars(generateStars());
+
+    const handleResize = () => {
+      setStars(generateStars());
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [generateStars]);
 
   useEffect(() => {
@@ -70,7 +125,6 @@ export const LoadingScreen = ({ onComplete }) => {
     document.documentElement.style.overflow = "hidden";
 
     const startTime = Date.now();
-    const totalDuration = 700;
 
     timeIntervalRef.current = setInterval(() => {
       const elapsed = (Date.now() - startTime) / 1000;
@@ -80,58 +134,53 @@ export const LoadingScreen = ({ onComplete }) => {
     progressIntervalRef.current = setInterval(() => {
       const elapsed = Date.now() - startTime;
 
-      const normalizedTime = Math.min(elapsed / totalDuration, 1);
-      let newProgress;
-
-      if (normalizedTime < 0.2) {
-        newProgress = (normalizedTime / 0.2) * 25;
-      } else if (normalizedTime < 0.7) {
-        newProgress = 25 + ((normalizedTime - 0.2) / 0.5) * 50;
-      } else {
-        newProgress = 75 + ((normalizedTime - 0.7) / 0.3) * 25;
-      }
+      const normalizedTime = Math.min(elapsed / TOTAL_DURATION, 1);
+      let newProgress = calculateProgress(normalizedTime);
 
       newProgress = Math.min(Math.max(newProgress, 0), 100);
       setProgress(newProgress);
 
       const currentTime = elapsed / 1000;
-      setProgressHistory((prev) => {
-        const newHistory = [
-          ...prev,
-          { progress: newProgress, time: currentTime },
-        ];
-        return newHistory.slice(-10);
-      });
 
       if (newProgress > 5 && newProgress < 95) {
-        setProgressHistory((prev) => {
-          if (prev.length >= 3) {
-            const recent = prev.slice(-3);
-            const progressDiff =
-              recent[recent.length - 1].progress - recent[0].progress;
-            const timeDiff = recent[recent.length - 1].time - recent[0].time;
+        const measurementDelta = 300;
+        if (!progressIntervalRef.lastMeasurement) {
+          progressIntervalRef.lastMeasurement = {
+            progress: newProgress,
+            time: currentTime,
+          };
+        } else if (
+          currentTime - progressIntervalRef.lastMeasurement.time >=
+          measurementDelta / 1000
+        ) {
+          const progressDiff =
+            newProgress - progressIntervalRef.lastMeasurement.progress;
+          const timeDiff =
+            currentTime - progressIntervalRef.lastMeasurement.time;
 
-            if (progressDiff > 0 && timeDiff > 0) {
-              const progressRate = progressDiff / timeDiff;
-              const remainingProgress = 100 - newProgress;
-              const estimatedRemaining = remainingProgress / progressRate;
-              const newEstimatedTotal = currentTime + estimatedRemaining;
-              setEstimatedTime(
-                Math.max(Math.min(newEstimatedTotal, 2), currentTime + 0.1)
-              );
-            }
+          if (progressDiff > 0 && timeDiff > 0) {
+            const progressRate = progressDiff / timeDiff;
+            const remainingProgress = 100 - newProgress;
+            const estimatedRemaining = remainingProgress / progressRate;
+            const newEstimatedTotal = currentTime + estimatedRemaining;
+            setEstimatedTime(
+              Math.max(Math.min(newEstimatedTotal, 2), currentTime + 0.1),
+            );
           }
-          return prev;
-        });
+          progressIntervalRef.lastMeasurement = {
+            progress: newProgress,
+            time: currentTime,
+          };
+        }
       }
 
       const taskIndex = Math.min(
         Math.floor((newProgress / 100) * loadingTasks.length),
-        loadingTasks.length - 1
+        loadingTasks.length - 1,
       );
       setCurrentTask(loadingTasks[taskIndex] || "");
 
-      if (elapsed >= totalDuration) {
+      if (elapsed >= TOTAL_DURATION) {
         clearInterval(progressIntervalRef.current);
         clearInterval(timeIntervalRef.current);
         setProgress(100);
@@ -182,7 +231,7 @@ export const LoadingScreen = ({ onComplete }) => {
         ))}
       </div>
     ),
-    [stars]
+    [stars],
   );
 
   if (!isVisible) return null;
