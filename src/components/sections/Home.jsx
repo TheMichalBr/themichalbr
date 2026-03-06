@@ -72,7 +72,7 @@ export const Home = React.memo(() => {
 	return (
 		<section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden py-24 md:py-0 select-none">
 			{blinkStyle}
-			<BackGround speed={4.5} scale={0.925} color="#071936" noiseIntensity={1.5} rotation={4.55} />
+			<BackGround/>
 
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				<div className="absolute top-1/4 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
