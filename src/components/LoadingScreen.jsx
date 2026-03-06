@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useMemo, useRef } from "react";
+import BackGround from "./BackGround";
 
 const TOTAL_DURATION = 700;
 const STAR_CONFIG = {
@@ -247,6 +248,7 @@ export const LoadingScreen = ({ onComplete }) => {
       style={{ willChange: "opacity" }}
     >
       {StarField}
+      <BackGround/>
 
       <div className="relative z-10 flex flex-col items-center">
         <div className="mb-8 text-5xl font-mono font-bold text-center select-none">
