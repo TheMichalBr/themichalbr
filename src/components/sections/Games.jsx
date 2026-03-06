@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
-import { reviews } from "./GamesData";
+import { reviews } from "../../data/GamesData";
 
 import G1 from "/games/G_CS2.webp";
 import G2 from "/games/G_OW.webp";
@@ -213,7 +213,7 @@ export const Games = () => {
                           <div
                             className="transition-all duration-700 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform
                   opacity-0 max-h-0 translate-y-1 overflow-hidden
-                  group-hover:opacity-100 group-hover:max-h-[500px] group-hover:translate-y-0 delay-75">
+                  group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75">
                             <div className="space-y-1">
                               {Object.entries(review.info).map(
                                 ([key, value], index) => (
@@ -222,7 +222,7 @@ export const Games = () => {
                                     className="flex gap-2 text-sm text-gray-200 leading-relaxed
                         [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]"
                                   >
-                                    <span className="text-gray-400 min-w-[70px] font-medium">
+                                    <span className="text-gray-400 min-w-17.5 font-medium">
                                       {key.charAt(0).toUpperCase() +
                                         key.slice(1)}
                                       :
@@ -470,7 +470,7 @@ export const Games = () => {
             overflow-hidden transition-all duration-600 ease-in-out
             motion-safe:transform-gpu
             ${showSettings === game.id
-                          ? "max-h-[500px] opacity-100 translate-y-0 scale-100"
+                          ? "max-h-125 opacity-100 translate-y-0 scale-100"
                           : "max-h-0 opacity-0 -translate-y-4 scale-95"
                         }
           `}
@@ -492,7 +492,7 @@ export const Games = () => {
   {Object.entries(game.settings).map(([key, value]) => (
     <div key={key} className="flex text-sm group/item items-center gap-2 cursor-auto">
       <span
-        className="text-gray-400 font-medium min-w-[100px]
+        className="text-gray-400 font-medium min-w-25
         transition-colors duration-300
         group-hover/item:text-gray-300"
       >
