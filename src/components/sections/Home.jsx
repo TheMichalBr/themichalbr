@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
-import HomeBackGround from "./HomeBackGround";
+import BackGround from "../BackGround";
 
 const ROLES = ["Content Creator.", "Developer.", "Gamer."];
 const TYPING_SPEED = { typing: 120, deleting: 50 };
@@ -72,7 +72,7 @@ export const Home = React.memo(() => {
 	return (
 		<section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden py-24 md:py-0 select-none">
 			{blinkStyle}
-			<HomeBackGround speed={4.5} scale={0.925} color="#071936" noiseIntensity={1.5} rotation={4.55} />
+			<BackGround speed={4.5} scale={0.925} color="#071936" noiseIntensity={1.5} rotation={4.55} />
 
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
 				<div className="absolute top-1/4 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
