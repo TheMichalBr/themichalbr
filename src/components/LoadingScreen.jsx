@@ -251,7 +251,7 @@ export const LoadingScreen = ({ onComplete }) => {
       <BackGround/>
 
       <div className="relative z-10 flex flex-col items-center">
-        <div className="mb-8 text-5xl font-mono font-bold text-center select-none">
+        <div className="mb-7 text-6xl leading-tight tracking-tight text-center select-none">
           <span className="text-white drop-shadow-2xl tracking-widest">
             Loading
           </span>
@@ -269,19 +269,19 @@ export const LoadingScreen = ({ onComplete }) => {
             <div className="absolute inset-0 bg-linear-to-r from-transparent via-white to-transparent opacity-25 animate-shimmer" />
           </div>
 
-          <div className="absolute -top-7 right-0 text-sm font-mono text-blue-300 tracking-wider">
+          <div className="absolute -top-7 right-0 text-sm text-blue-300 tracking-wider">
             {Math.round(progress)}%
           </div>
         </div>
 
-        <div className="text-center mb-3">
-          <div className="text-base text-blue-200 tracking-wide font-mono transition-all duration-200 select-none min-h-6">
+        <div className="text-center mb-5">
+          <div className="text-base text-blue-200 tracking-wide transition-all duration-200 select-none min-h-6">
             {currentTask}
           </div>
         </div>
 
-        <div className="text-center mb-3">
-          <div className="flex justify-center items-center space-x-8 text-sm font-mono text-gray-300">
+        <div className="text-center mb-4">
+          <div className="flex justify-center items-center space-x-8 text-sm text-gray-300">
             <div className="flex items-center space-x-2">
               <div className="w-1 h-1 bg-blue-400 rounded-full animate-bounce-smooth" />
               <span className="text-gray-400">Elapsed:</span>
@@ -302,7 +302,7 @@ export const LoadingScreen = ({ onComplete }) => {
           </div>
         </div>
 
-        <div className="text-xs text-gray-400 tracking-wide font-mono opacity-70 select-none text-center">
+        <div className="text-xs text-gray-400 tracking-wide  opacity-70 select-none text-center">
           <div className="flex items-center justify-center space-x-2 mb-2">
             <div
               className={`w-1 h-1 rounded-full animate-pulse ${systemStatus === "operational"
