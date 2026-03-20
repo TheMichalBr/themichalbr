@@ -1,4 +1,14 @@
 export const reviews = [
+    {
+    title: "Harry Potter and the Philosopher's Stone",
+    image: "https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@._V1_.jpg",
+    tag: "film",
+    rating: "9/10",
+    info: {
+      year: "2001",
+      genre: "Fantasy",
+    },
+  },
   {
     title: "Blue Protocol: Star Resonance",
     image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3681810/bab705e2414243cd247a14a07b2d5490dcd2cefd/header.jpg?t=1760243884",
