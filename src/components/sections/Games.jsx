@@ -146,6 +146,12 @@ export const Games = () => {
               </p>
             </div>
 
+            <div className="flex items-center gap-4 mb-10">
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+              <span className="text-xs text-gray-600 uppercase tracking-widest">Latest reviews</span>
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+
             <div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {reviews.slice(0, 2).map((review, index) => (
@@ -303,6 +309,12 @@ export const Games = () => {
             </div>
 
             <div className="h-16"></div>
+
+                        <div className="flex items-center gap-4 mb-10">
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+              <span className="text-xs text-gray-600 uppercase tracking-widest">Ranks & Settings</span>
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {" "}
