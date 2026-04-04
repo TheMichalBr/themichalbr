@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
-import { reviews } from "../../data/GamesData";
+import { reviews, type Review } from "../../data/GamesData";
 
 import G1 from "/games/G_CS2.webp";
 import G2 from "/games/G_OW.webp";
@@ -18,14 +18,34 @@ import GR5 from "/games/G_VALORANT_R.webp";
 import GR6 from "/games/G_R6X_R.webp";
 import GR7 from "/games/G_CHESS_R.webp";
 
-export const Games = () => {
-  const [showSettings, setShowSettings] = useState(null);
+type GameSettings = Record<string, string>;
 
-  const toggleSettings = (gameId) => {
+interface Game {
+  id: string;
+  name: string;
+  platform: string;
+  rank: string;
+  rankIcon: string;
+  image: string;
+  settings: GameSettings;
+}
+
+interface TagInfo {
+  icon: string;
+  color: string;
+  bgColor: string;
+  borderColor: string;
+  text: string;
+}
+
+export const Games = () => {
+  const [showSettings, setShowSettings] = useState<string | null>(null);
+
+  const toggleSettings = (gameId: string): void => {
     setShowSettings((prev) => (prev === gameId ? null : gameId));
   };
 
-  const games = [
+  const games: Game[] = [
     {
       id: "cs2",
       name: "Counter Strike 2",
@@ -148,7 +168,9 @@ export const Games = () => {
 
             <div className="flex items-center gap-4 mb-10">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
-              <span className="text-xs text-gray-600 uppercase tracking-widest">Latest reviews</span>
+              <span className="text-xs text-gray-600 uppercase tracking-widest">
+                Latest reviews
+              </span>
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
             </div>
 
@@ -219,7 +241,8 @@ export const Games = () => {
                           <div
                             className="transition-all duration-700 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform
                   opacity-0 max-h-0 translate-y-1 overflow-hidden
-                  group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75">
+                  group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75"
+                          >
                             <div className="space-y-1">
                               {Object.entries(review.info).map(
                                 ([key, value], index) => (
@@ -237,7 +260,7 @@ export const Games = () => {
                                       {value}
                                     </span>
                                   </div>
-                                )
+                                ),
                               )}
                             </div>
                           </div>
@@ -310,9 +333,11 @@ export const Games = () => {
 
             <div className="h-16"></div>
 
-                        <div className="flex items-center gap-4 mb-10">
+            <div className="flex items-center gap-4 mb-10">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
-              <span className="text-xs text-gray-600 uppercase tracking-widest">Ranks & Settings</span>
+              <span className="text-xs text-gray-600 uppercase tracking-widest">
+                Ranks & Settings
+              </span>
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
             </div>
 
@@ -500,51 +525,59 @@ export const Games = () => {
                         >
                           Settings & Information
                         </h4>
-<div className="space-y-2.25">
-  {Object.entries(game.settings).map(([key, value]) => (
-    <div key={key} className="flex text-sm group/item items-center gap-2 cursor-auto">
-      <span
-        className="text-gray-400 font-medium min-w-25
+                        <div className="space-y-2.25">
+                          {Object.entries(game.settings).map(([key, value]) => (
+                            <div
+                              key={key}
+                              className="flex text-sm group/item items-center gap-2 cursor-auto"
+                            >
+                              <span
+                                className="text-gray-400 font-medium min-w-25
         transition-colors duration-300
         group-hover/item:text-gray-300"
-      >
-        {key}:
-      </span>
-      <span
-        className="text-gray-300 wrap-break-word flex-1
+                              >
+                                {key}:
+                              </span>
+                              <span
+                                className="text-gray-300 wrap-break-word flex-1
         transition-colors duration-300 
         group-hover/item:text-gray-200"
-      >
-        {value}
-      </span>
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          navigator.clipboard.writeText(value);
-        }}
-        className="p-1.5 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20
+                              >
+                                {value}
+                              </span>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  navigator.clipboard.writeText(value);
+                                }}
+                                className="p-1.5 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20
         text-cyan-400 hover:text-cyan-300 transition-all duration-200
         opacity-0 group-hover/item:opacity-100 active:scale-95
         focus:outline-none focus:ring-2 focus:ring-cyan-500/50 cursor-pointer"
-        aria-label={`Copy ${key}`}
-        title="Copy"
-      >
-        <svg
-          className="w-3.5 h-3.5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-        </svg>
-      </button>
-    </div>
-  ))}
-</div>
-
-
+                                aria-label={`Copy ${key}`}
+                                title="Copy"
+                              >
+                                <svg
+                                  className="w-3.5 h-3.5"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth={2}
+                                >
+                                  <rect
+                                    x="9"
+                                    y="9"
+                                    width="13"
+                                    height="13"
+                                    rx="2"
+                                    ry="2"
+                                  />
+                                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                </svg>
+                              </button>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -559,7 +592,7 @@ export const Games = () => {
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const getTagInfo = (tag) => {
+export const getTagInfo = (tag: Review["tag"]): TagInfo => {
   switch (tag) {
     case "game":
       return {
@@ -584,6 +617,14 @@ export const getTagInfo = (tag) => {
         bgColor: "bg-white/10",
         borderColor: "border-orange-500/20 backdrop-blur-sm",
         text: "Series",
+      };
+    default:
+      return {
+        icon: "❓",
+        color: "text-white/90",
+        bgColor: "bg-white/10",
+        borderColor: "border-white/20 backdrop-blur-sm",
+        text: "Unknown",
       };
   }
 };
