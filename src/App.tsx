@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { Navbar } from "./components/Navbar";
 import { MobileMenu } from "./components/MobileMenu";
@@ -9,11 +9,11 @@ import { Games } from "./components/sections/Games";
 import { Projects } from "./components/sections/Projects";
 import Footer from "./components/sections/Footer";
 
-import "./index.css";
+import "./index.scss";
 import "./App.scss";
 import "./assets/fonts/fonts.css";
 
-function App() {
+const App: FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
