@@ -1,8 +1,12 @@
-odkladiste
+// Only developer file
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, FC } from "react";
 
-export function HomeBackGround() {
+interface HomeBackGroundProps {
+  // Add props here if needed
+}
+
+export const HomeBackGround: FC<HomeBackGroundProps> = () => {
     const canvasRef = useRef(null);
     const opacityRef = useRef(0);
     const targetOpacity = 0.9;
