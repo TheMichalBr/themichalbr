@@ -1,12 +1,7 @@
-
-
-
-
 aktualne refaktor celeho kodu:
 About
 equipment
 footer
-games
 home
 project
 video
@@ -18,23 +13,8 @@ reaveal
 
 
 
-
-az na:
-gamesdata.ts  (nutna kontrola pro games)
-
-
-
-
-udelano:?
--
--
--
--
-
-
-
-
-
+Hotovo:
+- Games.tsx (+GamesData.ts)
 
 
 // Only developer file
