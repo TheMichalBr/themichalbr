@@ -11,7 +11,7 @@ import Footer from "./components/sections/Footer";
 
 import "./index.scss";
 import "./App.scss";
-import "./assets/fonts/fonts.css";
+import "./assets/fonts/fonts.scss";
 
 const App: FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
