@@ -1,3 +1,18 @@
+
+
+
+
+aktualne byla refaktor games a zatim nenic nic hotoveho
+
+
+
+az na:
+gamesdata.ts
+
+
+
+
+
 // Only developer file
 
 import { useEffect, useRef, FC } from "react";
