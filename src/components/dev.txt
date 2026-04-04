@@ -2,12 +2,36 @@
 
 
 
-aktualne byla refaktor games a zatim nenic nic hotoveho
+aktualne refaktor celeho kodu:
+About
+equipment
+footer
+games
+home
+project
+video
+background
+loading
+mobile
+navbar
+reaveal
+
 
 
 
 az na:
-gamesdata.ts
+gamesdata.ts  (nutna kontrola pro games)
+
+
+
+
+udelano:?
+-
+-
+-
+-
+
+
 
 
 
