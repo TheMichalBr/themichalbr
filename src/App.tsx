@@ -9,7 +9,7 @@ import { Games } from "./components/sections/Games";
 import { Projects } from "./components/sections/Projects";
 import Footer from "./components/sections/Footer";
 
-import "./index.scss";
+import "./index.css";
 import "./App.scss";
 import "./assets/fonts/fonts.scss";
 
