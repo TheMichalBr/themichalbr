@@ -26,3 +26,7 @@ dist-ssr
 .env
 .env.local
 desktop.ini
+
+
+# trans to TS
+.old
