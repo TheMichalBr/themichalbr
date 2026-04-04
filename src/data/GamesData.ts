@@ -1,7 +1,26 @@
-export const reviews = [
-    {
+export type ReviewTag = "film" | "series" | "game";
+
+export interface ReviewInfo {
+  year: string;
+  genre: string;
+  platform?: string;
+  additional?: string;
+}
+
+export interface Review {
+  title: string;
+  image: string;
+  tag: ReviewTag;
+  rating: string;
+  info: ReviewInfo;
+  review?: string;
+}
+
+export const reviews: Review[] = [
+  {
     title: "Harry Potter and the Philosopher's Stone",
-    image: "https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@._V1_.jpg",
+    image:
+      "https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@._V1_.jpg",
     tag: "film",
     rating: "9/10",
     info: {
@@ -11,7 +30,8 @@ export const reviews = [
   },
   {
     title: "Blue Protocol: Star Resonance",
-    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3681810/bab705e2414243cd247a14a07b2d5490dcd2cefd/header.jpg?t=1760243884",
+    image:
+      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3681810/bab705e2414243cd247a14a07b2d5490dcd2cefd/header.jpg?t=1760243884",
     tag: "game",
     rating: "6.5/10",
     info: {
@@ -33,7 +53,8 @@ export const reviews = [
   },
   {
     title: "Cyberpunk 2077",
-    image: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1769690377",
+    image:
+      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1769690377",
     tag: "game",
     rating: "10/10",
     info: {
