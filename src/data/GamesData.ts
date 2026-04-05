@@ -18,8 +18,7 @@ export interface ReviewInfo {
 export const reviews: Review[] = [
   {
     title: "Harry Potter and the Philosopher's Stone",
-    image:
-      "https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@._V1_.jpg",
+    image: "https://miro.medium.com/1*XdoGGruC9N0bKdWpAIFdjw.jpeg",
     tag: "film",
     rating: "9/10",
     info: {
@@ -29,8 +28,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Blue Protocol: Star Resonance",
-    image:
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3681810/bab705e2414243cd247a14a07b2d5490dcd2cefd/header.jpg?t=1760243884",
+    image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3681810/bab705e2414243cd247a14a07b2d5490dcd2cefd/header.jpg?t=1760243884",
     tag: "game",
     rating: "6.5/10",
     info: {
@@ -41,8 +39,7 @@ export const reviews: Review[] = [
   },
   {
     title: "The SpongeBob SquarePants Movie",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/346/158346718_8fc204.jpg",
+    image: "",
     tag: "film",
     rating: "7.5/10",
     info: {
@@ -52,8 +49,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Cyberpunk 2077",
-    image:
-      "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/e9047d8ec47ae3d94bb8b464fb0fc9e9972b4ac7/header.jpg?t=1769690377",
+    image: "",
     tag: "game",
     rating: "10/10",
     info: {
@@ -65,8 +61,7 @@ export const reviews: Review[] = [
   },
   {
     title: "SpongeBob SquarePants",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/165/214/165214155_e427d6.jpg",
+    image: "",
     tag: "series",
     rating: "9.0/10",
     info: {
@@ -76,8 +71,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Comeback",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/170/044/170044994_9nto2l.jpg",
+    image: "",
     tag: "series",
     rating: "9.5/10",
     info: {
@@ -87,8 +81,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Doom Eternal",
-    image:
-      "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/782330/header.jpg?t=1755109910",
+    image: "",
     tag: "game",
     rating: "9.2/10",
     info: {
@@ -101,8 +94,7 @@ export const reviews: Review[] = [
   },
   {
     title: "The Simpsons Movie",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/000/004/4599_41e971.jpg",
+    image: "",
     tag: "film",
     rating: "9.0/10",
     info: {
@@ -112,8 +104,7 @@ export const reviews: Review[] = [
   },
   {
     title: "The Pink Panther 2",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w140/files/images/film/posters/000/054/54794_424716.jpg",
+    image: "",
     tag: "film",
     rating: "7.0/10",
     info: {
@@ -123,8 +114,7 @@ export const reviews: Review[] = [
   },
   {
     title: "The Pink Panther",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/000/042/42209_fae7f0.jpg",
+    image: "",
     tag: "film",
     rating: "7.5/10",
     info: {
@@ -134,8 +124,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Police Academy 7: Mission to Moscow",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651161_77c108.jpg",
+    image: "",
     tag: "film",
     rating: "6.0/10",
     info: {
@@ -145,8 +134,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Police Academy 6: City Under Siege",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651155_698ca7.jpg",
+    image: "",
     tag: "film",
     rating: "6.7/10",
     info: {
@@ -156,8 +144,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Police Academy 5: Assignment: Miami Beach",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651160_ceba89.jpg",
+    image: "",
     tag: "film",
     rating: "6.9/10",
     info: {
@@ -167,8 +154,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Police Academy 4: Citizens on Patrol",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651159_69bb17.jpg",
+    image: "",
     tag: "film",
     rating: "7.0/10",
     info: {
@@ -178,8 +164,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Police Academy 3: Back in Training",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651158_8ee031.jpg",
+    image: "",
     tag: "film",
     rating: "7.2/10",
     info: {
@@ -189,8 +174,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Police Academy 2: Their First Assignment",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651157_913a78.jpg",
+    image: "",
     tag: "film",
     rating: "7.4/10",
     info: {
@@ -200,8 +184,7 @@ export const reviews: Review[] = [
   },
   {
     title: "Police Academy",
-    image:
-      "https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/158/651/158651156_2277a3.jpg",
+    image: "",
     tag: "film",
     rating: "7.5/10",
     info: {
