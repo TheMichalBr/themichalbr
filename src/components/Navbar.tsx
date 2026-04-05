@@ -1,18 +1,24 @@
+import React from "react";
 import { useEffect, useState } from "react";
 
-export const Navbar = ({ menuOpen, setMenuOpen }) => {
-  const [activeSection, setActiveSection] = useState("");
+interface NavbarProps {
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean | ((prev: boolean) => boolean)) => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ menuOpen, setMenuOpen }) => {
+  const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
 
-    const handleScroll = () => {
+    const handleScroll = (): void => {
       const sections = document.querySelectorAll("section");
       let current = "";
       sections.forEach((section) => {
         const sectionTop = section.offsetTop - 100;
         if (window.scrollY >= sectionTop) {
-          current = section.getAttribute("id");
+          current = section.getAttribute("id") || "";
         }
       });
       setActiveSection(current);
