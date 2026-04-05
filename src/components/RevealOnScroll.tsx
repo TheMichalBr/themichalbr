@@ -1,14 +1,23 @@
 import { useEffect, useRef, useState } from "react";
+import React from "react";
 
-export const RevealOnScroll = ({
+interface RevealOnScrollProps {
+  children: React.ReactNode;
+  once?: boolean;
+  offset?: string;
+  duration?: number;
+  delay?: number;
+}
+
+export const RevealOnScroll: React.FC<RevealOnScrollProps> = ({
   children,
   once = true,
   offset = "0px",
   duration = 600,
   delay = 0,
 }) => {
-  const ref = useRef(null);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
 
   useEffect(() => {
     const checkScreenSize = () => {
