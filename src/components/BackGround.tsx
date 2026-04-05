@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useMemo } from "react";
 
 const VERT = `
@@ -55,7 +56,7 @@ void main(){
     gl_FragColor=vec4(clamp(col-grain,0.,1.),1.);
 }`;
 
-const hexToVec3 = (hex) => {
+const hexToVec3 = (hex: string): [number, number, number] => {
     hex = hex.replace("#", "");
     return [
         parseInt(hex.slice(0, 2), 16) / 255,
@@ -64,9 +65,29 @@ const hexToVec3 = (hex) => {
     ];
 };
 
-const buildProgram = (gl) => {
-    const compile = (type, src) => {
+interface GLContext {
+    gl: WebGLRenderingContext;
+    prog: WebGLProgram;
+    buf: WebGLBuffer;
+    locs: {
+        uTime: WebGLUniformLocation;
+        uSpeed: WebGLUniformLocation;
+        uColor1: WebGLUniformLocation;
+        uColor2: WebGLUniformLocation;
+        uColor3: WebGLUniformLocation;
+    };
+    colorsRef?: {
+        c1: [number, number, number];
+        c2: [number, number, number];
+        c3: [number, number, number];
+    };
+    speedRef?: { value: number };
+}
+
+const buildProgram = (gl: WebGLRenderingContext): WebGLProgram => {
+    const compile = (type: number, src: string): WebGLShader | null => {
         const s = gl.createShader(type);
+        if (!s) return null;
         gl.shaderSource(s, src);
         gl.compileShader(s);
         return s;
@@ -74,6 +95,7 @@ const buildProgram = (gl) => {
     const vs = compile(gl.VERTEX_SHADER, VERT);
     const fs = compile(gl.FRAGMENT_SHADER, FRAG);
     const prog = gl.createProgram();
+    if (!prog || !vs || !fs) throw new Error("Failed to create program");
     gl.attachShader(prog, vs);
     gl.attachShader(prog, fs);
     gl.linkProgram(prog);
@@ -82,15 +104,23 @@ const buildProgram = (gl) => {
     return prog;
 };
 
+interface LiquidBackgroundProps {
+    color1?: string;
+    color2?: string;
+    color3?: string;
+    speed?: number;
+    style?: React.CSSProperties;
+}
+
 export default function LiquidBackground({
     color1 = "#00032e",
     color2 = "#000000",
     color3 = "#001b4d",
     speed = 1.5,
     style = {},
-}) {
-    const canvasRef = useRef(null);
-    const glRef = useRef(null);
+}: LiquidBackgroundProps): React.ReactElement {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const glRef = useRef<GLContext | null>(null);
 
     const colorVecs = useMemo(
         () => ({
@@ -110,7 +140,7 @@ export default function LiquidBackground({
             antialias: false,
             powerPreference: "high-performance",
             preserveDrawingBuffer: false,
-        });
+        }) as WebGLRenderingContext | null;
         if (!gl) return;
 
         const prog = buildProgram(gl);
@@ -129,14 +159,14 @@ export default function LiquidBackground({
         gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
 
         const locs = {
-            uTime: gl.getUniformLocation(prog, "uTime"),
-            uSpeed: gl.getUniformLocation(prog, "uSpeed"),
-            uColor1: gl.getUniformLocation(prog, "uColor1"),
-            uColor2: gl.getUniformLocation(prog, "uColor2"),
-            uColor3: gl.getUniformLocation(prog, "uColor3"),
+            uTime: gl.getUniformLocation(prog, "uTime") as WebGLUniformLocation,
+            uSpeed: gl.getUniformLocation(prog, "uSpeed") as WebGLUniformLocation,
+            uColor1: gl.getUniformLocation(prog, "uColor1") as WebGLUniformLocation,
+            uColor2: gl.getUniformLocation(prog, "uColor2") as WebGLUniformLocation,
+            uColor3: gl.getUniformLocation(prog, "uColor3") as WebGLUniformLocation,
         };
 
-        glRef.current = { gl, prog, buf, locs };
+        glRef.current = { gl, prog, buf: buf as WebGLBuffer, locs };
 
         const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         let pendingW = (canvas.clientWidth * dpr) | 0;
@@ -157,12 +187,12 @@ export default function LiquidBackground({
 
         let time = 0,
             last = performance.now(),
-            raf;
+            raf: number;
         const colorsRef = { c1: colorVecs.c1, c2: colorVecs.c2, c3: colorVecs.c3 };
         glRef.current.colorsRef = colorsRef;
         glRef.current.speedRef = { value: speed };
 
-        const loop = (now) => {
+        const loop = (now: number): void => {
             raf = requestAnimationFrame(loop);
 
             if (pendingResize) {
@@ -176,7 +206,7 @@ export default function LiquidBackground({
             last = now;
 
             gl.uniform1f(locs.uTime, time);
-            gl.uniform1f(locs.uSpeed, glRef.current.speedRef.value);
+            gl.uniform1f(locs.uSpeed, glRef.current?.speedRef?.value || speed);
             gl.uniform3fv(locs.uColor1, colorsRef.c1);
             gl.uniform3fv(locs.uColor2, colorsRef.c2);
             gl.uniform3fv(locs.uColor3, colorsRef.c3);
@@ -195,7 +225,7 @@ export default function LiquidBackground({
 
     useEffect(() => {
         const state = glRef.current;
-        if (!state) return;
+        if (!state || !state.colorsRef || !state.speedRef) return;
         state.colorsRef.c1 = colorVecs.c1;
         state.colorsRef.c2 = colorVecs.c2;
         state.colorsRef.c3 = colorVecs.c3;
