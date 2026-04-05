@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 import React from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface RevealOnScrollProps {
   children: React.ReactNode;
@@ -60,7 +60,7 @@ export const RevealOnScroll: React.FC<RevealOnScrollProps> = ({
       {
         threshold: threshold,
         rootMargin: offset,
-      }
+      },
     );
 
     observer.observe(el);
@@ -70,7 +70,8 @@ export const RevealOnScroll: React.FC<RevealOnScrollProps> = ({
   return <div ref={ref}>{children}</div>;
 };
 
-{/*
+{
+  /*
 import { useEffect, useRef } from "react";
 
 export const RevealOnScroll = ({
@@ -192,4 +193,5 @@ export const RevealOnScroll = ({
 
   return <div ref={ref}>{children}</div>;
 };
-*/}
+*/
+}
