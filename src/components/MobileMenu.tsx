@@ -1,7 +1,21 @@
+import React from "react";
 import { useEffect, useRef } from "react";
 
-export const MobileMenu = ({ menuOpen, setMenuOpen }) => {
-  const scrollPosition = useRef(0);
+interface MobileMenuProps {
+  menuOpen: boolean;
+  setMenuOpen: (open: boolean) => void;
+}
+
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+export const MobileMenu: React.FC<MobileMenuProps> = ({
+  menuOpen,
+  setMenuOpen,
+}) => {
+  const scrollPosition = useRef<number>(0);
 
   useEffect(() => {
     if (menuOpen) {
