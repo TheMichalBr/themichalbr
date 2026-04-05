@@ -1,13 +1,29 @@
+import React from "react";
 import { useState, useEffect } from "react";
 
-const Video = ({ videoUrl }) => {
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [videoTitle, setVideoTitle] = useState("Loading...");
-  const [videoViews, setVideoViews] = useState("Loading...");
+interface VideoProps {
+  videoUrl: string;
+}
 
-  const getVideoId = (url) => {
+interface VideoDataResponse {
+  items: Array<{
+    snippet: {
+      title: string;
+    };
+    statistics: {
+      viewCount: string;
+    };
+  }>;
+}
+
+const Video: React.FC<VideoProps> = ({ videoUrl }) => {
+  const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
+  const [videoTitle, setVideoTitle] = useState<string>("Loading...");
+  const [videoViews, setVideoViews] = useState<string>("Loading...");
+
+  const getVideoId = (url: string): string | null => {
     const match = url.match(
-      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/
+      /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/,
     );
     return match ? match[1] : null;
   };
@@ -17,17 +33,17 @@ const Video = ({ videoUrl }) => {
 
   useEffect(() => {
     if (videoId) {
-      const fetchVideoData = async () => {
+      const fetchVideoData = async (): Promise<void> => {
         try {
           const response = await fetch(
-            `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${API_KEY}`
+            `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${videoId}&key=${API_KEY}`,
           );
-          const data = await response.json();
+          const data: VideoDataResponse = await response.json();
           if (data.items && data.items.length > 0) {
             const videoData = data.items[0];
             setVideoTitle(videoData.snippet.title);
             setVideoViews(
-              `${parseInt(videoData.statistics.viewCount).toLocaleString()} views`
+              `${parseInt(videoData.statistics.viewCount).toLocaleString()} views`,
             );
           }
         } catch (error) {
@@ -103,7 +119,9 @@ const Video = ({ videoUrl }) => {
         )}
       </div>
       <div className="mt-4 flex justify-between w-full max-w-4xl">
-        <h3 className="text-lg font-semibold text-gray-300 select-none">{videoTitle}</h3>
+        <h3 className="text-lg font-semibold text-gray-300 select-none">
+          {videoTitle}
+        </h3>
         <p className="text-sm text-gray-400 select-none">{videoViews}</p>
       </div>
     </div>
