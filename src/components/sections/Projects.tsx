@@ -1,3 +1,4 @@
+import React from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { useState, useEffect } from "react";
 
@@ -5,11 +6,37 @@ import pm1 from "/projects/P_1.webp";
 import pm2 from "/projects/P_2.webp";
 import pm3 from "/projects/P_3.webp";
 import pm4 from "/projects/P_4.webp";
+
+interface Project {
+  id: string;
+  order: number;
+  title: string;
+  version: string;
+  desc: string;
+  tech: string[];
+  image: string | null;
+  link: string;
+  linkLabel: string;
+  downloads: string | number | null;
+  disabled?: boolean;
+  status: "completed" | "development" | "planning";
+  featured: boolean;
+}
+
+interface StatusBadgeProps {
+  status: string;
+}
+
+interface ProjectCardProps {
+  project: Project;
+  downloads: number | null;
+}
+
 {
   /* import pm5 from "/projects/PM_5.webp"; */
 }
 
-const projectsData = [
+const projectsData: Project[] = [
   {
     id: "tetris",
     order: 1,
@@ -99,14 +126,14 @@ const projectsData = [
   },
 ];
 
-const StatusBadge = ({ status }) => {
-  const statusStyles = {
+const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
+  const statusStyles: Record<string, string> = {
     completed: "bg-green-500/20 text-green-400 border-green-500/30",
     development: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
     planning: "bg-purple-500/20 text-purple-400 border-purple-500/30",
   };
 
-  const statusLabels = {
+  const statusLabels: Record<string, string> = {
     completed: "Released",
     development: "In Development",
     planning: "Planning",
@@ -121,8 +148,8 @@ const StatusBadge = ({ status }) => {
   );
 };
 
-const ProjectCard = ({ project, downloads }) => {
-  const [isHovered, setIsHovered] = useState(false);
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, downloads }) => {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
     <div
@@ -237,24 +264,25 @@ const ProjectCard = ({ project, downloads }) => {
   );
 };
 
-export const Projects = () => {
-  const [downloads, setDownloads] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export const Projects: React.FC = () => {
+  const [downloads, setDownloads] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchModrinthData = async () => {
+    const fetchModrinthData = async (): Promise<void> => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://api.modrinth.com/v2/project/G4nmS8ee"
+          "https://api.modrinth.com/v2/project/G4nmS8ee",
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         setDownloads(data.downloads);
-      } catch (error) {
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error(String(err));
         console.error("Error fetching Modrinth data:", error);
         setError(error.message);
       } finally {
@@ -269,7 +297,7 @@ export const Projects = () => {
     .filter((p) => p.order > 0)
     .sort((a, b) => {
       if (a.featured !== b.featured) {
-        return b.featured - a.featured;
+        return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
       }
       return a.order - b.order;
     });
@@ -323,7 +351,7 @@ export const Projects = () => {
         </div>
       </RevealOnScroll>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fade-in {
           from {
             opacity: 0;
