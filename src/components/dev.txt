@@ -1,20 +1,6 @@
-aktualne refaktor celeho kodu:
-About
-equipment
-footer
-home
-project
-video
-background
-loading
-mobile
-navbar
-reaveal
-
-
-
-Hotovo:
-- Games.tsx (+GamesData.ts)
+TODO:
+- Loadingscreen oddělat starý kod
+- Reveal com. nevypda spatne?
 
 
 // Only developer file
