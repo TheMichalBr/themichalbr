@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 
@@ -21,6 +22,34 @@ import headsetI from "/equipment/E_17_HEADSET.webp";
 import microphoneI from "/equipment/E_18_MICROPHONE.webp";
 import mobileI from "/equipment/E_19_MOBILE.webp";
 import consoleI from "/equipment/E_20_CONSOLE.webp";
+
+interface EquipmentSpecs {
+  [key: string]: string | undefined;
+}
+
+interface EquipmentItem {
+  category: string;
+  name: string;
+  image: string;
+  specs: EquipmentSpecs;
+}
+
+interface EquipmentCardProps {
+  item: EquipmentItem;
+  index: number;
+  onClick?: (item: EquipmentItem) => void;
+}
+
+interface FilterButtonProps {
+  filter: string;
+  isActive: boolean;
+  onClick: (filter: string) => void;
+}
+
+interface ModalProps {
+  item: EquipmentItem | null;
+  onClose: () => void;
+}
 
 const equipmentData = [
   {
@@ -267,55 +296,60 @@ const categoryMap = {
   CONSOLE: "MOBILE & CONSOLES",
 };
 
-const getCategoryGroup = (category) => categoryMap[category] || "OTHER";
+const getCategoryGroup = (category: string): string =>
+  categoryMap[category as keyof typeof categoryMap] || "OTHER";
 
-const formatSpecKey = (key) => {
+const formatSpecKey = (key: string): string => {
   return key
     .replace(/([A-Z])/g, " $1")
     .replace(/^./, (str) => str.toUpperCase())
     .trim();
 };
 
-const EquipmentCard = ({ item, index, onClick }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
+const EquipmentCard: React.FC<EquipmentCardProps> = ({
+  item,
+  index,
+  onClick,
+}) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+  const [imageError, setImageError] = useState<boolean>(false);
 
   useEffect(() => {
     const timer = setTimeout(
       () => setIsVisible(true),
-      Math.min(index * 50, 1000)
+      Math.min(index * 50, 1000),
     );
     return () => clearTimeout(timer);
   }, [index]);
 
-  const handleClick = useCallback(() => {
+  const handleClick = useCallback((): void => {
     onClick?.(item);
   }, [item, onClick]);
 
-  const handleImageLoad = useCallback(() => {
+  const handleImageLoad = useCallback((): void => {
     setImageLoaded(true);
     setImageError(false);
   }, []);
 
-  const handleImageError = useCallback(() => {
+  const handleImageError = useCallback((): void => {
     setImageError(true);
     setImageLoaded(true);
   }, []);
 
   const handleKeyDown = useCallback(
-    (e) => {
+    (e: React.KeyboardEvent<HTMLDivElement>): void => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         handleClick();
       }
     },
-    [handleClick]
+    [handleClick],
   );
 
   const displaySpecs = useMemo(
-    () => Object.entries(item.specs).slice(0, 2),
-    [item.specs]
+    () => Object.entries(item.specs).slice(0, 2) as [string, string][],
+    [item.specs],
   );
 
   {
@@ -401,7 +435,11 @@ const EquipmentCard = ({ item, index, onClick }) => {
   );
 };
 
-const FilterButton = ({ filter, isActive, onClick }) => (
+const FilterButton: React.FC<FilterButtonProps> = ({
+  filter,
+  isActive,
+  onClick,
+}) => (
   <button
     onClick={() => onClick(filter)}
     className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-slate-400/50 ${isActive
@@ -414,8 +452,8 @@ const FilterButton = ({ filter, isActive, onClick }) => (
   </button>
 );
 
-const Modal = ({ item, onClose }) => {
-  const [isVisible, setIsVisible] = useState(false);
+const Modal: React.FC<ModalProps> = ({ item, onClose }) => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -429,7 +467,7 @@ const Modal = ({ item, onClose }) => {
     style.top = `-${scrollY}px`;
     style.width = "100%";
 
-    const handleEscape = (e) => {
+    const handleEscape = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
         setIsVisible(false);
 
@@ -461,7 +499,7 @@ const Modal = ({ item, onClose }) => {
     };
   }, [onClose]);
 
-  const handleClose = useCallback(() => {
+  const handleClose = useCallback((): void => {
     setIsVisible(false);
 
     const scrollY = parseInt(document.body.style.top || "0", 10) * -1;
@@ -478,10 +516,10 @@ const Modal = ({ item, onClose }) => {
   }, [onClose]);
 
   const handleBackdropClick = useCallback(
-    (e) => {
+    (e: React.MouseEvent<HTMLDivElement>): void => {
       if (e.target === e.currentTarget) handleClose();
     },
-    [handleClose]
+    [handleClose],
   );
 
   if (!item) return null;
@@ -504,7 +542,10 @@ const Modal = ({ item, onClose }) => {
       >
         <header className="sticky top-0 bg-linear-to-r from-slate-800/40 via-slate-800/40 to-slate-900/40 p-6 border-b border-white/10 z-10 rounded-2xl">
           <div className="flex items-center justify-between">
-            <h3 id="modal-title" className="text-xl font-bold text-white select-none">
+            <h3
+              id="modal-title"
+              className="text-xl font-bold text-white select-none"
+            >
               Specifications
             </h3>
             <button
@@ -581,14 +622,14 @@ const Modal = ({ item, onClose }) => {
   );
 };
 
-export const Equipment = () => {
-  const [selectedFilter, setSelectedFilter] = useState("ALL");
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [isFilterChanging, setIsFilterChanging] = useState(false);
-  const [searchTerm] = useState("");
+const EquipmentSection: React.FC = () => {
+  const [selectedFilter, setSelectedFilter] = useState<string>("ALL");
+  const [selectedItem, setSelectedItem] = useState<EquipmentItem | null>(null);
+  const [isFilterChanging, setIsFilterChanging] = useState<boolean>(false);
+  const [searchTerm] = useState<string>("");
 
   const handleFilterChange = useCallback(
-    (filter) => {
+    (filter: string): void => {
       if (filter === selectedFilter) return;
 
       setIsFilterChanging(true);
@@ -597,18 +638,21 @@ export const Equipment = () => {
         setIsFilterChanging(false);
       }, 175);
     },
-    [selectedFilter]
+    [selectedFilter],
   );
 
-  const handleItemSelect = useCallback((item) => setSelectedItem(item), []);
-  const handleModalClose = useCallback(() => setSelectedItem(null), []);
+  const handleItemSelect = useCallback(
+    (item: EquipmentItem): void => setSelectedItem(item),
+    [],
+  );
+  const handleModalClose = useCallback((): void => setSelectedItem(null), []);
 
   const filteredEquipment = useMemo(() => {
     let filtered = equipmentData;
 
     if (selectedFilter !== "ALL") {
       filtered = filtered.filter(
-        (item) => getCategoryGroup(item.category) === selectedFilter
+        (item) => getCategoryGroup(item.category) === selectedFilter,
       );
     }
 
@@ -619,8 +663,8 @@ export const Equipment = () => {
           item.name.toLowerCase().includes(searchLower) ||
           item.category.toLowerCase().includes(searchLower) ||
           Object.values(item.specs).some((spec) =>
-            spec.toString().toLowerCase().includes(searchLower)
-          )
+            spec.toString().toLowerCase().includes(searchLower),
+          ),
       );
     }
 
@@ -740,4 +784,5 @@ export const Equipment = () => {
   );
 };
 
+export const Equipment = EquipmentSection;
 export default Equipment;
