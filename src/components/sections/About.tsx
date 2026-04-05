@@ -1,7 +1,13 @@
 import { RevealOnScroll } from "../RevealOnScroll";
 import Video from "./Video";
+import React from "react";
 
-export const About = () => {
+interface Language {
+  name: string;
+  level: string;
+}
+
+export const About: React.FC = () => {
   const hobbies = [
     "Gaming",
     "Movies",
@@ -48,7 +54,10 @@ export const About = () => {
   const cardClasses =
     "rounded-xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-xl hover:shadow-2xl";
   const sectionClasses =
-    "bg-white/5 rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300"; {/* bg-white/5 , dobré i bez*/}
+    "bg-white/5 rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300";
+  {
+    /* bg-white/5 , dobré i bez*/
+  }
   const tagClasses =
     "py-2 px-3 rounded-full text-sm transition-all duration-200 transform cursor-default flex-shrink-0 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]";
 
