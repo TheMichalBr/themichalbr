@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { reviews, type Review } from "../../data/GamesData";
 
@@ -31,7 +31,7 @@ interface Game {
 }
 
 interface TagInfo {
-  icon: string;
+  icon: ReactNode;
   color: string;
   bgColor: string;
   borderColor: string;
@@ -596,7 +596,14 @@ export const getTagInfo = (tag: Review["tag"]): TagInfo => {
   switch (tag) {
     case "game":
       return {
-        icon: "🎮",
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+        <path d="M12 3C9 3 7 5 7 8v8a5 5 0 0 0 10 0V8c0-3-2-5-5-5z" />
+        <line x1="12" y1="3" x2="12" y2="10" />
+        <line x1="7" y1="10" x2="17" y2="10" />
+        <circle cx="12" cy="7" r="1" fill="currentColor" stroke="none" />
+      </svg>
+        ),
         color: "text-white/90",
         bgColor: "bg-white/10",
         borderColor: "border-cyan-500/20 backdrop-blur-sm",
@@ -604,7 +611,18 @@ export const getTagInfo = (tag: Review["tag"]): TagInfo => {
       };
     case "film":
       return {
-        icon: "🎬",
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <rect x="2" y="2" width="20" height="20" rx="2" />
+            <line x1="7" y1="2" x2="7" y2="22" />
+            <line x1="17" y1="2" x2="17" y2="22" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <line x1="2" y1="7" x2="7" y2="7" />
+            <line x1="2" y1="17" x2="7" y2="17" />
+            <line x1="17" y1="17" x2="22" y2="17" />
+            <line x1="17" y1="7" x2="22" y2="7" />
+          </svg>
+        ),
         color: "text-white/90",
         bgColor: "bg-white/10",
         borderColor: "border-purple-500/20 backdrop-blur-sm",
@@ -612,7 +630,12 @@ export const getTagInfo = (tag: Review["tag"]): TagInfo => {
       };
     case "series":
       return {
-        icon: "📺",
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <rect x="2" y="7" width="20" height="15" rx="2" />
+            <polyline points="17 2 12 7 7 2" />
+          </svg>
+        ),
         color: "text-white/90",
         bgColor: "bg-white/10",
         borderColor: "border-orange-500/20 backdrop-blur-sm",
@@ -620,7 +643,13 @@ export const getTagInfo = (tag: Review["tag"]): TagInfo => {
       };
     default:
       return {
-        icon: "❓",
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+        ),
         color: "text-white/90",
         bgColor: "bg-white/10",
         borderColor: "border-white/20 backdrop-blur-sm",
