@@ -161,12 +161,12 @@ export const Games = () => {
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
                 Here you can find few information about my competitive games, my
-                highest ranks in these games, in-game settings, and my newest
+                highest ranks or in-game settings in these games, and my newest
                 reviews.
               </p>
             </div>
 
-            <div className="flex items-center gap-4 mb-10">
+            <div className="flex items-center gap-4 mb-10 select-none">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
               <span className="text-xs text-gray-600 uppercase tracking-widest">
                 Latest reviews
@@ -333,7 +333,7 @@ export const Games = () => {
 
             <div className="h-16"></div>
 
-            <div className="flex items-center gap-4 mb-10">
+            <div className="flex items-center gap-4 mb-10 select-none">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
               <span className="text-xs text-gray-600 uppercase tracking-widest">
                 Ranks & Settings
