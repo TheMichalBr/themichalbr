@@ -268,61 +268,97 @@ export const Games = () => {
                       </div>
 
                       {/* Spodní část s hodnocením a tlačítkem */}
-                      <div className="relative flex items-end justify-between mt-4 h-8">
-                        {/* Hodnocení s animací */}
-                        <div
-                          className={`
-              absolute transform transition-all duration-700 ease-in-out
-              ${review.review ? "right-0 group-hover:left-0 group-hover:right-auto" : "right-0"}
-            `}
-                        >
-                          <span
-                            className="text-lg font-bold text-yellow-400 flex items-center gap-1.5
-                             [text-shadow:0_2px_4px_rgba(0,0,0,0.5)]
-                             transition-colors duration-300
-                             group-hover:text-yellow-300"
-                          >
-                            <span className="relative flex">
-                              {/* Šedé hvězdičky na pozadí */}
-                              <span className="flex text-gray-600">
-                                {[1, 2, 3, 4, 5].map((star) => (
-                                  <span key={`bg-${star}`}>★</span>
-                                ))}
-                              </span>
-                              {/* Žluté hvězdičky přes ně */}
-                              <span
-                                className="absolute top-0 left-0 flex overflow-hidden text-yellow-500/90"
-                                style={{
-                                  width: `${(parseFloat(review.rating) / 2 / 5) * 100}%`,
-                                }}
-                              >
-                                {[1, 2, 3, 4, 5].map((star) => (
-                                  <span key={`fg-${star}`}>★</span>
-                                ))}
-                              </span>
-                            </span>
-                            <span>{review.rating}</span>
-                          </span>
-                        </div>
+<div className="relative flex items-end justify-between mt-4 h-10">
+  {/* Hodnocení s animací */}
+  <div
+    className={`
+      absolute transform transition-all duration-700 ease-in-out
+      ${review.review ? "right-0 group-hover:left-0 group-hover:right-auto" : "right-0"}
+    `}
+  >
+    <div className="flex items-center gap-2.5">
+      {/* Hvězdičky */}
+      <div className="relative flex items-center">
+        {/* Šedé hvězdičky na pozadí */}
+        <span className="flex gap-1">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <svg
+              key={`bg-${star}`}
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="text-gray-700/60"
+            >
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          ))}
+        </span>
+
+        {/* Žluté hvězdičky přes ně */}
+        <span
+          className="absolute top-0 left-0 flex gap-1 overflow-hidden"
+          style={{
+            width: `${(parseFloat(review.rating) / 2 / 5) * 100}%`,
+          }}
+        >
+          {[1, 2, 3, 4, 5].map((star) => (
+            <svg
+              key={`fg-${star}`}
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="shrink-0 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-500"
+              style={{
+                filter: "drop-shadow(0 0 4px rgba(250, 204, 21, 0.7))",
+              }}
+            >
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
+          ))}
+        </span>
+      </div>
+
+      {/* Oddělovač */}
+      <span className="w-px h-4 bg-gray-700/80 rounded-full" />
+
+      {/* Číslo hodnocení */}
+      <div className="flex items-baseline gap-0.5">
+        <span
+          className="text-base font-bold tabular-nums text-yellow-400 
+            group-hover:text-yellow-300 transition-colors duration-500
+            [text-shadow:0_0_12px_rgba(250,204,21,0.45)]"
+        >
+          {review.rating}
+        </span>
+        <span className="text-xs text-gray-500 font-medium">/10</span>
+      </div>
+    </div>
+  </div>
 
                         {/* Tlačítko recenze */}
-                        {review.review && (
-                          <a
-                            href={review.review}
-                            className="absolute right-0 transform transition-all duration-500 ease-out
-                         text-cyan-400 hover:text-cyan-300 text-sm font-semibold
-                         bg-black/30 hover:bg-black/50 backdrop-blur-sm 
-                         px-3 py-1.5 rounded-full
-                         border border-cyan-500/20 hover:border-cyan-500/30
-                         shadow-lg hover:shadow-cyan-500/10
-                         opacity-0 translate-x-2
-                         group-hover:opacity-100 group-hover:translate-x-0
-                         focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Read review →
-                          </a>
+  {review.review && (
+    <a
+      href={review.review}
+      className="absolute right-0 transform transition-all duration-600 ease-out
+        text-cyan-400 hover:text-cyan-300 text-sm font-semibold
+        bg-black/30 hover:bg-black/50 backdrop-blur-sm 
+        px-3.5 py-1.5 rounded-full
+        border border-cyan-500/20 hover:border-cyan-500/40
+        shadow-lg hover:shadow-cyan-500/20
+        opacity-0 translate-x-3
+        group-hover:opacity-100 group-hover:translate-x-0
+        focus:outline-none focus:ring-2 focus:ring-cyan-500/40
+        flex items-center gap-1.5"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Read review
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </a>
                         )}
                       </div>
                     </div>
