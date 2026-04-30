@@ -1,3 +1,1473 @@
+import { ReactNode, useState, useCallback } from "react";
+import { RevealOnScroll } from "../RevealOnScroll";
+import { reviews, type Review } from "../../data/GamesData";
+
+import G1 from "/games/G_CS2.webp";
+import G2 from "/games/G_OW.webp";
+import G3 from "/games/G_APEX.webp";
+import G4 from "/games/G_FORTNITE.webp";
+import G5 from "/games/G_VALORANT.webp";
+import G6 from "/games/G_R6X.webp";
+import G7 from "/games/G_CHESS.webp";
+
+import GR1 from "/games/G_CS2_R.webp";
+import GR2 from "/games/G_OW_R.webp";
+import GR3 from "/games/G_APEX_R.webp";
+import GR4 from "/games/G_FORTNITE_R.webp";
+import GR5 from "/games/G_VALORANT_R.webp";
+import GR6 from "/games/G_R6X_R.webp";
+import GR7 from "/games/G_CHESS_R.webp";
+
+type GameSettings = Record<string, string>;
+
+interface Game {
+  id: string;
+  name: string;
+  nick: string;
+  platform: string;
+  rank: string;
+  rankIcon: string;
+  image: string;
+  settings: GameSettings;
+}
+
+interface TagInfo {
+  icon: ReactNode;
+  color: string;
+  bgColor: string;
+  borderColor: string;
+  text: string;
+}
+
+const COPY_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} width={10} height={10}>
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+  </svg>
+);
+
+const CHECK_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth={2.5} width={10} height={10}>
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+function CopyButton({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(value).catch(() => {});
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1400);
+  }, [value]);
+
+  return (
+    <button
+      onClick={handleCopy}
+      aria-label="Copy value"
+      title="Copy"
+      style={{
+        flexShrink: 0,
+        width: 22,
+        height: 22,
+        borderRadius: 6,
+        border: copied
+          ? "1px solid rgba(74,222,128,0.3)"
+          : "1px solid rgba(100,190,255,0.14)",
+        background: copied
+          ? "rgba(74,222,128,0.12)"
+          : "rgba(100,190,255,0.07)",
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        opacity: 0,
+        transition: "opacity 0.2s, background 0.2s, transform 0.15s",
+      }}
+      className="setting-copy-btn"
+    >
+      {copied ? CHECK_ICON : COPY_ICON}
+    </button>
+  );
+}
+
+function SettingRow({ settingKey, value, isCopied, onCopy }: {
+  settingKey: string;
+  value: string;
+  isCopied: boolean;
+  onCopy: (e: React.MouseEvent) => void;
+}) {
+  return (
+    <div
+      className="setting-row"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        padding: "7px 6px",
+        borderRadius: 8,
+        borderBottom: "1px solid rgba(255,255,255,0.04)",
+        background: isCopied ? "rgba(74,222,128,0.07)" : "transparent",
+        transition: "background 0.25s",
+      }}
+    >
+      <span
+        style={{
+          fontSize: 12,
+          color: "rgba(150,170,200,0.7)",
+          minWidth: 100,
+          flexShrink: 0,
+        }}
+      >
+        {settingKey}:
+      </span>
+      <span
+        style={{
+          fontSize: 12,
+          color: isCopied ? "#4ade80" : "rgba(200,220,255,0.8)",
+          flex: 1,
+          wordBreak: "break-word",
+          transition: "color 0.25s",
+        }}
+      >
+        {value}
+      </span>
+      <button
+        onClick={onCopy}
+        aria-label={`Copy ${settingKey}`}
+        title="Copy"
+        style={{
+          flexShrink: 0,
+          width: 22,
+          height: 22,
+          borderRadius: 6,
+          border: isCopied
+            ? "1px solid rgba(74,222,128,0.3)"
+            : "1px solid rgba(100,190,255,0.14)",
+          background: isCopied
+            ? "rgba(74,222,128,0.12)"
+            : "rgba(100,190,255,0.07)",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transition: "background 0.2s, border-color 0.2s",
+        }}
+        className="row-copy-btn"
+      >
+        {isCopied ? CHECK_ICON : COPY_ICON}
+      </button>
+    </div>
+  );
+}
+
+function GameCard({ game }: { game: Game }) {
+  const [open, setOpen] = useState(false);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+  const toggle = useCallback((e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest(".row-copy-btn")) return;
+    setOpen((p) => !p);
+  }, []);
+
+  const handleCopy = useCallback((key: string, value: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(value).catch(() => {});
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 1400);
+  }, []);
+
+  return (
+    <>
+      <style>{`
+        .game-card-root { cursor: pointer; }
+        .game-card-root:hover .card-banner-bg { opacity: 0.42 !important; }
+        .game-card-root:hover { transform: translateY(-3px); border-color: rgba(100,180,255,0.22) !important; box-shadow: 0 8px 36px rgba(0,0,0,0.55) !important; }
+        .game-card-root:hover .game-name { color: #a8d8ff !important; }
+        .game-card-root:hover .rank-badge { border-color: rgba(100,190,255,0.5) !important; }
+        .game-card-root:hover .avatar-img { transform: scale(1.08) rotate(3deg); }
+        .setting-row:last-child { border-bottom: none !important; }
+        .setting-row:hover .row-copy-btn { opacity: 1 !important; }
+        .row-copy-btn { opacity: 0; transition: opacity 0.2s, background 0.2s, border-color 0.2s; }
+        .row-copy-btn:hover { background: rgba(100,190,255,0.2) !important; }
+        .row-copy-btn:active { transform: scale(0.88); }
+      `}</style>
+
+      <div
+        className="game-card-root"
+        onClick={toggle}
+        style={{
+          borderRadius: 16,
+          overflow: "hidden",
+          background: "rgba(8,12,22,0.88)",
+          border: "1px solid rgba(255,255,255,0.07)",
+          backdropFilter: "blur(24px)",
+          transition: "transform 0.3s cubic-bezier(.22,.68,0,1.15), border-color 0.3s, box-shadow 0.3s",
+          boxShadow: "0 2px 20px rgba(0,0,0,0.4)",
+        }}
+      >
+        {/* Banner */}
+        <div style={{ position: "relative", height: 72, overflow: "hidden" }}>
+          <div
+            className="card-banner-bg"
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: `url(${game.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              opacity: 0.28,
+              transition: "opacity 0.4s",
+              filter: "saturate(1.6) blur(1px)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(180deg, rgba(8,12,22,0) 0%, rgba(8,12,22,0.85) 100%)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: 10,
+              left: "1rem",
+              right: "1rem",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+            }}
+          >
+            <span
+              className="game-name"
+              style={{
+                fontSize: 16,
+                fontWeight: 500,
+                color: "#e8f4ff",
+                textShadow: "0 1px 8px rgba(0,0,0,0.8)",
+                transition: "color 0.3s",
+              }}
+            >
+              {game.name}
+            </span>
+            <div
+              className="rank-badge"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "3px 10px 3px 7px",
+                borderRadius: 999,
+                background: "rgba(10,20,40,0.75)",
+                border: "1px solid rgba(100,190,255,0.25)",
+                backdropFilter: "blur(8px)",
+                transition: "border-color 0.3s",
+              }}
+            >
+              <img
+                src={game.rankIcon}
+                alt={game.rank}
+                width={15}
+                height={15}
+                draggable={false}
+                style={{ width: 15, height: 15, objectFit: "contain" }}
+              />
+              <span style={{ fontSize: 11, fontWeight: 500, color: "#7ec8f8", letterSpacing: "0.04em" }}>
+                {game.rank}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Body */}
+        <div style={{ padding: "0.9rem 1rem 0" }}>
+          {/* Meta row */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+              <span
+                style={{
+                  fontSize: 11,
+                  color: "rgba(150,170,200,0.7)",
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  padding: "2px 8px",
+                  borderRadius: 6,
+                }}
+              >
+                {game.platform}
+              </span>
+              <span
+                style={{
+                  fontSize: 11,
+                  color: "rgba(180,220,255,0.75)",
+                  background: "rgba(255,255,255,0.07)",
+                  border: "1px solid rgba(255,255,255,0.11)",
+                  padding: "2px 8px",
+                  borderRadius: 6,
+                }}
+              >
+                {game.nick}
+              </span>
+            </div>
+            <img
+              className="avatar-img"
+              src={game.image}
+              alt={game.name}
+              width={32}
+              height={32}
+              draggable={false}
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 9,
+                objectFit: "cover",
+                border: "1.5px solid rgba(255,255,255,0.12)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.4)",
+                transition: "transform 0.3s",
+              }}
+            />
+          </div>
+
+          {/* Toggle */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setOpen((p) => !p); }}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0.65rem 0 0.75rem",
+              border: "none",
+              borderTop: "1px solid rgba(255,255,255,0.06)",
+              background: "none",
+              cursor: "pointer",
+              marginBottom: open ? 0 : 0,
+            }}
+          >
+            <span style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(120,190,255,0.6)" }}>
+              Settings &amp; Info
+            </span>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={open ? "rgba(255,100,100,0.7)" : "rgba(120,190,255,0.5)"}
+              strokeWidth={2.2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              width={16}
+              height={16}
+              style={{
+                transform: open ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2), stroke 0.3s",
+                flexShrink: 0,
+              }}
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+
+          {/* Panel */}
+          <div
+            style={{
+              overflow: "hidden",
+              maxHeight: open ? 600 : 0,
+              opacity: open ? 1 : 0,
+              transition: "max-height 0.45s cubic-bezier(.4,0,.2,1), opacity 0.3s",
+            }}
+          >
+            <div style={{ paddingBottom: "1.1rem" }}>
+              {Object.entries(game.settings).map(([key, value]) => (
+                <SettingRow
+                  key={key}
+                  settingKey={key}
+                  value={value}
+                  isCopied={copiedKey === key}
+                  onCopy={(e) => handleCopy(key, value, e)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export const Games = () => {
+  const games: Game[] = [
+    {
+      id: "cs2",
+      name: "Counter Strike 2",
+      nick: "MichalBr",
+      platform: "Steam",
+      rank: "Level 10",
+      rankIcon: GR1,
+      image: G1,
+      settings: {
+        FACEIT: "Level 10",
+        Premier: "21 000+ ELO (MM p. Global Elite)",
+        Crosshair: "CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D",
+        Viewmodel: "viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2",
+        Sensitivity: "2.52",
+        Resolution: "1280x960, Almost everything on low quality",
+        Config: "Soon...",
+      },
+    },
+    {
+      id: "overwatch",
+      name: "Overwatch",
+      nick: "MichalBr#2144",
+      platform: "Battle.net",
+      rank: "Platinum III",
+      rankIcon: GR2,
+      image: G2,
+      settings: {
+        Crosshair: "2560x1440",
+        Sensitivity: "4.0",
+        Resolution: "2560x1440, LOW quality",
+      },
+    },
+    {
+      id: "apex",
+      name: "Apex Legends",
+      nick: "TheMichalBr",
+      platform: "EA",
+      rank: "Platinum IV",
+      rankIcon: GR3,
+      image: G3,
+      settings: {
+        Crosshair: "1920x1080",
+        Sensitivity: "2.0",
+        Resolution: "2560x1440, LOW quality",
+      },
+    },
+    {
+      id: "fortnite",
+      name: "Fortnite",
+      nick: "MichalBr",
+      platform: "Epic Games",
+      rank: "Unreal",
+      rankIcon: GR4,
+      image: G4,
+      settings: {
+        Statistics: "https://fortnite.gg/stats?player=MichalBr",
+        Sensitivity: "5.0",
+        Resolution: "2560x1440, Almost everything on low quality, View Distance HIGH",
+      },
+    },
+    {
+      id: "valorant",
+      name: "Valorant",
+      nick: "MichalBr#UwU",
+      platform: "Riot Games",
+      rank: "Platinum II",
+      rankIcon: GR5,
+      image: G5,
+      settings: {
+        Sensitivity: "0.82 / 1 / 1",
+        Graphics: "Low and only Bloom, MT, NVRB are ON",
+        Crosshair: "Cyan / Static",
+        Info: "FPS counter - enabled, Enemy highlight color - red, Map rotate - On (1.16 0.72)",
+        Resolution: "2560x1440, Almost everything on low quality",
+      },
+    },
+    {
+      id: "rainbowsixsiegex",
+      name: "Rainbow Six Siege X",
+      nick: "TheMichalBr",
+      platform: "Ubisoft",
+      rank: "Emerald IV",
+      rankIcon: GR6,
+      image: G6,
+      settings: {
+        Sensitivity: "16/16",
+        Resolution: "2560x1440",
+        Graphics: "Almost everything on low/medium quality",
+      },
+    },
+    {
+      id: "chess",
+      name: "Chess",
+      nick: "MichalBr13",
+      platform: "Chess.com",
+      rank: "700+ Rating",
+      rankIcon: GR7,
+      image: G7,
+      settings: {
+        Chessboard: "Dark Blue",
+        Figurines: "Space",
+      },
+    },
+  ];
+
+  return (
+    <section
+      id="games"
+      className="min-h-screen text-white py-20 justify-center flex items-center"
+    >
+      <div className="max-w-6xl mx-auto space-y-16 px-4">
+        <RevealOnScroll>
+          <div>
+            <div className="text-center mb-10">
+              <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent drop-shadow-lg select-none">
+                Games
+              </h2>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
+                Here you can find few information about my competitive games, my
+                highest ranks or in-game settings in these games, and my newest
+                reviews.
+              </p>
+            </div>
+
+            {/* Latest reviews divider */}
+            <div className="flex items-center gap-4 mb-10 select-none">
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+              <span className="text-xs text-gray-600 uppercase tracking-widest">
+                Latest reviews
+              </span>
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+
+            {/* Reviews grid — unchanged */}
+            <div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {reviews.slice(0, 2).map((review, index) => (
+                  <div
+                    key={index}
+                    tabIndex={0}
+                    className="group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl 
+                   border border-gray-900 overflow-hidden
+                   transition-all duration-500 ease-out select-none will-change-transform
+                   hover:scale-[1.02] hover:shadow-2xl hover:border-cyan-500/20
+                   focus:outline-none focus:ring-3 focus:ring-blue-500/40"
+                    style={{
+                      backgroundImage: `linear-gradient(165deg,
+            rgba(0,0,0,0.92) 0%,
+            rgba(0,0,0,0.85) 50%,
+            rgba(0,0,0,0.80) 100%), 
+            url(${review.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      willChange: "transform",
+                    }}
+                  >
+                    <div className="absolute inset-0 pointer-events-none rounded-2xl bg-linear-to-br from-black/80 via-black/60 to-transparent transition-opacity duration-700 ease-out opacity-60 group-hover:opacity-40 group-hover:from-black/70" />
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-300 tracking-tight drop-shadow-lg mb-2 transition-colors duration-300 ease-out group-hover:text-gray-200">
+                          {review.title}
+                        </h3>
+                        {review.tag && (
+                          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-gray-700/50 shadow-lg backdrop-blur-sm transition-all duration-500 ease-out group-hover:border-cyan-500/30 group-hover:scale-[1.02]">
+                            <span className="text-sm text-gray-300 flex items-center gap-1.5">
+                              <span className="transition-transform duration-500 ease-out group-hover:scale-110">
+                                {getTagInfo(review.tag).icon}
+                              </span>
+                              <span className="font-medium">{getTagInfo(review.tag).text}</span>
+                            </span>
+                          </div>
+                        )}
+                        <div className="relative mt-4">
+                          <div className="transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform opacity-0 max-h-0 translate-y-1 overflow-hidden group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75">
+                            <div className="space-y-1">
+                              {Object.entries(review.info).map(([key, value], i) => (
+                                <div key={i} className="flex gap-2 text-sm text-gray-200 leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                                  <span className="text-gray-400 min-w-17.5 font-medium">
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}:
+                                  </span>
+                                  <span className="text-gray-300 wrap-break-word flex-1">{value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="relative flex items-end justify-between mt-4 h-10">
+                        <div className={`absolute transform transition-all duration-700 ease-in-out ${review.review ? "right-0 group-hover:left-0 group-hover:right-auto" : "right-0"}`}>
+                          <div className="flex items-center gap-2.5">
+                            <div className="relative flex items-center">
+                              <span className="flex gap-1">
+                                {[1,2,3,4,5].map((star) => (
+                                  <svg key={`bg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700/60">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                  </svg>
+                                ))}
+                              </span>
+                              <span className="absolute top-0 left-0 flex gap-1 overflow-hidden" style={{ width: `${(parseFloat(review.rating) / 2 / 5) * 100}%` }}>
+                                {[1,2,3,4,5].map((star) => (
+                                  <svg key={`fg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-500" style={{ filter: "drop-shadow(0 0 4px rgba(250,204,21,0.7))" }}>
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                  </svg>
+                                ))}
+                              </span>
+                            </div>
+                            <span className="w-px h-4 bg-gray-700/80 rounded-full" />
+                            <div className="flex items-baseline gap-0.5">
+                              <span className="text-base font-bold tabular-nums text-yellow-400 group-hover:text-yellow-300 transition-colors duration-500 [text-shadow:0_0_12px_rgba(250,204,21,0.45)]">
+                                {review.rating}
+                              </span>
+                              <span className="text-xs text-gray-500 font-medium">/10</span>
+                            </div>
+                          </div>
+                        </div>
+                        {review.review && (
+                          <a
+                            href={review.review}
+                            className="absolute right-0 transform transition-all duration-600 ease-out text-cyan-400 hover:text-cyan-300 text-sm font-semibold bg-black/30 hover:bg-black/50 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-cyan-500/20 hover:border-cyan-500/40 shadow-lg hover:shadow-cyan-500/20 opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 focus:outline-none focus:ring-2 focus:ring-cyan-500/40 flex items-center gap-1.5"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Read review
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="h-16" />
+
+            {/* Ranks & Settings divider */}
+            <div className="flex items-center gap-4 mb-10 select-none">
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+              <span className="text-xs text-gray-600 uppercase tracking-widest">
+                Ranks &amp; Settings
+              </span>
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+
+            {/* New game cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {games.map((game) => (
+                <GameCard key={game.id} game={game} />
+              ))}
+            </div>
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
+  );
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const getTagInfo = (tag: Review["tag"]): TagInfo => {
+  switch (tag) {
+    case "game":
+      return {
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <path d="M12 3 Q12 1 14 1" />
+            <path d="M8 9C8 6 9.5 4.5 12 4.5C14.5 4.5 16 6 16 9V15C16 17.8 14.2 19.5 12 19.5C9.8 19.5 8 17.8 8 15V9Z" />
+            <line x1="12" y1="4.5" x2="12" y2="11" />
+            <line x1="8" y1="11" x2="16" y2="11" />
+            <rect x="11" y="7" width="2" height="3" rx="1" fill="currentColor" stroke="none" />
+          </svg>
+        ),
+        color: "text-white/90",
+        bgColor: "bg-white/10",
+        borderColor: "border-cyan-500/20 backdrop-blur-sm",
+        text: "Game",
+      };
+    case "film":
+      return {
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <rect x="2" y="2" width="20" height="20" rx="2" />
+            <line x1="7" y1="2" x2="7" y2="22" />
+            <line x1="17" y1="2" x2="17" y2="22" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <line x1="2" y1="7" x2="7" y2="7" />
+            <line x1="2" y1="17" x2="7" y2="17" />
+            <line x1="17" y1="17" x2="22" y2="17" />
+            <line x1="17" y1="7" x2="22" y2="7" />
+          </svg>
+        ),
+        color: "text-white/90",
+        bgColor: "bg-white/10",
+        borderColor: "border-purple-500/20 backdrop-blur-sm",
+        text: "Film",
+      };
+    case "series":
+      return {
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <rect x="2" y="7" width="20" height="15" rx="2" />
+            <polyline points="17 2 12 7 7 2" />
+          </svg>
+        ),
+        color: "text-white/90",
+        bgColor: "bg-white/10",
+        borderColor: "border-orange-500/20 backdrop-blur-sm",
+        text: "Series",
+      };
+    default:
+      return {
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+        ),
+        color: "text-white/90",
+        bgColor: "bg-white/10",
+        borderColor: "border-white/20 backdrop-blur-sm",
+        text: "Unknown",
+      };
+  }
+};
+
+
+novej games sekce?:
+
+
+
+import { ReactNode, useState, useCallback } from "react";
+import { RevealOnScroll } from "../RevealOnScroll";
+import { reviews, type Review } from "../../data/GamesData";
+
+import G1 from "/games/G_CS2.webp";
+import G2 from "/games/G_OW.webp";
+import G3 from "/games/G_APEX.webp";
+import G4 from "/games/G_FORTNITE.webp";
+import G5 from "/games/G_VALORANT.webp";
+import G6 from "/games/G_R6X.webp";
+import G7 from "/games/G_CHESS.webp";
+
+import GR1 from "/games/G_CS2_R.webp";
+import GR2 from "/games/G_OW_R.webp";
+import GR3 from "/games/G_APEX_R.webp";
+import GR4 from "/games/G_FORTNITE_R.webp";
+import GR5 from "/games/G_VALORANT_R.webp";
+import GR6 from "/games/G_R6X_R.webp";
+import GR7 from "/games/G_CHESS_R.webp";
+
+type GameSettings = Record<string, string>;
+
+interface Game {
+  id: string;
+  name: string;
+  nick: string;
+  platform: string;
+  rank: string;
+  rankIcon: string;
+  image: string;
+  settings: GameSettings;
+}
+
+interface TagInfo {
+  icon: ReactNode;
+  color: string;
+  bgColor: string;
+  borderColor: string;
+  text: string;
+}
+
+const COPY_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} width={10} height={10}>
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+  </svg>
+);
+
+const CHECK_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth={2.5} width={10} height={10}>
+    <polyline points="20 6 9 17 4 12" />
+  </svg>
+);
+
+function CopyButton({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(value).catch(() => {});
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1400);
+  }, [value]);
+
+  return (
+    <button
+      onClick={handleCopy}
+      aria-label="Copy value"
+      title="Copy"
+      style={{
+        flexShrink: 0,
+        width: 22,
+        height: 22,
+        borderRadius: 6,
+        border: copied
+          ? "1px solid rgba(74,222,128,0.3)"
+          : "1px solid rgba(100,190,255,0.14)",
+        background: copied
+          ? "rgba(74,222,128,0.12)"
+          : "rgba(100,190,255,0.07)",
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        opacity: 0,
+        transition: "opacity 0.2s, background 0.2s, transform 0.15s",
+      }}
+      className="setting-copy-btn"
+    >
+      {copied ? CHECK_ICON : COPY_ICON}
+    </button>
+  );
+}
+
+function SettingRow({ settingKey, value, isCopied, onCopy }: {
+  settingKey: string;
+  value: string;
+  isCopied: boolean;
+  onCopy: (e: React.MouseEvent) => void;
+}) {
+  return (
+    <div
+      className="setting-row"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        padding: "7px 6px",
+        borderRadius: 8,
+        borderBottom: "1px solid rgba(255,255,255,0.04)",
+        background: isCopied ? "rgba(74,222,128,0.07)" : "transparent",
+        transition: "background 0.25s",
+      }}
+    >
+      <span
+        style={{
+          fontSize: 12,
+          color: "rgba(150,170,200,0.7)",
+          minWidth: 100,
+          flexShrink: 0,
+        }}
+      >
+        {settingKey}:
+      </span>
+      <span
+        style={{
+          fontSize: 12,
+          color: isCopied ? "#4ade80" : "rgba(200,220,255,0.8)",
+          flex: 1,
+          wordBreak: "break-word",
+          transition: "color 0.25s",
+        }}
+      >
+        {value}
+      </span>
+      <button
+        onClick={onCopy}
+        aria-label={`Copy ${settingKey}`}
+        title="Copy"
+        style={{
+          flexShrink: 0,
+          width: 22,
+          height: 22,
+          borderRadius: 6,
+          border: isCopied
+            ? "1px solid rgba(74,222,128,0.3)"
+            : "1px solid rgba(100,190,255,0.14)",
+          background: isCopied
+            ? "rgba(74,222,128,0.12)"
+            : "rgba(100,190,255,0.07)",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          transition: "background 0.2s, border-color 0.2s",
+        }}
+        className="row-copy-btn"
+      >
+        {isCopied ? CHECK_ICON : COPY_ICON}
+      </button>
+    </div>
+  );
+}
+
+function GameCard({ game }: { game: Game }) {
+  const [open, setOpen] = useState(false);
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+
+  const toggle = useCallback((e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (target.closest(".row-copy-btn")) return;
+    setOpen((p) => !p);
+  }, []);
+
+  const handleCopy = useCallback((key: string, value: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(value).catch(() => {});
+    setCopiedKey(key);
+    setTimeout(() => setCopiedKey(null), 1400);
+  }, []);
+
+  return (
+    <>
+      <style>{`
+        .game-card-root { cursor: pointer; }
+        .game-card-root:hover .card-banner-bg { opacity: 0.42 !important; }
+        .game-card-root:hover { transform: translateY(-3px); border-color: rgba(100,180,255,0.22) !important; box-shadow: 0 8px 36px rgba(0,0,0,0.55) !important; }
+        .game-card-root:hover .game-name { color: #a8d8ff !important; }
+        .game-card-root:hover .rank-badge { border-color: rgba(100,190,255,0.5) !important; }
+        .game-card-root:hover .avatar-img { transform: scale(1.08) rotate(3deg); }
+        .setting-row:last-child { border-bottom: none !important; }
+        .setting-row:hover .row-copy-btn { opacity: 1 !important; }
+        .row-copy-btn { opacity: 0; transition: opacity 0.2s, background 0.2s, border-color 0.2s; }
+        .row-copy-btn:hover { background: rgba(100,190,255,0.2) !important; }
+        .row-copy-btn:active { transform: scale(0.88); }
+      `}</style>
+
+      <div
+        className="game-card-root"
+        onClick={toggle}
+        style={{
+          borderRadius: 16,
+          overflow: "hidden",
+          background: "rgba(8,12,22,0.88)",
+          border: "1px solid rgba(255,255,255,0.07)",
+          backdropFilter: "blur(24px)",
+          transition: "transform 0.3s cubic-bezier(.22,.68,0,1.15), border-color 0.3s, box-shadow 0.3s",
+          boxShadow: "0 2px 20px rgba(0,0,0,0.4)",
+        }}
+      >
+        {/* Banner */}
+        <div style={{ position: "relative", height: 72, overflow: "hidden" }}>
+          <div
+            className="card-banner-bg"
+            style={{
+              position: "absolute",
+              inset: 0,
+              backgroundImage: `url(${game.image})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              opacity: 0.28,
+              transition: "opacity 0.4s",
+              filter: "saturate(1.6) blur(1px)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(180deg, rgba(8,12,22,0) 0%, rgba(8,12,22,0.85) 100%)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: 10,
+              left: "1rem",
+              right: "1rem",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+            }}
+          >
+            <span
+              className="game-name"
+              style={{
+                fontSize: 16,
+                fontWeight: 500,
+                color: "#e8f4ff",
+                textShadow: "0 1px 8px rgba(0,0,0,0.8)",
+                transition: "color 0.3s",
+              }}
+            >
+              {game.name}
+            </span>
+            <div
+              className="rank-badge"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "3px 10px 3px 7px",
+                borderRadius: 999,
+                background: "rgba(10,20,40,0.75)",
+                border: "1px solid rgba(100,190,255,0.25)",
+                backdropFilter: "blur(8px)",
+                transition: "border-color 0.3s",
+              }}
+            >
+              <img
+                src={game.rankIcon}
+                alt={game.rank}
+                width={15}
+                height={15}
+                draggable={false}
+                style={{ width: 15, height: 15, objectFit: "contain" }}
+              />
+              <span style={{ fontSize: 11, fontWeight: 500, color: "#7ec8f8", letterSpacing: "0.04em" }}>
+                {game.rank}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Body */}
+        <div style={{ padding: "0.9rem 1rem 0" }}>
+          {/* Meta row */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.75rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+              <span
+                style={{
+                  fontSize: 11,
+                  color: "rgba(150,170,200,0.7)",
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  padding: "2px 8px",
+                  borderRadius: 6,
+                }}
+              >
+                {game.platform}
+              </span>
+              <span
+                style={{
+                  fontSize: 11,
+                  color: "rgba(180,220,255,0.75)",
+                  background: "rgba(255,255,255,0.07)",
+                  border: "1px solid rgba(255,255,255,0.11)",
+                  padding: "2px 8px",
+                  borderRadius: 6,
+                }}
+              >
+                {game.nick}
+              </span>
+            </div>
+            <img
+              className="avatar-img"
+              src={game.image}
+              alt={game.name}
+              width={32}
+              height={32}
+              draggable={false}
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 9,
+                objectFit: "cover",
+                border: "1.5px solid rgba(255,255,255,0.12)",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.4)",
+                transition: "transform 0.3s",
+              }}
+            />
+          </div>
+
+          {/* Toggle */}
+          <button
+            onClick={(e) => { e.stopPropagation(); setOpen((p) => !p); }}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0.65rem 0 0.75rem",
+              border: "none",
+              borderTop: "1px solid rgba(255,255,255,0.06)",
+              background: "none",
+              cursor: "pointer",
+              marginBottom: open ? 0 : 0,
+            }}
+          >
+            <span style={{ fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(120,190,255,0.6)" }}>
+              Settings &amp; Info
+            </span>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={open ? "rgba(255,100,100,0.7)" : "rgba(120,190,255,0.5)"}
+              strokeWidth={2.2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              width={16}
+              height={16}
+              style={{
+                transform: open ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.4s cubic-bezier(.22,.68,0,1.2), stroke 0.3s",
+                flexShrink: 0,
+              }}
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+
+          {/* Panel */}
+          <div
+            style={{
+              overflow: "hidden",
+              maxHeight: open ? 600 : 0,
+              opacity: open ? 1 : 0,
+              transition: "max-height 0.45s cubic-bezier(.4,0,.2,1), opacity 0.3s",
+            }}
+          >
+            <div style={{ paddingBottom: "1.1rem" }}>
+              {Object.entries(game.settings).map(([key, value]) => (
+                <SettingRow
+                  key={key}
+                  settingKey={key}
+                  value={value}
+                  isCopied={copiedKey === key}
+                  onCopy={(e) => handleCopy(key, value, e)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export const Games = () => {
+  const games: Game[] = [
+    {
+      id: "cs2",
+      name: "Counter Strike 2",
+      nick: "MichalBr",
+      platform: "Steam",
+      rank: "Level 10",
+      rankIcon: GR1,
+      image: G1,
+      settings: {
+        FACEIT: "Level 10",
+        Premier: "21 000+ ELO (MM p. Global Elite)",
+        Crosshair: "CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D",
+        Viewmodel: "viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2",
+        Sensitivity: "2.52",
+        Resolution: "1280x960, Almost everything on low quality",
+        Config: "Soon...",
+      },
+    },
+    {
+      id: "overwatch",
+      name: "Overwatch",
+      nick: "MichalBr#2144",
+      platform: "Battle.net",
+      rank: "Platinum III",
+      rankIcon: GR2,
+      image: G2,
+      settings: {
+        Crosshair: "2560x1440",
+        Sensitivity: "4.0",
+        Resolution: "2560x1440, LOW quality",
+      },
+    },
+    {
+      id: "apex",
+      name: "Apex Legends",
+      nick: "TheMichalBr",
+      platform: "EA",
+      rank: "Platinum IV",
+      rankIcon: GR3,
+      image: G3,
+      settings: {
+        Crosshair: "1920x1080",
+        Sensitivity: "2.0",
+        Resolution: "2560x1440, LOW quality",
+      },
+    },
+    {
+      id: "fortnite",
+      name: "Fortnite",
+      nick: "MichalBr",
+      platform: "Epic Games",
+      rank: "Unreal",
+      rankIcon: GR4,
+      image: G4,
+      settings: {
+        Statistics: "https://fortnite.gg/stats?player=MichalBr",
+        Sensitivity: "5.0",
+        Resolution: "2560x1440, Almost everything on low quality, View Distance HIGH",
+      },
+    },
+    {
+      id: "valorant",
+      name: "Valorant",
+      nick: "MichalBr#UwU",
+      platform: "Riot Games",
+      rank: "Platinum II",
+      rankIcon: GR5,
+      image: G5,
+      settings: {
+        Sensitivity: "0.82 / 1 / 1",
+        Graphics: "Low and only Bloom, MT, NVRB are ON",
+        Crosshair: "Cyan / Static",
+        Info: "FPS counter - enabled, Enemy highlight color - red, Map rotate - On (1.16 0.72)",
+        Resolution: "2560x1440, Almost everything on low quality",
+      },
+    },
+    {
+      id: "rainbowsixsiegex",
+      name: "Rainbow Six Siege X",
+      nick: "TheMichalBr",
+      platform: "Ubisoft",
+      rank: "Emerald IV",
+      rankIcon: GR6,
+      image: G6,
+      settings: {
+        Sensitivity: "16/16",
+        Resolution: "2560x1440",
+        Graphics: "Almost everything on low/medium quality",
+      },
+    },
+    {
+      id: "chess",
+      name: "Chess",
+      nick: "MichalBr13",
+      platform: "Chess.com",
+      rank: "700+ Rating",
+      rankIcon: GR7,
+      image: G7,
+      settings: {
+        Chessboard: "Dark Blue",
+        Figurines: "Space",
+      },
+    },
+  ];
+
+  return (
+    <section
+      id="games"
+      className="min-h-screen text-white py-20 justify-center flex items-center"
+    >
+      <div className="max-w-6xl mx-auto space-y-16 px-4">
+        <RevealOnScroll>
+          <div>
+            <div className="text-center mb-10">
+              <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent drop-shadow-lg select-none">
+                Games
+              </h2>
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
+                Here you can find few information about my competitive games, my
+                highest ranks or in-game settings in these games, and my newest
+                reviews.
+              </p>
+            </div>
+
+            {/* Latest reviews divider */}
+            <div className="flex items-center gap-4 mb-10 select-none">
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+              <span className="text-xs text-gray-600 uppercase tracking-widest">
+                Latest reviews
+              </span>
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+
+            {/* Reviews grid — unchanged */}
+            <div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {reviews.slice(0, 2).map((review, index) => (
+                  <div
+                    key={index}
+                    tabIndex={0}
+                    className="group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl 
+                   border border-gray-900 overflow-hidden
+                   transition-all duration-500 ease-out select-none will-change-transform
+                   hover:scale-[1.02] hover:shadow-2xl hover:border-cyan-500/20
+                   focus:outline-none focus:ring-3 focus:ring-blue-500/40"
+                    style={{
+                      backgroundImage: `linear-gradient(165deg,
+            rgba(0,0,0,0.92) 0%,
+            rgba(0,0,0,0.85) 50%,
+            rgba(0,0,0,0.80) 100%), 
+            url(${review.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      willChange: "transform",
+                    }}
+                  >
+                    <div className="absolute inset-0 pointer-events-none rounded-2xl bg-linear-to-br from-black/80 via-black/60 to-transparent transition-opacity duration-700 ease-out opacity-60 group-hover:opacity-40 group-hover:from-black/70" />
+                    <div className="relative z-10 flex flex-col h-full justify-between">
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-300 tracking-tight drop-shadow-lg mb-2 transition-colors duration-300 ease-out group-hover:text-gray-200">
+                          {review.title}
+                        </h3>
+                        {review.tag && (
+                          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-gray-700/50 shadow-lg backdrop-blur-sm transition-all duration-500 ease-out group-hover:border-cyan-500/30 group-hover:scale-[1.02]">
+                            <span className="text-sm text-gray-300 flex items-center gap-1.5">
+                              <span className="transition-transform duration-500 ease-out group-hover:scale-110">
+                                {getTagInfo(review.tag).icon}
+                              </span>
+                              <span className="font-medium">{getTagInfo(review.tag).text}</span>
+                            </span>
+                          </div>
+                        )}
+                        <div className="relative mt-4">
+                          <div className="transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] transform opacity-0 max-h-0 translate-y-1 overflow-hidden group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75">
+                            <div className="space-y-1">
+                              {Object.entries(review.info).map(([key, value], i) => (
+                                <div key={i} className="flex gap-2 text-sm text-gray-200 leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                                  <span className="text-gray-400 min-w-17.5 font-medium">
+                                    {key.charAt(0).toUpperCase() + key.slice(1)}:
+                                  </span>
+                                  <span className="text-gray-300 wrap-break-word flex-1">{value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="relative flex items-end justify-between mt-4 h-10">
+                        <div className={`absolute transform transition-all duration-700 ease-in-out ${review.review ? "right-0 group-hover:left-0 group-hover:right-auto" : "right-0"}`}>
+                          <div className="flex items-center gap-2.5">
+                            <div className="relative flex items-center">
+                              <span className="flex gap-1">
+                                {[1,2,3,4,5].map((star) => (
+                                  <svg key={`bg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-gray-700/60">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                  </svg>
+                                ))}
+                              </span>
+                              <span className="absolute top-0 left-0 flex gap-1 overflow-hidden" style={{ width: `${(parseFloat(review.rating) / 2 / 5) * 100}%` }}>
+                                {[1,2,3,4,5].map((star) => (
+                                  <svg key={`fg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-500" style={{ filter: "drop-shadow(0 0 4px rgba(250,204,21,0.7))" }}>
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                                  </svg>
+                                ))}
+                              </span>
+                            </div>
+                            <span className="w-px h-4 bg-gray-700/80 rounded-full" />
+                            <div className="flex items-baseline gap-0.5">
+                              <span className="text-base font-bold tabular-nums text-yellow-400 group-hover:text-yellow-300 transition-colors duration-500 [text-shadow:0_0_12px_rgba(250,204,21,0.45)]">
+                                {review.rating}
+                              </span>
+                              <span className="text-xs text-gray-500 font-medium">/10</span>
+                            </div>
+                          </div>
+                        </div>
+                        {review.review && (
+                          <a
+                            href={review.review}
+                            className="absolute right-0 transform transition-all duration-600 ease-out text-cyan-400 hover:text-cyan-300 text-sm font-semibold bg-black/30 hover:bg-black/50 backdrop-blur-sm px-3.5 py-1.5 rounded-full border border-cyan-500/20 hover:border-cyan-500/40 shadow-lg hover:shadow-cyan-500/20 opacity-0 translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 focus:outline-none focus:ring-2 focus:ring-cyan-500/40 flex items-center gap-1.5"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Read review
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="h-16" />
+
+            {/* Ranks & Settings divider */}
+            <div className="flex items-center gap-4 mb-10 select-none">
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+              <span className="text-xs text-gray-600 uppercase tracking-widest">
+                Ranks &amp; Settings
+              </span>
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+
+            {/* New game cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {games.map((game) => (
+                <GameCard key={game.id} game={game} />
+              ))}
+            </div>
+          </div>
+        </RevealOnScroll>
+      </div>
+    </section>
+  );
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const getTagInfo = (tag: Review["tag"]): TagInfo => {
+  switch (tag) {
+    case "game":
+      return {
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <path d="M12 3 Q12 1 14 1" />
+            <path d="M8 9C8 6 9.5 4.5 12 4.5C14.5 4.5 16 6 16 9V15C16 17.8 14.2 19.5 12 19.5C9.8 19.5 8 17.8 8 15V9Z" />
+            <line x1="12" y1="4.5" x2="12" y2="11" />
+            <line x1="8" y1="11" x2="16" y2="11" />
+            <rect x="11" y="7" width="2" height="3" rx="1" fill="currentColor" stroke="none" />
+          </svg>
+        ),
+        color: "text-white/90",
+        bgColor: "bg-white/10",
+        borderColor: "border-cyan-500/20 backdrop-blur-sm",
+        text: "Game",
+      };
+    case "film":
+      return {
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <rect x="2" y="2" width="20" height="20" rx="2" />
+            <line x1="7" y1="2" x2="7" y2="22" />
+            <line x1="17" y1="2" x2="17" y2="22" />
+            <line x1="2" y1="12" x2="22" y2="12" />
+            <line x1="2" y1="7" x2="7" y2="7" />
+            <line x1="2" y1="17" x2="7" y2="17" />
+            <line x1="17" y1="17" x2="22" y2="17" />
+            <line x1="17" y1="7" x2="22" y2="7" />
+          </svg>
+        ),
+        color: "text-white/90",
+        bgColor: "bg-white/10",
+        borderColor: "border-purple-500/20 backdrop-blur-sm",
+        text: "Film",
+      };
+    case "series":
+      return {
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <rect x="2" y="7" width="20" height="15" rx="2" />
+            <polyline points="17 2 12 7 7 2" />
+          </svg>
+        ),
+        color: "text-white/90",
+        bgColor: "bg-white/10",
+        borderColor: "border-orange-500/20 backdrop-blur-sm",
+        text: "Series",
+      };
+    default:
+      return {
+        icon: (
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+        ),
+        color: "text-white/90",
+        bgColor: "bg-white/10",
+        borderColor: "border-white/20 backdrop-blur-sm",
+        text: "Unknown",
+      };
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
 TODO:
 - Loadingscreen oddělat starý kod
 - Reveal com. nevypda spatne?
