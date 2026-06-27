@@ -77,7 +77,7 @@ const equipmentData = [
     name: "MSI MPG X870E CARBON WIFI",
     image: mbI,
     specs: {
-      biosVersion: "7E49v1A95",
+      biosVersion: "7E49v1AA0",
       formFactor: "ATX",
       socket: "AM5",
       chipset: "X870E",
