@@ -55,13 +55,12 @@ export const Games = () => {
       image: G1,
       settings: {
         FACEIT: "Level 10",
-        Premier: "21 000+ ELO (MM p. Global Elite)",
+        Premier: "22 000+ ELO | Global Elite",
         Crosshair: "CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D",
         Viewmodel:
           "viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2",
-        Sensitivity: "2.52",
-        Resolution: "1280x960, Almost everything on low quality",
-        Config: "Soon...",
+        Sensitivity: "2.52 | 0.95",
+        Resolution: "1280x960 Stretched | Low quality",
       },
     },
     {
@@ -72,9 +71,9 @@ export const Games = () => {
       rankIcon: GR2,
       image: G2,
       settings: {
-        Crosshair: "2560x1440",
+        Crosshair: "Cyan Static",
         Sensitivity: "4.0",
-        Resolution: "2560x1440, LOW quality",
+        Resolution: "2560x1440 | Low quality",
       },
     },
     {
@@ -85,9 +84,9 @@ export const Games = () => {
       rankIcon: GR3,
       image: G3,
       settings: {
-        Crosshair: "1920x1080",
+        Crosshair: "Cyan Static",
         Sensitivity: "2.0",
-        Resolution: "2560x1440, LOW quality",
+        Resolution: "2560x1440 | Low quality",
       },
     },
     {
@@ -100,8 +99,7 @@ export const Games = () => {
       settings: {
         Statistics: "https://fortnite.gg/stats?player=MichalBr",
         Sensitivity: "5.0",
-        Resolution:
-          "2560x1440, Almost everything on low quality, View Distance HIGH",
+        Resolution: "2560x1440 | Low quality, High Distance",
       },
     },
     {
@@ -112,11 +110,11 @@ export const Games = () => {
       rankIcon: GR5,
       image: G5,
       settings: {
-        Sensitivity: "0.82 / 1 / 1",
+        Sensitivity: "0.82 | 1 | 1",
         Graphics: "Low and only Bloom, MT, NVRB are ON",
-        Crosshair: "Cyan / Static",
+        Crosshair: "Cyan Static",
         Info: "FPS counter - enabled, Enemy highlight color - red, Map rotate - On (1.16 0.72)",
-        Resolution: "2560x1440, Almost everything on low quality",
+        Resolution: "2560x1440 | Low quality, On bloom",
       },
     },
     {
@@ -127,9 +125,8 @@ export const Games = () => {
       rankIcon: GR6,
       image: G6,
       settings: {
-        Sensitivity: "16/16",
-        Resolution: "2560x1440",
-        Graphics: "Almost everything on low/medium quality",
+        Sensitivity: "16 | 16",
+        Resolution: "2560x1440 | Medium quality",
       },
     },
     {
