@@ -32,6 +32,7 @@ interface EquipmentItem {
   name: string;
   image: string;
   specs: EquipmentSpecs;
+  link?: string;
 }
 
 interface EquipmentCardProps {
@@ -61,6 +62,7 @@ const equipmentData = [
       glass: "TG Dark Tint",
       size: "Midi Tower",
     },
+    link: "https://www.alza.cz/fractal-design-define-7-black-tg-light-tint-d5795415.htm",
   },
   {
     category: "POWER SUPPLY",
@@ -71,6 +73,7 @@ const equipmentData = [
       efficiency: "80 PLUS Platinum",
       modularity: "Fully",
     },
+    link: "https://www.alza.cz/corsair-hx1000-d4948332.htm",
   },
   {
     category: "MOTHERBOARD",
@@ -82,6 +85,7 @@ const equipmentData = [
       socket: "AM5",
       chipset: "X870E",
     },
+    link: "https://www.alza.cz/msi-mpg-x870e-carbon-wifi-d12501062.htm",
   },
   {
     category: "PROCESSOR",
@@ -94,6 +98,7 @@ const equipmentData = [
       socket: "AM5",
       architecture: "Zen 5 - Granite Ridge",
     },
+    link: "https://www.alza.cz/amd-ryzen-9-9900x-d12359489.htm",
   },
   {
     category: "PROCESSOR COOLER",
@@ -103,6 +108,7 @@ const equipmentData = [
       type: "PWM - Air Cooler",
       height: "125 mm",
     },
+    link: "https://www.alza.cz/noctua-nh-u9s-chromaxblack-d6285859.htm",
   },
   {
     category: "GRAPHICS CARD",
@@ -116,6 +122,7 @@ const equipmentData = [
       architecture: "NVIDIA - Blackwell 2.0 (GB205)",
       previousGpu: "MSI GeForce RTX 2070 GAMING Z",
     },
+    link: "https://www.alza.cz/msi-geforce-rtx-5070-12g-gaming-trio-oc-d12921094.htm",
   },
   {
     category: "COMPUTER MEMORY",
@@ -127,6 +134,7 @@ const equipmentData = [
       speed: "6000 MHz",
       latency: "CL30",
     },
+    link: "https://www.alza.cz/kingston-fury-32gb-kit-ddr5-6000mhz-cl30-beast-black-expo-d7903429.htm",
   },
   {
     category: "HARD DISK DRIVE",
@@ -138,6 +146,7 @@ const equipmentData = [
       rpm: "7200 RPM",
       cache: "256 MB",
     },
+    link: "https://www.alza.cz/wd-ultrastar-dc-hc320-8tb-d5663738.htm",
   },
   {
     category: "SOLID STATE DRIVE",
@@ -147,6 +156,7 @@ const equipmentData = [
       capacity: "1 TB",
       interface: "NVMe - PCIe 4.0",
     },
+    link: "https://www.alza.cz/samsung-990-pro-1tb-d7515155.htm",
   },
   {
     category: "OPERATING SYSTEM",
@@ -167,6 +177,7 @@ const equipmentData = [
       resolution: "2560x1440 (2K)",
       refreshRate: "270 Hz",
     },
+    link: "https://www.amazon.com/Acer-Predator-XB273U-Gpbmiipprzx-Compatible/dp/B08T9FT52N",
   },
   {
     category: "SIDE MONITOR",
@@ -178,6 +189,7 @@ const equipmentData = [
       resolution: "1920x1080 (FullHD)",
       refreshRate: "144 Hz",
     },
+    link: "https://www.amazon.com/BenQ-XL2720-Response-Equalizer-Adjustable/dp/B01H5KKQTM",
   },
   {
     category: "SIDE MONITOR",
@@ -199,6 +211,7 @@ const equipmentData = [
       layout: "TKL",
       connectivity: "Wireless",
     },
+    link: "https://www.alza.cz/logitech-g915-lightspeed-tkl-carbon-gl-tactile-czsk-d6215316.htm",
   },
   {
     category: "MOUSE",
@@ -211,6 +224,7 @@ const equipmentData = [
       sensor: "HERO 25K",
       connectivity: "Wireless",
     },
+    link: "https://www.alza.cz/logitech-g-pro-x-superlight-2-black-d7903102.htm",
   },
   {
     category: "MOUSEPAD",
@@ -222,6 +236,7 @@ const equipmentData = [
       thickness: "3 mm",
       base: "Rubber",
     },
+    link: "https://www.alza.cz/logitech-g640-large-cloth-gaming-mouse-pad-d3790103.htm",
   },
   {
     category: "HEADSET",
@@ -232,6 +247,7 @@ const equipmentData = [
       microphone: "Blue VO!CE",
       battery: "50+ hours",
     },
+    link: "https://www.alza.cz/logitech-g-pro-x-2-lightspeed-black-d7768593.htm",
   },
   {
     category: "MICROPHONE",
@@ -241,6 +257,7 @@ const equipmentData = [
       connection: "USB",
       type: "Condenser",
     },
+    link: "https://www.alza.cz/hyperx-quadcast-d5570083.htm",
   },
   {
     category: "MOBILE",
@@ -251,6 +268,7 @@ const equipmentData = [
       storage: "256 GB",
       processor: "Apple A19",
     },
+    link: "https://www.apple.com/iphone/",
   },
   {
     category: "CONSOLE",
@@ -261,6 +279,7 @@ const equipmentData = [
       other: "Samsung Gear VR",
       table: "Electric Table",
     },
+    link: "https://www.amazon.com/Xbox-360-250GB-Console/dp/B003O6JKLC",
   },
 ];
 
@@ -354,6 +373,15 @@ const formatSpecKey = (key: string): string => {
     .replace(/([A-Z])/g, " $1")
     .replace(/^./, (str) => str.toUpperCase())
     .trim();
+};
+
+const getLinkLabel = (url?: string): string => {
+  if (!url) return "";
+  const lowerUrl = url.toLowerCase();
+  if (lowerUrl.includes("alza")) return "View on Alza.cz";
+  if (lowerUrl.includes("amazon")) return "View on Amazon.com";
+  if (lowerUrl.includes("apple")) return "View on Apple Store";
+  return "View product";
 };
 
 const CustomStyles = () => (
@@ -609,7 +637,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
       aria-labelledby="drawer-title"
     >
       <div
-        className={`w-full sm:max-w-md bg-[#070709]/98 border-l border-white/10 shadow-2xl backdrop-blur-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] h-full flex flex-col ${
+        className={`w-full sm:max-w-md bg-[#070709]/98 border-l border-white/10 shadow-2xl backdrop-blur-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] h-full flex flex-col sm:rounded-l-3xl overflow-hidden ${
           isVisible ? "translate-x-0" : "translate-x-full"
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -706,15 +734,43 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
                   key={key}
                   className="bg-white/2 hover:bg-white/4 rounded-xl p-3.5 border border-white/3 hover:border-blue-500/10 transition-all duration-200"
                 >
-                  <dt className="text-gray-400 text-xs font-semibold capitalize mb-1">
+                  <dt className="text-gray-500 text-xs font-semibold capitalize mb-1">
                     {formatSpecKey(key)}
                   </dt>
-                  <dd className="text-white text-xs font-semibold break-all pr-4">
+                  <dd className="text-gray-300 text-xs font-semibold break-all pr-4">
                     {value}
                   </dd>
                 </div>
               ))}
             </dl>
+
+            <div className="border-b border-white/10 my-6" />
+
+            {item.link && (
+              <div className="pt-1 pb-4">
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-blue-900 hover:bg-blue-800 text-white text-xs font-bold tracking-wider uppercase transition-all duration-300 active:scale-[0.98] cursor-pointer font-mono"
+                >
+                  <span>{getLinkLabel(item.link)}</span>
+                  <svg
+                    className="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2.5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                    />
+                  </svg>
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>
