@@ -58,11 +58,11 @@ const equipmentData = [
     name: "Fractal Design Define 7",
     image: caseI,
     specs: {
-      color: "Black",
+      size: "Mid Tower",
       glass: "TG Dark Tint",
-      size: "Midi Tower",
+      color: "Black",
     },
-    link: "https://www.alza.cz/fractal-design-define-7-black-tg-light-tint-d5795415.htm",
+    link: "https://www.fractal-design.com/products/cases/define/define-7/black-tg-dark-tint/",
   },
   {
     category: "POWER SUPPLY",
@@ -318,9 +318,11 @@ const getCategoryGroup = (category: string): string =>
   categoryMap[category as keyof typeof categoryMap] || "OTHER";
 
 const specLabels: Record<string, string> = {
-  color: "Color",
-  glass: "Glass Type",
+  // COMPUTER CASE
   size: "Size",
+  glass: "Glass",
+  color: "Color",
+
   power: "Power Output",
   efficiency: "Efficiency Rating",
   modularity: "Modularity",
