@@ -46,7 +46,7 @@ interface FilterButtonProps {
   onClick: (filter: string) => void;
 }
 
-interface ModalProps {
+interface DrawerProps {
   item: EquipmentItem | null;
   onClose: () => void;
 }
@@ -271,7 +271,6 @@ const categoryFilters = [
   "MONITORS",
   "AUDIO",
   "MOBILE & CONSOLES",
-  "OTHER",
 ];
 
 const categoryMap = {
@@ -299,12 +298,80 @@ const categoryMap = {
 const getCategoryGroup = (category: string): string =>
   categoryMap[category as keyof typeof categoryMap] || "OTHER";
 
+const specLabels: Record<string, string> = {
+  color: "Color",
+  glass: "Glass Type",
+  size: "Size",
+  power: "Power Output",
+  efficiency: "Efficiency Rating",
+  modularity: "Modularity",
+  biosVersion: "BIOS Version",
+  formFactor: "Form Factor",
+  socket: "Socket Type",
+  chipset: "Chipset",
+  cores: "Cores & Threads",
+  baseClock: "Base Clock Frequency",
+  boostClock: "Boost Clock Frequency",
+  architecture: "Microarchitecture",
+  memory: "Memory / VRAM",
+  memoryBus: "Memory Bus Width",
+  previousGpu: "Previous GPU",
+  type: "Cooler / Memory Type",
+  height: "Cooler Height",
+  capacity: "Capacity",
+  speed: "Memory Frequency",
+  latency: "Memory Latency (CL)",
+  interface: "Storage Interface",
+  rpm: "Rotational Speed",
+  cache: "Buffer Cache Size",
+  version: "OS Version",
+  build: "OS Build Number",
+  panel: "Display Panel Type",
+  resolution: "Native Resolution",
+  refreshRate: "Refresh Rate",
+  switches: "Key Switch Type",
+  layout: "Keyboard Layout Style",
+  connectivity: "Connection Mode",
+  dpi: "Sensor Sensitivity (DPI)",
+  pollingRate: "USB Polling Rate",
+  weight: "Physical Weight",
+  sensor: "Optical Sensor model",
+  surface: "Mousepad Surface Type",
+  thickness: "Mousepad Thickness",
+  base: "Mousepad Non-Slip Base",
+  microphone: "Built-in Microphone",
+  battery: "Battery Lifespan",
+  connection: "Microphone Connector",
+  storage: "Storage Capacity",
+  other: "Accessories / Extras",
+  table: "Desk Type",
+  processor: "System Processor",
+};
+
 const formatSpecKey = (key: string): string => {
+  if (specLabels[key]) return specLabels[key];
   return key
     .replace(/([A-Z])/g, " $1")
     .replace(/^./, (str) => str.toUpperCase())
     .trim();
 };
+
+const CustomStyles = () => (
+  <style>{`
+    .blueprint-grid {
+      background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.035) 1px, transparent 1px);
+      background-size: 16px 16px;
+      background-position: center;
+    }
+    body, section, h2, h3, p, span, button, dt, dd {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+  `}</style>
+);
 
 const EquipmentCard: React.FC<EquipmentCardProps> = ({
   item,
@@ -314,6 +381,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
   const [imageError, setImageError] = useState<boolean>(false);
+  const [showSpinner, setShowSpinner] = useState<boolean>(false);
 
   useEffect(() => {
     const timer = setTimeout(
@@ -323,19 +391,18 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
     return () => clearTimeout(timer);
   }, [index]);
 
+  useEffect(() => {
+    if (!imageLoaded && !imageError) {
+      const timer = setTimeout(() => setShowSpinner(true), 80);
+      return () => clearTimeout(timer);
+    } else {
+      setShowSpinner(false);
+    }
+  }, [item.image, imageLoaded, imageError]);
+
   const handleClick = useCallback((): void => {
     onClick?.(item);
   }, [item, onClick]);
-
-  const handleImageLoad = useCallback((): void => {
-    setImageLoaded(true);
-    setImageError(false);
-  }, []);
-
-  const handleImageError = useCallback((): void => {
-    setImageError(true);
-    setImageLoaded(true);
-  }, []);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLDivElement>): void => {
@@ -352,29 +419,27 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
     [item.specs],
   );
 
-  {
-    /* bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" className="absolute inset-0 bg-gradient-to-t from-blue-500/2 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" */
-  }
-
   return (
     <article
-      className={`group relative bg-linear-to-br from-[#1e20243a] to-[#2a2d353a] border border-white/10 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-blue-400/40 hover:bg-linear-to-br hover:from-slate-800/60 hover:to-slate-900/60 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-900 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
+      className={`group relative bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-550 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform hover:shadow-2xl hover:-translate-y-1 hover:border-blue-500/30 hover:bg-[#0f0f12]/90 focus:outline-none focus:ring-2 focus:ring-blue-500/40 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+      }`}
       onClick={handleClick}
       role="button"
       tabIndex={0}
       onKeyDown={handleKeyDown}
       aria-label={`View details for ${item.name}`}
     >
-      <div className="relative h-48 bg-linear-to-br from-white/5 to-transparent flex items-center justify-center p-4">
-        {!imageLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-8 h-8 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+      {/* Blueprint grid background */}
+      <div className="relative h-48 blueprint-grid bg-black/25 flex items-center justify-center p-4 overflow-hidden border-b border-white/2">
+        {showSpinner && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/10">
+            <div className="w-8 h-8 border-3 border-white/10 border-t-blue-500 rounded-full animate-spin" />
           </div>
         )}
 
         {imageError ? (
-          <div className="flex flex-col items-center justify-center text-gray-400">
+          <div className="flex flex-col items-center justify-center text-gray-500 relative z-25">
             <svg
               className="w-12 h-12 mb-2"
               fill="none"
@@ -394,43 +459,50 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
           <img
             src={item.image}
             alt={`${item.name} - ${item.category}`}
-            className={`max-w-full max-h-full object-contain transition-all duration-450 group-hover:scale-110 ${imageLoaded ? "opacity-100" : "opacity-0"
-              }`}
-            onLoad={handleImageLoad}
-            onError={handleImageError}
+            className={`max-w-[85%] max-h-[85%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] ${
+              imageLoaded ? "opacity-100" : "opacity-0"
+            }`}
+            style={{ backfaceVisibility: "hidden" }}
+            onLoad={() => {
+              setImageLoaded(true);
+              setImageError(false);
+            }}
+            onError={() => {
+              setImageError(true);
+              setImageLoaded(true);
+            }}
             loading="lazy"
           />
         )}
 
-        <div className="absolute inset-0 bg-linear-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
       <div className="p-5">
         <div className="mb-2">
-          <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">
+          <span className="text-[10px] font-semibold text-blue-400 uppercase tracking-widest">
             {item.category}
           </span>
         </div>
 
-        <h3 className="text-base font-semibold text-gray-200 leading-tight mb-4 group-hover:text-blue-100 transition-colors duration-300 line-clamp-2">
-          {item.name}
-        </h3>
+        <div className="h-6 flex items-start mb-3">
+          <h3 className="text-sm md:text-base font-bold text-gray-300 leading-snug group-hover:text-blue-400 transition-colors duration-300 truncate w-full select-none">
+            {item.name}
+          </h3>
+        </div>
 
-        <dl className="text-xs text-gray-400 space-y-2">
-          {displaySpecs.map(([key, value]) => (
-            <div key={key} className="flex justify-between items-center gap-2">
-              <dt className="capitalize font-medium text-gray-400 shrink-0">
-                {formatSpecKey(key)}
-              </dt>
-              <dd className="text-gray-200 font-semibold text-right truncate flex-1 min-w-0">
-                {value}
-              </dd>
-            </div>
+        {/* Clean Spec Inline Row */}
+        <div className="text-[11px] text-gray-400/80 font-medium flex flex-wrap gap-x-2 gap-y-1 select-none">
+          {displaySpecs.map(([_, value], idx) => (
+            <span key={idx} className="flex items-center gap-2">
+              {idx > 0 && <span className="text-gray-600/60">•</span>}
+              <span>{value}</span>
+            </span>
           ))}
-        </dl>
+        </div>
       </div>
 
-      <div className="absolute inset-0 bg-linear-to-t from-blue-500/5 via-transparent to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-t from-blue-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
     </article>
   );
 };
@@ -442,77 +514,79 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 }) => (
   <button
     onClick={() => onClick(filter)}
-    className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-slate-400/50 ${isActive
-        ? "bg-linear-to-r from-slate-700 to-slate-800 text-white shadow-lg hover:from-slate-800 hover:to-slate-900"
+    className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500/40 ${
+      isActive
+        ? "bg-blue-500/10 text-blue-400 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.15)]"
         : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20"
-      }`}
+    }`}
     aria-pressed={isActive}
   >
     {filter}
   </button>
 );
 
-const Modal: React.FC<ModalProps> = ({ item, onClose }) => {
+const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(true);
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+  const [imageError, setImageError] = useState<boolean>(false);
+  const [showSpinner, setShowSpinner] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsVisible(true);
+    setImageLoaded(false);
+    setImageError(false);
+    setShowSpinner(false);
+  }, [item]);
 
-    const scrollY = window.scrollY;
-    const style = document.body.style;
+  useEffect(() => {
+    if (!imageLoaded && !imageError && item) {
+      const timer = setTimeout(() => setShowSpinner(true), 80);
+      return () => clearTimeout(timer);
+    } else {
+      setShowSpinner(false);
+    }
+  }, [item, imageLoaded, imageError]);
 
-    style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-    style.position = "fixed";
-    style.top = `-${scrollY}px`;
-    style.width = "100%";
+  useEffect(() => {
+    if (item) {
+      setIsTransitioning(true);
+      const timer = setTimeout(() => setIsVisible(true), 50);
+      const transitionTimer = setTimeout(() => setIsTransitioning(false), 350);
 
-    const handleEscape = (e: KeyboardEvent): void => {
-      if (e.key === "Escape") {
-        setIsVisible(false);
+      const scrollY = window.scrollY;
+      const style = document.body.style;
 
-        const currentScrollY =
-          parseInt(document.body.style.top || "0", 10) * -1;
-        const currentStyle = document.body.style;
+      style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      style.position = "fixed";
+      style.top = `-${scrollY}px`;
+      style.width = "100%";
 
-        currentStyle.overflow = "unset";
+      const handleEscape = (e: KeyboardEvent): void => {
+        if (e.key === "Escape") {
+          handleClose();
+        }
+      };
+
+      document.addEventListener("keydown", handleEscape);
+
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(transitionTimer);
+        style.overflow = "unset";
         document.documentElement.style.overflow = "unset";
-        currentStyle.position = "unset";
-        currentStyle.top = "unset";
-        currentStyle.width = "unset";
-        window.scrollTo(0, currentScrollY);
-
-        setTimeout(onClose, 200);
-      }
-    };
-
-    document.addEventListener("keydown", handleEscape);
-
-    return () => {
-      style.overflow = "unset";
-      document.documentElement.style.overflow = "unset";
-      style.position = "unset";
-      style.top = "unset";
-      style.width = "unset";
-      window.scrollTo(0, scrollY);
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [onClose]);
+        style.position = "unset";
+        style.top = "unset";
+        style.width = "unset";
+        window.scrollTo(0, scrollY);
+        document.removeEventListener("keydown", handleEscape);
+      };
+    }
+  }, [item]);
 
   const handleClose = useCallback((): void => {
     setIsVisible(false);
-
-    const scrollY = parseInt(document.body.style.top || "0", 10) * -1;
-    const style = document.body.style;
-
-    style.overflow = "unset";
-    document.documentElement.style.overflow = "unset";
-    style.position = "unset";
-    style.top = "unset";
-    style.width = "unset";
-    window.scrollTo(0, scrollY);
-
-    setTimeout(onClose, 200);
+    setTimeout(onClose, 300);
   }, [onClose]);
 
   const handleBackdropClick = useCallback(
@@ -526,95 +600,121 @@ const Modal: React.FC<ModalProps> = ({ item, onClose }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"
-        }`}
+      className={`fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
+        isVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      }`}
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
-      aria-labelledby="modal-title"
-      aria-describedby="modal-description"
+      aria-labelledby="drawer-title"
     >
-      {/* from-[#1e2024] to-[#15171a] from-slate-800/40 via-slate-800/40 to-slate-900/40*/}
       <div
-        className={`bg-linear-to-br from-slate-800/40 via-slate-800/40 to-slate-900/40 rounded-2xl border border-white/20 max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all duration-300 ${isVisible ? "scale-100" : "scale-95"
-          }`}
+        className={`w-full sm:max-w-md bg-[#070709]/98 border-l border-white/10 shadow-2xl backdrop-blur-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] h-full flex flex-col ${
+          isVisible ? "translate-x-0" : "translate-x-full"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="sticky top-0 bg-linear-to-r from-slate-800/40 via-slate-800/40 to-slate-900/40 p-6 border-b border-white/10 z-10 rounded-2xl">
-          <div className="flex items-center justify-between">
-            <h3
-              id="modal-title"
-              className="text-xl font-bold text-white select-none"
+        <header className="p-6 border-b border-white/10 flex items-center justify-between shrink-0 bg-black/20">
+          <span className="text-[10px] font-mono tracking-widest text-blue-400 uppercase">
+            Specifications
+          </span>
+          <button
+            onClick={handleClose}
+            className="text-gray-400 hover:text-white transition-colors p-1.5 hover:bg-white/5 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/40 cursor-pointer"
+            aria-label="Close panel"
+          >
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              Specifications
-            </h3>
-            <button
-              onClick={handleClose}
-              className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-slate-800 cursor-pointer"
-              aria-label="Close modal"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2.5"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
         </header>
 
-        <div className="overflow-y-auto max-h-[calc(90vh-100px)]">
-          <div className="p-8">
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="shrink-0">
-                <div className="w-48 h-48 bg-linear-to-br from-white/5 to-transparent rounded-xl flex items-center justify-center p-4">
-                  <img
-                    src={item.image}
-                    alt={`${item.name} - ${item.category}`}
-                    className="max-w-full max-h-full object-contain"
-                  />
-                </div>
+        <div className="overflow-y-auto flex-1 p-6 space-y-6">
+          {/* Blueprint image header */}
+          <div className={`relative h-60 blueprint-grid border border-white/4 bg-black/40 rounded-2xl flex items-center justify-center p-6 overflow-hidden group ${
+            isTransitioning ? "pointer-events-none" : ""
+          }`}>
+            {showSpinner && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/10">
+                <div className="w-8 h-8 border-3 border-white/10 border-t-blue-500 rounded-full animate-spin" />
               </div>
+            )}
 
-              <div className="flex-1 min-w-0">
-                <span className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-3 block">
-                  {item.category}
-                </span>
-
-                <h3
-                  id="modal-description"
-                  className="text-2xl font-bold text-white mb-6 wrap-break-word"
+            {imageError ? (
+              <div className="flex flex-col items-center justify-center text-gray-500 relative z-25">
+                <svg
+                  className="w-10 h-10 mb-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  {item.name}
-                </h3>
-
-                <div className="space-y-4">
-                  <div className="border-b border-white/10 mb-4" />
-                  <dl className="grid grid-cols-2 gap-3">
-                    {Object.entries(item.specs).map(([key, value]) => (
-                      <div
-                        key={key}
-                        className="bg-slate-800/30 rounded-md p-3 border border-white/5 hover:border-white/10 transition-colors duration-200"
-                      >
-                        <dt className="text-gray-400 text-xs font-medium uppercase tracking-wide mb-1">
-                          {formatSpecKey(key)}
-                        </dt>
-                        <dd className="text-white text-sm font-semibold">
-                          {value}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span className="text-xs">Image not available</span>
               </div>
-            </div>
+            ) : (
+              <img
+                src={item.image}
+                alt={`${item.name} - ${item.category}`}
+                className={`max-w-[80%] max-h-[80%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] ${
+                  imageLoaded ? "opacity-100" : "opacity-0"
+                }`}
+                style={{ backfaceVisibility: "hidden" }}
+                onLoad={() => {
+                  setImageLoaded(true);
+                  setImageError(false);
+                }}
+                onError={() => {
+                  setImageError(true);
+                  setImageLoaded(true);
+                }}
+              />
+            )}
+          </div>
+
+          <div>
+            <span className="text-[10px] font-semibold text-blue-400 uppercase tracking-widest mb-1.5 block">
+              {item.category}
+            </span>
+            <h3
+              id="drawer-title"
+              className="text-xl font-bold text-gray-300 mb-6 leading-tight wrap-break-word"
+            >
+              {item.name}
+            </h3>
+            
+            <div className="border-b border-white/10 mb-6" />
+
+            <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {Object.entries(item.specs).map(([key, value]) => (
+                <div
+                  key={key}
+                  className="bg-white/2 hover:bg-white/4 rounded-xl p-3.5 border border-white/3 hover:border-blue-500/10 transition-all duration-200"
+                >
+                  <dt className="text-gray-400 text-xs font-semibold capitalize mb-1">
+                    {formatSpecKey(key)}
+                  </dt>
+                  <dd className="text-white text-xs font-semibold break-all pr-4">
+                    {value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
       </div>
@@ -623,10 +723,9 @@ const Modal: React.FC<ModalProps> = ({ item, onClose }) => {
 };
 
 const EquipmentSection: React.FC = () => {
-  const [selectedFilter, setSelectedFilter] = useState<string>("ALL");
+  const [selectedFilter, setSelectedFilter] = useState<string>("COMPUTER");
   const [selectedItem, setSelectedItem] = useState<EquipmentItem | null>(null);
   const [isFilterChanging, setIsFilterChanging] = useState<boolean>(false);
-  const [searchTerm] = useState<string>("");
 
   const handleFilterChange = useCallback(
     (filter: string): void => {
@@ -648,38 +747,20 @@ const EquipmentSection: React.FC = () => {
   const handleModalClose = useCallback((): void => setSelectedItem(null), []);
 
   const filteredEquipment = useMemo(() => {
-    let filtered = equipmentData;
-
-    if (selectedFilter !== "ALL") {
-      filtered = filtered.filter(
-        (item) => getCategoryGroup(item.category) === selectedFilter,
-      );
-    }
-
-    if (searchTerm.trim()) {
-      const searchLower = searchTerm.toLowerCase().trim();
-      filtered = filtered.filter(
-        (item) =>
-          item.name.toLowerCase().includes(searchLower) ||
-          item.category.toLowerCase().includes(searchLower) ||
-          Object.values(item.specs).some((spec) =>
-            spec.toString().toLowerCase().includes(searchLower),
-          ),
-      );
-    }
-
-    return filtered;
-  }, [selectedFilter, searchTerm]);
+    if (selectedFilter === "ALL") return equipmentData;
+    return equipmentData.filter(
+      (item) => getCategoryGroup(item.category) === selectedFilter,
+    );
+  }, [selectedFilter]);
 
   const equipmentCount = filteredEquipment.length;
-  const totalCount = equipmentData.length;
 
   return (
     <section id="equipment" className="min-h-screen py-20 lg:px-10">
+      <CustomStyles />
       <div className="max-w-6xl mx-auto px-4 select-none">
         <RevealOnScroll>
           <header className="text-center mb-10">
-            {/* className= px-4/10 lg:px-10 horizontal-scroll max-w-5xl and 6/7 "group relative bg-[#1e20243a] border border-white/10 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-2 transition-all duration-300" w-3/4 h-3/4 object-contain group-hover:scale-110 transition-transform duration-300" "p-4 bg-[#1e202470]/90 backdrop-blur-md rounded-b-xl w-full h-full" */}
             <h2 className="text-4xl font-bold mb-8 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent drop-shadow-lg select-none text-center">
               Equipment
             </h2>
@@ -701,85 +782,37 @@ const EquipmentSection: React.FC = () => {
 
           <div className="text-center mb-8">
             <p className="text-gray-400 text-sm select-none">
-              {searchTerm
-                ? `Found ${equipmentCount} of ${totalCount} items.`
-                : `Showing ${equipmentCount} item${equipmentCount !== 1 ? "s" : ""}${selectedFilter !== "ALL" ? ` in ${selectedFilter}` : ""
-                }.`}
+              {`Showing ${equipmentCount} item${equipmentCount !== 1 ? "s" : ""}${
+                selectedFilter !== "ALL" ? ` in ${selectedFilter}` : ""
+              }.`}
             </p>
           </div>
 
           <div
-            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 transition-opacity duration-300 ${isFilterChanging ? "opacity-0" : "opacity-100"
-              }`}
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isFilterChanging
+                ? "opacity-0 scale-[0.99] translate-y-1"
+                : "opacity-100 scale-100 translate-y-0"
+            }`}
           >
             {filteredEquipment.map((item, index) => (
               <EquipmentCard
-                key={`${item.name}-${selectedFilter}-${searchTerm}`}
+                key={`${item.name}-${selectedFilter}`}
                 item={item}
                 index={index}
                 onClick={handleItemSelect}
               />
             ))}
           </div>
-
-          {equipmentCount === 0 && !isFilterChanging && (
-            <div className="text-center py-20">
-              <div className="text-6xl mb-4 opacity-50 flex justify-center">
-                {searchTerm ? (
-                  <svg
-                    width="72"
-                    height="72"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="M21 21l-4.35-4.35" />
-                  </svg>
-                ) : (
-                  <svg
-                    width="72"
-                    height="72"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <rect x="3" y="3" width="18" height="18" rx="2" />
-                    <path d="M9 9h6v6H9z" />
-                    <path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4" />
-                  </svg>
-                )}
-              </div>
-              <h3 className="text-xl font-semibold text-gray-300 mb-2 select-none">
-                {searchTerm ? "No results found!" : "No equipment found!"}
-              </h3>
-              <p className="text-gray-400 mb-4 select-none">
-                {searchTerm
-                  ? `No equipment matches "${searchTerm}".`
-                  : "Try selecting a different category."}
-              </p>
-              {(searchTerm || selectedFilter !== "ALL") && (
-                <div className="flex flex-wrap justify-center gap-2">
-                  {selectedFilter !== "ALL" && (
-                    <button
-                      onClick={() => handleFilterChange("ALL")}
-                      className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-200 cursor-pointer"
-                    >
-                      Show all categories
-                    </button>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
         </RevealOnScroll>
       </div>
 
-      {selectedItem && <Modal item={selectedItem} onClose={handleModalClose} />}
+      {selectedItem && (
+        <Drawer
+          item={selectedItem}
+          onClose={handleModalClose}
+        />
+      )}
     </section>
   );
 };
