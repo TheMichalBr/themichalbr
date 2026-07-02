@@ -637,7 +637,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
       aria-labelledby="drawer-title"
     >
       <div
-        className={`w-full sm:max-w-md bg-[#070709]/98 border-l border-white/10 shadow-2xl backdrop-blur-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] h-full flex flex-col sm:rounded-l-3xl overflow-hidden ${
+        className={`w-full sm:max-w-md bg-[#070709]/95 border-l border-white/10 shadow-2xl backdrop-blur-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] h-full flex flex-col sm:rounded-l-3xl overflow-hidden ${
           isVisible ? "translate-x-0" : "translate-x-full"
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -752,7 +752,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-blue-900 hover:bg-blue-800 text-white text-xs font-bold tracking-wider uppercase transition-all duration-300 active:scale-[0.98] cursor-pointer font-mono"
+                  className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/2 hover:bg-white/4 border-white/3 hover:border-blue-500/10 text-gray-300 text-xs font-bold tracking-wider uppercase transition-all duration-300 active:scale-[0.98] cursor-pointer font-mono"
                 >
                   <span>{getLinkLabel(item.link)}</span>
                   <svg
