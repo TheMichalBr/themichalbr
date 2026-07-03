@@ -541,7 +541,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
         )}
 
         {imageError ? (
-          <div className="flex flex-col items-center justify-center text-gray-500 relative z-25">
+          <div className="flex flex-col items-center justify-center text-gray-500 relative z-25 pointer-events-none select-none">
             <svg
               className="w-12 h-12 mb-2"
               fill="none"
@@ -753,7 +753,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
             )}
 
             {imageError ? (
-              <div className="flex flex-col items-center justify-center text-gray-500 relative z-25">
+              <div className="flex flex-col items-center justify-center text-gray-500 relative z-25 pointer-events-none select-none">
                 <svg
                   className="w-10 h-10 mb-2"
                   fill="none"
