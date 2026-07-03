@@ -455,6 +455,24 @@ const CustomStyles = () => (
       -moz-osx-font-smoothing: grayscale;
       text-rendering: optimizeLegibility;
     }
+    .custom-scrollbar {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      transition: background-color 0.2s ease;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
   `}</style>
 );
 
@@ -614,6 +632,18 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
   const [imageError, setImageError] = useState<boolean>(false);
   const [showSpinner, setShowSpinner] = useState<boolean>(false);
 
+  const handleClose = useCallback((): void => {
+    setIsVisible(false);
+    setTimeout(onClose, 300);
+  }, [onClose]);
+
+  const handleBackdropClick = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>): void => {
+      if (e.target === e.currentTarget) handleClose();
+    },
+    [handleClose],
+  );
+
   useEffect(() => {
     setImageLoaded(false);
     setImageError(false);
@@ -664,19 +694,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
         document.removeEventListener("keydown", handleEscape);
       };
     }
-  }, [item]);
-
-  const handleClose = useCallback((): void => {
-    setIsVisible(false);
-    setTimeout(onClose, 300);
-  }, [onClose]);
-
-  const handleBackdropClick = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>): void => {
-      if (e.target === e.currentTarget) handleClose();
-    },
-    [handleClose],
-  );
+  }, [item, handleClose]);
 
   if (!item) return null;
 
@@ -721,7 +739,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
           </button>
         </header>
 
-        <div className="overflow-y-auto flex-1 p-6 space-y-6">
+        <div className="overflow-y-auto flex-1 p-6 space-y-6 custom-scrollbar">
           {/* Blueprint image header */}
           <div
             className={`relative h-60 blueprint-grid border border-white/4 bg-black/40 rounded-2xl flex items-center justify-center p-6 overflow-hidden group ${isTransitioning ? "pointer-events-none" : ""
