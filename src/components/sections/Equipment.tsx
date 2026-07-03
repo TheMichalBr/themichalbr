@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 
 import caseI from "/equipment/E_1_CASE.webp";
