@@ -58,9 +58,10 @@ const equipmentData = [
     name: "Fractal Design Define 7",
     image: caseI,
     specs: {
-      size: "Mid Tower",
-      glass: "TG Dark Tint",
-      color: "Black",
+      caseSize: "Mid Tower",
+      caseGlass: "TG Dark Tint",
+      caseColor: "Black",
+      caseFans: "Dynamic X2 GP-14/12",
     },
     link: "https://www.fractal-design.com/products/cases/define/define-7/black-tg-dark-tint/",
   },
@@ -69,102 +70,105 @@ const equipmentData = [
     name: "Corsair HX1000",
     image: psuI,
     specs: {
-      power: "1000 W",
-      efficiency: "80 PLUS Platinum",
-      modularity: "Fully",
+      psuPower: "1000 W",
+      psuEfficiency: "80 PLUS Platinum",
+      psuModularity: "Fully",
     },
-    link: "https://www.alza.cz/corsair-hx1000-d4948332.htm",
+    link: "https://www.corsair.com/eu/en/p/psu/cp-9020139-eu/hx-series-hx1000-1000-watt-80-plus-platinum-certified-fully-modular-psu-eu-cp-9020139-eu",
   },
   {
     category: "MOTHERBOARD",
     name: "MSI MPG X870E CARBON WIFI",
     image: mbI,
     specs: {
-      biosVersion: "7E49v1AA0",
-      formFactor: "ATX",
-      socket: "AM5",
-      chipset: "X870E",
+      mbBiosVersion: "7E49v1AA0",
+      mbFormFactor: "ATX",
+      mbSocket: "AM5",
+      mbChipset: "X870E",
     },
-    link: "https://www.alza.cz/msi-mpg-x870e-carbon-wifi-d12501062.htm",
+    link: "https://www.msi.com/Motherboard/MPG-X870E-CARBON-WIFI",
   },
   {
     category: "PROCESSOR",
     name: "AMD Ryzen 9 9900X",
     image: cpuI,
     specs: {
-      cores: "12 cores / 24 threads",
-      baseClock: "4.4 GHz",
-      boostClock: "5.6 GHz",
-      socket: "AM5",
-      architecture: "Zen 5 - Granite Ridge",
+      cpuCores: "12 cores / 24 threads",
+      cpuBaseClock: "4.4 GHz",
+      cpuBoostClock: "5.6 GHz",
+      cpuSocket: "AM5",
+      cpuArchitecture: "Zen 5 - Granite Ridge",
     },
-    link: "https://www.alza.cz/amd-ryzen-9-9900x-d12359489.htm",
+    link: "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9900x.html",
   },
   {
     category: "PROCESSOR COOLER",
-    name: "Noctua NH-U9S chromax.black",
+    name: "Noctua NH-U9S",
     image: cpucoolerI,
     specs: {
-      type: "PWM - Air Cooler",
-      height: "125 mm",
+      ccolerCoolerVersion: "chromax.black",
+      ccolerType: "PWM - Air Cooler",
+      ccolerHeight: "125 mm",
     },
-    link: "https://www.alza.cz/noctua-nh-u9s-chromaxblack-d6285859.htm",
+    link: "https://www.noctua.at/en/products/nh-u9s-chromax-black",
   },
   {
     category: "GRAPHICS CARD",
-    name: "MSI GeForce RTX 5070 12G GAMING TRIO OC",
+    name: "MSI GeForce RTX 5070",
     image: gpuI,
     specs: {
-      memory: "12 GB GDDR7",
-      baseClock: "2325 MHz",
-      memoryBus: "192 bit",
-      boostClock: "2610 Mhz",
-      architecture: "NVIDIA - Blackwell 2.0 (GB205)",
-      previousGpu: "MSI GeForce RTX 2070 GAMING Z",
+      gpuType: "12G GAMING TRIO OC",
+      gpuMemory: "12 GB GDDR7",
+      gpuBaseClock: "2325 MHz",
+      gpuBoostClock: "2610 Mhz",
+      gpuMemoryBus: "192 bit",
+      gpuArchitecture: "NVIDIA - Blackwell 2.0 (GB205)",
+      gpuPreviousGpu: "MSI GeForce RTX 2070 GAMING Z", // REMOVE AFTER SALE
     },
-    link: "https://www.alza.cz/msi-geforce-rtx-5070-12g-gaming-trio-oc-d12921094.htm",
+    link: "https://cz.msi.com/Graphics-Card/GeForce-RTX-5070-12G-GAMING-TRIO-OC",
   },
   {
     category: "COMPUTER MEMORY",
     name: "Kingston Fury Beast",
     image: ramI,
     specs: {
-      type: "DDR5",
-      capacity: "32 GB (2x16 GB)",
-      speed: "6000 MHz",
-      latency: "CL30",
+      ramType: "DDR5",
+      ramCapacity: "32 GB (2x16 GB)",
+      ramSpeed: "6000 MHz",
+      ramLatency: "CL30",
+      ramColor: "Black - RGB",
     },
-    link: "https://www.alza.cz/kingston-fury-32gb-kit-ddr5-6000mhz-cl30-beast-black-expo-d7903429.htm",
+    link: "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-rgb-memory?speed=6000mt%2Fs&total%20(kit)%20capacity=32gb&kit=kit%20of%202&cas%20latency=30&dram%20density=16gbit&profile%20type=amd%20expo%20%2F%20intel%20xmp&color=black",
   },
   {
     category: "HARD DISK DRIVE",
     name: "WD Ultrastar DC HC320",
     image: hddI,
     specs: {
-      capacity: "8 TB",
-      interface: "SATA III",
-      rpm: "7200 RPM",
-      cache: "256 MB",
+      hddCapacity: "8 TB",
+      hddInterface: "SATA III",
+      hddRpm: "7200 RPM",
+      hddCache: "256 MB",
     },
-    link: "https://www.alza.cz/wd-ultrastar-dc-hc320-8tb-d5663738.htm",
+    link: "https://www.westerndigital.com/cs-cz/products/internal-drives/data-center-drives/ultrastar-dc-hc320-hdd?sku=0B36404",
   },
   {
     category: "SOLID STATE DRIVE",
     name: "Samsung SSD 990 PRO",
     image: ssdI,
     specs: {
-      capacity: "1 TB",
-      interface: "NVMe - PCIe 4.0",
+      ssdCapacity: "1 TB",
+      ssdInterface: "NVMe - PCIe 4.0",
     },
-    link: "https://www.alza.cz/samsung-990-pro-1tb-d7515155.htm",
+    link: "https://www.samsung.com/cz/memory-storage/nvme-ssd/990-pro-1tb-nvme-pcie-gen-4-mz-v9p1t0bw/",
   },
   {
     category: "OPERATING SYSTEM",
     name: "Windows 11",
     image: osI,
     specs: {
-      version: "Professional (Pro)",
-      build: "25H2",
+      osVersion: "Professional (Pro)",
+      osBuild: "25H2",
     },
   },
   {
@@ -172,34 +176,34 @@ const equipmentData = [
     name: "Acer Predator XB273UNX",
     image: mmonitorI,
     specs: {
-      size: "27 inches",
-      panel: "IPS",
-      resolution: "2560x1440 (2K)",
-      refreshRate: "270 Hz",
+      monitorSize: "27 inches",
+      monitorPanel: "IPS",
+      monitorResolution: "2560x1440 (2K)",
+      monitorRefreshRate: "270 Hz",
     },
-    link: "https://www.amazon.com/Acer-Predator-XB273U-Gpbmiipprzx-Compatible/dp/B08T9FT52N",
+    link: "https://www.alza.cz/27-acer-predator-xb273unx-d6769245.htm#parameters",
   },
   {
     category: "SIDE MONITOR",
     name: "Zowie by BenQ XL2720",
     image: smonitor1I,
     specs: {
-      size: "27 inches",
-      panel: "TN",
-      resolution: "1920x1080 (FullHD)",
-      refreshRate: "144 Hz",
+      monitorSize: "27 inches",
+      monitorPanel: "TN",
+      monitorResolution: "1920x1080 (FullHD)",
+      monitorRefreshRate: "144 Hz",
     },
-    link: "https://www.amazon.com/BenQ-XL2720-Response-Equalizer-Adjustable/dp/B01H5KKQTM",
+    link: "https://www.alza.cz/27-zowie-by-benq-xl2720-d4395694.htm#parameters",
   },
   {
     category: "SIDE MONITOR",
     name: "Iiyama PLE2209HDS",
     image: smonitor2I,
     specs: {
-      size: "22 inches",
-      panel: "TN",
-      resolution: "1920x1080 (FullHD)",
-      refreshRate: "60 Hz",
+      monitorSize: "22 inches",
+      monitorPanel: "TN",
+      monitorResolution: "1920x1080 (FullHD)",
+      monitorRefreshRate: "60 Hz",
     },
   },
   {
@@ -207,79 +211,78 @@ const equipmentData = [
     name: "Logitech G915 LIGHTSPEED TKL",
     image: keyboardI,
     specs: {
-      switches: "GL Linear - Red",
-      layout: "TKL",
-      connectivity: "Wireless",
+      kbSwitches: "GL Linear - Red",
+      kbLayout: "TKL",
+      kbConnectivity: "Wireless",
     },
-    link: "https://www.alza.cz/logitech-g915-lightspeed-tkl-carbon-gl-tactile-czsk-d6215316.htm",
+    link: "https://www.logitechg.com/cs-cz/shop/p/g915-x-tkl-wireless.920-012747",
   },
   {
     category: "MOUSE",
     name: "Logitech G Pro X Superlight 2",
     image: mouseI,
     specs: {
-      dpi: "400 DPI",
-      pollingRate: "8000 Hz",
-      weight: "60 g",
-      sensor: "HERO 25K",
-      connectivity: "Wireless",
+      mouseDpi: "400 DPI",
+      mousePollingRate: "8000 Hz",
+      mouseWeight: "60 g",
+      mouseSensor: "HERO 25K",
+      mouseConnectivity: "Wireless",
     },
-    link: "https://www.alza.cz/logitech-g-pro-x-superlight-2-black-d7903102.htm",
+    link: "https://www.logitechg.com/cs-cz/shop/p/pro-x2-superlight-wireless-mouse.910-006638",
   },
   {
     category: "MOUSEPAD",
-    name: "Logitech G640 Large Cloth",
+    name: "Logitech G640",
     image: mousepadI,
     specs: {
-      size: "Large",
-      surface: "Cloth",
-      thickness: "3 mm",
-      base: "Rubber",
+      mousepadSize: "Large",
+      mousepadSurface: "Cloth",
+      mousepadThickness: "3 mm",
+      mousepadBase: "Rubber",
     },
-    link: "https://www.alza.cz/logitech-g640-large-cloth-gaming-mouse-pad-d3790103.htm",
+    link: "https://www.logitechg.com/cs-cz/shop/p/g640-cloth-gaming-mouse-pad",
   },
   {
     category: "HEADSET",
     name: "Logitech G Pro X 2 LIGHTSPEED",
     image: headsetI,
     specs: {
-      connectivity: "Wireless",
-      microphone: "Blue VO!CE",
-      battery: "50+ hours",
+      headsetConnectivity: "Wireless",
+      headsetMicrophone: "Blue VO!CE",
+      headsetBattery: "50+ hours",
     },
-    link: "https://www.alza.cz/logitech-g-pro-x-2-lightspeed-black-d7768593.htm",
+    link: "https://www.logitechg.com/cs-cz/shop/p/pro-x-2-wireless-headset",
   },
   {
     category: "MICROPHONE",
     name: "HyperX Quadcast",
     image: microphoneI,
     specs: {
-      connection: "USB",
-      type: "Condenser",
+      microphoneConnection: "USB",
+      microphoneType: "Condenser",
     },
-    link: "https://www.alza.cz/hyperx-quadcast-d5570083.htm",
+    link: "https://www.alza.cz/hyperx-quadcast-d6876014.htm#parameters",
   },
   {
     category: "MOBILE",
     name: "iPhone 17",
     image: mobileI,
     specs: {
-      memory: "8 GB",
-      storage: "256 GB",
-      processor: "Apple A19",
+      mobileMemory: "8 GB",
+      mobileStorage: "256 GB",
+      mobileProcessor: "Apple A19",
     },
-    link: "https://www.apple.com/iphone/",
+    link: "https://www.apple.com/cz/iphone-17/",
   },
   {
     category: "CONSOLE",
     name: "Xbox 360",
     image: consoleI,
     specs: {
-      storage: "250 GB",
-      other: "Samsung Gear VR",
-      table: "Electric Table",
+      consoleStorage: "250 GB",
+      consoleOther: "Samsung Gear VR",
+      consoleTable: "Electric Table",
     },
-    link: "https://www.amazon.com/Xbox-360-250GB-Console/dp/B003O6JKLC",
   },
 ];
 
@@ -319,54 +322,106 @@ const getCategoryGroup = (category: string): string =>
 
 const specLabels: Record<string, string> = {
   // COMPUTER CASE
-  size: "Size",
-  glass: "Glass",
-  color: "Color",
+  caseSize: "Size",
+  caseGlass: "Glass",
+  caseColor: "Color",
+  caseFans: "Fans",
 
-  power: "Power Output",
-  efficiency: "Efficiency Rating",
-  modularity: "Modularity",
-  biosVersion: "BIOS Version",
-  formFactor: "Form Factor",
-  socket: "Socket Type",
-  chipset: "Chipset",
-  cores: "Cores & Threads",
-  baseClock: "Base Clock Frequency",
-  boostClock: "Boost Clock Frequency",
-  architecture: "Microarchitecture",
-  memory: "Memory / VRAM",
-  memoryBus: "Memory Bus Width",
-  previousGpu: "Previous GPU",
-  type: "Cooler / Memory Type",
-  height: "Cooler Height",
-  capacity: "Capacity",
-  speed: "Memory Frequency",
-  latency: "Memory Latency (CL)",
-  interface: "Storage Interface",
-  rpm: "Rotational Speed",
-  cache: "Buffer Cache Size",
-  version: "OS Version",
-  build: "OS Build Number",
-  panel: "Display Panel Type",
-  resolution: "Native Resolution",
-  refreshRate: "Refresh Rate",
-  switches: "Key Switch Type",
-  layout: "Keyboard Layout Style",
-  connectivity: "Connection Mode",
-  dpi: "Sensor Sensitivity (DPI)",
-  pollingRate: "USB Polling Rate",
-  weight: "Physical Weight",
-  sensor: "Optical Sensor model",
-  surface: "Mousepad Surface Type",
-  thickness: "Mousepad Thickness",
-  base: "Mousepad Non-Slip Base",
-  microphone: "Built-in Microphone",
-  battery: "Battery Lifespan",
-  connection: "Microphone Connector",
-  storage: "Storage Capacity",
-  other: "Accessories / Extras",
-  table: "Desk Type",
-  processor: "System Processor",
+  // POWER SUPPLY
+  psuPower: "Power",
+  psuEfficiency: "Rating",
+  psuModularity: "Modularity",
+
+  // MOTHERBOARD
+  mbBiosVersion: "BIOS Version",
+  mbFormFactor: "Form Factor",
+  mbSocket: "Socket",
+  mbChipset: "Chipset",
+
+  // PROCESSOR
+  cpuCores: "Cores & Threads",
+  cpuBaseClock: "Base Frequency",
+  cpuBoostClock: "Boost Frequency",
+  cpuSocket: "Socket",
+  cpuArchitecture: "Microarchitecture",
+
+  // PROCESSOR COOLER
+  ccolerCoolerVersion: "Version",
+  ccolerType: "Type",
+  ccolerHeight: "Height",
+
+  // GRAPHICS CARD
+  gpuType: "Version",
+  gpuMemory: "Memory",
+  gpuBaseClock: "Base Clock",
+  gpuBoostClock: "Boost Clock",
+  gpuMemoryBus: "Memory Bus",
+  gpuArchitecture: "Microarchitecture",
+  gpuPreviousGpu: "Previous GPU",
+
+  // COMPUTER MEMORY
+  ramType: "Type",
+  ramCapacity: "Capacity",
+  ramSpeed: "Frequency",
+  ramLatency: "Latency",
+  ramColor: "Color",
+
+  // HARD DISK DRIVE
+  hddCapacity: "Capacity",
+  hddInterface: "Interface",
+  hddRpm: "Speed",
+  hddCache: "Cache",
+
+  // SOLID STATE DRIVE
+  ssdCapacity: "Capacity",
+  ssdInterface: "Interface",
+
+  // OPERATING SYSTEM
+  osVersion: "Version",
+  osBuild: "Build",
+
+  // MONITORS
+  monitorSize: "Size",
+  monitorPanel: "Panel",
+  monitorResolution: "Resolution",
+  monitorRefreshRate: "Refresh Rate",
+
+  // KEYBOARD
+  kbSwitches: "Switches",
+  kbLayout: "Layout",
+  kbConnectivity: "Connectivity",
+
+  // MOUSE
+  mouseDpi: "Sensitivity",
+  mousePollingRate: "Polling Rate",
+  mouseWeight: "Weight",
+  mouseSensor: "Sensor",
+  mouseConnectivity: "Connectivity",
+
+  // MOUSEPAD
+  mousepadSize: "Size",
+  mousepadSurface: "Surface",
+  mousepadThickness: "Thickness",
+  mousepadBase: "Base",
+
+  // HEADSET  TODO
+  headsetConnectivity: "Connectivity",
+  headsetMicrophone: "Microphone",
+  headsetBattery: "Battery",
+
+  // MICROPHONE  TODO
+  microphoneConnection: "Connection",
+  microphoneType: "Type",
+
+  // MOBILE
+  mobileMemory: "Memory",
+  mobileStorage: "Storage",
+  mobileProcessor: "Processor",
+
+  // CONSOLE
+  consoleStorage: "Storage",
+  consoleOther: "Accessories",
+  consoleTable: "Desk",
 };
 
 const formatSpecKey = (key: string): string => {
@@ -451,9 +506,8 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
 
   return (
     <article
-      className={`group relative bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-550 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform hover:shadow-2xl hover:-translate-y-1 hover:border-blue-500/30 hover:bg-[#0f0f12]/90 focus:outline-none focus:ring-2 focus:ring-blue-500/40 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-      }`}
+      className={`group relative bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-550 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform hover:shadow-2xl hover:-translate-y-1 hover:border-blue-500/30 hover:bg-[#0f0f12]/90 focus:outline-none focus:ring-2 focus:ring-blue-500/40 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+        }`}
       onClick={handleClick}
       role="button"
       tabIndex={0}
@@ -489,9 +543,8 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
           <img
             src={item.image}
             alt={`${item.name} - ${item.category}`}
-            className={`max-w-[85%] max-h-[85%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] ${
-              imageLoaded ? "opacity-100" : "opacity-0"
-            }`}
+            className={`max-w-[85%] max-h-[85%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] ${imageLoaded ? "opacity-100" : "opacity-0"
+              }`}
             style={{ backfaceVisibility: "hidden" }}
             onLoad={() => {
               setImageLoaded(true);
@@ -544,11 +597,10 @@ const FilterButton: React.FC<FilterButtonProps> = ({
 }) => (
   <button
     onClick={() => onClick(filter)}
-    className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500/40 ${
-      isActive
+    className={`cursor-pointer px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500/40 ${isActive
         ? "bg-blue-500/10 text-blue-400 border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.15)]"
         : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10 hover:border-white/20"
-    }`}
+      }`}
     aria-pressed={isActive}
   >
     {filter}
@@ -630,18 +682,18 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${
-        isVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-      }`}
+      className={`fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-sm transition-opacity duration-300 ${isVisible
+          ? "opacity-100 pointer-events-auto"
+          : "opacity-0 pointer-events-none"
+        }`}
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
       aria-labelledby="drawer-title"
     >
       <div
-        className={`w-full sm:max-w-md bg-[#070709]/95 border-l border-white/10 shadow-2xl backdrop-blur-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] h-full flex flex-col sm:rounded-l-3xl overflow-hidden ${
-          isVisible ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`w-full sm:max-w-md bg-[#070709]/95 border-l border-white/10 shadow-2xl backdrop-blur-2xl transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] h-full flex flex-col sm:rounded-l-3xl overflow-hidden ${isVisible ? "translate-x-0" : "translate-x-full"
+          }`}
         onClick={(e) => e.stopPropagation()}
       >
         <header className="p-6 border-b border-white/10 flex items-center justify-between shrink-0 bg-black/20">
@@ -671,9 +723,10 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
 
         <div className="overflow-y-auto flex-1 p-6 space-y-6">
           {/* Blueprint image header */}
-          <div className={`relative h-60 blueprint-grid border border-white/4 bg-black/40 rounded-2xl flex items-center justify-center p-6 overflow-hidden group ${
-            isTransitioning ? "pointer-events-none" : ""
-          }`}>
+          <div
+            className={`relative h-60 blueprint-grid border border-white/4 bg-black/40 rounded-2xl flex items-center justify-center p-6 overflow-hidden group ${isTransitioning ? "pointer-events-none" : ""
+              }`}
+          >
             {showSpinner && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/10">
                 <div className="w-8 h-8 border-3 border-white/10 border-t-blue-500 rounded-full animate-spin" />
@@ -701,9 +754,8 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
               <img
                 src={item.image}
                 alt={`${item.name} - ${item.category}`}
-                className={`max-w-[80%] max-h-[80%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] ${
-                  imageLoaded ? "opacity-100" : "opacity-0"
-                }`}
+                className={`max-w-[80%] max-h-[80%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] ${imageLoaded ? "opacity-100" : "opacity-0"
+                  }`}
                 style={{ backfaceVisibility: "hidden" }}
                 onLoad={() => {
                   setImageLoaded(true);
@@ -727,7 +779,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
             >
               {item.name}
             </h3>
-            
+
             <div className="border-b border-white/10 mb-6" />
 
             <dl className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -840,18 +892,16 @@ const EquipmentSection: React.FC = () => {
 
           <div className="text-center mb-8">
             <p className="text-gray-400 text-sm select-none">
-              {`Showing ${equipmentCount} item${equipmentCount !== 1 ? "s" : ""}${
-                selectedFilter !== "ALL" ? ` in ${selectedFilter}` : ""
-              }.`}
+              {`Showing ${equipmentCount} item${equipmentCount !== 1 ? "s" : ""}${selectedFilter !== "ALL" ? ` in ${selectedFilter}` : ""
+                }.`}
             </p>
           </div>
 
           <div
-            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              isFilterChanging
+            className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${isFilterChanging
                 ? "opacity-0 scale-[0.99] translate-y-1"
                 : "opacity-100 scale-100 translate-y-0"
-            }`}
+              }`}
           >
             {filteredEquipment.map((item, index) => (
               <EquipmentCard
@@ -866,10 +916,7 @@ const EquipmentSection: React.FC = () => {
       </div>
 
       {selectedItem && (
-        <Drawer
-          item={selectedItem}
-          onClose={handleModalClose}
-        />
+        <Drawer item={selectedItem} onClose={handleModalClose} />
       )}
     </section>
   );
