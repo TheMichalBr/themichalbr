@@ -697,7 +697,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <header className="p-6 border-b border-white/10 flex items-center justify-between shrink-0 bg-black/20">
-          <span className="text-[10px] font-mono tracking-widest text-blue-400 uppercase">
+          <span className="text-[12px] tracking-widest text-blue-400 uppercase">
             Specifications
           </span>
           <button
