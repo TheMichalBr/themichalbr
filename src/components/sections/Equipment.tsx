@@ -715,7 +715,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <header className="p-6 border-b border-white/10 flex items-center justify-between shrink-0 bg-black/20">
-          <span className="text-[12px] tracking-widest text-blue-400 uppercase">
+          <span className="text-[12px] tracking-widest text-blue-400 uppercase select-none">
             Specifications
           </span>
           <button
@@ -788,7 +788,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
           </div>
 
           <div>
-            <span className="text-[10px] font-semibold text-blue-400 uppercase tracking-widest mb-1.5 block">
+            <span className="text-[10px] font-semibold text-blue-400 uppercase tracking-widest mb-1.5 block select-none">
               {item.category}
             </span>
             <h3
@@ -806,7 +806,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
                   key={key}
                   className="bg-white/2 hover:bg-white/4 rounded-xl p-3.5 border border-white/3 hover:border-blue-500/10 transition-all duration-200"
                 >
-                  <dt className="text-gray-500 text-xs font-semibold capitalize mb-1">
+                  <dt className="text-gray-500 text-xs font-semibold capitalize mb-1 select-none">
                     {formatSpecKey(key)}
                   </dt>
                   <dd className="text-gray-300 text-xs font-semibold break-all pr-4">
@@ -824,7 +824,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/2 hover:bg-white/4 border-white/3 hover:border-blue-500/10 text-gray-300 text-xs font-bold tracking-wider uppercase transition-all duration-300 active:scale-[0.98] cursor-pointer font-mono"
+                  className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/2 hover:bg-white/4 border-white/3 hover:border-blue-500/10 text-gray-300 text-xs font-bold tracking-wider uppercase transition-all duration-300 active:scale-[0.98] cursor-pointer font-mono select-none"
                 >
                   <span>{getLinkLabel(item.link)}</span>
                   <svg
