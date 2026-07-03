@@ -561,7 +561,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
           <img
             src={item.image}
             alt={`${item.name} - ${item.category}`}
-            className={`max-w-[85%] max-h-[85%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] ${imageLoaded ? "opacity-100" : "opacity-0"
+            className={`max-w-[85%] max-h-[85%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] pointer-events-none select-none ${imageLoaded ? "opacity-100" : "opacity-0"
               }`}
             style={{ backfaceVisibility: "hidden" }}
             onLoad={() => {
@@ -573,6 +573,7 @@ const EquipmentCard: React.FC<EquipmentCardProps> = ({
               setImageLoaded(true);
             }}
             loading="lazy"
+            draggable="false"
           />
         )}
 
@@ -772,7 +773,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
               <img
                 src={item.image}
                 alt={`${item.name} - ${item.category}`}
-                className={`max-w-[80%] max-h-[80%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] ${imageLoaded ? "opacity-100" : "opacity-0"
+                className={`max-w-[80%] max-h-[80%] object-contain relative z-25 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform transform-gpu group-hover:scale-[1.08] pointer-events-none select-none ${imageLoaded ? "opacity-100" : "opacity-0"
                   }`}
                 style={{ backfaceVisibility: "hidden" }}
                 onLoad={() => {
@@ -783,6 +784,7 @@ const Drawer: React.FC<DrawerProps> = ({ item, onClose }) => {
                   setImageError(true);
                   setImageLoaded(true);
                 }}
+                draggable="false"
               />
             )}
           </div>
