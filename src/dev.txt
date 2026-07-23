@@ -1,3 +1,14 @@
+vyresit neukazovani ranku na malych obrazovkach
+zvetsis velikost recenzi 
+
+
+
+
+
+
+
+-------------------------------------------
+
 import { ReactNode, useState, useCallback } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { reviews, type Review } from "../../data/GamesData";
