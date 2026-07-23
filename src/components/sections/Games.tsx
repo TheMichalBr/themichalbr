@@ -192,7 +192,7 @@ export const Games = () => {
                 Games
               </h2>
               <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto select-none leading-relaxed">
-                Explore details about my competitive games, peak ranks, personalized in-game configurations, and my latest media reviews.
+                Here you can find few information about my competitive games, my highest ranks or in-game settings in these games, and my newest reviews.
               </p>
             </div>
 
