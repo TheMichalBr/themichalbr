@@ -183,7 +183,7 @@ export const Games = () => {
         }
         .rank-tip:hover::after { opacity: 1; }
       `}</style>
-      {/* bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 */}
+      {/*  bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400  */}
       <div className="max-w-6xl mx-auto space-y-16 px-4">
         <RevealOnScroll>
           <div>
