@@ -49,7 +49,6 @@ export const Games = () => {
   const [showSettings, setShowSettings] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandAll, setExpandAll] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<string>("ALL");
   const drawerRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const toggleSettings = (gameId: string): void => {
@@ -341,7 +340,7 @@ export const Games = () => {
 
             <div className="h-16"></div>
 
-            {/* ── Ranks header with game count badge ── */}
+            {/* ── Ranks header with game count badge + Expand All ── */}
             <div className="flex items-center gap-3 mb-5 select-none">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
               <span className="text-xs text-gray-600 uppercase tracking-widest">Ranks &amp; Settings</span>
@@ -349,24 +348,6 @@ export const Games = () => {
                 {games.length}
               </span>
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
-            </div>
-
-            {/* ── Filter bar + Expand All ── */}
-            <div className="flex items-center gap-2 mb-5 flex-wrap select-none">
-              {(["ALL", "FPS", "Battle Royale", "Strategy"] as const).map((f) => (
-                <button
-                  key={f}
-                  onClick={() => setActiveFilter(f)}
-                  className={`text-[10px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full border transition-colors duration-150 cursor-pointer ${
-                    activeFilter === f
-                      ? "bg-blue-400/10 border-blue-400/30 text-blue-400"
-                      : "bg-white/[0.03] border-white/[0.06] text-gray-600 hover:text-gray-300 hover:border-white/10"
-                  }`}
-                >
-                  {f}
-                </button>
-              ))}
-              <div className="flex-1" />
               <button
                 onClick={toggleExpandAll}
                 className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full border border-white/[0.06] bg-white/[0.03] text-gray-500 hover:text-gray-300 hover:border-white/10 transition-colors duration-150 cursor-pointer"
@@ -379,24 +360,14 @@ export const Games = () => {
             </div>
 
             {/* Ranks & Settings — full-width dashboard panel */}
-            <div className="rounded-2xl border border-white/[0.06] bg-[#0a0a0c]/80 backdrop-blur-xl overflow-hidden shadow-xl">
-              {games
-                .filter((g) => {
-                  if (activeFilter === "ALL") return true;
-                  const cat: Record<string, string> = {
-                    cs2: "FPS", overwatch: "FPS", apex: "Battle Royale",
-                    fortnite: "Battle Royale", valorant: "FPS",
-                    rainbowsixsiegex: "FPS", chess: "Strategy",
-                  };
-                  return cat[g.id] === activeFilter;
-                })
-                .map((game, idx, arr) => {
+            <div className="rounded-2xl border border-white/[0.06] bg-[#0a0a0c] overflow-hidden shadow-xl">
+              {games.map((game, idx, arr) => {
                 const hasSettings = game.settings && Object.keys(game.settings).length > 0;
                 const isOpen = expandAll ? hasSettings : showSettings === game.id;
                 const isLast = idx === arr.length - 1;
                 const settingEntries = Object.entries(game.settings);
                 return (
-                  <div key={game.id} className={!isLast ? "border-b border-white/[0.04]" : ""}>
+                  <div key={game.id} className={`isolate${!isLast ? " border-b border-white/[0.04]" : ""}`}>
 
                     {/* ── Main row ── */}
                     <div
@@ -418,8 +389,7 @@ export const Games = () => {
                         alt=""
                         aria-hidden
                         width={800} height={200}
-                        className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.08] pointer-events-none select-none will-change-opacity"
-                        style={{ transform: "translateZ(0)" }}
+                        className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.08] pointer-events-none select-none"
                         loading="lazy"
                         decoding="async"
                       />
