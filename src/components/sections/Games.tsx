@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useCallback, useRef, useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { reviews, type Review } from "../../data/GamesData";
 
@@ -48,12 +48,19 @@ interface TagInfo {
 export const Games = () => {
   const [showSettings, setShowSettings] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  // Track inner content heights for smooth animation without max-h jank
+  const [expandAll, setExpandAll] = useState(false);
+  const [activeFilter, setActiveFilter] = useState<string>("ALL");
   const drawerRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const toggleSettings = (gameId: string): void => {
+    setExpandAll(false);
     setShowSettings((prev) => (prev === gameId ? null : gameId));
   };
+
+  const toggleExpandAll = useCallback((): void => {
+    setShowSettings(null);
+    setExpandAll((p) => !p);
+  }, []);
 
   const handleCopy = (text: string, id: string): void => {
     navigator.clipboard.writeText(text).catch(() => {});
@@ -154,6 +161,29 @@ export const Games = () => {
       id="games"
       className="min-h-screen text-white py-20 justify-center flex items-center font-poppins"
     >
+      <style>{`
+        .rank-tip { position: relative; }
+        .rank-tip::after {
+          content: attr(data-tip);
+          position: absolute;
+          bottom: calc(100% + 7px);
+          left: 50%;
+          transform: translateX(-50%);
+          background: #18181b;
+          color: #d1d5db;
+          font-size: 10px;
+          font-weight: 600;
+          white-space: nowrap;
+          padding: 3px 9px;
+          border-radius: 6px;
+          border: 1px solid rgba(255,255,255,0.08);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.15s;
+          z-index: 50;
+        }
+        .rank-tip:hover::after { opacity: 1; }
+      `}</style>
       {/* bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 */}
       <div className="max-w-6xl mx-auto space-y-16 px-4">
         <RevealOnScroll>
@@ -311,20 +341,59 @@ export const Games = () => {
 
             <div className="h-16"></div>
 
-            <div className="flex items-center gap-4 mb-10 select-none">
+            {/* ── Ranks header with game count badge ── */}
+            <div className="flex items-center gap-3 mb-5 select-none">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
-              <span className="text-xs text-gray-600 uppercase tracking-widest">
-                Ranks & Settings
+              <span className="text-xs text-gray-600 uppercase tracking-widest">Ranks &amp; Settings</span>
+              <span className="text-[9px] font-bold text-gray-700 bg-white/[0.04] border border-white/[0.06] rounded-full px-2 py-0.5">
+                {games.length}
               </span>
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
             </div>
 
+            {/* ── Filter bar + Expand All ── */}
+            <div className="flex items-center gap-2 mb-5 flex-wrap select-none">
+              {(["ALL", "FPS", "Battle Royale", "Strategy"] as const).map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setActiveFilter(f)}
+                  className={`text-[10px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full border transition-colors duration-150 cursor-pointer ${
+                    activeFilter === f
+                      ? "bg-blue-400/10 border-blue-400/30 text-blue-400"
+                      : "bg-white/[0.03] border-white/[0.06] text-gray-600 hover:text-gray-300 hover:border-white/10"
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+              <div className="flex-1" />
+              <button
+                onClick={toggleExpandAll}
+                className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full border border-white/[0.06] bg-white/[0.03] text-gray-500 hover:text-gray-300 hover:border-white/10 transition-colors duration-150 cursor-pointer"
+              >
+                {expandAll ? "Collapse All" : "Expand All"}
+                <svg className={`w-2.5 h-2.5 transition-transform duration-300 ${expandAll ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+            </div>
+
             {/* Ranks & Settings — full-width dashboard panel */}
             <div className="rounded-2xl border border-white/[0.06] bg-[#0a0a0c]/80 backdrop-blur-xl overflow-hidden shadow-xl">
-              {games.map((game, idx) => {
+              {games
+                .filter((g) => {
+                  if (activeFilter === "ALL") return true;
+                  const cat: Record<string, string> = {
+                    cs2: "FPS", overwatch: "FPS", apex: "Battle Royale",
+                    fortnite: "Battle Royale", valorant: "FPS",
+                    rainbowsixsiegex: "FPS", chess: "Strategy",
+                  };
+                  return cat[g.id] === activeFilter;
+                })
+                .map((game, idx, arr) => {
                 const hasSettings = game.settings && Object.keys(game.settings).length > 0;
-                const isOpen = showSettings === game.id;
-                const isLast = idx === games.length - 1;
+                const isOpen = expandAll ? hasSettings : showSettings === game.id;
+                const isLast = idx === arr.length - 1;
                 const settingEntries = Object.entries(game.settings);
                 return (
                   <div key={game.id} className={!isLast ? "border-b border-white/[0.04]" : ""}>
@@ -381,10 +450,14 @@ export const Games = () => {
                         </p>
                       </div>
 
-                      {/* Rank badges — all equal blue-400 style */}
+                      {/* Rank badges — all equal blue-400 style, with CSS tooltip */}
                       <div className="relative shrink-0 hidden sm:flex items-center gap-2 flex-wrap justify-end">
                         {game.ranks.map((r, ri) => (
-                          <div key={ri} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.08] transition-colors duration-150 group-hover:border-blue-400/30 group-hover:bg-blue-400/[0.07]">
+                          <div
+                            key={ri}
+                            className="rank-tip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.08] transition-colors duration-150 group-hover:border-blue-400/30 group-hover:bg-blue-400/[0.07]"
+                            data-tip={r.label}
+                          >
                             <img
                               src={r.icon}
                               alt={r.label}
@@ -430,77 +503,85 @@ export const Games = () => {
                         <div className="overflow-hidden">
                           <div
                             ref={(el) => { drawerRefs.current[game.id] = el; }}
-                            className="border-t border-white/4 bg-black/25 px-6 pt-4 pb-5"
+                            className="border-t border-white/[0.04] bg-black/25 px-6 pt-4 pb-3"
                           >
-                            {/* Settings rows — inline key:value for short, code block for long */}
-                            <div className="space-y-1.5">
-                              {settingEntries.map(([key, value]) => {
-                                const isLong = isLongSetting(key, value);
-                                const uniqueId = `${game.id}-${key}`;
-                                const isCopied = copiedId === uniqueId;
+                            {/* Scroll wrapper with fade indicator */}
+                            <div className="relative">
+                              <div
+                                className="max-h-60 overflow-y-auto"
+                                style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(255,255,255,0.1) transparent" }}
+                              >
+                                <div className="space-y-1.5 pb-4">
+                                  {settingEntries.map(([key, value]) => {
+                                    const isLong = isLongSetting(key, value);
+                                    const uniqueId = `${game.id}-${key}`;
+                                    const isCopied = copiedId === uniqueId;
 
-                                if (isLong) {
-                                  // Code block style for long values
-                                  return (
-                                    <div
-                                      key={key}
-                                      className="group/s rounded-lg border border-white/[0.05] bg-white/[0.02] hover:border-cyan-500/[0.12] transition-colors duration-150 overflow-hidden"
-                                    >
-                                      <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.04]">
-                                        <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-gray-600">{key}</span>
-                                        <button
-                                          onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
-                                          className={[
-                                            "p-0.5 rounded transition-all duration-150 cursor-pointer",
-                                            isCopied
-                                              ? "text-emerald-400"
-                                              : "text-gray-600 hover:text-cyan-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
-                                          ].join(" ")}
-                                          title={`Copy ${key}`} aria-label={`Copy ${key}`}
+                                    if (isLong) {
+                                      return (
+                                        <div
+                                          key={key}
+                                          className="group/s rounded-lg border border-white/[0.05] bg-white/[0.02] hover:border-cyan-500/[0.12] transition-colors duration-150 overflow-hidden"
                                         >
-                                          {isCopied
-                                            ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
-                                            : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-                                          }
-                                        </button>
-                                      </div>
-                                      <p className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all select-text ${isCopied ? "text-emerald-400" : "text-gray-400"}`}>
-                                        {isCopied ? "Copied!" : value}
-                                      </p>
-                                    </div>
-                                  );
-                                }
+                                          <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.04]">
+                                            <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-gray-600">{key}</span>
+                                            <button
+                                              onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
+                                              className={[
+                                                "p-0.5 rounded transition-all duration-150 cursor-pointer",
+                                                isCopied
+                                                  ? "text-emerald-400"
+                                                  : "text-gray-600 hover:text-cyan-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
+                                              ].join(" ")}
+                                              title={`Copy ${key}`} aria-label={`Copy ${key}`}
+                                            >
+                                              {isCopied
+                                                ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
+                                                : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                                              }
+                                            </button>
+                                          </div>
+                                          <p className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all select-text ${isCopied ? "text-emerald-400" : "text-gray-400"}`}>
+                                            {isCopied ? "Copied!" : value}
+                                          </p>
+                                        </div>
+                                      );
+                                    }
 
-                                // Inline row for short values
-                                return (
-                                  <div
-                                    key={key}
-                                    className="group/s flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-white/[0.02] transition-colors duration-150"
-                                  >
-                                    <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-gray-600 shrink-0">{key}</span>
-                                    <div className="flex items-center gap-2 min-w-0">
-                                      <span className={`text-xs font-medium truncate ${isCopied ? "text-emerald-400" : "text-gray-300"}`}>
-                                        {isCopied ? "Copied!" : value}
-                                      </span>
-                                      <button
-                                        onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
-                                        className={[
-                                          "shrink-0 p-0.5 rounded transition-all duration-150 cursor-pointer",
-                                          isCopied
-                                            ? "text-emerald-400 opacity-100"
-                                            : "text-gray-600 hover:text-cyan-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
-                                        ].join(" ")}
-                                        title={`Copy ${key}`} aria-label={`Copy ${key}`}
+                                    // Inline row — CountUp for numeric values
+                                    return (
+                                      <div
+                                        key={key}
+                                        className="group/s flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-white/[0.02] transition-colors duration-150"
                                       >
-                                        {isCopied
-                                          ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
-                                          : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-                                        }
-                                      </button>
-                                    </div>
-                                  </div>
-                                );
-                              })}
+                                        <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-gray-600 shrink-0">{key}</span>
+                                        <div className="flex items-center gap-2 min-w-0">
+                                          <span className={`text-xs font-medium truncate ${isCopied ? "text-emerald-400" : "text-gray-300"}`}>
+                                            {isCopied ? "Copied!" : value}
+                                          </span>
+                                          <button
+                                            onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
+                                            className={[
+                                              "shrink-0 p-0.5 rounded transition-all duration-150 cursor-pointer",
+                                              isCopied
+                                                ? "text-emerald-400 opacity-100"
+                                                : "text-gray-600 hover:text-cyan-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
+                                            ].join(" ")}
+                                            title={`Copy ${key}`} aria-label={`Copy ${key}`}
+                                          >
+                                            {isCopied
+                                              ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
+                                              : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                                            }
+                                          </button>
+                                        </div>
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              </div>
+                              {/* Scroll fade indicator */}
+                              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
                             </div>
                           </div>
                         </div>
