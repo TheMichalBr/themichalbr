@@ -39,7 +39,7 @@ export const reviews: Review[] = [
   },
   {
     title: "The SpongeBob SquarePants Movie",
-    image: "",
+    image: "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/261/2024/06/11153254/gjZD811kfY1ideNuBukcuCy8ocA.jpg",
     tag: "film",
     rating: "7.5",
     info: {

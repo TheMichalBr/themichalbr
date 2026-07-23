@@ -205,8 +205,8 @@ export const Games = () => {
             </div>
 
             <div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {reviews.slice(0, 2).map((review, index) => {
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {reviews.slice(0, 3).map((review, index) => {
                   const cardContent = (
                     <>
                       {/* Performance-optimized background image */}
