@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { RevealOnScroll } from "../RevealOnScroll";
 import { reviews, type Review } from "../../data/GamesData";
 
@@ -10,22 +10,29 @@ import G5 from "/games/G_VALORANT.webp";
 import G6 from "/games/G_R6X.webp";
 import G7 from "/games/G_CHESS.webp";
 
-import GR1 from "/games/G_CS2_R.webp";
+import GR1a from "/games/G_CS2_FACEIT.webp";
+import GR1b from "/games/G_CS2_PREMIER.svg";
+import GR1c from "/games/G_CS2_MM.webp";
 import GR2 from "/games/G_OW_R.webp";
 import GR3 from "/games/G_APEX_R.webp";
 import GR4 from "/games/G_FORTNITE_R.webp";
 import GR5 from "/games/G_VALORANT_R.webp";
 import GR6 from "/games/G_R6X_R.webp";
-import GR7 from "/games/G_CHESS_R.webp";
+import GR7a from "/games/G_CHESS_BLITZ.svg";
+import GR7b from "/games/G_CHESS_BULLET.svg";
 
 type GameSettings = Record<string, string>;
+
+interface GameRank {
+  label: string;
+  icon: string;
+}
 
 interface Game {
   id: string;
   name: string;
   platform: string;
-  rank: string;
-  rankIcon: string;
+  ranks: GameRank[];
   image: string;
   settings: GameSettings;
 }
@@ -40,22 +47,36 @@ interface TagInfo {
 
 export const Games = () => {
   const [showSettings, setShowSettings] = useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+  // Track inner content heights for smooth animation without max-h jank
+  const drawerRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const toggleSettings = (gameId: string): void => {
     setShowSettings((prev) => (prev === gameId ? null : gameId));
+  };
+
+  const handleCopy = (text: string, id: string): void => {
+    navigator.clipboard.writeText(text).catch(() => {});
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
+  const isLongSetting = (_key: string, value: string): boolean => {
+    return value.length > 28;
   };
 
   const games: Game[] = [
     {
       id: "cs2",
       name: "Counter Strike 2",
-      platform: "Steam (MichalBr)",
-      rank: "Level 10",
-      rankIcon: GR1,
+      platform: "Steam | MichalBr",
+      ranks: [
+        { label: "2,047", icon: GR1a },
+        { label: "22,987", icon: GR1b },
+        { label: "Global Elite", icon: GR1c },
+      ],
       image: G1,
       settings: {
-        FACEIT: "Level 10",
-        Premier: "22 000+ ELO | Global Elite",
         Crosshair: "CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D",
         Viewmodel:
           "viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2",
@@ -66,38 +87,26 @@ export const Games = () => {
     {
       id: "overwatch",
       name: "Overwatch",
-      platform: "Battle.net (MichalBr#2144)",
-      rank: "Platinum III",
-      rankIcon: GR2,
+      platform: "Battle.net | MichalBr#2144",
+      ranks: [{ label: "Platinum III", icon: GR2 }],
       image: G2,
-      settings: {
-        Crosshair: "Cyan Static",
-        Sensitivity: "4.0",
-        Resolution: "2560x1440 | Low quality",
-      },
+      settings: {},
     },
     {
       id: "apex",
       name: "Apex Legends",
-      platform: "EA (TheMichalBr)",
-      rank: "Platinum IV",
-      rankIcon: GR3,
+      platform: "EA | TheMichalBr",
+      ranks: [{ label: "Platinum IV", icon: GR3 }],
       image: G3,
-      settings: {
-        Crosshair: "Cyan Static",
-        Sensitivity: "2.0",
-        Resolution: "2560x1440 | Low quality",
-      },
+      settings: {},
     },
     {
       id: "fortnite",
       name: "Fortnite",
-      platform: "Epic Games (MichalBr)",
-      rank: "Unreal",
-      rankIcon: GR4,
+      platform: "Epic Games | MichalBr",
+      ranks: [{ label: "Unreal", icon: GR4 }],
       image: G4,
       settings: {
-        Statistics: "https://fortnite.gg/stats?player=MichalBr",
         Sensitivity: "5.0",
         Resolution: "2560x1440 | Low quality, High Distance",
       },
@@ -105,9 +114,8 @@ export const Games = () => {
     {
       id: "valorant",
       name: "Valorant",
-      platform: "Riot Games (MichalBr#UwU)",
-      rank: "Platinum II",
-      rankIcon: GR5,
+      platform: "Riot Games | MichalBr#UwU",
+      ranks: [{ label: "Platinum II", icon: GR5 }],
       image: G5,
       settings: {
         Sensitivity: "0.82 | 1 | 1",
@@ -120,9 +128,8 @@ export const Games = () => {
     {
       id: "rainbowsixsiegex",
       name: "Rainbow Six Siege X",
-      platform: "Ubisoft (TheMichalBr)",
-      rank: "Emerald IV",
-      rankIcon: GR6,
+      platform: "Ubisoft Connect | TheMichalBr",
+      ranks: [{ label: "Emerald IV", icon: GR6 }],
       image: G6,
       settings: {
         Sensitivity: "16 | 16",
@@ -132,21 +139,20 @@ export const Games = () => {
     {
       id: "chess",
       name: "Chess",
-      platform: "Chess.com (MichalBr13)",
-      rank: "700+ Rating",
-      rankIcon: GR7,
+      platform: "Chess.com | Michalbr13",
+      ranks: [
+        { label: "500+", icon: GR7a },
+        { label: "700+", icon: GR7b },
+      ],
       image: G7,
-      settings: {
-        Chessboard: "Dark Blue",
-        Figurines: "Space",
-      },
+      settings: {},
     },
   ];
 
   return (
     <section
       id="games"
-      className="min-h-screen text-white py-20 justify-center flex items-center"
+      className="min-h-screen text-white py-20 justify-center flex items-center font-poppins"
     >
       {/* bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400 */}
       <div className="max-w-6xl mx-auto space-y-16 px-4">
@@ -156,10 +162,8 @@ export const Games = () => {
               <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent drop-shadow-lg select-none">
                 Games
               </h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
-                Here you can find few information about my competitive games, my
-                highest ranks or in-game settings in these games, and my newest
-                reviews.
+              <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto select-none leading-relaxed">
+                Explore details about my competitive games, peak ranks, personalized in-game configurations, and my latest media reviews.
               </p>
             </div>
 
@@ -173,206 +177,135 @@ export const Games = () => {
 
             <div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {reviews.slice(0, 2).map((review, index) => (
-                  <div
-                    key={index}
-                    tabIndex={0}
-                    className="group relative p-5 bg-gray-900/80 backdrop-blur-lg rounded-2xl shadow-2xl 
-                   border border-gray-900 overflow-hidden
-                   transition-all duration-500 ease-out select-none will-change-transform
-                   hover:scale-[1.02] hover:shadow-2xl hover:border-cyan-500/20
-                   focus:outline-none focus:ring-3 focus:ring-blue-500/40"
-                    style={{
-                      backgroundImage: `linear-gradient(165deg,
-            rgba(0,0,0,0.92) 0%,
-            rgba(0,0,0,0.85) 50%,
-            rgba(0,0,0,0.80) 100%), 
-            url(${review.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      willChange: "transform",
-                    }}
-                  >
-                    {/* Pozadí s gradientem */}
-                    <div
-                      className="absolute inset-0 pointer-events-none rounded-2xl 
-                       bg-linear-to-br from-black/80 via-black/60 to-transparent 
-                       transition-opacity duration-700 ease-out opacity-60
-                       group-hover:opacity-40 group-hover:from-black/70"
-                    ></div>
+                {reviews.slice(0, 2).map((review, index) => {
+                  const cardContent = (
+                    <>
+                      {/* Performance-optimized background image */}
+                      <img
+                        src={review.image}
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-1200 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.05] pointer-events-none will-change-transform transform-gpu"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-linear-to-br from-black/90 via-black/75 to-black/60 pointer-events-none" />
 
-                    {/* Hlavní obsah */}
-                    <div className="relative z-10 flex flex-col h-full justify-between">
-                      <div>
-                        {/* Nadpis */}
-                        <h3
-                          className="text-xl font-bold text-gray-300 tracking-tight drop-shadow-lg mb-2
-                         transition-colors duration-300 ease-out
-                         group-hover:text-gray-200"
-                        >
-                          {review.title}
-                        </h3>
+                      {/* Main Content */}
+                      <div className="relative z-10 flex flex-col h-full justify-between gap-4">
+                        <div>
+                          {/* Title */}
+                          <h3 className="text-xl font-bold text-gray-300 tracking-tight drop-shadow-lg mb-2 transition-colors duration-300 ease-out group-hover:text-gray-200">
+                            {review.title}
+                          </h3>
 
-                        {/* Tag */}
-                        {review.tag && (
-                          <div
-                            className="inline-flex items-center gap-2 px-2.5 py-1 
-                            rounded-full border border-gray-700/50
-                            shadow-lg backdrop-blur-sm
-                            transition-all duration-500 ease-out
-                            group-hover:border-cyan-500/30 group-hover:scale-[1.02]"
-                          >
-                            <span className="text-sm text-gray-300 flex items-center gap-1.5">
-                              <span className="transition-transform duration-500 ease-out group-hover:scale-110">
-                                {getTagInfo(review.tag).icon}
+                          {/* Tag */}
+                          {review.tag && (
+                            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-white/5 bg-white/5 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:border-cyan-500/30 group-hover:bg-white/10 group-hover:scale-[1.02]">
+                              <span className="text-xs text-gray-300 flex items-center gap-1.5">
+                                <span className="transition-transform duration-500 ease-out group-hover:scale-110">
+                                  {getTagInfo(review.tag).icon}
+                                </span>
+                                <span className="font-semibold tracking-wider uppercase text-[10px]">
+                                  {getTagInfo(review.tag).text}
+                                </span>
                               </span>
-                              <span className="font-medium">
-                                {getTagInfo(review.tag).text}
-                              </span>
-                            </span>
-                          </div>
-                        )}
+                            </div>
+                          )}
 
-                        {/* Info sekce */}
-                        <div className="relative mt-4">
-                          <div
-                            className="transition-all duration-700 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform
-                  opacity-0 max-h-0 translate-y-1 overflow-hidden
-                  group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75"
-                          >
-                            <div className="space-y-1">
-                              {Object.entries(review.info).map(
-                                ([key, value], index) => (
-                                  <div
-                                    key={index}
-                                    className="flex gap-2 text-sm text-gray-200 leading-relaxed
-                        [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]"
-                                  >
-                                    <span className="text-gray-400 min-w-17.5 font-medium">
-                                      {key.charAt(0).toUpperCase() +
-                                        key.slice(1)}
-                                      :
+                          {/* Info section */}
+                          <div className="relative mt-4">
+                            <div className="transition-all duration-700 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform opacity-0 max-h-0 translate-y-1 overflow-hidden group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75">
+                              <div className="space-y-1.5 pt-3 pb-2 mt-1">
+                                {Object.entries(review.info).map(([key, value], idx) => (
+                                  <div key={idx} className="flex gap-2 text-xs text-gray-300 leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                                    <span className="text-gray-400 min-w-17.5 font-semibold uppercase tracking-wider text-[10px]">
+                                      {key}:
                                     </span>
-                                    <span className="text-gray-300 wrap-break-word flex-1">
+                                    <span className="text-gray-300 break-all flex-1 font-medium">
                                       {value}
                                     </span>
                                   </div>
-                                ),
-                              )}
+                                ))}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Spodní část s hodnocením a tlačítkem */}
-                      <div className="relative flex items-end justify-between mt-4 h-10">
-                        {/* Hodnocení s animací */}
-                        <div
-                          className={`
-      absolute transform transition-all duration-700 ease-in-out
-      ${review.review ? "right-0 group-hover:left-0 group-hover:right-auto" : "right-0"}
-    `}
-                        >
-                          <div className="flex items-center gap-2.5">
-                            {/* Hvězdičky */}
+                        {/* Bottom row: Rating & button with transition (no border line) */}
+                        <div className="relative flex items-center w-full h-10 mt-auto overflow-hidden">
+                          {/* Rating display (translated smoothly on hover to avoid layout reflows) */}
+                          <div className={`absolute top-1/2 -translate-y-1/2 right-0 w-40 flex items-center gap-2.5 transition-transform duration-500 ease-out transform ${
+                            review.review 
+                              ? "group-hover:-translate-x-37.5" 
+                              : ""
+                          }`}>
+                            {/* Stars */}
                             <div className="relative flex items-center">
-                              {/* Šedé hvězdičky na pozadí */}
+                              {/* Background stars */}
                               <span className="flex gap-1">
                                 {[1, 2, 3, 4, 5].map((star) => (
-                                  <svg
-                                    key={`bg-${star}`}
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                                    className="text-gray-700/60"
-                                  >
+                                  <svg key={`bg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-white/10">
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                   </svg>
                                 ))}
                               </span>
 
-                              {/* Žluté hvězdičky přes ně */}
-                              <span
-                                className="absolute top-0 left-0 flex gap-1 overflow-hidden"
-                                style={{
-                                  width: `${(parseFloat(review.rating) / 2 / 5) * 100}%`,
-                                }}
-                              >
+                              {/* Foreground stars */}
+                              <span className="absolute top-0 left-0 flex gap-1 overflow-hidden" style={{ width: `${(parseFloat(review.rating) / 2 / 5) * 100}%` }}>
                                 {[1, 2, 3, 4, 5].map((star) => (
-                                  <svg
-                                    key={`fg-${star}`}
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="currentColor"
-                                    className="shrink-0 text-yellow-400 group-hover:text-yellow-300 transition-colors duration-500"
-                                    style={{
-                                      filter:
-                                        "drop-shadow(0 0 4px rgba(250, 204, 21, 0.7))",
-                                    }}
-                                  >
+                                  <svg key={`fg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-yellow-500 group-hover:text-yellow-400 transition-colors duration-500" style={{ filter: "drop-shadow(0 0 4px rgba(234, 179, 8, 0.5))" }}>
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                   </svg>
                                 ))}
                               </span>
                             </div>
 
-                            {/* Oddělovač */}
-                            <span className="w-px h-4 bg-gray-700/80 rounded-full" />
+                            <span className="w-px h-3 bg-white/10 rounded-full" />
 
-                            {/* Číslo hodnocení */}
                             <div className="flex items-baseline gap-0.5">
-                              <span
-                                className="text-base font-bold tabular-nums text-yellow-400 
-            group-hover:text-yellow-300 transition-colors duration-500
-            [text-shadow:0_0_12px_rgba(250,204,21,0.45)]"
-                              >
+                              <span className="text-base font-extrabold tabular-nums text-yellow-500 group-hover:text-yellow-400 transition-colors duration-500 [text-shadow:0_0_8px_rgba(234,179,8,0.3)]">
                                 {review.rating}
                               </span>
-                              <span className="text-xs text-gray-500 font-medium">
-                                /10
-                              </span>
+                              <span className="text-xs text-gray-500 font-bold">/10</span>
                             </div>
                           </div>
-                        </div>
 
-                        {/* Tlačítko recenze */}
-                        {review.review && (
-                          <a
-                            href={review.review}
-                            className="absolute right-0 transform transition-all duration-600 ease-out
-        text-cyan-400 hover:text-cyan-300 text-sm font-semibold
-        bg-black/30 hover:bg-black/50 backdrop-blur-sm 
-        px-3.5 py-1.5 rounded-full
-        border border-cyan-500/20 hover:border-cyan-500/40
-        shadow-lg hover:shadow-cyan-500/20
-        opacity-0 translate-x-3
-        group-hover:opacity-100 group-hover:translate-x-0
-        focus:outline-none focus:ring-2 focus:ring-cyan-500/40
-        flex items-center gap-1.5"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            Read review
-                            <svg
-                              width="12"
-                              height="12"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                          </a>
-                        )}
+                          {/* Read review action (slides in from the right boundary) */}
+                          {review.review && (
+                            <div className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center gap-1 text-cyan-400 group-hover:text-cyan-300 text-xs font-bold bg-white/5 group-hover:bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-white/5 group-hover:border-cyan-500/30 shadow-md transition-all duration-500 ease-out transform translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                              <span>Read review</span>
+                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-0.5">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                              </svg>
+                            </div>
+                          )}
+                        </div>
                       </div>
+                    </>
+                  );
+
+                  const cardClass = "group relative p-5 bg-gray-900/60 backdrop-blur-md rounded-xl shadow-2xl border border-white/5 overflow-hidden transition-all duration-500 ease-out select-none will-change-transform hover:scale-[1.02] hover:shadow-cyan-950/20 hover:border-cyan-500/30 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 flex flex-col justify-between";
+
+                  return review.review ? (
+                    <a
+                      key={index}
+                      href={review.review}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cardClass}
+                    >
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <div
+                      key={index}
+                      className={cardClass}
+                    >
+                      {cardContent}
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
@@ -386,248 +319,196 @@ export const Games = () => {
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {" "}
-              {/* p-5 pridat copy tlacitko pro values */}
-              {games.map((game) => (
-                <div
-                  key={game.id}
-                  tabIndex={0}
-                  className={`
-        group relative p-6 bg-black/70 backdrop-blur-xl rounded-2xl 
-        border border-gray-900 overflow-hidden
-        transition-all duration-500 ease-out will-change-transform
-        hover:scale-[1.02] hover:border-cyan-500/20 
-        focus:outline-none focus:ring-3 focus:ring-blue-500/40
-        active:scale-[0.99] active:shadow-[0_0_30px_rgba(6,182,212,0.1)]
-        select-none cursor-pointer shadow-2xl hover:shadow-3xl
-        motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.99]
-        ${showSettings === game.id ? "ring-2 ring-blue-500/40" : ""}
-      `}
-                  onClick={() => toggleSettings(game.id)}
-                  style={{
-                    backgroundImage: `linear-gradient(165deg,
-          rgba(0,0,0,0.97) 0%,
-          rgba(0,0,0,0.92) 40%,
-          rgba(0,0,0,0.85) 100%), 
-          url(${game.image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    willChange: "transform, opacity",
-                  }}
-                >
-                  <div
-                    className="absolute inset-0 pointer-events-none rounded-2xl opacity-60
-                   bg-linear-to-br from-black/90 via-black/70 to-transparent 
-                   transition-opacity duration-700 group-hover:opacity-40
-                   group-hover:via-black/60
-                   motion-safe:transition-all"
-                  />
+            {/* Ranks & Settings — full-width dashboard panel */}
+            <div className="rounded-2xl border border-white/[0.06] bg-[#0a0a0c]/80 backdrop-blur-xl overflow-hidden shadow-xl">
+              {games.map((game, idx) => {
+                const hasSettings = game.settings && Object.keys(game.settings).length > 0;
+                const isOpen = showSettings === game.id;
+                const isLast = idx === games.length - 1;
+                const settingEntries = Object.entries(game.settings);
+                return (
+                  <div key={game.id} className={!isLast ? "border-b border-white/[0.04]" : ""}>
 
-                  <div className="relative z-10 flex flex-col gap-2">
-                    <div className="flex items-start justify-between">
-                      <div className="flex gap-4 items-start flex-1">
-                        <div className="relative group/image perspective">
-                          <img
-                            src={game.image}
-                            alt={game.name}
-                            width="64"
-                            height="64"
-                            fetchPriority="high"
-                            className="w-16 h-16 rounded-xl shadow-lg object-cover
-                         transition-all duration-500 transform
-                         group-hover/image:scale-105 group-hover/image:shadow-cyan-500/20
-                         group-hover/image:rotate-3 group-hover/image:-translate-y-0.5
-                         motion-safe:transform-gpu motion-safe:backface-visibility-hidden border-2 border-white/10 group-hover:scale-105"
-                            loading="lazy"
-                            draggable={false}
-                            style={{ userSelect: "none" }}
-                            onClick={(e) => e.stopPropagation()}
-                          />
-                          <div
-                            className="absolute inset-0 rounded-xl bg-linear-to-br 
-                           from-black/20 to-transparent opacity-0 
-                           group-hover/image:opacity-100 transition-opacity duration-300"
-                          />
-                        </div>
+                    {/* ── Main row ── */}
+                    <div
+                      tabIndex={hasSettings ? 0 : -1}
+                      role={hasSettings ? "button" : undefined}
+                      onClick={hasSettings ? () => toggleSettings(game.id) : undefined}
+                      onKeyDown={hasSettings ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleSettings(game.id); } } : undefined}
+                      className={[
+                        "group relative flex items-center gap-5 px-6 py-5 overflow-hidden",
+                        "transition-colors duration-150 select-none",
+                        "focus:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-cyan-500/40",
+                        hasSettings ? "cursor-pointer hover:bg-white/[0.018] active:bg-white/[0.025]" : "cursor-default",
+                        isOpen ? "bg-white/[0.025]" : "",
+                      ].join(" ")}
+                    >
+                      {/* Subtle game art background — GPU composited, no repaint */}
+                      <img
+                        src={game.image}
+                        alt=""
+                        aria-hidden
+                        width={800} height={200}
+                        className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.08] pointer-events-none select-none will-change-opacity"
+                        style={{ transform: "translateZ(0)" }}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      {/* Dark gradient overlay so text stays readable */}
+                      <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0c]/95 via-[#0a0a0c]/80 to-[#0a0a0c]/60 pointer-events-none" />
 
-                        <div className="flex-1 min-w-0">
-                          <h3
-                            className="text-xl font-bold text-transparent bg-clip-text
-                         bg-linear-to-r from-white to-white/90
-                         transition-all duration-300
-                         group-hover:from-cyan-200 group-hover:to-white
-                         motion-safe:transform drop-shadow select-none"
-                          >
-                            {" "}
-                            {/* tracking-tight */}
-                            {game.name}
-                          </h3>
-                          <p
-                            className="text-sm text-gray-400 mt-0.5 truncate
-                         transition-colors duration-300
-                         group-hover:text-gray-300"
-                          >
-                            {game.platform}
-                          </p>
+                      {/* Thumbnail with hover zoom on inner img only */}
+                      <div className="relative shrink-0 w-13 h-13 rounded-xl overflow-hidden border border-white/[0.1] shadow-lg">
+                        <img
+                          src={game.image}
+                          alt={game.name}
+                          width={52} height={52}
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                          loading="lazy"
+                          decoding="async"
+                          draggable={false}
+                          style={{ willChange: "transform" }}
+                        />
+                      </div>
 
-                          <div
-                            className="inline-flex items-center gap-2 mt-2 px-3 py-1
-                           bg-black/30 rounded-full border border-white/10
-                           backdrop-blur-sm transition-all duration-300
-                           group-hover:border-cyan-500/30
-                           group-hover:bg-black/40
-                           group-hover:translate-x-1
-                           motion-safe:transform-gpu"
-                          >
+                      {/* Name + platform */}
+                      <div className="relative flex-1 min-w-0">
+                        <p className="text-[15px] font-semibold text-gray-300 group-hover:text-gray-200 transition-colors duration-150 truncate leading-snug">
+                          {game.name}
+                        </p>
+                        <p className="text-xs text-gray-400 truncate mt-0.5 leading-snug">
+                          {game.platform}
+                        </p>
+                      </div>
+
+                      {/* Rank badges — all equal blue-400 style */}
+                      <div className="relative shrink-0 hidden sm:flex items-center gap-2 flex-wrap justify-end">
+                        {game.ranks.map((r, ri) => (
+                          <div key={ri} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.08] transition-colors duration-150 group-hover:border-blue-400/30 group-hover:bg-blue-400/[0.07]">
                             <img
-                              src={game.rankIcon}
-                              alt={game.rank}
-                              width="20"
-                              height="20"
-                              className="w-6 h-6 transition-transform duration-500
-                           group-hover:scale-110 group-hover:rotate-6
-                           motion-safe:transform-gpu drop-shadow"
+                              src={r.icon}
+                              alt={r.label}
+                              width={18} height={18}
+                              className="w-[18px] h-[18px] object-contain"
                               loading="lazy"
+                              decoding="async"
                               draggable={false}
-                              style={{ userSelect: "none" }}
                             />
-                            <span
-                              className="text-sm font-semibold bg-linear-to-r
-                              from-sky-400 to-cyan-300 bg-clip-text text-transparent
-                              transition-all duration-300
-                              group-hover:from-cyan-300 group-hover:to-blue-300"
-                            >
-                              {game.rank}
+                            <span className="text-xs font-bold text-blue-400 whitespace-nowrap">
+                              {r.label}
                             </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Chevron */}
+                      {hasSettings ? (
+                        <div className={[
+                          "relative shrink-0 w-7 h-7 flex items-center justify-center rounded-lg border transition-colors duration-150",
+                          isOpen
+                            ? "bg-red-500/[0.08] border-red-500/20 text-red-400"
+                            : "bg-white/[0.03] border-white/[0.06] text-gray-600 group-hover:text-cyan-400 group-hover:border-cyan-500/20",
+                        ].join(" ")}>
+                          <svg
+                            className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      ) : (
+                        <div className="shrink-0 w-7 h-7" />
+                      )}
+                    </div>
+
+                    {/* ── Drawer: CSS grid-rows trick — no max-h jank ── */}
+                    {hasSettings && (
+                      <div
+                        className="grid transition-[grid-template-rows] duration-300 ease-in-out"
+                        style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
+                      >
+                        <div className="overflow-hidden">
+                          <div
+                            ref={(el) => { drawerRefs.current[game.id] = el; }}
+                            className="border-t border-white/4 bg-black/25 px-6 pt-4 pb-5"
+                          >
+                            {/* Settings rows — inline key:value for short, code block for long */}
+                            <div className="space-y-1.5">
+                              {settingEntries.map(([key, value]) => {
+                                const isLong = isLongSetting(key, value);
+                                const uniqueId = `${game.id}-${key}`;
+                                const isCopied = copiedId === uniqueId;
+
+                                if (isLong) {
+                                  // Code block style for long values
+                                  return (
+                                    <div
+                                      key={key}
+                                      className="group/s rounded-lg border border-white/[0.05] bg-white/[0.02] hover:border-cyan-500/[0.12] transition-colors duration-150 overflow-hidden"
+                                    >
+                                      <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.04]">
+                                        <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-gray-600">{key}</span>
+                                        <button
+                                          onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
+                                          className={[
+                                            "p-0.5 rounded transition-all duration-150 cursor-pointer",
+                                            isCopied
+                                              ? "text-emerald-400"
+                                              : "text-gray-600 hover:text-cyan-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
+                                          ].join(" ")}
+                                          title={`Copy ${key}`} aria-label={`Copy ${key}`}
+                                        >
+                                          {isCopied
+                                            ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
+                                            : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                                          }
+                                        </button>
+                                      </div>
+                                      <p className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all select-text ${isCopied ? "text-emerald-400" : "text-gray-400"}`}>
+                                        {isCopied ? "Copied!" : value}
+                                      </p>
+                                    </div>
+                                  );
+                                }
+
+                                // Inline row for short values
+                                return (
+                                  <div
+                                    key={key}
+                                    className="group/s flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-white/[0.02] transition-colors duration-150"
+                                  >
+                                    <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-gray-600 shrink-0">{key}</span>
+                                    <div className="flex items-center gap-2 min-w-0">
+                                      <span className={`text-xs font-medium truncate ${isCopied ? "text-emerald-400" : "text-gray-300"}`}>
+                                        {isCopied ? "Copied!" : value}
+                                      </span>
+                                      <button
+                                        onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
+                                        className={[
+                                          "shrink-0 p-0.5 rounded transition-all duration-150 cursor-pointer",
+                                          isCopied
+                                            ? "text-emerald-400 opacity-100"
+                                            : "text-gray-600 hover:text-cyan-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
+                                        ].join(" ")}
+                                        title={`Copy ${key}`} aria-label={`Copy ${key}`}
+                                      >
+                                        {isCopied
+                                          ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
+                                          : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                                        }
+                                      </button>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
                           </div>
                         </div>
                       </div>
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleSettings(game.id);
-                        }}
-                        className={`
-              p-2.5 rounded-full transition-all duration-300
-              backdrop-blur-sm transform
-              hover:scale-110 active:scale-95
-              focus:outline-none focus:ring-2 focus:ring-cyan-500/50
-              motion-safe:hover:scale-110 motion-safe:active:scale-95 cursor-pointer
-              ${showSettings === game.id
-                            ? "bg-red-500/20 hover:bg-red-500/30 text-red-400"
-                            : "bg-blue-500/20 hover:bg-cyan-500/30 text-cyan-400"
-                          }
-            `}
-                        aria-label={
-                          showSettings === game.id
-                            ? "Hide settings"
-                            : "Show settings"
-                        }
-                        tabIndex={0}
-                      >
-                        <svg
-                          className={`w-5 h-5 transition-transform duration-500 ease-out
-                       ${showSettings === game.id ? "rotate-180" : "rotate-0"}
-                       motion-safe:transform-gpu`}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M19 9l-7 7-7-7"
-                            className="transition-all duration-300
-                         group-hover:stroke-current"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-
-                    <div
-                      className={`
-            overflow-hidden transition-all duration-600 ease-in-out
-            motion-safe:transform-gpu
-            ${showSettings === game.id
-                          ? "max-h-125 opacity-100 translate-y-0 scale-100"
-                          : "max-h-0 opacity-0 -translate-y-4 scale-95"
-                        }
-          `}
-                    >
-                      <div
-                        className="bg-black/40 backdrop-blur-sm rounded-xl p-4
-                       border border-white/10 transition-all duration-300
-                       hover:border-cyan-500/30 hover:bg-black/50
-                       group-hover:shadow-lg"
-                      >
-                        <h4
-                          className="text-sm font-medium text-cyan-400 mb-3
-                        transition-colors duration-300
-                        group-hover:text-cyan-300"
-                        >
-                          Settings & Information
-                        </h4>
-                        <div className="space-y-2.25">
-                          {Object.entries(game.settings).map(([key, value]) => (
-                            <div
-                              key={key}
-                              className="flex text-sm group/item items-center gap-2 cursor-auto"
-                            >
-                              <span
-                                className="text-gray-400 font-medium min-w-25
-        transition-colors duration-300
-        group-hover/item:text-gray-300"
-                              >
-                                {key}:
-                              </span>
-                              <span
-                                className="text-gray-300 wrap-break-word flex-1
-        transition-colors duration-300 
-        group-hover/item:text-gray-200"
-                              >
-                                {value}
-                              </span>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  navigator.clipboard.writeText(value);
-                                }}
-                                className="p-1.5 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20
-        text-cyan-400 hover:text-cyan-300 transition-all duration-200
-        opacity-0 group-hover/item:opacity-100 active:scale-95
-        focus:outline-none focus:ring-2 focus:ring-cyan-500/50 cursor-pointer"
-                                aria-label={`Copy ${key}`}
-                                title="Copy"
-                              >
-                                <svg
-                                  className="w-3.5 h-3.5"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeWidth={2}
-                                >
-                                  <rect
-                                    x="9"
-                                    y="9"
-                                    width="13"
-                                    height="13"
-                                    rx="2"
-                                    ry="2"
-                                  />
-                                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                                </svg>
-                              </button>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
+                    )}
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </RevealOnScroll>
