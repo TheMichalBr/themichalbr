@@ -184,7 +184,7 @@ export const Games = () => {
         .rank-tip:hover::after { opacity: 1; }
       `}</style>
       {/*  bg-gradient-to-r from-blue-500 via-sky-600 to-cyan-400  */}
-      <div className="max-w-6xl mx-auto space-y-16 px-4">
+      <div className="w-full max-w-6xl mx-auto space-y-16 px-4">
         <RevealOnScroll>
           <div>
             <div className="text-center mb-10">
@@ -204,38 +204,38 @@ export const Games = () => {
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
             </div>
 
-            <div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {reviews.slice(0, 3).map((review, index) => {
+            <div className="w-full flex justify-center">
+              <div className="flex flex-col md:flex-row gap-8 w-full justify-between items-stretch">
+                {reviews.slice(0, 2).map((review, index) => {
                   const cardContent = (
                     <>
-                      {/* Performance-optimized background image */}
+                      {/* Background image with smooth transition */}
                       <img
                         src={review.image}
                         alt=""
-                        className="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-1200 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.05] pointer-events-none will-change-transform transform-gpu"
+                        className="absolute inset-0 w-full h-full object-cover opacity-40 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.06] pointer-events-none select-none"
                         loading="lazy"
                         decoding="async"
                       />
-                      {/* Gradient overlay */}
-                      <div className="absolute inset-0 bg-linear-to-br from-black/90 via-black/75 to-black/60 pointer-events-none" />
+                      {/* Dark gradient overlay */}
+                      <div className="absolute inset-0 bg-linear-to-br from-black/90 via-black/80 to-black/65 pointer-events-none" />
 
                       {/* Main Content */}
                       <div className="relative z-10 flex flex-col h-full justify-between gap-4">
                         <div>
                           {/* Title */}
-                          <h3 className="text-xl font-bold text-gray-300 tracking-tight drop-shadow-lg mb-2 transition-colors duration-300 ease-out group-hover:text-gray-200">
+                          <h3 className="text-lg md:text-xl font-bold text-gray-300 tracking-tight drop-shadow-lg mb-2 transition-colors duration-300 ease-out group-hover:text-blue-400">
                             {review.title}
                           </h3>
 
                           {/* Tag */}
                           {review.tag && (
-                            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-white/5 bg-white/5 shadow-lg backdrop-blur-sm transition-all duration-300 group-hover:border-cyan-500/30 group-hover:bg-white/10 group-hover:scale-[1.02]">
+                            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-white/10 bg-white/5 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:border-blue-500/30 group-hover:bg-blue-500/10">
                               <span className="text-xs text-gray-300 flex items-center gap-1.5">
-                                <span className="transition-transform duration-500 ease-out group-hover:scale-110">
+                                <span className="transition-transform duration-300 ease-out group-hover:scale-110">
                                   {getTagInfo(review.tag).icon}
                                 </span>
-                                <span className="font-semibold tracking-wider uppercase text-[10px]">
+                                <span className="font-semibold tracking-wider uppercase text-[10px] text-blue-400">
                                   {getTagInfo(review.tag).text}
                                 </span>
                               </span>
@@ -244,7 +244,7 @@ export const Games = () => {
 
                           {/* Info section */}
                           <div className="relative mt-4">
-                            <div className="transition-all duration-700 ease-[cubic-bezier(0.4, 0, 0.2, 1)] transform opacity-0 max-h-0 translate-y-1 overflow-hidden group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75">
+                            <div className="transition-all duration-700 ease-in-out transform opacity-0 max-h-0 translate-y-1 overflow-hidden group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75">
                               <div className="space-y-1.5 pt-3 pb-2 mt-1">
                                 {Object.entries(review.info).map(([key, value], idx) => (
                                   <div key={idx} className="flex gap-2 text-xs text-gray-300 leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
@@ -261,9 +261,9 @@ export const Games = () => {
                           </div>
                         </div>
 
-                        {/* Bottom row: Rating & button with transition (no border line) */}
+                        {/* Bottom row: Rating & button */}
                         <div className="relative flex items-center w-full h-10 mt-auto overflow-hidden">
-                          {/* Rating display (translated smoothly on hover to avoid layout reflows) */}
+                          {/* Rating display */}
                           <div className={`absolute top-1/2 -translate-y-1/2 right-0 w-40 flex items-center gap-2.5 transition-transform duration-500 ease-out transform ${
                             review.review 
                               ? "group-hover:-translate-x-37.5" 
@@ -271,7 +271,6 @@ export const Games = () => {
                           }`}>
                             {/* Stars */}
                             <div className="relative flex items-center">
-                              {/* Background stars */}
                               <span className="flex gap-1">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                   <svg key={`bg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-white/10">
@@ -279,8 +278,6 @@ export const Games = () => {
                                   </svg>
                                 ))}
                               </span>
-
-                              {/* Foreground stars */}
                               <span className="absolute top-0 left-0 flex gap-1 overflow-hidden" style={{ width: `${(parseFloat(review.rating) / 2 / 5) * 100}%` }}>
                                 {[1, 2, 3, 4, 5].map((star) => (
                                   <svg key={`fg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-yellow-500 group-hover:text-yellow-400 transition-colors duration-500" style={{ filter: "drop-shadow(0 0 4px rgba(234, 179, 8, 0.5))" }}>
@@ -300,9 +297,9 @@ export const Games = () => {
                             </div>
                           </div>
 
-                          {/* Read review action (slides in from the right boundary) */}
+                          {/* Read review action */}
                           {review.review && (
-                            <div className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center gap-1 text-cyan-400 group-hover:text-cyan-300 text-xs font-bold bg-white/5 group-hover:bg-cyan-500/10 px-3 py-1.5 rounded-lg border border-white/5 group-hover:border-cyan-500/30 shadow-md transition-all duration-500 ease-out transform translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <div className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center gap-1 text-blue-400 group-hover:text-blue-300 text-xs font-semibold bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/30 shadow-md transition-all duration-500 ease-out transform translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
                               <span>Read review</span>
                               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-0.5">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -314,7 +311,7 @@ export const Games = () => {
                     </>
                   );
 
-                  const cardClass = "group relative p-5 bg-gray-900/60 backdrop-blur-md rounded-xl shadow-2xl border border-white/5 overflow-hidden transition-all duration-500 ease-out select-none will-change-transform hover:scale-[1.02] hover:shadow-cyan-950/20 hover:border-cyan-500/30 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 flex flex-col justify-between";
+                  const cardClass = "group relative p-6 bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-550 ease-[cubic-bezier(0.16,1,0.3,1)] select-none hover:shadow-[0_0_25px_rgba(59,130,246,0.15)] hover:-translate-y-1 hover:border-blue-500/30 hover:bg-[#0f0f12]/90 focus:outline-none focus:ring-2 focus:ring-blue-500/40 flex flex-col justify-between flex-1 w-full md:w-[calc(50%-16px)] min-w-0";
 
                   return review.review ? (
                     <a
