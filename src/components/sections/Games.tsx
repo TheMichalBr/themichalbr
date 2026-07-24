@@ -344,13 +344,13 @@ export const Games = () => {
             <div className="flex items-center gap-3 mb-5 select-none">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
               <span className="text-xs text-gray-600 uppercase tracking-widest">Ranks &amp; Settings</span>
-              <span className="text-[9px] font-bold text-gray-700 bg-white/[0.04] border border-white/[0.06] rounded-full px-2 py-0.5">
+              <span className="text-[9px] font-bold text-gray-700 bg-white/4 border border-white/6 rounded-full px-2 py-0.5">
                 {games.length}
               </span>
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
               <button
                 onClick={toggleExpandAll}
-                className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full border border-white/[0.06] bg-white/[0.03] text-gray-500 hover:text-gray-300 hover:border-white/10 transition-colors duration-150 cursor-pointer"
+                className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full border border-white/6 bg-white/3 text-gray-500 hover:text-gray-300 hover:border-white/10 transition-colors duration-150 cursor-pointer"
               >
                 {expandAll ? "Collapse All" : "Expand All"}
                 <svg className={`w-2.5 h-2.5 transition-transform duration-300 ${expandAll ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
@@ -360,14 +360,14 @@ export const Games = () => {
             </div>
 
             {/* Ranks & Settings — full-width dashboard panel */}
-            <div className="rounded-2xl border border-white/[0.06] bg-[#0a0a0c] overflow-hidden shadow-xl">
+            <div className="rounded-2xl border border-white/6 bg-[#0a0a0c] overflow-hidden shadow-xl">
               {games.map((game, idx, arr) => {
                 const hasSettings = game.settings && Object.keys(game.settings).length > 0;
                 const isOpen = expandAll ? hasSettings : showSettings === game.id;
                 const isLast = idx === arr.length - 1;
                 const settingEntries = Object.entries(game.settings);
                 return (
-                  <div key={game.id} className={`isolate${!isLast ? " border-b border-white/[0.04]" : ""}`}>
+                  <div key={game.id} className={`isolate${!isLast ? " border-b border-white/4" : ""}`}>
 
                     {/* ── Main row ── */}
                     <div
@@ -379,8 +379,8 @@ export const Games = () => {
                         "group relative flex items-center gap-5 px-6 py-5 overflow-hidden",
                         "transition-colors duration-150 select-none",
                         "focus:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-cyan-500/40",
-                        hasSettings ? "cursor-pointer hover:bg-white/[0.018] active:bg-white/[0.025]" : "cursor-default",
-                        isOpen ? "bg-white/[0.025]" : "",
+                        hasSettings ? "cursor-pointer hover:bg-white/[0.018] active:bg-white/2.5" : "cursor-default",
+                        isOpen ? "bg-white/2.5" : "",
                       ].join(" ")}
                     >
                       {/* Subtle game art background — GPU composited, no repaint */}
@@ -397,7 +397,7 @@ export const Games = () => {
                       <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0c]/95 via-[#0a0a0c]/80 to-[#0a0a0c]/60 pointer-events-none" />
 
                       {/* Thumbnail with hover zoom on inner img only */}
-                      <div className="relative shrink-0 w-13 h-13 rounded-xl overflow-hidden border border-white/[0.1] shadow-lg">
+                      <div className="relative shrink-0 w-13 h-13 rounded-xl overflow-hidden border border-white/10 shadow-lg">
                         <img
                           src={game.image}
                           alt={game.name}
@@ -425,14 +425,14 @@ export const Games = () => {
                         {game.ranks.map((r, ri) => (
                           <div
                             key={ri}
-                            className="rank-tip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.08] transition-colors duration-150 group-hover:border-blue-400/30 group-hover:bg-blue-400/[0.07]"
+                            className="rank-tip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/8 transition-colors duration-150 group-hover:border-blue-400/30 group-hover:bg-blue-400/[0.07]"
                             data-tip={r.label}
                           >
                             <img
                               src={r.icon}
                               alt={r.label}
                               width={18} height={18}
-                              className="w-[18px] h-[18px] object-contain"
+                              className="w-4.5 h-4.5 object-contain"
                               loading="lazy"
                               decoding="async"
                               draggable={false}
@@ -449,8 +449,8 @@ export const Games = () => {
                         <div className={[
                           "relative shrink-0 w-7 h-7 flex items-center justify-center rounded-lg border transition-colors duration-150",
                           isOpen
-                            ? "bg-red-500/[0.08] border-red-500/20 text-red-400"
-                            : "bg-white/[0.03] border-white/[0.06] text-gray-600 group-hover:text-cyan-400 group-hover:border-cyan-500/20",
+                            ? "bg-red-500/8 border-red-500/20 text-red-400"
+                            : "bg-white/3 border-white/6 text-gray-600 group-hover:text-cyan-400 group-hover:border-cyan-500/20",
                         ].join(" ")}>
                           <svg
                             className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
@@ -473,7 +473,7 @@ export const Games = () => {
                         <div className="overflow-hidden">
                           <div
                             ref={(el) => { drawerRefs.current[game.id] = el; }}
-                            className="border-t border-white/[0.04] bg-black/25 px-6 pt-4 pb-3"
+                            className="border-t border-white/4 bg-black/25 px-6 pt-4 pb-3"
                           >
                             {/* Scroll wrapper with fade indicator */}
                             <div className="relative">
@@ -491,9 +491,9 @@ export const Games = () => {
                                       return (
                                         <div
                                           key={key}
-                                          className="group/s rounded-lg border border-white/[0.05] bg-white/[0.02] hover:border-cyan-500/[0.12] transition-colors duration-150 overflow-hidden"
+                                          className="group/s rounded-lg border border-white/5 bg-white/2 hover:border-cyan-500/12 transition-colors duration-150 overflow-hidden"
                                         >
-                                          <div className="flex items-center justify-between px-3 py-2 border-b border-white/[0.04]">
+                                          <div className="flex items-center justify-between px-3 py-2 border-b border-white/4">
                                             <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-gray-600">{key}</span>
                                             <button
                                               onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
@@ -522,7 +522,7 @@ export const Games = () => {
                                     return (
                                       <div
                                         key={key}
-                                        className="group/s flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-white/[0.02] transition-colors duration-150"
+                                        className="group/s flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-white/2 transition-colors duration-150"
                                       >
                                         <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-gray-600 shrink-0">{key}</span>
                                         <div className="flex items-center gap-2 min-w-0">
@@ -551,7 +551,7 @@ export const Games = () => {
                                 </div>
                               </div>
                               {/* Scroll fade indicator */}
-                              <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+                              <div className="absolute bottom-0 left-0 right-0 h-8 bg-linear-to-t from-black/50 to-transparent pointer-events-none" />
                             </div>
                           </div>
                         </div>
