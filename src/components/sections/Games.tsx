@@ -398,7 +398,7 @@ export const Games = () => {
                         <img
                           src={game.image}
                           alt={game.name}
-                          width={52} height={52}
+                          width={48} height={48}
                           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                           loading="lazy"
                           decoding="async"
@@ -412,7 +412,7 @@ export const Games = () => {
                         <p className="text-[15px] font-semibold text-gray-300 group-hover:text-gray-200 transition-colors duration-150 truncate leading-snug">
                           {game.name}
                         </p>
-                        <p className="text-xs text-gray-400 truncate mt-0.5 leading-snug">
+                        <p className="text-xs text-gray-400/80 truncate mt-0.5 leading-snug">
                           {game.platform}
                         </p>
                       </div>
