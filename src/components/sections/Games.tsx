@@ -409,7 +409,7 @@ export const Games = () => {
 
                       {/* Name + platform */}
                       <div className="relative flex-1 min-w-0">
-                        <p className="text-[15px] font-semibold text-gray-300 group-hover:text-gray-200 transition-colors duration-150 truncate leading-snug">
+                        <p className="text-[15px] font-bold text-gray-300 group-hover:text-blue-400 transition-colors duration-300 truncate leading-snug">
                           {game.name}
                         </p>
                         <p className="text-xs text-gray-400/80 truncate mt-0.5 leading-snug">
@@ -422,7 +422,7 @@ export const Games = () => {
                         {game.ranks.map((r, ri) => (
                           <div
                             key={ri}
-                            className="rank-tip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/8 transition-colors duration-150 group-hover:border-blue-400/30 group-hover:bg-blue-400/[0.07]"
+                            className="rank-tip inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 transition-all duration-300 group-hover:border-blue-500/30 group-hover:bg-blue-500/10"
                             data-tip={r.label}
                           >
                             <img
@@ -434,7 +434,7 @@ export const Games = () => {
                               decoding="async"
                               draggable={false}
                             />
-                            <span className="text-xs font-bold text-blue-400 whitespace-nowrap">
+                            <span className="text-xs font-semibold text-blue-400 whitespace-nowrap">
                               {r.label}
                             </span>
                           </div>
