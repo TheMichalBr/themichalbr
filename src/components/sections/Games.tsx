@@ -357,7 +357,7 @@ export const Games = () => {
             </div>
 
             {/* Ranks & Settings — full-width dashboard panel */}
-            <div className="rounded-2xl border border-white/6 bg-[#0a0a0c] overflow-hidden shadow-xl">
+            <div className="rounded-2xl border border-white/6 bg-[#0a0a0c]/85 overflow-hidden backdrop-blur-xl shadow-xl">
               {games.map((game, idx, arr) => {
                 const hasSettings = game.settings && Object.keys(game.settings).length > 0;
                 const isOpen = expandAll ? hasSettings : showSettings === game.id;
