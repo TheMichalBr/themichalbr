@@ -198,7 +198,7 @@ export const Games = () => {
 
             <div className="flex items-center gap-4 mb-10 select-none">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
-              <span className="text-xs text-gray-600 uppercase tracking-widest">
+              <span className="text-xs text-gray-600 uppercase tracking-widest font-semibold">
                 Latest reviews
               </span>
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
@@ -340,7 +340,7 @@ export const Games = () => {
             {/* ── Ranks header with game count badge + Expand All ── */}
             <div className="flex items-center gap-3 mb-5 select-none">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
-              <span className="text-xs text-gray-600 uppercase tracking-widest">Ranks &amp; Settings</span>
+              <span className="text-xs text-gray-600 uppercase tracking-widest font-semibold">Ranks &amp; Settings</span>
               <span className="text-[9px] font-bold text-gray-700 bg-white/4 border border-white/6 rounded-full px-2 py-0.5">
                 {games.length}
               </span>
