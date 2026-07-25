@@ -278,7 +278,7 @@ export const Games = () => {
                         {/* Bottom row: Rating & button */}
                         <div className="relative flex items-center w-full h-10 mt-auto overflow-hidden">
                           {/* Rating display */}
-                          <div className={`absolute top-1/2 -translate-y-1/2 right-0 w-40 flex items-center gap-2.5 transition-transform duration-500 ease-out transform ${
+                          <div className={`absolute top-1/2 -translate-y-1/2 right-1 w-40 flex items-center gap-2.5 transition-transform duration-500 ease-out transform ${
                             review.review 
                               ? "md:group-hover:-translate-x-37.5" 
                               : ""
@@ -301,7 +301,7 @@ export const Games = () => {
                               </span>
                             </div>
 
-                            <span className="w-px h-3 bg-white/10 rounded-full" />
+                            <span className="w-px h-3 bg-white/15 rounded-full shrink-0" />
 
                             <div className="flex items-baseline gap-0.5">
                               <span className="text-base font-extrabold tabular-nums text-yellow-500 group-hover:text-yellow-400 transition-colors duration-500 [text-shadow:0_0_8px_rgba(234,179,8,0.3)] select-none">
