@@ -340,6 +340,7 @@ export const Games = () => {
                   ) : (
                     <div
                       key={index}
+                      tabIndex={0}
                       className={cardClass}
                     >
                       {cardContent}
