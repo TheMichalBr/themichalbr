@@ -488,6 +488,29 @@ export const Games = () => {
                             ref={(el) => { drawerRefs.current[game.id] = el; }}
                             className="border-t border-white/4 bg-black/30 px-6 pt-4 pb-3"
                           >
+                            {/* Rank badges — mobile only, shown inside drawer */}
+                            {game.ranks.length > 0 && (
+                              <div className="sm:hidden flex flex-wrap gap-1.5 mb-3 select-none">
+                                {game.ranks.map((r, ri) => (
+                                  <div
+                                    key={ri}
+                                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20"
+                                  >
+                                    <img
+                                      src={r.icon}
+                                      alt={r.label}
+                                      width={16} height={16}
+                                      className="w-4 h-4 object-contain"
+                                      loading="lazy"
+                                      decoding="async"
+                                      draggable={false}
+                                    />
+                                    <span className="text-[11px] font-semibold text-blue-400 whitespace-nowrap">{r.label}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
                             {/* Scroll wrapper with fade indicator */}
                             <div className="relative">
                               <div
