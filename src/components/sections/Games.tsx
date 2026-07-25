@@ -258,7 +258,7 @@ export const Games = () => {
 
                           {/* Info section */}
                           <div className="relative mt-4">
-                            <div className="transition-all duration-700 ease-in-out transform opacity-0 max-h-0 translate-y-1 overflow-hidden group-hover:opacity-100 group-hover:max-h-125 group-hover:translate-y-0 delay-75">
+                            <div className="transition-all duration-700 ease-in-out transform overflow-hidden opacity-100 max-h-125 translate-y-0 md:opacity-0 md:max-h-0 md:translate-y-1 md:group-hover:opacity-100 md:group-hover:max-h-125 md:group-hover:translate-y-0 delay-75">
                               <div className="space-y-1.5 pt-3 pb-2 mt-1">
                                 {Object.entries(review.info).map(([key, value], idx) => (
                                   <div key={idx} className="flex gap-2 text-xs text-gray-300 leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
@@ -280,7 +280,7 @@ export const Games = () => {
                           {/* Rating display */}
                           <div className={`absolute top-1/2 -translate-y-1/2 right-0 w-40 flex items-center gap-2.5 transition-transform duration-500 ease-out transform ${
                             review.review 
-                              ? "group-hover:-translate-x-37.5" 
+                              ? "md:group-hover:-translate-x-37.5" 
                               : ""
                           }`}>
                             {/* Stars */}
