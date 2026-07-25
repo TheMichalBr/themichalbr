@@ -9,6 +9,7 @@ import G4 from "/games/G_FORTNITE.webp";
 import G5 from "/games/G_VALORANT.webp";
 import G6 from "/games/G_R6X.webp";
 import G7 from "/games/G_CHESS.webp";
+import G_LOL from "/games/G_LOL.webp";
 
 import GR1a from "/games/G_CS2_FACEIT.webp";
 import GR1b from "/games/G_CS2_PREMIER.svg";
@@ -20,6 +21,7 @@ import GR5 from "/games/G_VALORANT_R.webp";
 import GR6 from "/games/G_R6X_R.webp";
 import GR7a from "/games/G_CHESS_BLITZ.svg";
 import GR7b from "/games/G_CHESS_BULLET.svg";
+import GR_LOL from "/games/G_LOL_R.webp";
 
 type GameSettings = Record<string, string>;
 
@@ -50,7 +52,7 @@ export const Games = () => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandAll, setExpandAll] = useState(false);
   const drawerRefs = useRef<Record<string, HTMLDivElement | null>>({});
-  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);;
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const toggleSettings = (gameId: string): void => {
     setExpandAll(false);
@@ -63,22 +65,23 @@ export const Games = () => {
   }, []);
 
   const handleCopy = (text: string, id: string): void => {
-    // Clear any pending reset from a previous copy click
     if (copyTimer.current) clearTimeout(copyTimer.current);
-    navigator.clipboard.writeText(text).then(() => {
-      setCopiedId(id);
-      copyTimer.current = setTimeout(() => {
-        setCopiedId(null);
-        copyTimer.current = null;
-      }, 2000);
-    }).catch(() => {
-      // Fallback: still show feedback even if clipboard API fails
-      setCopiedId(id);
-      copyTimer.current = setTimeout(() => {
-        setCopiedId(null);
-        copyTimer.current = null;
-      }, 2000);
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopiedId(id);
+        copyTimer.current = setTimeout(() => {
+          setCopiedId(null);
+          copyTimer.current = null;
+        }, 2000);
+      })
+      .catch(() => {
+        setCopiedId(id);
+        copyTimer.current = setTimeout(() => {
+          setCopiedId(null);
+          copyTimer.current = null;
+        }, 2000);
+      });
   };
 
   const isLongSetting = (_key: string, value: string): boolean => {
@@ -91,18 +94,20 @@ export const Games = () => {
       name: "Counter Strike 2",
       platform: "Steam | MichalBr",
       ranks: [
-        { label: "2,047", icon: GR1a },
-        { label: "22,987", icon: GR1b },
+        { label: "2.047", icon: GR1a },
+        { label: "22.987", icon: GR1b },
         { label: "Global Elite", icon: GR1c },
       ],
       image: G1,
       settings: {
-        Sensitivity: "2.52 | 0.95",
         Crosshair: "CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D",
         Viewmodel:
           "viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2",
-        Resolution: "1280 x 960 Stretched",
-        Quality: "Low quality",
+        Sensitivity: "2.52 | 1.00",
+        Resolution: "1280 x 960 - 4:3 Stretched",
+        Quality: "Mostly all set to Low",
+        Other:
+          "HUD scaling: 0.90, HUD color: by player color, Radar: 0.65 | 1.15 | 0.40 | 1.00",
       },
     },
     {
@@ -129,9 +134,17 @@ export const Games = () => {
       image: G4,
       settings: {
         Sensitivity: "5.0",
-        Quality: "Low, High Distance",
-        Resolution: "2560 x 1440",
+        Resolution: "2560 x 1440 - 16:9",
+        Quality: "All Low, except View Distance on High",
       },
+    },
+    {
+      id: "leagueoflegends",
+      name: "League of Legends",
+      platform: "Riot Games | MichalBr#UwU",
+      ranks: [{ label: "Silver IV", icon: GR_LOL }],
+      image: G_LOL,
+      settings: {},
     },
     {
       id: "valorant",
@@ -140,12 +153,11 @@ export const Games = () => {
       ranks: [{ label: "Platinum II", icon: GR5 }],
       image: G5,
       settings: {
+        Crosshair: "Static - Cyan",
         Sensitivity: "0.82",
-        Graphics: "Low and only Bloom, MT, NVRB are ON",
-        Crosshair: "Cyan Static",
-        Info: "FPS counter - enabled, Enemy highlight color - red, Map rotate - On (1.16 0.72)",
-        Quality: "Low and bloom ON",
-        Resolution: "2560 x 1440",
+        Resolution: "2560 x 1440 - 16:9",
+        Quality: "Mostly all set to Low with Bloom/MT/NR ON",
+        Info: "FPS counter - Enabled, Enemy highlight color - Red, Map rotate - On (1.16 | 0.72)",
       },
     },
     {
@@ -156,8 +168,8 @@ export const Games = () => {
       image: G6,
       settings: {
         Sensitivity: "16.0",
-        Quality: "Medium",
-        Resolution: "2560 x 1440",
+        Resolution: "2560 x 1440 - 16:9",
+        Quality: "Mostly all set to Medium",
       },
     },
     {
@@ -210,7 +222,9 @@ export const Games = () => {
                 Games
               </h2>
               <p className="text-gray-400 text-base md:text-lg max-w-2xl mx-auto select-none leading-relaxed">
-                Here you can find few information about my competitive games, my highest ranks or in-game settings in these games, and my newest reviews.
+                Here you can find few information about my competitive games, my
+                highest ranks or in-game settings in these games, and my newest
+                reviews.
               </p>
             </div>
 
@@ -264,16 +278,21 @@ export const Games = () => {
                           <div className="relative mt-4">
                             <div className="transition-all duration-700 ease-in-out transform overflow-hidden opacity-100 max-h-125 translate-y-0 md:opacity-0 md:max-h-0 md:translate-y-1 md:group-hover:opacity-100 md:group-hover:max-h-125 md:group-hover:translate-y-0 delay-75">
                               <div className="space-y-1.5 pt-3 pb-2 mt-1">
-                                {Object.entries(review.info).map(([key, value], idx) => (
-                                  <div key={idx} className="flex gap-2 text-xs text-gray-300 leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-                                    <span className="text-gray-400 min-w-17.5 font-semibold uppercase tracking-wider text-[10px] select-none">
-                                      {key}:
-                                    </span>
-                                    <span className="text-gray-300 break-all flex-1 font-medium">
-                                      {value}
-                                    </span>
-                                  </div>
-                                ))}
+                                {Object.entries(review.info).map(
+                                  ([key, value], idx) => (
+                                    <div
+                                      key={idx}
+                                      className="flex gap-2 text-xs text-gray-300 leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]"
+                                    >
+                                      <span className="text-gray-400 min-w-17.5 font-semibold uppercase tracking-wider text-[10px] select-none">
+                                        {key}:
+                                      </span>
+                                      <span className="text-gray-300 break-all flex-1 font-medium">
+                                        {value}
+                                      </span>
+                                    </div>
+                                  ),
+                                )}
                               </div>
                             </div>
                           </div>
@@ -282,23 +301,47 @@ export const Games = () => {
                         {/* Bottom row: Rating & button */}
                         <div className="relative flex items-center w-full h-10 mt-auto overflow-hidden">
                           {/* Rating display */}
-                          <div className={`absolute top-1/2 -translate-y-1/2 right-1 w-40 flex items-center gap-2.5 transition-transform duration-500 ease-out transform ${
-                            review.review 
-                              ? "max-md:left-0 max-md:right-auto md:right-1 md:group-hover:-translate-x-37.5" 
-                              : "right-1"
-                          }`}>
+                          <div
+                            className={`absolute top-1/2 -translate-y-1/2 right-1 w-40 flex items-center gap-2.5 transition-transform duration-500 ease-out transform ${review.review
+                                ? "max-md:left-0 max-md:right-auto md:right-1 md:group-hover:-translate-x-37.5"
+                                : "right-1"
+                              }`}
+                          >
                             {/* Stars */}
                             <div className="relative flex items-center select-none">
                               <span className="flex gap-1">
                                 {[1, 2, 3, 4, 5].map((star) => (
-                                  <svg key={`bg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-white/10">
+                                  <svg
+                                    key={`bg-${star}`}
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    className="text-white/10"
+                                  >
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                   </svg>
                                 ))}
                               </span>
-                              <span className="absolute top-0 left-0 flex gap-1 overflow-hidden" style={{ width: `${(parseFloat(review.rating) / 2 / 5) * 100}%` }}>
+                              <span
+                                className="absolute top-0 left-0 flex gap-1 overflow-hidden"
+                                style={{
+                                  width: `${(parseFloat(review.rating) / 2 / 5) * 100}%`,
+                                }}
+                              >
                                 {[1, 2, 3, 4, 5].map((star) => (
-                                  <svg key={`fg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-yellow-500 group-hover:text-yellow-400 transition-colors duration-500" style={{ filter: "drop-shadow(0 0 4px rgba(234, 179, 8, 0.5))" }}>
+                                  <svg
+                                    key={`fg-${star}`}
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                    className="shrink-0 text-yellow-500 group-hover:text-yellow-400 transition-colors duration-500"
+                                    style={{
+                                      filter:
+                                        "drop-shadow(0 0 4px rgba(234, 179, 8, 0.5))",
+                                    }}
+                                  >
                                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                   </svg>
                                 ))}
@@ -311,7 +354,9 @@ export const Games = () => {
                               <span className="text-base font-extrabold tabular-nums text-yellow-500 group-hover:text-yellow-400 transition-colors duration-500 [text-shadow:0_0_8px_rgba(234,179,8,0.3)] select-none">
                                 {review.rating}
                               </span>
-                              <span className="text-xs text-gray-500 font-bold select-none">/10</span>
+                              <span className="text-xs text-gray-500 font-bold select-none">
+                                /10
+                              </span>
                             </div>
                           </div>
 
@@ -319,7 +364,17 @@ export const Games = () => {
                           {review.review && (
                             <div className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center gap-1 text-blue-400 group-hover:text-blue-300 text-xs font-semibold bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/30 shadow-md transition-all duration-500 ease-out transform md:translate-x-12 md:opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
                               <span>Read review</span>
-                              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-0.5">
+                              <svg
+                                width="10"
+                                height="10"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="transition-transform duration-300 group-hover:translate-x-0.5"
+                              >
                                 <path d="M5 12h14M12 5l7 7-7 7" />
                               </svg>
                             </div>
@@ -329,7 +384,8 @@ export const Games = () => {
                     </>
                   );
 
-                  const cardClass = "group relative p-6 bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-550 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_0_25px_rgba(59,130,246,0.15)] hover:-translate-y-1 hover:border-blue-500/30 hover:bg-[#0f0f12]/90 focus:outline-none focus:ring-2 focus:ring-blue-500/40 flex flex-col justify-between flex-1 w-full md:w-[calc(50%-16px)] min-w-0";
+                  const cardClass =
+                    "group relative p-6 bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-550 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_0_25px_rgba(59,130,246,0.15)] hover:-translate-y-1 hover:border-blue-500/30 hover:bg-[#0f0f12]/90 focus:outline-none focus:ring-2 focus:ring-blue-500/40 flex flex-col justify-between flex-1 w-full md:w-[calc(50%-16px)] min-w-0";
 
                   return review.review ? (
                     <a
@@ -343,11 +399,7 @@ export const Games = () => {
                       {cardContent}
                     </a>
                   ) : (
-                    <div
-                      key={index}
-                      tabIndex={0}
-                      className={cardClass}
-                    >
+                    <div key={index} tabIndex={0} className={cardClass}>
                       {cardContent}
                     </div>
                   );
@@ -360,7 +412,9 @@ export const Games = () => {
             {/* ── Ranks header with game count badge + Expand All ── */}
             <div className="flex items-center gap-3 mb-5 select-none">
               <div className="flex-1 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
-              <span className="text-xs text-gray-600 uppercase tracking-widest font-semibold">Ranks &amp; Settings</span>
+              <span className="text-xs text-gray-600 uppercase tracking-widest font-semibold">
+                Ranks &amp; Settings
+              </span>
               <span className="text-[9px] font-bold text-gray-700 bg-white/4 border border-white/6 rounded-full px-2 py-0.5">
                 {games.length}
               </span>
@@ -370,8 +424,18 @@ export const Games = () => {
                 className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-semibold px-3 py-1 rounded-full border border-white/6 bg-white/3 text-gray-500 hover:text-gray-300 hover:border-white/10 transition-colors duration-150 cursor-pointer"
               >
                 {expandAll ? "Collapse All" : "Expand All"}
-                <svg className={`w-2.5 h-2.5 transition-transform duration-300 ${expandAll ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                <svg
+                  className={`w-2.5 h-2.5 transition-transform duration-300 ${expandAll ? "rotate-180" : ""}`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={3}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
             </div>
@@ -379,24 +443,42 @@ export const Games = () => {
             {/* Ranks & Settings — full-width dashboard panel */}
             <div className="rounded-2xl border border-white/6 bg-[#0a0a0c]/85 overflow-hidden backdrop-blur-xl shadow-xl">
               {games.map((game, idx, arr) => {
-                const hasSettings = game.settings && Object.keys(game.settings).length > 0;
-                const isOpen = expandAll ? hasSettings : showSettings === game.id;
+                const hasSettings =
+                  game.settings && Object.keys(game.settings).length > 0;
+                const isOpen = expandAll
+                  ? hasSettings
+                  : showSettings === game.id;
                 const isLast = idx === arr.length - 1;
                 const settingEntries = Object.entries(game.settings);
                 return (
-                  <div key={game.id} className={`isolate${!isLast ? " border-b border-white/4" : ""}`}>
-
+                  <div
+                    key={game.id}
+                    className={`isolate${!isLast ? " border-b border-white/4" : ""}`}
+                  >
                     {/* ── Main row ── */}
                     <div
                       tabIndex={hasSettings ? 0 : -1}
                       role={hasSettings ? "button" : undefined}
-                      onClick={hasSettings ? () => toggleSettings(game.id) : undefined}
-                      onKeyDown={hasSettings ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleSettings(game.id); } } : undefined}
+                      onClick={
+                        hasSettings ? () => toggleSettings(game.id) : undefined
+                      }
+                      onKeyDown={
+                        hasSettings
+                          ? (e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              toggleSettings(game.id);
+                            }
+                          }
+                          : undefined
+                      }
                       className={[
                         "group relative flex items-center gap-5 px-6 py-5 overflow-hidden",
                         "transition-colors duration-150 select-none",
                         "focus:outline-none focus-visible:ring-1 focus-visible:ring-inset focus-visible:ring-cyan-500/40",
-                        hasSettings ? "cursor-pointer hover:bg-white/[0.018] active:bg-white/2.5" : "cursor-default",
+                        hasSettings
+                          ? "cursor-pointer hover:bg-white/[0.018] active:bg-white/2.5"
+                          : "cursor-default",
                         isOpen ? "bg-white/2.5" : "",
                       ].join(" ")}
                     >
@@ -405,20 +487,21 @@ export const Games = () => {
                         src={game.image}
                         alt=""
                         aria-hidden
-                        width={800} height={200}
+                        width={800}
+                        height={200}
                         className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.08] pointer-events-none select-none"
                         loading="lazy"
                         decoding="async"
                       />
                       {/* Dark gradient overlay so text stays readable */}
                       <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0c]/95 via-[#0a0a0c]/80 to-[#0a0a0c]/60 pointer-events-none" />
-
                       {/* Thumbnail with hover zoom on inner img only */}
                       <div className="relative shrink-0 w-13 h-13 rounded-xl overflow-hidden border border-white/10 shadow-lg">
                         <img
                           src={game.image}
                           alt={game.name}
-                          width={48} height={48}
+                          width={48}
+                          height={48}
                           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                           loading="lazy"
                           decoding="async"
@@ -426,7 +509,6 @@ export const Games = () => {
                           style={{ willChange: "transform" }}
                         />
                       </div>
-
                       {/* Name + platform */}
                       <div className="relative flex-1 min-w-0">
                         <p className="text-[15px] font-bold text-gray-300 group-hover:text-blue-400 transition-colors duration-300 truncate leading-snug">
@@ -436,7 +518,6 @@ export const Games = () => {
                           {game.platform}
                         </p>
                       </div>
-
                       {/* Rank badges — all equal blue-400 style, with CSS tooltip */}
                       <div className="relative shrink-0 hidden sm:flex items-center gap-2 flex-wrap justify-end">
                         {game.ranks.map((r, ri) => (
@@ -448,7 +529,8 @@ export const Games = () => {
                             <img
                               src={r.icon}
                               alt={r.label}
-                              width={18} height={18}
+                              width={18}
+                              height={18}
                               className="w-4.5 h-4.5 object-contain"
                               loading="lazy"
                               decoding="async"
@@ -460,20 +542,28 @@ export const Games = () => {
                           </div>
                         ))}
                       </div>
-
                       {/* Chevron */} {/* isOpen could be red */}
                       {hasSettings ? (
-                        <div className={[
-                          "relative shrink-0 w-7 h-7 flex items-center justify-center rounded-lg border transition-all duration-300",
-                          isOpen
-                            ? "bg-blue-500/10 border-blue-500/30 text-blue-400"
-                            : "bg-white/3 border-white/6 text-gray-600 group-hover:text-blue-400 group-hover:border-blue-500/20",
-                        ].join(" ")}>
+                        <div
+                          className={[
+                            "relative shrink-0 w-7 h-7 flex items-center justify-center rounded-lg border transition-all duration-300",
+                            isOpen
+                              ? "bg-blue-500/10 border-blue-500/30 text-blue-400"
+                              : "bg-white/3 border-white/6 text-gray-600 group-hover:text-blue-400 group-hover:border-blue-500/20",
+                          ].join(" ")}
+                        >
                           <svg
                             className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={2.5}
                           >
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M19 9l-7 7-7-7"
+                            />
                           </svg>
                         </div>
                       ) : (
@@ -489,7 +579,9 @@ export const Games = () => {
                       >
                         <div className="overflow-hidden">
                           <div
-                            ref={(el) => { drawerRefs.current[game.id] = el; }}
+                            ref={(el) => {
+                              drawerRefs.current[game.id] = el;
+                            }}
                             className="border-t border-white/4 bg-black/30 px-6 pt-4 pb-3"
                           >
                             {/* Rank badges — mobile only, shown inside drawer */}
@@ -503,13 +595,16 @@ export const Games = () => {
                                     <img
                                       src={r.icon}
                                       alt={r.label}
-                                      width={16} height={16}
+                                      width={16}
+                                      height={16}
                                       className="w-4 h-4 object-contain"
                                       loading="lazy"
                                       decoding="async"
                                       draggable={false}
                                     />
-                                    <span className="text-[11px] font-semibold text-blue-400 whitespace-nowrap">{r.label}</span>
+                                    <span className="text-[11px] font-semibold text-blue-400 whitespace-nowrap">
+                                      {r.label}
+                                    </span>
                                   </div>
                                 ))}
                               </div>
@@ -519,7 +614,11 @@ export const Games = () => {
                             <div className="relative">
                               <div
                                 className="max-h-60 overflow-y-auto"
-                                style={{ scrollbarWidth: "thin", scrollbarColor: "rgba(255,255,255,0.1) transparent" }}
+                                style={{
+                                  scrollbarWidth: "thin",
+                                  scrollbarColor:
+                                    "rgba(255,255,255,0.1) transparent",
+                                }}
                               >
                                 <div className="space-y-1.5 pb-4">
                                   {settingEntries.map(([key, value]) => {
@@ -534,27 +633,62 @@ export const Games = () => {
                                           className="group/s rounded-lg border border-white/5 bg-white/2 hover:border-blue-500/20 transition-all duration-150 overflow-hidden"
                                         >
                                           <div className="flex items-center justify-between px-3 py-2 border-b border-white/4">
-                                            <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-blue-400/80 select-none">{key}</span>
+                                            <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-blue-400/80 select-none">
+                                              {key}
+                                            </span>
                                             <button
-                                              onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
+                                              onClick={(e) => {
+                                                e.stopPropagation();
+                                                handleCopy(value, uniqueId);
+                                              }}
                                               className={[
                                                 "p-0.5 rounded transition-all duration-150 cursor-pointer",
                                                 isCopied
                                                   ? "text-blue-400 opacity-100 scale-110"
                                                   : "text-gray-600 hover:text-blue-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100 scale-100",
                                               ].join(" ")}
-                                              title={`Copy ${key}`} aria-label={`Copy ${key}`}
+                                              title={`Copy ${key}`}
+                                              aria-label={`Copy ${key}`}
                                             >
                                               <span className="block transition-all duration-200">
-                                                {isCopied
-                                                  ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
-                                                  : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-                                                }
+                                                {isCopied ? (
+                                                  <svg
+                                                    className="w-3 h-3"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth={3}
+                                                  >
+                                                    <polyline points="20 6 9 17 4 12" />
+                                                  </svg>
+                                                ) : (
+                                                  <svg
+                                                    className="w-3 h-3"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth={2.2}
+                                                  >
+                                                    <rect
+                                                      x="9"
+                                                      y="9"
+                                                      width="13"
+                                                      height="13"
+                                                      rx="2"
+                                                      ry="2"
+                                                    />
+                                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                                  </svg>
+                                                )}
                                               </span>
                                             </button>
                                           </div>
-                                          <p className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all ${isCopied ? "text-blue-400 font-semibold select-none" : "text-gray-400"}`}>
-                                            {isCopied ? "Copied to clipboard!" : value}
+                                          <p
+                                            className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all ${isCopied ? "text-blue-400 font-semibold select-none" : "text-gray-400"}`}
+                                          >
+                                            {isCopied
+                                              ? "Copied to clipboard!"
+                                              : value}
                                           </p>
                                         </div>
                                       );
@@ -566,26 +700,61 @@ export const Games = () => {
                                         key={key}
                                         className="group/s flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-white/2 transition-colors duration-150"
                                       >
-                                        <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-blue-400/80 shrink-0 select-none">{key}</span>
+                                        <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-blue-400/80 shrink-0 select-none">
+                                          {key}
+                                        </span>
                                         <div className="flex items-center gap-2 min-w-0">
-                                          <span className={`text-xs font-medium truncate ${isCopied ? "text-blue-400 font-semibold select-none" : "text-gray-300"}`}>
-                                            {isCopied ? "Copied to clipboard!" : value}
+                                          <span
+                                            className={`text-xs font-medium truncate ${isCopied ? "text-blue-400 font-semibold select-none" : "text-gray-300"}`}
+                                          >
+                                            {isCopied
+                                              ? "Copied to clipboard!"
+                                              : value}
                                           </span>
                                           <button
-                                            onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              handleCopy(value, uniqueId);
+                                            }}
                                             className={[
                                               "shrink-0 p-0.5 rounded transition-all duration-150 cursor-pointer",
                                               isCopied
                                                 ? "text-blue-400 opacity-100 scale-110"
                                                 : "text-gray-600 hover:text-blue-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100 scale-100",
                                             ].join(" ")}
-                                            title={`Copy ${key}`} aria-label={`Copy ${key}`}
+                                            title={`Copy ${key}`}
+                                            aria-label={`Copy ${key}`}
                                           >
                                             <span className="block transition-all duration-200">
-                                              {isCopied
-                                                ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
-                                                : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-                                              }
+                                              {isCopied ? (
+                                                <svg
+                                                  className="w-3 h-3"
+                                                  viewBox="0 0 24 24"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  strokeWidth={3}
+                                                >
+                                                  <polyline points="20 6 9 17 4 12" />
+                                                </svg>
+                                              ) : (
+                                                <svg
+                                                  className="w-3 h-3"
+                                                  viewBox="0 0 24 24"
+                                                  fill="none"
+                                                  stroke="currentColor"
+                                                  strokeWidth={2.2}
+                                                >
+                                                  <rect
+                                                    x="9"
+                                                    y="9"
+                                                    width="13"
+                                                    height="13"
+                                                    rx="2"
+                                                    ry="2"
+                                                  />
+                                                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                                </svg>
+                                              )}
                                             </span>
                                           </button>
                                         </div>
