@@ -50,6 +50,7 @@ export const Games = () => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandAll, setExpandAll] = useState(false);
   const drawerRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);;
 
   const toggleSettings = (gameId: string): void => {
     setExpandAll(false);
@@ -62,9 +63,22 @@ export const Games = () => {
   }, []);
 
   const handleCopy = (text: string, id: string): void => {
-    navigator.clipboard.writeText(text).catch(() => {});
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+    // Clear any pending reset from a previous copy click
+    if (copyTimer.current) clearTimeout(copyTimer.current);
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedId(id);
+      copyTimer.current = setTimeout(() => {
+        setCopiedId(null);
+        copyTimer.current = null;
+      }, 2000);
+    }).catch(() => {
+      // Fallback: still show feedback even if clipboard API fails
+      setCopiedId(id);
+      copyTimer.current = setTimeout(() => {
+        setCopiedId(null);
+        copyTimer.current = null;
+      }, 2000);
+    });
   };
 
   const isLongSetting = (_key: string, value: string): boolean => {
@@ -497,15 +511,17 @@ export const Games = () => {
                                               className={[
                                                 "p-0.5 rounded transition-all duration-150 cursor-pointer",
                                                 isCopied
-                                                  ? "text-blue-400"
-                                                  : "text-gray-600 hover:text-blue-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
+                                                  ? "text-blue-400 opacity-100 scale-110"
+                                                  : "text-gray-600 hover:text-blue-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100 scale-100",
                                               ].join(" ")}
                                               title={`Copy ${key}`} aria-label={`Copy ${key}`}
                                             >
-                                              {isCopied
-                                                ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
-                                                : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-                                              }
+                                              <span className="block transition-all duration-200">
+                                                {isCopied
+                                                  ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
+                                                  : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                                                }
+                                              </span>
                                             </button>
                                           </div>
                                           <p className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all select-text ${isCopied ? "text-blue-400 font-semibold" : "text-gray-400"}`}>
@@ -531,15 +547,17 @@ export const Games = () => {
                                             className={[
                                               "shrink-0 p-0.5 rounded transition-all duration-150 cursor-pointer",
                                               isCopied
-                                                ? "text-blue-400 opacity-100"
-                                                : "text-gray-600 hover:text-blue-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
+                                                ? "text-blue-400 opacity-100 scale-110"
+                                                : "text-gray-600 hover:text-blue-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100 scale-100",
                                             ].join(" ")}
                                             title={`Copy ${key}`} aria-label={`Copy ${key}`}
                                           >
-                                            {isCopied
-                                              ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
-                                              : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
-                                            }
+                                            <span className="block transition-all duration-200">
+                                              {isCopied
+                                                ? <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><polyline points="20 6 9 17 4 12" /></svg>
+                                                : <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2}><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></svg>
+                                              }
+                                            </span>
                                           </button>
                                         </div>
                                       </div>
