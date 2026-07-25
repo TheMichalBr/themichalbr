@@ -97,11 +97,12 @@ export const Games = () => {
       ],
       image: G1,
       settings: {
+        Sensitivity: "2.52 | 0.95",
         Crosshair: "CSGO-bimys-eFkyb-icw9q-Sfrmo-XKH8D",
         Viewmodel:
           "viewmodel_fov 68; viewmodel_offset_x 2; viewmodel_offset_y 2; viewmodel_offset_z -2",
-        Sensitivity: "2.52 | 0.95",
-        Resolution: "1280x960 Stretched | Low quality",
+        Resolution: "1280 x 960 Stretched",
+        Quality: "Low quality",
       },
     },
     {
@@ -128,7 +129,8 @@ export const Games = () => {
       image: G4,
       settings: {
         Sensitivity: "5.0",
-        Resolution: "2560x1440 | Low quality, High Distance",
+        Quality: "Low, High Distance",
+        Resolution: "2560 x 1440",
       },
     },
     {
@@ -138,11 +140,12 @@ export const Games = () => {
       ranks: [{ label: "Platinum II", icon: GR5 }],
       image: G5,
       settings: {
-        Sensitivity: "0.82 | 1 | 1",
+        Sensitivity: "0.82",
         Graphics: "Low and only Bloom, MT, NVRB are ON",
         Crosshair: "Cyan Static",
         Info: "FPS counter - enabled, Enemy highlight color - red, Map rotate - On (1.16 0.72)",
-        Resolution: "2560x1440 | Low quality, On bloom",
+        Quality: "Low and bloom ON",
+        Resolution: "2560 x 1440",
       },
     },
     {
@@ -152,8 +155,9 @@ export const Games = () => {
       ranks: [{ label: "Emerald IV", icon: GR6 }],
       image: G6,
       settings: {
-        Sensitivity: "16 | 16",
-        Resolution: "2560x1440 | Medium quality",
+        Sensitivity: "16.0",
+        Quality: "Medium",
+        Resolution: "2560 x 1440",
       },
     },
     {
