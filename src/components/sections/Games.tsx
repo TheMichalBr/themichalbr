@@ -157,7 +157,7 @@ export const Games = () => {
         Sensitivity: "0.82",
         Resolution: "2560 x 1440 - 16:9",
         Quality: "Mostly all set to Low with Bloom/MT/NR ON",
-        Info: "FPS counter - Enabled, Enemy highlight color - Red, Map rotate - On (1.16 | 0.72)",
+        Other: "FPS counter - Enabled, Enemy highlight color - Red, Map rotate - On (1.16 | 0.72)",
       },
     },
     {
