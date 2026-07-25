@@ -238,7 +238,7 @@ export const Games = () => {
                       <div className="relative z-10 flex flex-col h-full justify-between gap-4">
                         <div>
                           {/* Title */}
-                          <h3 className="text-lg md:text-xl font-bold text-gray-300 tracking-tight drop-shadow-lg mb-2 transition-colors duration-300 ease-out group-hover:text-blue-400">
+                          <h3 className="text-lg md:text-xl font-bold text-gray-300 tracking-tight drop-shadow-lg mb-2 transition-colors duration-300 ease-out group-hover:text-blue-400 select-none">
                             {review.title}
                           </h3>
 
@@ -246,10 +246,10 @@ export const Games = () => {
                           {review.tag && (
                             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-white/10 bg-white/5 shadow-md backdrop-blur-sm transition-all duration-300 group-hover:border-blue-500/30 group-hover:bg-blue-500/10">
                               <span className="text-xs text-gray-300 flex items-center gap-1.5">
-                                <span className="transition-transform duration-300 ease-out group-hover:scale-110">
+                                <span className="transition-transform duration-300 ease-out group-hover:scale-110 select-none">
                                   {getTagInfo(review.tag).icon}
                                 </span>
-                                <span className="font-semibold tracking-wider uppercase text-[10px] text-blue-400">
+                                <span className="font-semibold tracking-wider uppercase text-[10px] text-blue-400 select-none">
                                   {getTagInfo(review.tag).text}
                                 </span>
                               </span>
@@ -262,7 +262,7 @@ export const Games = () => {
                               <div className="space-y-1.5 pt-3 pb-2 mt-1">
                                 {Object.entries(review.info).map(([key, value], idx) => (
                                   <div key={idx} className="flex gap-2 text-xs text-gray-300 leading-relaxed [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
-                                    <span className="text-gray-400 min-w-17.5 font-semibold uppercase tracking-wider text-[10px]">
+                                    <span className="text-gray-400 min-w-17.5 font-semibold uppercase tracking-wider text-[10px] select-none">
                                       {key}:
                                     </span>
                                     <span className="text-gray-300 break-all flex-1 font-medium">
@@ -284,7 +284,7 @@ export const Games = () => {
                               : ""
                           }`}>
                             {/* Stars */}
-                            <div className="relative flex items-center">
+                            <div className="relative flex items-center select-none">
                               <span className="flex gap-1">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                   <svg key={`bg-${star}`} width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-white/10">
@@ -304,16 +304,16 @@ export const Games = () => {
                             <span className="w-px h-3 bg-white/10 rounded-full" />
 
                             <div className="flex items-baseline gap-0.5">
-                              <span className="text-base font-extrabold tabular-nums text-yellow-500 group-hover:text-yellow-400 transition-colors duration-500 [text-shadow:0_0_8px_rgba(234,179,8,0.3)]">
+                              <span className="text-base font-extrabold tabular-nums text-yellow-500 group-hover:text-yellow-400 transition-colors duration-500 [text-shadow:0_0_8px_rgba(234,179,8,0.3)] select-none">
                                 {review.rating}
                               </span>
-                              <span className="text-xs text-gray-500 font-bold">/10</span>
+                              <span className="text-xs text-gray-500 font-bold select-none">/10</span>
                             </div>
                           </div>
 
-                          {/* Read review action */}
+                          {/* Read review action — always visible on touch, hover-only on desktop */}
                           {review.review && (
-                            <div className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center gap-1 text-blue-400 group-hover:text-blue-300 text-xs font-semibold bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/30 shadow-md transition-all duration-500 ease-out transform translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
+                            <div className="absolute top-1/2 -translate-y-1/2 right-0 flex items-center gap-1 text-blue-400 group-hover:text-blue-300 text-xs font-semibold bg-blue-500/10 px-3 py-1.5 rounded-lg border border-blue-500/30 shadow-md transition-all duration-500 ease-out transform md:translate-x-12 md:opacity-0 group-hover:translate-x-0 group-hover:opacity-100">
                               <span>Read review</span>
                               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-0.5">
                                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -325,7 +325,7 @@ export const Games = () => {
                     </>
                   );
 
-                  const cardClass = "group relative p-6 bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-550 ease-[cubic-bezier(0.16,1,0.3,1)] select-none hover:shadow-[0_0_25px_rgba(59,130,246,0.15)] hover:-translate-y-1 hover:border-blue-500/30 hover:bg-[#0f0f12]/90 focus:outline-none focus:ring-2 focus:ring-blue-500/40 flex flex-col justify-between flex-1 w-full md:w-[calc(50%-16px)] min-w-0";
+                  const cardClass = "group relative p-6 bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl overflow-hidden shadow-xl cursor-pointer transition-all duration-550 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_0_25px_rgba(59,130,246,0.15)] hover:-translate-y-1 hover:border-blue-500/30 hover:bg-[#0f0f12]/90 focus:outline-none focus:ring-2 focus:ring-blue-500/40 flex flex-col justify-between flex-1 w-full md:w-[calc(50%-16px)] min-w-0";
 
                   return review.review ? (
                     <a
@@ -334,6 +334,7 @@ export const Games = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={cardClass}
+                      style={{ touchAction: "manipulation" }}
                     >
                       {cardContent}
                     </a>
@@ -506,7 +507,7 @@ export const Games = () => {
                                           className="group/s rounded-lg border border-white/5 bg-white/2 hover:border-blue-500/20 transition-all duration-150 overflow-hidden"
                                         >
                                           <div className="flex items-center justify-between px-3 py-2 border-b border-white/4">
-                                            <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-blue-400/80">{key}</span>
+                                            <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-blue-400/80 select-none">{key}</span>
                                             <button
                                               onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
                                               className={[
@@ -525,7 +526,7 @@ export const Games = () => {
                                               </span>
                                             </button>
                                           </div>
-                                          <p className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all select-text ${isCopied ? "text-blue-400 font-semibold" : "text-gray-400"}`}>
+                                          <p className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all ${isCopied ? "text-blue-400 font-semibold select-none" : "text-gray-400"}`}>
                                             {isCopied ? "Copied to clipboard!" : value}
                                           </p>
                                         </div>
@@ -538,9 +539,9 @@ export const Games = () => {
                                         key={key}
                                         className="group/s flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-white/2 transition-colors duration-150"
                                       >
-                                        <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-blue-400/80 shrink-0">{key}</span>
+                                        <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-blue-400/80 shrink-0 select-none">{key}</span>
                                         <div className="flex items-center gap-2 min-w-0">
-                                          <span className={`text-xs font-medium truncate ${isCopied ? "text-blue-400 font-semibold" : "text-gray-300"}`}>
+                                          <span className={`text-xs font-medium truncate ${isCopied ? "text-blue-400 font-semibold select-none" : "text-gray-300"}`}>
                                             {isCopied ? "Copied to clipboard!" : value}
                                           </span>
                                           <button
