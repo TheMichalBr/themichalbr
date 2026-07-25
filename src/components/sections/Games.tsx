@@ -441,13 +441,13 @@ export const Games = () => {
                         ))}
                       </div>
 
-                      {/* Chevron */}
+                      {/* Chevron */} {/* isOpen could be red */}
                       {hasSettings ? (
                         <div className={[
-                          "relative shrink-0 w-7 h-7 flex items-center justify-center rounded-lg border transition-colors duration-150",
+                          "relative shrink-0 w-7 h-7 flex items-center justify-center rounded-lg border transition-all duration-300",
                           isOpen
-                            ? "bg-red-500/8 border-red-500/20 text-red-400"
-                            : "bg-white/3 border-white/6 text-gray-600 group-hover:text-cyan-400 group-hover:border-cyan-500/20",
+                            ? "bg-blue-500/10 border-blue-500/30 text-blue-400"
+                            : "bg-white/3 border-white/6 text-gray-600 group-hover:text-blue-400 group-hover:border-blue-500/20",
                         ].join(" ")}>
                           <svg
                             className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
