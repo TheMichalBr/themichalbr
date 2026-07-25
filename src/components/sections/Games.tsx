@@ -470,7 +470,7 @@ export const Games = () => {
                         <div className="overflow-hidden">
                           <div
                             ref={(el) => { drawerRefs.current[game.id] = el; }}
-                            className="border-t border-white/4 bg-black/25 px-6 pt-4 pb-3"
+                            className="border-t border-white/4 bg-black/30 px-6 pt-4 pb-3"
                           >
                             {/* Scroll wrapper with fade indicator */}
                             <div className="relative">
@@ -488,10 +488,10 @@ export const Games = () => {
                                       return (
                                         <div
                                           key={key}
-                                          className="group/s rounded-lg border border-white/5 bg-white/2 hover:border-cyan-500/12 transition-colors duration-150 overflow-hidden"
+                                          className="group/s rounded-lg border border-white/5 bg-white/2 hover:border-blue-500/20 transition-all duration-150 overflow-hidden"
                                         >
                                           <div className="flex items-center justify-between px-3 py-2 border-b border-white/4">
-                                            <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-gray-600">{key}</span>
+                                            <span className="text-[9px] uppercase font-bold tracking-[0.14em] text-blue-400/80">{key}</span>
                                             <button
                                               onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
                                               className={[
