@@ -497,8 +497,8 @@ export const Games = () => {
                                               className={[
                                                 "p-0.5 rounded transition-all duration-150 cursor-pointer",
                                                 isCopied
-                                                  ? "text-emerald-400"
-                                                  : "text-gray-600 hover:text-cyan-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
+                                                  ? "text-blue-400"
+                                                  : "text-gray-600 hover:text-blue-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
                                               ].join(" ")}
                                               title={`Copy ${key}`} aria-label={`Copy ${key}`}
                                             >
@@ -508,31 +508,31 @@ export const Games = () => {
                                               }
                                             </button>
                                           </div>
-                                          <p className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all select-text ${isCopied ? "text-emerald-400" : "text-gray-400"}`}>
-                                            {isCopied ? "Copied!" : value}
+                                          <p className={`px-3 py-2 font-mono text-[10px] leading-relaxed break-all select-text ${isCopied ? "text-blue-400 font-semibold" : "text-gray-400"}`}>
+                                            {isCopied ? "Copied to clipboard!" : value}
                                           </p>
                                         </div>
                                       );
                                     }
 
-                                    // Inline row — CountUp for numeric values
+                                    // Inline row — CountUp for numeric values  could use text-emerald-400 or red-400
                                     return (
                                       <div
                                         key={key}
                                         className="group/s flex items-center justify-between gap-3 px-3 py-2 rounded-lg hover:bg-white/2 transition-colors duration-150"
                                       >
-                                        <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-gray-600 shrink-0">{key}</span>
+                                        <span className="text-[10px] uppercase font-semibold tracking-[0.12em] text-blue-400/80 shrink-0">{key}</span>
                                         <div className="flex items-center gap-2 min-w-0">
-                                          <span className={`text-xs font-medium truncate ${isCopied ? "text-emerald-400" : "text-gray-300"}`}>
-                                            {isCopied ? "Copied!" : value}
+                                          <span className={`text-xs font-medium truncate ${isCopied ? "text-blue-400 font-semibold" : "text-gray-300"}`}>
+                                            {isCopied ? "Copied to clipboard!" : value}
                                           </span>
                                           <button
                                             onClick={(e) => { e.stopPropagation(); handleCopy(value, uniqueId); }}
                                             className={[
                                               "shrink-0 p-0.5 rounded transition-all duration-150 cursor-pointer",
                                               isCopied
-                                                ? "text-emerald-400 opacity-100"
-                                                : "text-gray-600 hover:text-cyan-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
+                                                ? "text-blue-400 opacity-100"
+                                                : "text-gray-600 hover:text-blue-400 opacity-0 group-hover/s:opacity-100 focus:opacity-100",
                                             ].join(" ")}
                                             title={`Copy ${key}`} aria-label={`Copy ${key}`}
                                           >
