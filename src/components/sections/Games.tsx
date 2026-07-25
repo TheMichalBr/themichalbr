@@ -52,7 +52,7 @@ export const Games = () => {
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [expandAll, setExpandAll] = useState(false);
   const drawerRefs = useRef<Record<string, HTMLDivElement | null>>({});
-  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);;
 
   const toggleSettings = (gameId: string): void => {
     setExpandAll(false);
