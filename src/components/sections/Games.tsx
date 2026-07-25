@@ -280,8 +280,8 @@ export const Games = () => {
                           {/* Rating display */}
                           <div className={`absolute top-1/2 -translate-y-1/2 right-1 w-40 flex items-center gap-2.5 transition-transform duration-500 ease-out transform ${
                             review.review 
-                              ? "md:group-hover:-translate-x-37.5" 
-                              : ""
+                              ? "max-md:left-0 max-md:right-auto md:right-1 md:group-hover:-translate-x-37.5" 
+                              : "right-1"
                           }`}>
                             {/* Stars */}
                             <div className="relative flex items-center select-none">
