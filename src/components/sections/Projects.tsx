@@ -118,9 +118,9 @@ const projectsData: Project[] = [
 
 const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
   const statusStyles: Record<string, string> = {
-    completed: "bg-green-500/20 text-green-400 border-green-500/30",
-    development: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
-    planning: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+    completed: "bg-green-500/10 text-green-300 border border-green-400/40 shadow-[0_0_0_1px_rgba(34,197,94,0.22)]",
+    development: "bg-yellow-500/10 text-yellow-300 border border-yellow-400/40 shadow-[0_0_0_1px_rgba(245,158,11,0.22)]",
+    planning: "bg-purple-500/18 text-purple-300 border border-purple-500/40 shadow-[0_0_0_1px_rgba(168,85,247,0.17)]",
   };
 
   const statusLabels: Record<string, string> = {
@@ -213,13 +213,13 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
         </div>
       )}
 
-      <div className="overflow-hidden rounded-[1.75rem] border border-zinc-800 bg-zinc-950/90 shadow-[0_0_0_1px_rgba(255,255,255,0.03)]">
+      <div className="overflow-hidden rounded-[1.75rem] bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 shadow-xl">
         <div className="relative">
           <div className="absolute right-4 top-4 z-20 flex items-center gap-2 rounded-full border border-zinc-800/70 bg-zinc-950/70 p-1.5 backdrop-blur-sm">
             <button
               type="button"
               onClick={() => switchProject((activeIndex - 1 + projects.length) % projects.length)}
-              className="rounded-full border border-zinc-800 bg-zinc-900/70 p-2 text-zinc-200 transition hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-blue-200 cursor-pointer"
+              className="rounded-full border border-white/10 bg-white/5 p-2 text-zinc-200 transition-all duration-200 ease-out hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-blue-200 select-none cursor-pointer"
               aria-label="Previous project"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -229,7 +229,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
             <button
               type="button"
               onClick={() => switchProject((activeIndex + 1) % projects.length)}
-              className="rounded-full border border-zinc-800 bg-zinc-900/70 p-2 text-zinc-200 transition hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-blue-200 cursor-pointer"
+              className="rounded-full border border-white/10 bg-white/5 p-2 text-zinc-200 transition-all duration-200 ease-out hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-blue-200 selection:none cursor-pointer"
               aria-label="Next project"
             >
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -249,24 +249,21 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-zinc-900 px-6 text-center">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.3em] text-zinc-500">
-                    Preview coming soon
-                  </p>
-                  <p className="mt-2 text-lg font-medium text-zinc-200">
-                    Visual concept for {activeProject.title}
+                  <p className="text-sm uppercase tracking-[0.3em] text-zinc-500 select-none">
+                    Preview coming soon for {activeProject.title}
                   </p>
                 </div>
               </div>
             )}
             <div className={`absolute inset-0 bg-linear-to-t from-zinc-950/75 via-zinc-950/20 to-transparent transition-opacity duration-700 ${isTransitioning ? "opacity-95" : "opacity-100"}`} />
-            <div className="absolute left-4 top-4 rounded-full border border-zinc-800/80 bg-zinc-950/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-300 backdrop-blur-sm">
+            <div className="absolute left-4 top-4 rounded-full border border-zinc-800/80 bg-zinc-950/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-300 backdrop-blur-sm select-none">
               Project {activeIndex + 1} / {projects.length}
             </div>
           </div>
 
-          <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10">
+          <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10 bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl shadow-xl">
             <div className="space-y-5">
-              <div className="flex flex-wrap items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2 select-none">
                 <StatusBadge status={activeProject.status} />
                 <span className="text-xs uppercase tracking-[0.25em] text-zinc-500">
                   {activeProject.version}
@@ -286,7 +283,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                 {activeProject.tech.map((tech, key) => (
                   <span
                     key={key}
-                    className="rounded-full border border-zinc-800 bg-zinc-900/70 px-3 py-1 text-sm text-zinc-300 transition duration-200 ease-out hover:border-blue-500/30 hover:bg-zinc-900/80 hover:text-zinc-100"
+                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-zinc-300 transition duration-200 ease-out hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-zinc-100 cursor-default select-none"
                   >
                     {tech}
                   </span>
@@ -353,7 +350,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                       key={project.id}
                       type="button"
                       onClick={() => switchProject(index)}
-                      className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer select-none ${
                         activeIndex === index
                           ? "w-8 bg-blue-500 shadow-[0_0_0_1px_rgba(59,130,246,0.2)]"
                           : "w-2.5 bg-zinc-700 hover:bg-zinc-500"
@@ -365,7 +362,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
 
                 <a
                   href={activeProject.link}
-                  className={`group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  className={`group inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition select-none ${
                     activeProject.disabled
                       ? "cursor-not-allowed border border-zinc-800 bg-zinc-900 text-zinc-500"
                       : "border border-blue-500/25 bg-blue-500/10 text-blue-300 hover:bg-blue-500/20"
