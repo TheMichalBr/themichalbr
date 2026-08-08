@@ -5,6 +5,7 @@ import pm1 from "/projects/P_1.webp";
 import pm2 from "/projects/P_2.webp";
 import pm3 from "/projects/P_3.webp";
 import pm4 from "/projects/P_4.webp";
+import pm5 from "/projects/P_5.webp";
 
 interface Project {
   id: string;
@@ -75,7 +76,7 @@ const projectsData: Project[] = [
     id: "shooter",
     order: 4,
     title: "shooter game",
-    version: "v0.1 (alpha)",
+    version: "v0.02a",
     desc: "First person shooter game on unknown island. Game will be made in Unreal Engine!",
     tech: ["Game", "Unreal"],
     image: pm4,
@@ -90,7 +91,7 @@ const projectsData: Project[] = [
     id: "aim_blueline",
     order: 0,
     title: "aim_blueline",
-    version: "v0.2 (alpha)",
+    version: "v0.05a",
     desc: "You just want to have a blast with your friends? Or have a thrilling duel to compare who is the bigger shooter? Inspired by the legendary aim_redline map.",
     tech: ["Game Map", "CS2", "Source 2 Editor"],
     image: null,
@@ -106,13 +107,13 @@ const projectsData: Project[] = [
     order: 0,
     title: "Websites",
     version: "v1.0",
-    desc: "I have created several custom websites of various types, ranging from simple ones to portfolios.",
-    tech: ["Website", "HTML", "CSS", "JS", "React"],
-    image: null,
-    link: "#",
-    linkLabel: "",
+    desc: "I have created several custom websites of various types, ranging from simple ones to more advanced.",
+    tech: ["Website", "HTML / CSS", "JS", "React"],
+    image: pm5,
+    link: "#aboutme",
+    linkLabel: "CONTACT ME",
     downloads: null,
-    disabled: true,
+    disabled: false,
     status: "completed",
     featured: false,
   },
