@@ -17,6 +17,7 @@ interface Project {
   link: string;
   linkLabel: string;
   downloads: string | number | null;
+  plays?: number | null;
   disabled?: boolean;
   status: "completed" | "development" | "planning";
   featured: boolean;
@@ -38,6 +39,7 @@ const projectsData: Project[] = [
     link: "https://themichalbr.github.io/mgames/Tetris.html",
     linkLabel: "PLAY ONLINE",
     downloads: null,
+    plays: 736,
     status: "completed",
     featured: true,
   },
@@ -315,24 +317,45 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-2.5 text-zinc-300">
                         <div className="flex h-8 w-8 items-center justify-center rounded-full border border-blue-400/20 bg-zinc-950/70">
-                          <svg viewBox="0 0 24 24" className="h-4 w-4 text-blue-400" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <svg viewBox="0 0 24 24" className="h-4 w-4 text-blue-400 select-none" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M12 3v14" />
                             <path d="m7 10 5 5 5-5" />
                             <path d="M5 19h14" />
                           </svg>
                         </div>
                         <div>
-                          <div className="text-sm font-medium text-zinc-200">Downloads</div>
-                          <div className="text-xs text-zinc-500">from Modrinth</div>
+                          <div className="text-sm font-medium text-zinc-200 select-none">Downloads</div>
+                          <div className="text-xs text-zinc-500 select-none">from Modrinth</div>
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-base font-semibold text-blue-300">
+                        <div className="text-base font-semibold text-blue-300 select-none">
                           {loading
                             ? "Loading.."
                             : downloads !== null
                               ? downloads.toLocaleString()
                               : "Unavailable"}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : typeof activeProject.plays === "number" ? (
+                  <div className="rounded-2xl border border-emerald-500/20 bg-linear-to-br from-emerald-500/10 via-emerald-500/5 to-zinc-900/70 p-4 sm:p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-2.5 text-zinc-300">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full border border-emerald-400/20 bg-zinc-950/70">
+                          <svg viewBox="0 0 24 24" className="h-4 w-4 text-emerald-300 select-none" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 3v18l15-9L5 3z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div className="text-sm font-medium text-zinc-200 select-none">Played</div>
+                          <div className="text-xs text-zinc-500 select-none">from Statistics</div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-base font-semibold text-emerald-300 select-none">
+                          {activeProject.plays.toLocaleString()}
                         </div>
                       </div>
                     </div>
