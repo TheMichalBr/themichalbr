@@ -329,7 +329,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                       <div className="text-right">
                         <div className="text-base font-semibold text-blue-300">
                           {loading
-                            ? "Loading..."
+                            ? "Loading.."
                             : downloads !== null
                               ? downloads.toLocaleString()
                               : "Unavailable"}
