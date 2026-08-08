@@ -266,7 +266,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
               <div className="flex h-full w-full items-center justify-center bg-zinc-900 px-6 text-center">
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-zinc-500 select-none">
-                    Preview coming soon for {activeProject.title}
+                    Preview not available for {activeProject.title}
                   </p>
                 </div>
               </div>
