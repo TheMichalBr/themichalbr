@@ -90,7 +90,7 @@ const projectsData: Project[] = [
     id: "aim_blueline",
     order: 0,
     title: "aim_blueline",
-    version: "in development",
+    version: "v0.2 (alpha)",
     desc: "You just want to have a blast with your friends? Or have a thrilling duel to compare who is the bigger shooter? Inspired by the legendary aim_redline map.",
     tech: ["Game Map", "CS2", "Source 2 Editor"],
     image: null,
@@ -105,7 +105,7 @@ const projectsData: Project[] = [
     id: "websites",
     order: 0,
     title: "Websites",
-    version: "no version",
+    version: "v1.0",
     desc: "I have created several custom websites of various types, ranging from simple ones to portfolios.",
     tech: ["Website", "HTML", "CSS", "JS", "React"],
     image: null,
@@ -281,16 +281,16 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
               <div className="flex flex-wrap items-center gap-2 select-none">
                 <StatusBadge status={activeProject.status} />
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs tracking-[0.25em] text-zinc-300">
-                  <svg viewBox="0 0 24 24" className="h-4 w-4 text-blue-300" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg viewBox="0 0 24 24" className="h-4 w-4 text-blue-400" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 8.5 12 3l8 5.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z" />
                     <path d="M9.5 12.5 11 14l3.5-3.5" />
                   </svg>
-                  <span className="font-semibold text-zinc-200 normal-case">{activeProject.version}</span>
+                  <span className="font-light text-gray-300 normal-case">{activeProject.version}</span>
                 </span>
               </div>
 
               <div className="space-y-2.5">
-                <h3 className="text-2xl font-semibold text-zinc-100 select-none">
+                <h3 className="text-2xl font-semibold text-gray-300 select-none">
                   {activeProject.title}
                 </h3>
                 <p className="text-sm leading-7 text-zinc-400 select-none">
