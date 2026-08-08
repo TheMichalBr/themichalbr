@@ -208,8 +208,8 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
   return (
     <div className="space-y-4">
       {error && (
-        <div className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
-          Failed to load download statistics: {error}
+        <div className="rounded-2xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400 select-none">
+          Failed to load download statistics: {error}!
         </div>
       )}
 
@@ -265,16 +265,20 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
             <div className="space-y-5">
               <div className="flex flex-wrap items-center gap-2 select-none">
                 <StatusBadge status={activeProject.status} />
-                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-300">
-                  {activeProject.version}
+                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs tracking-[0.25em] text-zinc-300">
+                  <svg viewBox="0 0 24 24" className="h-4 w-4 text-blue-300" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 8.5 12 3l8 5.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z" />
+                    <path d="M9.5 12.5 11 14l3.5-3.5" />
+                  </svg>
+                  <span className="font-semibold text-zinc-200 normal-case">{activeProject.version}</span>
                 </span>
               </div>
 
               <div className="space-y-2.5">
-                <h3 className="text-2xl font-semibold text-zinc-100">
+                <h3 className="text-2xl font-semibold text-zinc-100 select-none">
                   {activeProject.title}
                 </h3>
-                <p className="text-sm leading-7 text-zinc-400">
+                <p className="text-sm leading-7 text-zinc-400 select-none">
                   {activeProject.desc}
                 </p>
               </div>
@@ -293,7 +297,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
 
             <div className="mt-6 space-y-4">
               <div className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 sm:p-5">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.3em] text-zinc-500">
+                <div className="text-[11px] font-semibold uppercase tracking-[0.3em] text-zinc-500 select-none">
                   Details
                 </div>
                 <div className="mt-3 space-y-2.5 text-sm text-zinc-400">
