@@ -309,28 +309,6 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
             </div>
 
             <div className="mt-6 space-y-4">
-              <div className="rounded-2xl border border-zinc-800 bg-zinc-900/70 p-4 sm:p-5">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.3em] text-zinc-500 select-none">
-                  Details
-                </div>
-                <div className="mt-3 space-y-2.5 text-sm text-zinc-400">
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Type</span>
-                    <span className="font-medium text-zinc-200">{activeProject.tech[0]}</span>
-                  </div>
-                  <div className="flex items-center justify-between gap-3">
-                    <span>Status</span>
-                    <span className="font-medium text-zinc-200">
-                      {activeProject.status === "completed"
-                        ? "Ready"
-                        : activeProject.status === "development"
-                          ? "Work in progress"
-                          : "Planning"}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
               {activeProject.downloads === "modrinth" && (
                 <div className="rounded-2xl border border-blue-500/20 bg-linear-to-br from-blue-500/10 via-blue-500/5 to-zinc-900/70 p-4 sm:p-5">
                   <div className="flex items-start justify-between gap-3">
