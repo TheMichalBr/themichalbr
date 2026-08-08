@@ -259,6 +259,9 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
               <img
                 src={activeProject.image}
                 alt={activeProject.title}
+                draggable="false"
+                onDragStart={(event) => event.preventDefault()}
+                onContextMenu={(event) => event.preventDefault()}
                 className={`h-full w-full object-cover transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isTransitioning ? "scale-[1.03] opacity-90" : "scale-100 opacity-100"}`}
                 loading="lazy"
               />
