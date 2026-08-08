@@ -245,6 +245,9 @@ export const Games = () => {
                       <img
                         src={review.image}
                         alt=""
+                        draggable={false}
+                        onDragStart={(event) => event.preventDefault()}
+                        onContextMenu={(event) => event.preventDefault()}
                         className="absolute inset-0 w-full h-full object-cover opacity-40 transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.06] pointer-events-none select-none"
                         loading="lazy"
                         decoding="async"
@@ -487,6 +490,9 @@ export const Games = () => {
                         src={game.image}
                         alt=""
                         aria-hidden
+                        draggable={false}
+                        onDragStart={(event) => event.preventDefault()}
+                        onContextMenu={(event) => event.preventDefault()}
                         width={800}
                         height={200}
                         className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.08] pointer-events-none select-none"
@@ -502,10 +508,12 @@ export const Games = () => {
                           alt={game.name}
                           width={48}
                           height={48}
+                          draggable={false}
+                          onDragStart={(event) => event.preventDefault()}
+                          onContextMenu={(event) => event.preventDefault()}
                           className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                           loading="lazy"
                           decoding="async"
-                          draggable={false}
                           style={{ willChange: "transform" }}
                         />
                       </div>
@@ -535,6 +543,8 @@ export const Games = () => {
                               loading="lazy"
                               decoding="async"
                               draggable={false}
+                              onDragStart={(event) => event.preventDefault()}
+                              onContextMenu={(event) => event.preventDefault()}
                             />
                             <span className="text-xs font-semibold text-blue-400 whitespace-nowrap">
                               {r.label}
@@ -601,6 +611,8 @@ export const Games = () => {
                                       loading="lazy"
                                       decoding="async"
                                       draggable={false}
+                                      onDragStart={(event) => event.preventDefault()}
+                                      onContextMenu={(event) => event.preventDefault()}
                                     />
                                     <span className="text-[11px] font-semibold text-blue-400 whitespace-nowrap">
                                       {r.label}
