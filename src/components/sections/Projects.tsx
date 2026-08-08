@@ -286,7 +286,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                 {activeProject.tech.map((tech, key) => (
                   <span
                     key={key}
-                    className="rounded-full border border-zinc-800 bg-zinc-900/70 px-3 py-1 text-sm text-zinc-300"
+                    className="rounded-full border border-zinc-800 bg-zinc-900/70 px-3 py-1 text-sm text-zinc-300 transition duration-200 ease-out hover:border-blue-500/30 hover:bg-zinc-900/80 hover:text-zinc-100"
                   >
                     {tech}
                   </span>
