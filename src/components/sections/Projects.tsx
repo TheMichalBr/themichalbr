@@ -116,6 +116,8 @@ const projectsData: Project[] = [
   },
 ];
 
+const imagePreloadCache = new Set<string>();
+
 const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
   const statusStyles: Record<string, string> = {
     completed: "bg-green-500/10 text-green-300 border border-green-400/40 shadow-[0_0_0_1px_rgba(34,197,94,0.22)]",
@@ -154,6 +156,16 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lastInteraction, setLastInteraction] = useState(Date.now());
+
+  useEffect(() => {
+    projects.forEach((project) => {
+      if (project.image && !imagePreloadCache.has(project.image)) {
+        const img = new Image();
+        img.src = project.image;
+        img.onload = () => imagePreloadCache.add(project.image as string);
+      }
+    });
+  }, [projects]);
 
   useEffect(() => {
     if (projects.length === 0) {
@@ -245,6 +257,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                 src={activeProject.image}
                 alt={activeProject.title}
                 className={`h-full w-full object-cover transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isTransitioning ? "scale-[1.03] opacity-90" : "scale-100 opacity-100"}`}
+                loading="lazy"
               />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-zinc-900 px-6 text-center">
