@@ -265,7 +265,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
             <div className="space-y-5">
               <div className="flex flex-wrap items-center gap-2 select-none">
                 <StatusBadge status={activeProject.status} />
-                <span className="text-xs uppercase tracking-[0.25em] text-zinc-500">
+                <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-300">
                   {activeProject.version}
                 </span>
               </div>
