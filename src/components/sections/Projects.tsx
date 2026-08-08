@@ -374,14 +374,16 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                   tabIndex={activeProject.disabled ? -1 : 0}
                 >
                   <span>{activeProject.linkLabel || "Open project"}</span>
-                  {!activeProject.disabled && (
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-blue-400/20 bg-zinc-950/60 transition group-hover:translate-x-0.5 group-hover:border-blue-400/40">
-                      <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14" />
-                        <path d="M13 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  )}
+                  <span className={`inline-flex h-6 w-6 items-center justify-center rounded-full border transition-transform ${
+                    activeProject.disabled
+                      ? "border-zinc-800 bg-zinc-900 text-zinc-500"
+                      : "border-blue-400/20 bg-zinc-950/60 text-blue-300 group-hover:translate-x-0.5"
+                  }`}>
+                    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14" />
+                      <path d="M13 5l7 7-7 7" />
+                    </svg>
+                  </span>
                 </a>
               </div>
             </div>
