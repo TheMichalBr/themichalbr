@@ -45,7 +45,7 @@ const projectsData: Project[] = [
   },
   {
     id: "snake",
-    order: 2,
+    order: 3,
     title: "Snake",
     version: "v1.0.3",
     desc: "Classic Snake. Eat the food, grow the snake and try not to hit the walls or yourself!",
@@ -59,7 +59,7 @@ const projectsData: Project[] = [
   },
   {
     id: "rocketmod",
-    order: 3,
+    order: 4,
     title: "NmS' Rocket Launcher Mod",
     version: "v1.0.3",
     desc: "This mod adds a rocket launcher to the game. You know what to do with it. Be nice to your friends!",
@@ -73,7 +73,7 @@ const projectsData: Project[] = [
   },
   {
     id: "websites",
-    order: 4,
+    order: 5,
     title: "Custom Websites",
     version: "v1.0",
     desc: "I have created several custom websites of various types, ranging from simple ones to more advanced.",
@@ -88,7 +88,7 @@ const projectsData: Project[] = [
   },
   {
     id: "aim_blueline",
-    order: 5,
+    order: 6,
     title: "aim_blueline",
     version: "v0.21a",
     desc: "You just want to have a blast with your friends? Or have a thrilling duel to compare who is the better shooter?",
@@ -103,7 +103,7 @@ const projectsData: Project[] = [
   },
   {
     id: "shooter",
-    order: 6,
+    order: 7,
     title: "shooter game",
     version: "v0.02a",
     desc: "First person shooter game on unknown island. Game will be made in Unreal Engine!",
@@ -113,7 +113,7 @@ const projectsData: Project[] = [
     linkLabel: "DOWNLOAD GAME",
     downloads: 100,
     disabled: true,
-    status: "development",
+    status: "planning",
     featured: false,
   },
 ];
