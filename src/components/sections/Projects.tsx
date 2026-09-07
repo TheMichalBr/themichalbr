@@ -427,9 +427,7 @@ export const Projects: React.FC = () => {
 
 
 
-
 /*
-
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, downloads }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
@@ -652,5 +650,4 @@ export const Projects: React.FC = () => {
     </section>
   );
 };
-
 */
