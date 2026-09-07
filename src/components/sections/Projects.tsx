@@ -158,6 +158,27 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [lastInteraction, setLastInteraction] = useState(Date.now());
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
+
+  const activeProject = projects[activeIndex] ?? projects[0];
+
+  useEffect(() => {
+    setImageLoaded(false);
+    setImageError(false);
+    setShowSpinner(false);
+  }, [activeProject?.image]);
+
+  useEffect(() => {
+    if (!activeProject?.image || imageLoaded || imageError) {
+      setShowSpinner(false);
+      return;
+    }
+
+    const timer = window.setTimeout(() => setShowSpinner(true), 80);
+    return () => clearTimeout(timer);
+  }, [activeProject?.image, imageLoaded, imageError]);
 
   useEffect(() => {
     projects.forEach((project) => {
@@ -213,8 +234,6 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
     }, 90);
   };
 
-  const activeProject = projects[activeIndex] ?? projects[0];
-
   if (!activeProject) {
     return null;
   }
@@ -254,23 +273,50 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
         </div>
         <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
           <div className="relative min-h-96 overflow-hidden border-b border-zinc-800 lg:min-h-104 lg:border-b-0 lg:border-r">
-            {activeProject.image ? (
+            {showSpinner && (
+              <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/10">
+                <div className="w-8 h-8 border-3 border-white/10 border-t-blue-500 rounded-full animate-spin" />
+              </div>
+            )}
+
+            {activeProject.image && !imageError ? (
               <img
                 src={activeProject.image}
                 alt={activeProject.title}
                 draggable="false"
                 onDragStart={(event) => event.preventDefault()}
                 onContextMenu={(event) => event.preventDefault()}
+                onLoad={() => {
+                  setImageLoaded(true);
+                  setImageError(false);
+                }}
+                onError={() => {
+                  setImageError(true);
+                  setImageLoaded(true);
+                }}
                 className={`h-full w-full object-cover transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${isTransitioning ? "scale-[1.03] opacity-90" : "scale-100 opacity-100"}`}
                 loading="lazy"
               />
             ) : (
-              <div className="flex h-full w-full items-center justify-center bg-zinc-900 px-6 text-center">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.3em] text-zinc-500 select-none">
-                    Preview not available for {activeProject.title}
-                  </p>
-                </div>
+              <div className="relative z-10 flex h-full w-full flex-col items-center justify-center bg-zinc-900 px-6 text-center">
+                <svg
+                  className="w-12 h-12 mb-3 text-gray-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <p className="text-sm uppercase tracking-[0.3em] text-zinc-500 select-none">
+                  {activeProject.image
+                    ? `Unable to load preview for ${activeProject.title}`
+                    : `Preview not available for ${activeProject.title}`}
+                </p>
               </div>
             )}
             <div className={`absolute inset-0 bg-linear-to-t from-zinc-950/75 via-zinc-950/20 to-transparent transition-opacity duration-700 ${isTransitioning ? "opacity-95" : "opacity-100"}`} />
@@ -483,3 +529,240 @@ export const Projects: React.FC = () => {
     </section>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, downloads }) => {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
+  return (
+    <div
+      className={`group relative p-6 rounded-xl border transition-all duration-300 overflow-hidden select-none ${project.featured
+          ? "border-blue-500/30 bg-linear-to-br from-blue-500/5 to-cyan-500/5"
+          : "border-white/10"
+        } ${!project.disabled
+          ? "hover:-translate-y-2 hover:border-blue-500/50 hover:shadow-[0_8px_32px_rgba(59,130,246,0.15)]"
+          : "opacity-70"
+        }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {project.featured && (
+        <div className="absolute top-4 right-4 z-20">
+          <span className="bg-linear-to-br from-indigo-700 via-blue-600 to-blue-700 text-white px-2 py-1 rounded-full text-xs font-medium">
+            Featured
+          </span>
+        </div>
+      )}
+
+      <div
+        className={`absolute inset-0 bg-cover bg-center transition-all duration-500 ${isHovered ? "scale-105 opacity-40" : "scale-100 opacity-25"
+          }`}
+        style={{
+          backgroundImage: `url(${project.image})`,
+          filter: "blur(0.5px)",
+        }}
+      />
+
+      <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent" />
+
+      <div className="absolute inset-0">
+        <div
+          className={`absolute top-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl transition-all duration-700 ${isHovered
+              ? "translate-x-4 translate-y-4"
+              : "translate-x-0 translate-y-0"
+            }`}
+        />
+        <div
+          className={`absolute bottom-0 right-0 w-24 h-24 bg-cyan-500/10 rounded-full blur-2xl transition-all duration-700 ${isHovered
+              ? "-translate-x-4 -translate-y-4"
+              : "translate-x-0 translate-y-0"
+            }`}
+        />
+      </div>
+
+      <div className="relative z-10 h-full flex flex-col">
+        <div className="flex justify-between items-start mb-3">
+          <div>
+            <h3 className="text-xl font-bold mb-1 text-white group-hover:text-blue-300 transition-colors">
+              {" "}
+               mb-2 
+              {project.title}
+            </h3>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-400">{project.version}</span>
+              <StatusBadge status={project.status} />
+            </div>
+          </div>
+        </div>
+
+        <p className="text-gray-300 mb-4 leading-relaxed grow">
+          {project.desc}
+        </p>
+
+         bg-blue-500/10 text-blue-500 hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)] transition-all 
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.tech.map((tech, key) => (
+            <span
+              key={key}
+              className="bg-white/10 backdrop-blur-sm text-white/90 py-1 px-3 rounded-full text-sm border border-white/20 hover:bg-white/20 hover:shadow-[0_2px_8px_rgba(255,255,255,0.1)] transition-all duration-300"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex justify-between items-center pt-2">
+          <a
+            href={project.link}
+            className={`group/link flex items-center gap-1 font-medium transition-all duration-300 ${project.disabled
+                ? "text-gray-500 cursor-not-allowed pointer-events-none"
+                : "text-blue-400 hover:text-blue-300"
+              }`}
+            style={project.disabled ? { pointerEvents: "none" } : {}}
+            tabIndex={project.disabled ? -1 : 0}
+          >
+            {project.linkLabel}
+            {!project.disabled && (
+              <span className="inline-block transition-transform duration-300 group-hover/link:translate-x-1">
+                →
+              </span>
+            )}
+          </a>
+
+          {project.downloads === "modrinth" && downloads !== null && (
+            <div className="flex items-center gap-1 text-cyan-400 text-sm">
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  fillRule="evenodd"
+                  d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span>{downloads.toLocaleString()}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const Projects: React.FC = () => {
+  const [downloads, setDownloads] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchModrinthData = async (): Promise<void> => {
+      try {
+        setLoading(true);
+        const response = await fetch(
+          "https://api.modrinth.com/v2/project/G4nmS8ee",
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setDownloads(data.downloads);
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error(String(err));
+        console.error("Error fetching Modrinth data:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchModrinthData();
+  }, []);
+
+  const visibleProjects = projectsData
+    .filter((p) => p.order > 0)
+    .sort((a, b) => {
+      if (a.featured !== b.featured) {
+        return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+      }
+      return a.order - b.order;
+    });
+
+  return (
+    <section
+      id="projects"
+      className="min-h-screen flex items-center justify-center py-20 relative overflow-hidden"
+    >
+      <RevealOnScroll>
+        <div className="max-w-6xl mx-auto px-4 relative z-10">
+          {" "}
+           max-w-5xl ? bg-gradient-to-r from-blue-600 to-cyan-700*
+          <div className="text-center mb-10">
+            <h2 className="text-4xl font-bold mb-4 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-transparent select-none">
+              Featured projects
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto select-none">
+              Explore some of my creations, such as various applications, games,
+              or mods I have developed with passion, or projects I have been
+              involved in.
+            </p>
+          </div>
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+              Failed to load download statistics: {error}
+            </div>
+          )}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {visibleProjects.map((project, index) => (
+              <div
+                key={project.id}
+                className="opacity-0 animate-fade-in"
+                style={{
+                  animationDelay: `${index * 0.2}s`,
+                  animationFillMode: "forwards",
+                }}
+              >
+                <ProjectCard project={project} downloads={downloads} />
+              </div>
+            ))}
+          </div>
+          {loading && (
+            <div className="text-center mt-6">
+              <div className="inline-flex items-center gap-2 text-blue-400">
+                <div className="w-4 h-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin" />
+                <span className="text-sm">Loading project statistics...</span>
+              </div>
+            </div>
+          )}
+        </div>
+      </RevealOnScroll>
+
+      <style>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out;
+        }
+      `}</style>
+    </section>
+  );
+};
+
+*/
