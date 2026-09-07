@@ -3,7 +3,7 @@ import pm2 from "/projects/P_2.webp";
 import pm3 from "/projects/P_3.webp";
 import pm4 from "/projects/P_4.webp";
 
-interface Project {
+export interface Project {
   id: string;
   order: number;
   title: string;
