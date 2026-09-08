@@ -1,7 +1,8 @@
-import pm1 from "/projects/P_1.webp";
-import pm2 from "/projects/P_2.webp";
-import pm3 from "/projects/P_3.webp";
-import pm4 from "/projects/P_4.webp";
+import p1 from "/projects/P_tetris.webp";
+import p2 from "/projects/P_snake.webp";
+import p3 from "/projects/P_rocketmod.webp";
+import p4 from "/projects/P_websites.webp";
+import p5 from "/projects/P_mplayer.webp";
 
 export interface Project {
   id: string;
@@ -28,7 +29,7 @@ export const projectsData: Project[] = [
     version: "v1.1",
     desc: "Probably everyone has heard of Tetris. So this is my version of Tetris with some interesting changes!",
     tech: ["Web Game", "Godot"],
-    image: pm1,
+    image: p1,
     link: "https://themichalbr.github.io/mgames/Tetris.html",
     linkLabel: "PLAY ONLINE",
     downloads: null,
@@ -37,13 +38,28 @@ export const projectsData: Project[] = [
     featured: false,
   },
   {
+    id: "mplayer",
+    order: 2,
+    title: "MPlayer",
+    version: "v1.0.3",
+    desc: "All your downloaded songs in one place. Create your own playlists and start listening!",
+    tech: ["Application", "Android"],
+    image: p5,
+    link: "#",
+    linkLabel: "DOWNLOAD",
+    downloads: null,
+    disabled: true,
+    status: "development",
+    featured: true,
+  },
+  {
     id: "snake",
     order: 3,
     title: "Snake",
     version: "v1.0.3",
     desc: "Classic Snake. Eat the food, grow the snake and try not to hit the walls or yourself!",
     tech: ["Game", "Python"],
-    image: pm2,
+    image: p2,
     link: "https://github.com/TheMichalBr/snake_game",
     linkLabel: "DOWNLOAD GAME",
     downloads: null,
@@ -57,7 +73,7 @@ export const projectsData: Project[] = [
     version: "v1.0.3",
     desc: "This mod adds a rocket launcher to the game. You know what to do with it. Be nice to your friends!",
     tech: ["Game Mod", "Minecraft", "Java"],
-    image: pm3,
+    image: p3,
     link: "https://modrinth.com/mod/nms-rocket-launcher-mod/",
     linkLabel: "DOWNLOAD MOD",
     downloads: "modrinth",
@@ -71,7 +87,7 @@ export const projectsData: Project[] = [
     version: "v1.0",
     desc: "I have created several custom websites of various types, ranging from simple ones to more advanced.",
     tech: ["Website", "HTML / CSS", "JS", "React"],
-    image: pm4,
+    image: p4,
     link: "#footer",
     linkLabel: "CONTACT ME",
     downloads: null,
@@ -80,7 +96,7 @@ export const projectsData: Project[] = [
     featured: false,
   },
   {
-    id: "aim_blueline",
+    id: "aimblueline",
     order: 6,
     title: "aim_blueline",
     version: "v0.21a",
