@@ -49,7 +49,7 @@ export const projectsData: Project[] = [
     linkLabel: "DOWNLOAD",
     downloads: null,
     disabled: true,
-    status: "development",
+    status: "completed",
     featured: true,
   },
   {
