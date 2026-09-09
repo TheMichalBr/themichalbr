@@ -208,8 +208,8 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
               </div>
             )}
             <div className={`absolute inset-0 bg-linear-to-t from-zinc-950/75 via-zinc-950/20 to-transparent transition-opacity duration-700 ${isTransitioning ? "opacity-95" : "opacity-100"}`} />
-            <div className="absolute left-4 top-4 rounded-full border border-zinc-800/80 bg-zinc-950/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-300 backdrop-blur-sm select-none">
-              Project {activeIndex + 1} / {projects.length}
+            <div className="absolute left-4 top-4 rounded-full border border-zinc-800/80 bg-zinc-950/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-zinc-300 backdrop-blur-sm select-none">
+              Project {activeIndex + 1}/{projects.length}
             </div>
           </div>
 
@@ -218,11 +218,10 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
               <div className="flex flex-wrap items-center gap-2 select-none">
                 <StatusBadge status={activeProject.status} />
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs tracking-[0.25em] text-zinc-300">
-                  <svg viewBox="0 0 24 24" className="h-4 w-4 text-blue-400" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M4 8.5 12 3l8 5.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8.5Z" />
-                    <path d="M9.5 12.5 11 14l3.5-3.5" />
+                  <svg viewBox="0 0 24 24" className="h-3 w-3" fill="#aaaa" stroke="currentColor">
+                    <path d="M21.007 8.222A3.738 3.738 0 0 0 15.045 5.2a3.737 3.737 0 0 0 1.156 6.583 2.988 2.988 0 0 1-2.668 1.67h-2.99a4.456 4.456 0 0 0-2.989 1.165V7.4a3.737 3.737 0 1 0-1.494 0v9.117a3.776 3.776 0 1 0 1.816.099 2.99 2.99 0 0 1 2.668-1.667h2.99a4.484 4.484 0 0 0 4.223-3.039 3.736 3.736 0 0 0 3.25-3.687zM4.565 3.738a2.242 2.242 0 1 1 4.484 0 2.242 2.242 0 0 1-4.484 0zm4.484 16.441a2.242 2.242 0 1 1-4.484 0 2.242 2.242 0 0 1 4.484 0zm8.221-9.715a2.242 2.242 0 1 1 0-4.485 2.242 2.242 0 0 1 0 4.485z"/>
                   </svg>
-                  <span className="font-light text-gray-300 normal-case">{activeProject.version}</span>
+                  <span className="font-light text-gray-300">{activeProject.version}</span>
                 </span>
               </div>
 
@@ -373,7 +372,6 @@ export const Projects: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchModrinthData();
   }, []);
 
@@ -417,9 +415,6 @@ export const Projects: React.FC = () => {
     </section>
   );
 };
-
-
-
 
 
 
