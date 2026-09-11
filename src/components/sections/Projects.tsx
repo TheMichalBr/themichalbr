@@ -231,11 +231,11 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2.5">
                 {activeProject.tech.map((tech, key) => (
                   <span
                     key={key}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-zinc-300 transition duration-200 ease-out hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-zinc-100 cursor-default select-none"
+                    className="rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-xs font-medium text-zinc-300 transition-all duration-300 ease-out hover:border-blue-500/30 hover:bg-blue-500/10 hover:text-zinc-100 cursor-default select-none backdrop-blur-sm"
                   >
                     {tech}
                   </span>
