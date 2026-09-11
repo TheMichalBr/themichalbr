@@ -17,7 +17,7 @@ export interface Project {
   downloads: string | number | null;
   plays?: number | null;
   disabled?: boolean;
-  status: "completed" | "development" | "planning";
+  status: "completed" | "development";
   featured: boolean;
 }
 
@@ -122,7 +122,7 @@ export const projectsData: Project[] = [
     linkLabel: "DOWNLOAD",
     downloads: 100,
     disabled: true,
-    status: "planning",
+    status: "development",
     featured: false,
   },
 ];
