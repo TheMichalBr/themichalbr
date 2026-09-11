@@ -136,6 +136,12 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
 
       <div className="overflow-hidden rounded-[1.75rem] bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 shadow-xl">
         <div className="relative">
+
+
+
+          {/*
+          OLD SWITCHBAR
+          
           <div className="absolute right-4 top-4 z-20 flex items-center gap-2 rounded-full border border-zinc-800/70 bg-zinc-950/70 p-1.5 backdrop-blur-sm">
             <button
               type="button"
@@ -158,6 +164,51 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
               </svg>
             </button>
           </div>
+            */}
+
+
+
+
+
+
+          {/* Navigation Controls */}
+          <div className="absolute right-4 top-4 z-20 flex items-center gap-2 rounded-full border border-zinc-800/70 bg-zinc-950/80 p-1.5 backdrop-blur-md transition-all duration-300 hover:border-zinc-700 hover:bg-zinc-950/90">
+            <button
+              type="button"
+              onClick={() => switchProject((activeIndex - 1 + projects.length) % projects.length)}
+              className="group rounded-full border border-white/10 bg-white/5 p-2.5 text-zinc-200 transition-all duration-200 ease-out hover:border-blue-500/40 hover:bg-blue-500/15 hover:text-blue-200 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] select-none cursor-pointer active:scale-95"
+              aria-label="Previous project"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={() => switchProject((activeIndex + 1) % projects.length)}
+              className="group rounded-full border border-white/10 bg-white/5 p-2.5 text-zinc-200 transition-all duration-200 ease-out hover:border-blue-500/40 hover:bg-blue-500/15 hover:text-blue-200 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] select-none cursor-pointer active:scale-95"
+              aria-label="Next project"
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
         <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
           <div className="relative min-h-96 overflow-hidden border-b border-zinc-800 lg:min-h-104 lg:border-b-0 lg:border-r">
