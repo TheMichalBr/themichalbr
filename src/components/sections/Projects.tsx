@@ -208,9 +208,6 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
               </div>
             )}
             <div className={`absolute inset-0 bg-linear-to-t from-zinc-950/75 via-zinc-950/20 to-transparent transition-opacity duration-700 ${isTransitioning ? "opacity-95" : "opacity-100"}`} />
-            <div className="absolute left-4 top-4 rounded-full border border-zinc-800/80 bg-zinc-950/70 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-zinc-300 backdrop-blur-sm select-none">
-              Project {activeIndex + 1}/{projects.length}
-            </div>
           </div>
 
           <div className="flex flex-col justify-between p-6 sm:p-8 lg:p-10 bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/4 rounded-2xl shadow-xl">
@@ -393,17 +390,6 @@ export const Projects: React.FC = () => {
     >
       <RevealOnScroll>
         <div className="relative z-10 mx-auto max-w-6xl px-4">
-          <div className="mb-10 text-center">
-            <h2 className="mb-4 bg-linear-to-br from-[#0845d1] to-[#015ea1] bg-clip-text text-4xl font-bold text-transparent select-none">
-              Featured projects
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-gray-400 select-none">
-              Explore some of my creations, such as various applications, games,
-              or mods I have developed with passion, or projects I have been
-              involved in.
-            </p>
-          </div>
-
           <ProjectShowcase
             projects={orderedProjects}
             downloads={downloads}
