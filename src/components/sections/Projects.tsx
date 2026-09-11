@@ -11,14 +11,12 @@ const imagePreloadCache = new Set<string>();
 const StatusBadge: React.FC<StatusBadgeProps> = ({ status }) => {
   const statusStyles: Record<string, string> = {
     completed: "bg-green-500/10 text-green-300 border border-green-400/40 shadow-[0_0_0_1px_rgba(34,197,94,0.22)]",
-    development: "bg-yellow-500/10 text-yellow-300 border border-yellow-400/40 shadow-[0_0_0_1px_rgba(245,158,11,0.22)]",
-    planning: "bg-purple-500/18 text-purple-300 border border-purple-500/40 shadow-[0_0_0_1px_rgba(168,85,247,0.17)]",
+    development: "bg-yellow-500/10 text-yellow-300 border border-yellow-400/40 shadow-[0_0_0_1px_rgba(245,158,11,0.22)]"
   };
 
   const statusLabels: Record<string, string> = {
     completed: "Released",
     development: "Development",
-    planning: "Planning",
   };
 
   return (
@@ -295,7 +293,7 @@ const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({
             </div>
 
             <div className="mt-6 space-y-4">
-              <div className="min-h-24">
+              <div className="min-h-32">
                 {activeProject.downloads === "modrinth" ? (
                   <div className="rounded-2xl border border-blue-500/20 bg-linear-to-br from-blue-500/10 via-blue-500/5 to-zinc-900/70 p-4 sm:p-5">
                     <div className="flex items-center justify-between gap-3">
