@@ -142,7 +142,7 @@ export const Games = () => {
       id: "leagueoflegends",
       name: "League of Legends",
       platform: "Riot Games | MichalBr#UwU",
-      ranks: [{ label: "Silver III", icon: GR_LOL }],
+      ranks: [{ label: "Silver II", icon: GR_LOL }],
       image: G_LOL,
       settings: {},
     },
