@@ -54,9 +54,10 @@ export const About: React.FC = () => {
   const cardClasses =
     "rounded-xl p-6 md:p-8 border border-white/10 hover:-translate-y-1 transition-all duration-300 bg-gradient-to-br from-[#1e20243a] to-[#2a2d353a] backdrop-blur-sm shadow-xl hover:shadow-2xl";
   const sectionClasses =
-    "bg-white/5 rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300";
+    "rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 duration-300 transition-all bg-white/5 ";
   {
-    /* bg-white/5 , dobré i bez*/
+    /* bg-white/5 tohle ze stareho
+    */
   }
   const tagClasses =
     "py-2 px-3 rounded-full text-sm transition-all duration-200 transform cursor-default flex-shrink-0 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]";
@@ -75,7 +76,7 @@ export const About: React.FC = () => {
 
           {/* About */}
           <div className={`${cardClasses} mb-8`}>
-            <div className="mb-8">
+            <div className={`${sectionClasses} mb-8`}>
               <p className="text-gray-300 leading-relaxed text-lg select-none">
                 My name is Michal. I am 24 years old boy, from the Czech
                 Republic, and currently living in Brno. I am a passionate gamer
@@ -130,8 +131,7 @@ export const About: React.FC = () => {
                     <strong className="text-blue-500">
                       Mobile Applications
                     </strong>{" "}
-                    - High School of Information Technology, Postal Services,
-                    and Finance
+                    - High School of Information Technology and Finance
                     <span className="block text-sm text-gray-400">
                       2018 - 2022{" "}
                       <span className="text-gray-500 text-xs">(Completed)</span>
