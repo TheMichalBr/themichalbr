@@ -88,6 +88,69 @@ export const About: React.FC = () => {
                 modifications. I am eager to learn and grow, and I am excited by
                 new challenges.
               </p>
+
+
+<br></br>
+
+            {/* Let's Connect */}
+            <div className="rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 min-w-0">
+              <h3 className="text-xl font-semibold mb-3 text-gray-300 flex items-center select-none">
+                <svg
+                  className="w-6 h-6 mr-2 inline-block text-gray-300"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <rect
+                    x="3"
+                    y="5"
+                    width="18"
+                    height="14"
+                    rx="2"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                  <path
+                    d="M3 7l9 6 9-6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  />
+                </svg>
+                Let's Connect
+              </h3>
+              <p className="text-gray-300 mb-4 leading-relaxed select-none">
+                Interested in collaboration or have questions, since I don't
+                have everything written here? I'd love to hear from you! Feel
+                free to email me or message on Discord.
+              </p>
+
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
+                  <div className="flex items-center">
+                    <span className="text-sm text-gray-500 select-none">
+                      Discord:
+                    </span>
+                    <span className="ml-2 text-gray-300 font-medium break-all select-auto">
+                      @MichalBr
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
+                  <div className="flex items-center">
+                    <span className="text-sm text-gray-500 select-none">
+                      Email:
+                    </span>
+                    <span className="ml-2 text-gray-300 font-medium break-all select-auto">
+                      biz.michalbr@gmail.com
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             </div>
 
             {/* Education */}
@@ -100,7 +163,7 @@ export const About: React.FC = () => {
                   />
                   <div className="min-w-0">
                     <strong className="text-blue-500">
-                      Information Technologies
+                      Open Informatics
                     </strong>{" "}
                     - Mendel University
                     <span className="block text-sm text-gray-400">
@@ -184,7 +247,7 @@ export const About: React.FC = () => {
             </div>
 
             {/* Hobbies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               <div className={`${sectionClasses} min-w-0`}>
                 <h3 className="text-xl font-semibold mb-5 text-blue-500 flex items-center select-none">
                   <svg
@@ -255,65 +318,6 @@ export const About: React.FC = () => {
                       {tech}
                     </span>
                   ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Let's Connect */}
-            <div className="rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 min-w-0">
-              <h3 className="text-xl font-semibold mb-3 text-gray-300 flex items-center select-none">
-                <svg
-                  className="w-6 h-6 mr-2 inline-block text-gray-300"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <rect
-                    x="3"
-                    y="5"
-                    width="18"
-                    height="14"
-                    rx="2"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M3 7l9 6 9-6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                </svg>
-                Let's Connect
-              </h3>
-              <p className="text-gray-300 mb-4 leading-relaxed select-none">
-                Interested in collaboration or have questions, since I don't
-                have everything written here? I'd love to hear from you! Feel
-                free to email me or message on Discord.
-              </p>
-
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-                <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
-                  <div className="flex items-center">
-                    <span className="text-sm text-gray-500 select-none">
-                      Discord:
-                    </span>
-                    <span className="ml-2 text-gray-300 font-medium break-all select-auto">
-                      @MichalBr
-                    </span>
-                  </div>
-                </div>
-                <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
-                  <div className="flex items-center">
-                    <span className="text-sm text-gray-500 select-none">
-                      Email:
-                    </span>
-                    <span className="ml-2 text-gray-300 font-medium break-all select-auto">
-                      biz.michalbr@gmail.com
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>
