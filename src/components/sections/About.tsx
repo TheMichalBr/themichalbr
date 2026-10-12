@@ -57,7 +57,7 @@ export const About: React.FC = () => {
     "rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 duration-300 transition-all bg-white/5 ";
   {
     /* bg-white/5 tohle ze stareho
-    */
+     */
   }
   const tagClasses =
     "py-2 px-3 rounded-full text-sm transition-all duration-200 transform cursor-default flex-shrink-0 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]";
@@ -87,115 +87,152 @@ export const About: React.FC = () => {
                 and responsive applications, websites and good games or
                 modifications. I am eager to learn and grow, and I am excited by
                 new challenges.
-              </p>
+              </p>{" "}<br></br>
 
-
-<br></br>
-
-            {/* Let's Connect */}
-            <div className="rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 min-w-0">
-              <h3 className="text-xl font-semibold mb-3 text-gray-300 flex items-center select-none">
-                <svg
-                  className="w-6 h-6 mr-2 inline-block text-gray-300"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <rect
-                    x="3"
-                    y="5"
-                    width="18"
-                    height="14"
-                    rx="2"
+              {/* Let's Connect */}
+              <div className="rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 min-w-0 bg-white/5">
+                <h3 className="text-xl font-semibold mb-3 text-gray-300 flex items-center select-none">
+                  <svg
+                    className="w-6 h-6 mr-2 inline-block text-gray-300"
+                    fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
-                  />
-                  <path
-                    d="M3 7l9 6 9-6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  />
-                </svg>
-                Let's Connect
-              </h3>
-              <p className="text-gray-300 mb-4 leading-relaxed select-none">
-                Interested in collaboration or have questions, since I don't
-                have everything written here? I'd love to hear from you! Feel
-                free to email me or message on Discord.
-              </p>
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="3"
+                      y="5"
+                      width="18"
+                      height="14"
+                      rx="2"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    />
+                    <path
+                      d="M3 7l9 6 9-6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    />
+                  </svg>
+                  Let's Connect
+                </h3>
+                <p className="text-gray-300 mb-4 leading-relaxed select-none">
+                  Interested in collaboration or have questions, since I don't
+                  have everything written here? I'd love to hear from you! Feel
+                  free to email or message me.
+                </p>
 
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
-                <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
-                  <div className="flex items-center">
-                    <span className="text-sm text-gray-500 select-none">
-                      Discord:
-                    </span>
-                    <span className="ml-2 text-gray-300 font-medium break-all select-auto">
-                      @MichalBr
-                    </span>
+                <div className="flex flex-col sm:flex-row flex-wrap gap-3">
+                  <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
+                    <div className="flex items-center">
+                      <span className="text-sm text-gray-500 select-none">
+                        Discord:
+                      </span>
+                      <span className="ml-2 text-gray-300 font-medium break-all select-auto">
+                        <a
+                          href="https://discord.com/users/222683869982228491"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          @MichalBr
+                        </a>
+                      </span>
+                    </div>
                   </div>
-                </div>
-                <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
-                  <div className="flex items-center">
-                    <span className="text-sm text-gray-500 select-none">
-                      Email:
-                    </span>
-                    <span className="ml-2 text-gray-300 font-medium break-all select-auto">
-                      biz.michalbr@gmail.com
-                    </span>
+                  <div className="bg-white/5 px-4 py-2 rounded-lg border border-white/20 hover:bg-white/15 hover:border-white/30 transition-all duration-300 min-w-0 flex-1 sm:flex-initial">
+                    <div className="flex items-center">
+                      <span className="text-sm text-gray-500 select-none">
+                        Email:
+                      </span>
+                      <span className="ml-2 text-gray-300 font-medium break-all select-auto">
+                        <a
+                          href="mailto:biz.michalbr@gmail.com"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          biz.michalbr@gmail.com
+                        </a>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            </div>
-
             {/* Education */}
             <div className={`${sectionClasses} mb-8`}>
-              <div className="space-y-5 text-gray-300 leading-relaxed select-none">
-                <div className="flex items-start">
+              <div className="flex flex-col text-gray-300 leading-relaxed select-none">
+                <div className="relative pl-8 pb-8">
                   <div
-                    className="w-2 h-2 bg-blue-500/60 rounded-full mt-2 mr-4 shrink-0"
+                    className="absolute left-1.75 top-6 -bottom-2 w-0.5 bg-blue-500/30"
                     aria-hidden="true"
                   />
+                  <div
+                    className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-blue-500/40 flex items-center justify-center bg-gray-900"
+                    aria-hidden="true"
+                  >
+                    <div className="w-2 h-2 bg-blue-500 rounded-full" />
+                  </div>
+
                   <div className="min-w-0">
-                    <strong className="text-blue-500">
-                      Open Informatics
-                    </strong>{" "}
-                    - Mendel University
-                    <span className="block text-sm text-gray-400">
+                    <div>
+                      <strong className="text-blue-500">
+                        Open Informatics
+                      </strong>{" "}
+                      <span className="text-gray-300">- Mendel University</span>
+                    </div>
+                    <span className="block text-sm text-gray-400 mt-0.5">
                       2024 - Present
                     </span>
                   </div>
                 </div>
-                <div className="flex items-start">
+                <div className="relative pl-8 pb-8">
                   <div
-                    className="w-2 h-2 bg-blue-500/60 rounded-full mt-2 mr-4 shrink-0"
+                    className="absolute left-1.75 top-6 -bottom-2 w-0.5 bg-blue-500/30"
                     aria-hidden="true"
                   />
+                  <div
+                    className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-blue-500/40 bg-gray-900"
+                    aria-hidden="true"
+                  />
+
                   <div className="min-w-0">
-                    <strong className="text-blue-500">English Language</strong>{" "}
-                    - AMIGAS Language School
-                    <span className="block text-sm text-gray-400">
+                    <div>
+                      <strong className="text-blue-500">
+                        English Language
+                      </strong>{" "}
+                      <span className="text-gray-300">
+                        - AMIGAS Language School
+                      </span>
+                    </div>
+                    <span className="block text-sm text-gray-400 mt-0.5">
                       2022 - 2023{" "}
                       <span className="text-gray-500 text-xs">(Completed)</span>
                     </span>
                   </div>
                 </div>
-                <div className="flex items-start">
+                <div className="relative pl-8 pb-2">
                   <div
-                    className="w-2 h-2 bg-blue-500/60 rounded-full mt-2 mr-4 shrink-0"
+                    className="absolute left-1.75 top-6 h-12 w-0.5 bg-linear-to-b from-blue-500/30 to-transparent"
                     aria-hidden="true"
                   />
+                  <div
+                    className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-blue-500/40 bg-gray-900"
+                    aria-hidden="true"
+                  />
+
                   <div className="min-w-0">
-                    <strong className="text-blue-500">
-                      Mobile Applications
-                    </strong>{" "}
-                    - High School of Information Technology and Finance
-                    <span className="block text-sm text-gray-400">
+                    <div>
+                      <strong className="text-blue-500">
+                        Mobile Applications
+                      </strong>{" "}
+                      <span className="text-gray-300">
+                        - High School of Information Technology and Finance
+                      </span>
+                    </div>
+                    <span className="block text-sm text-gray-400 mt-0.5">
                       2018 - 2022{" "}
                       <span className="text-gray-500 text-xs">(Completed)</span>
                     </span>
