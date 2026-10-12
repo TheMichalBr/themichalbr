@@ -90,7 +90,7 @@ export const About: React.FC = () => {
               </p>{" "}<br></br>
 
               {/* Let's Connect */}
-              <div className="rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 min-w-0 bg-white/5">
+              <div className="rounded-xl p-5 md:p-6 border border-white/10 hover:border-white/20 transition-all duration-300 min-w-0 bg-gray-950/40">
                 <h3 className="text-xl font-semibold mb-3 text-gray-300 flex items-center select-none">
                   <svg
                     className="w-6 h-6 mr-2 inline-block text-gray-300"
