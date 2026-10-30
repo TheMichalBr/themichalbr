@@ -3,6 +3,7 @@ import p2 from "/projects/P_snake.webp";
 import p3 from "/projects/P_rocketmod.webp";
 import p4 from "/projects/P_websites.webp";
 import p5 from "/projects/P_mplayer.webp";
+import p6 from "/projects/P_tracker.webp";
 
 export interface Project {
   id: string;
@@ -50,7 +51,7 @@ export const projectsData: Project[] = [
     downloads: null,
     disabled: true,
     status: "completed",
-    featured: true,
+    featured: false,
   },
   {
     id: "snake",
@@ -124,5 +125,20 @@ export const projectsData: Project[] = [
     disabled: true,
     status: "development",
     featured: false,
+  },
+  {
+    id: "tracker",
+    order: 8,
+    title: "Tracker",
+    version: "v1.0.5",
+    desc: "Save all your movies, TV shows, and even games. All in one place, organized and quick to access!",
+    tech: ["Application", "Windows", "Rust"],
+    image: p6,
+    link: "https://github.com/TheMichalBr/tracker/releases",
+    linkLabel: "DOWNLOAD",
+    downloads: null,
+    disabled: false,
+    status: "completed",
+    featured: true,
   },
 ];
